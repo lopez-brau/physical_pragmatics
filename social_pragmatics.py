@@ -5,14 +5,7 @@ import time
 import sys
 import csv
 
-from config import *
-from util import softmax
-from util import cooperative_reward
-from util import cache_no_ToM_enforcer
-from util import cache_no_ToM_enforcer2
-from util import cache_ToM_agent
-from util import access_no_ToM_enforcer
-from util import access_ToM_agent
+from util import *
 
 def no_ToM_agent(agent_reward, agent_cost, rationality):
 	U = agent_reward - agent_cost
@@ -36,13 +29,8 @@ def ToM_agent(agent_reward, agent_cost, enforcer_action, rationality, cooperatio
 	# Compute the likelihood.
 	if cache == True:
 		total_enforcer_action_probabilities = access_no_ToM_enforcer(enforcer_rewards)
-		likelihood2 = total_enforcer_action_probabilities.T[enforcer_action[1]][enforcer_action[0]:total_enforcer_action_probabilities.shape[0]:10]
-		likelihood2 = likelihood2.reshape(space)
-		for enforcer_reward in enforcer_rewards:
-			enforcer_action_probabilities = access_no_ToM_enforcer(enforcer_reward)
-			likelihood[enforcer_reward] = enforcer_action_probabilities[tuple(enforcer_action)]
-
-		print(likelihood2 - likelihood)
+		likelihood = total_enforcer_action_probabilities.T[enforcer_action[1]][enforcer_action[0]:total_enforcer_action_probabilities.shape[0]:10]
+		likelihood = likelihood.reshape(space)
 		return
 	else:
 		for enforcer_reward in enforcer_rewards:
@@ -89,7 +77,7 @@ def enforcer(enforcer_reward, rationality, cooperation=None, method=None, smart=
 		agent_rewards = list(itertools.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS))
 		enforcer_actions = list(itertools.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS))
 	agent_cost = np.zeros(NUM_ACTIONS)
-	start_time = time.time()
+
 	# Compute the utilities.
 	temp = np.zeros(space)
 	for agent_reward in agent_rewards:
@@ -107,7 +95,7 @@ def enforcer(enforcer_reward, rationality, cooperation=None, method=None, smart=
 			U[enforcer_action] = expected_enforcer_reward - (COST_RATIO*sum(enforcer_action))
 		temp = temp + U
 	U = temp / size
-	print(time.time()-start_time)
+
 	# Softmax the utilities to get action probabilities.
 	action_probabilities = softmax(U.flatten(), rationality).reshape(space)
 
@@ -218,8 +206,9 @@ def main():
 	# cooperation_set = np.array([-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 5.0])
 	# cache_ToM_agent(smart_agent, agent_rewards, agent_cost, enforcer_actions, rationality, cooperation_set)
 	
-	# cache_no_ToM_enforcer2(enforcer, enforcer_rewards, rationality)
-	ToM_agent(agent_reward, agent_cost, enforcer_action, rationality, cooperation, method, cache=True)
+	cache_no_ToM_enforcer(enforcer, enforcer_rewards, rationality) 
+
+	# ToM_agent(agent_reward, agent_cost, enforcer_action, rationality, cooperation, method, cache=True)
 	print(time.time()-start_time)
 	return
 
