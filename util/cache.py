@@ -1,6 +1,8 @@
 import csv
 import numpy as np
 
+from .config import *
+
 def cache_no_ToM_enforcer(model, enforcer_rewards, rationality): 
     filename = "cache/no_ToM_enforcer.csv"
     with open(filename, "w", newline="") as file:
