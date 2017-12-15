@@ -1,23 +1,35 @@
 import csv
 import numpy as np
 
-def retrieve_no_ToM_enforcer(enforcer_reward):
-    action_probabilities = []
+from .config import *
+
+def retrieve_no_ToM_enforcer(enforcer_rewards, enforcer_action, likelihood):
     filename = "cache/no_ToM_enforcer.csv" 
     with open(filename, "r") as file:
         reader = csv.reader(file)
-        for row in reader:
-            action_probabilities.append([float(num) for num in row])
+        action_probabilities = []
+        for enforcer_reward in enforcer_rewards:
+            row = next(reader)
+            while row != []:
+                action_probabilities.append([float(num) for num in row])
+                row = next(reader)
+            likelihood[tuple(enforcer_reward)] = np.array(action_probabilities)[tuple(enforcer_action)]
+            action_probabilities = []
 
-    return np.array(action_probabilities)
+    return likelihood
 
-def retrieve_ToM_agent(agent_reward, enforcer_action, cooperation, method):
-    filename = "cache/smart_agent/" + method + "_" + str(cooperation) + "_" + \
-               ''.join([str(action_reward) for action_reward in agent_reward]) + "_" + \
-               ''.join([str(action) for action in enforcer_action]) + ".csv"
+def retrieve_ToM_agent(agent_rewards, enforcer_reward, enforcer_actions, cooperation, U):
+    filename = "cache/ToM_agent/" + METHOD + "/" + str(cooperation) + ".csv"
     with open(filename, "r") as file:
         reader = csv.reader(file)
-        for row in reader:
-            action_probabilities = [float(num) for num in row]
+        temp = np.zeros(U.shape)
+        for agent_reward in agent_rewards:
+            for enforcer_action in enforcer_actions:
+                row = next(reader)
+                action_probabilities = [float(num) for num in row]
+                expected_enforcer_reward = np.dot(enforcer_reward, action_probabilities)
+                temp[tuple(enforcer_action)] = expected_enforcer_reward - (COST_RATIO*sum(enforcer_action))
+            U = U + temp
+        U = U / np.prod(U.shape)
 
-    return np.array(action_probabilities)
+    return U

@@ -2,12 +2,12 @@ import numpy as np
 
 from .config import *
 
-def cooperative_reward(enforcer_rewards, reward_probabilities, cooperation, method):
+def cooperative_reward(enforcer_rewards, reward_probabilities, cooperation):
     inferred_enforcer_action = np.zeros(NUM_ACTIONS)
 
     # The "confidence" method computes the probabilities of each enforcer 
     # action being the optimal one.
-    if method == "confidence":
+    if METHOD == "confidence":
         for enforcer_reward in enforcer_rewards:
             optimal_enforcer_action = (max(enforcer_reward) == np.array(enforcer_reward)) + 0.0
             inferred_enforcer_action = inferred_enforcer_action + \
@@ -15,7 +15,7 @@ def cooperative_reward(enforcer_rewards, reward_probabilities, cooperation, meth
 
     # The "flat" method computes the expected enforcer rewards and infers that
     # the max of those rewards is the optimal enforcer action.
-    elif method == "flat":
+    elif METHOD == "flat":
         expected_enforcer_rewards = np.zeros(NUM_ACTIONS)
         for enforcer_reward in enforcer_rewards:
             expected_enforcer_rewards = expected_enforcer_rewards + \
@@ -23,7 +23,7 @@ def cooperative_reward(enforcer_rewards, reward_probabilities, cooperation, meth
         inferred_enforcer_action = (max(expected_enforcer_rewards) == expected_enforcer_rewards) + 0.0
 
     # The "proportional" method computes the expected enforcer rewards.
-    elif method == "proportional":
+    elif METHOD == "proportional":
         expected_enforcer_rewards = np.zeros(NUM_ACTIONS)
         for enforcer_reward in enforcer_rewards:
             expected_enforcer_rewards = expected_enforcer_rewards + \

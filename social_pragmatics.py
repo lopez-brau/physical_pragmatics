@@ -1,9 +1,9 @@
-import numpy as np
-import matplotlib.pyplot as plt
+import csv
 import itertools
+import matplotlib.pyplot as plt
+import numpy as np
 import time
 import sys
-import csv
 
 from util import *
 
@@ -13,7 +13,7 @@ def no_ToM_agent(agent_reward, agent_cost, rationality):
 
 	return action_probabilities
 
-def ToM_agent(agent_reward, agent_cost, enforcer_action, rationality, cooperation, method, cache=False, plot=False):
+def ToM_agent(agent_reward, agent_cost, enforcer_action, rationality, cooperation, cache=False, plot=False):
 	# Set up the likelihood space.
 	space = tuple([MAX_VALUE for action in np.arange(NUM_ACTIONS)])
 	likelihood = np.zeros(space)
@@ -28,14 +28,11 @@ def ToM_agent(agent_reward, agent_cost, enforcer_action, rationality, cooperatio
 
 	# Compute the likelihood.
 	if cache == True:
-		total_enforcer_action_probabilities = access_no_ToM_enforcer(enforcer_rewards)
-		likelihood = total_enforcer_action_probabilities.T[enforcer_action[1]][enforcer_action[0]:total_enforcer_action_probabilities.shape[0]:10]
-		likelihood = likelihood.reshape(space)
-		return
+		likelihood = retrieve_no_ToM_enforcer(enforcer_rewards, enforcer_action, likelihood)
 	else:
 		for enforcer_reward in enforcer_rewards:
 			enforcer_action_probabilities = enforcer(enforcer_reward, rationality)
-			likelihood[enforcer_reward] = enforcer_action_probabilities[tuple(enforcer_action)]
+			likelihood[tuple(enforcer_reward)] = enforcer_action_probabilities[tuple(enforcer_action)]
 
 	# Normalize the likelihood to generate the posterior.
 	likelihood = likelihood.flatten()
@@ -53,7 +50,7 @@ def ToM_agent(agent_reward, agent_cost, enforcer_action, rationality, cooperatio
 		plt.pcolor(posterior)
 
 	# Compute the utilities.
-	smart_agent_reward = agent_reward + cooperative_reward(enforcer_rewards, posterior, cooperation, method)
+	smart_agent_reward = agent_reward + cooperative_reward(enforcer_rewards, posterior, cooperation)
 	smart_agent_cost = agent_cost + enforcer_action
 	U = smart_agent_reward - smart_agent_cost
 
@@ -62,7 +59,7 @@ def ToM_agent(agent_reward, agent_cost, enforcer_action, rationality, cooperatio
 
 	return action_probabilities
 
-def enforcer(enforcer_reward, rationality, cooperation=None, method=None, smart=False, cache=False, plot=False):
+def enforcer(enforcer_reward, rationality, cooperation=None, smart=False, cache=False, plot=False):
 	# Set up the utility space.
 	space = tuple([MAX_VALUE for action in np.arange(NUM_ACTIONS)])
 	U = np.zeros(space)
@@ -79,22 +76,22 @@ def enforcer(enforcer_reward, rationality, cooperation=None, method=None, smart=
 	agent_cost = np.zeros(NUM_ACTIONS)
 
 	# Compute the utilities.
-	temp = np.zeros(space)
-	for agent_reward in agent_rewards:
-		for enforcer_action in enforcer_actions:
-			if smart == True:
-				if cache == True:
-					agent_action_probabilities = access_ToM_agent(agent_reward, enforcer_action, cooperation, method)
-				else:
+	if cache == True:
+		U = retrieve_ToM_agent(agent_rewards, enforcer_reward, enforcer_actions, cooperation, U)
+	else:
+		temp = np.zeros(space)
+		for agent_reward in agent_rewards:
+			for enforcer_action in enforcer_actions:
+				if smart == True:
 					agent_action_probabilities = ToM_agent(agent_reward, agent_cost, enforcer_action, rationality, \
-															 cooperation, method, cache=True)
-			elif smart == False:
-				updated_agent_cost = agent_cost + enforcer_action
-				agent_action_probabilities = no_ToM_agent(agent_reward, updated_agent_cost, rationality)
-			expected_enforcer_reward = np.dot(enforcer_reward, agent_action_probabilities)
-			U[enforcer_action] = expected_enforcer_reward - (COST_RATIO*sum(enforcer_action))
-		temp = temp + U
-	U = temp / size
+														   cooperation, cache=True)
+				elif smart == False:
+					updated_agent_cost = agent_cost + enforcer_action
+					agent_action_probabilities = no_ToM_agent(agent_reward, updated_agent_cost, rationality)
+				expected_enforcer_reward = np.dot(enforcer_reward, agent_action_probabilities)
+				temp[tuple(enforcer_action)] = expected_enforcer_reward - (COST_RATIO*sum(enforcer_action))
+			U = U + temp
+		U = U / size
 
 	# Softmax the utilities to get action probabilities.
 	action_probabilities = softmax(U.flatten(), rationality).reshape(space)
@@ -197,7 +194,6 @@ def main():
 
 	rationality = 1.0
 	cooperation = 2.0
-	method = "flat"
 	
 	start_time = time.time()
 	# agent_rewards = list(itertools.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS))
@@ -206,25 +202,16 @@ def main():
 	# cooperation_set = np.array([-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 5.0])
 	# cache_ToM_agent(smart_agent, agent_rewards, agent_cost, enforcer_actions, rationality, cooperation_set)
 	
-	cache_no_ToM_enforcer(enforcer, enforcer_rewards, rationality) 
+	# cache_no_ToM_enforcer(enforcer, enforcer_rewards, rationality) 
+	space = tuple([MAX_VALUE for action in np.arange(NUM_ACTIONS)])
+	likelihood = np.zeros(space)
 
-	# ToM_agent(agent_reward, agent_cost, enforcer_action, rationality, cooperation, method, cache=True)
+	t1 = enforcer(enforcer_reward, rationality, cooperation=cooperation, smart=True, cache=True, plot=False)
+	t2 = enforcer(enforcer_reward, rationality, cooperation=cooperation, smart=True, cache=False, plot=False)
+	print(t1 - t2)
 	print(time.time()-start_time)
 	return
 
-	posterior = enforcer(enforcer_reward, rationality, plot=True)
-	# smart_agent(agent_reward, agent_cost, enforcer_action, rationality, cooperation, method, cache=True, plot=True)
-	# enforcer(enforcer_reward, rationality, cooperation=cooperation, method=method, smart=True, cache=True, plot=True)
-	unobserved = "cooperation"
-	posterior = observer(unobserved, rationality, enforcer_reward=enforcer_reward, enforcer_action=enforcer_action, 
-						 cooperation=cooperation, method=method, smart=True)
-	# print(posterior)
-	# print(np.unravel_index(posterior.argmax(), posterior.shape))
-	# print(time.time()-start_time)
-	# plt.show()
-	return
-	# agent_rewards = list(itertools.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS))
-	# enforcer_actions = list(itertools.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS))
 
 	start_time = time.time()
 	# cooperative_reward(enforcer_rewards, posterior, cooperation, "confidence")
