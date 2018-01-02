@@ -1,7 +1,7 @@
 # Define hyperparameters.
-COST_RATIO = 0.9
-MAX_SAMPLES = 40
-MAX_VALUE = 10
+COST_RATIO = 1.0
+MAX_SAMPLES = 100
+MAX_VALUE = 20
 METHOD = "flat"
 NUM_ACTIONS = 2
 SAMPLING = False
