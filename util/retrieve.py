@@ -3,8 +3,8 @@ import numpy as np
 
 from .config import *
 
-def retrieve_no_ToM_enforcer(enforcer_rewards, enforcer_action, likelihood):
-    filename = "cache/no_ToM_enforcer.csv" 
+def retrieve_enforcer_no_ToM(enforcer_rewards, enforcer_action, likelihood):
+    filename = "cache/enforcer_no_ToM.csv" 
     with open(filename, "r") as file:
         reader = csv.reader(file)
         action_probabilities = []
@@ -18,8 +18,8 @@ def retrieve_no_ToM_enforcer(enforcer_rewards, enforcer_action, likelihood):
 
     return likelihood
 
-def retrieve_ToM_agent(agent_rewards, enforcer_reward, enforcer_actions, cooperation, U):
-    filename = "cache/ToM_agent/" + METHOD + "/" + str(cooperation) + ".csv"
+def retrieve_agent_ToM(agent_rewards, enforcer_reward, enforcer_actions, cooperation, U):
+    filename = "cache/agent_ToM/" + METHOD + "/" + str(cooperation) + ".csv"
     with open(filename, "r") as file:
         reader = csv.reader(file)
         temp = np.zeros(U.shape)
