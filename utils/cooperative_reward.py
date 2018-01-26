@@ -9,7 +9,7 @@ def cooperative_reward(enforcer_rewards, reward_probabilities, cooperation):
     # action being the optimal one.
     if METHOD == "confidence":
         for enforcer_reward in enforcer_rewards:
-            optimal_enforcer_action = (max(enforcer_reward) == np.array(enforcer_reward)) + 0.0
+            optimal_enforcer_action = (max(enforcer_reward) == enforcer_reward) + 0.0
             inferred_enforcer_action = inferred_enforcer_action + \
                                        (reward_probabilities[tuple(enforcer_reward)]*optimal_enforcer_action)
 
@@ -19,7 +19,7 @@ def cooperative_reward(enforcer_rewards, reward_probabilities, cooperation):
         expected_enforcer_rewards = np.zeros(NUM_ACTIONS)
         for enforcer_reward in enforcer_rewards:
             expected_enforcer_rewards = expected_enforcer_rewards + \
-                                        (reward_probabilities[tuple(enforcer_reward)]*np.array(enforcer_reward))
+                                        (reward_probabilities[tuple(enforcer_reward)]*enforcer_reward)
         inferred_enforcer_action = (max(expected_enforcer_rewards) == expected_enforcer_rewards) + 0.0
 
     # The "proportional" method computes the expected enforcer rewards.
@@ -27,7 +27,7 @@ def cooperative_reward(enforcer_rewards, reward_probabilities, cooperation):
         expected_enforcer_rewards = np.zeros(NUM_ACTIONS)
         for enforcer_reward in enforcer_rewards:
             expected_enforcer_rewards = expected_enforcer_rewards + \
-                                        (reward_probabilities[tuple(enforcer_reward)]*np.array(enforcer_reward))
+                                        (reward_probabilities[tuple(enforcer_reward)]*enforcer_reward)
         inferred_enforcer_action = expected_enforcer_rewards
 
     # Throw an error if there's a typo in the method type.

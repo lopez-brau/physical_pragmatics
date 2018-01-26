@@ -18,8 +18,8 @@ def retrieve_enforcer_no_ToM(enforcer_rewards, enforcer_action, likelihood):
 
     return likelihood
 
-def retrieve_agent_ToM(agent_rewards, enforcer_reward, enforcer_actions, cooperation, U):
-    filename = "cache/agent_ToM/" + METHOD + "/" + str(cooperation) + ".csv"
+def retrieve_agent_ToM(enforcer_reward, agent_rewards, enforcer_actions, p, cooperation, U):
+    filename = "cache/agent_ToM/" + METHOD + "/" + str(p) + "/" + str(cooperation) + ".csv"
     with open(filename, "r") as file:
         reader = csv.reader(file)
         temp = np.zeros(U.shape)
