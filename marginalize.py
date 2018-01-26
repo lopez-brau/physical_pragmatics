@@ -1,8 +1,8 @@
+from utils import *
+
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
-
-from utils import *
 
 natural_costs = np.array([[0, 0], [0, 2], [2, 0], [2, 2], [5, 0], [0, 5], [5, 5], [5, 2], [2, 5]])
 # enforcer_actions = [(0, 0), (0, 1), (1, 0), (1, 1), (4, 0), (0, 4), (4, 4), (4, 1), (1, 4)]
@@ -10,8 +10,7 @@ enforcer_actions = np.array([[0, 0], [1, 0], [4, 0]])
 # enforcer_actions = np.array([[0, 0]])
 for natural_cost in natural_costs:
     for enforcer_action in enforcer_actions:
-        path = "results/test_2/"
-        filename = str(natural_cost) + "_" + str(enforcer_action) + ".txt"
+        filename = "predictions/" + str(cooperation) + "/" + str(natural_cost) + "_" + str(enforcer_action) + ".txt"
         with open(path + filename, "r") as file:
             reader = csv.reader(file)
             data = []

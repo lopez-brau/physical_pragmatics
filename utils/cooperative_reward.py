@@ -1,6 +1,6 @@
-import numpy as np
-
 from .config import *
+
+import numpy as np
 
 def cooperative_reward(enforcer_rewards, reward_probabilities, cooperation):
     inferred_enforcer_action = np.zeros(NUM_ACTIONS)

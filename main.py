@@ -1,11 +1,11 @@
+from models import * 
+from utils import *
+
 import csv
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
 import time
-
-from utils import *
-from models import * 
 
 # Variables:
 # Enforcer's beliefs (distributional assumptions) about agent rewards 
@@ -58,8 +58,7 @@ def main():
 	for enforcer_action in enforcer_actions:
 		results = observer("agent_rewards_and_p", rationality, enforcer_reward=enforcer_reward, \
 						   enforcer_action=enforcer_action, cooperation=cooperation, plot=False)
-		path = "results/test_2/"
-		filename = str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
+		filename = "predictions/" + str(cooperation) + "/" + str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
 		with open(path + filename, "w", newline="") as file:
 			writer = csv.writer(file)
 			writer.writerows(results)
