@@ -44,7 +44,7 @@ def agent_ToM(rationality, agent_reward, enforcer_action, cooperation, cache=Fal
 
 	# Plot the posterior.
 	if plot == True:
-		plt.figure(2)
+		plt.figure()
 		plt.title("ToM Agent with Rationality = " + str(rationality))
 		plt.ylabel("Enforcer Rewards for Action 0")
 		plt.xlabel("Enforcer Rewards for Action 1")
@@ -133,6 +133,7 @@ def observer(infer, rationality, **kwargs):
 	# Infer the enforcer's reward.
 	if infer == "enforcer_reward":
 		# Extract variables.
+		# enforcer_rewards = kwargs["enforcer_rewards"]
 		cooperation = kwargs["cooperation"]
 		p = kwargs["p"]
 		enforcer_action = kwargs["enforcer_action"]
@@ -211,16 +212,16 @@ def observer(infer, rationality, **kwargs):
 
 	# Jointly infer what the enforcer's beliefs of the agent rewards and
 	# the degree of ToM that the enforcer was acting for.
-	elif infer == "agent_rewards_and_p":
+	elif infer == "agent_reward_and_p":
 		# Extract variables.
 		enforcer_reward = kwargs["enforcer_reward"]
 		cooperation = kwargs["cooperation"]
 		enforcer_action = kwargs["enforcer_action"]
-
+		
 		# Set up the space of possible proportion parameters and the likelihood
 		# space.
 		p_set = np.linspace(0.0, 1.0, num=11)
-		space = (MAX_VALUES^2, p_set.size)
+		space = (min(MAX_VALUE**2, MAX_SAMPLES), p_set.size)
 		likelihood = np.zeros(space)
 
 		# Generate possible enforcer rewards. Use random sampling if the 

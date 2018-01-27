@@ -2,7 +2,7 @@ import numpy as np
 import sys
 
 # Define hyperparameters.
-COST_RATIO = 0.6
+COST_RATIO = 1.0
 MAX_SAMPLES = 100
 MAX_VALUE = 10
 METHOD = "flat"
