@@ -58,11 +58,15 @@ if __name__ == "__main__":
 	# plt.show()
 
 	# Observer inferring the enforcer's beliefs about the agent reward and degree of ToM.
+	start_time = time.time()
 	enforcer_actions = np.array([[0, 0], [1, 0], [2, 0]])
+	path = "predictions/2/"
 	for enforcer_action in enforcer_actions:
 		predictions = observer("agent_reward_and_p", rationality, enforcer_reward=enforcer_reward, cooperation=cooperation, \
 							   enforcer_action=enforcer_action)
-		filename = "predictions/2/" + str(cooperation) + "/" + str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
+		print(time.time()-start_time)
+		filename = path + str(cooperation) + "/" + str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
 		with open(path + filename, "w", newline="") as file:
 			writer = csv.writer(file)
 			writer.writerows(predictions)
+	print(time.time()-start_time)
