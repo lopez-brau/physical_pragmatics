@@ -22,8 +22,24 @@ if __name__ == "__main__":
 	enforcer_action = np.array([1, 0])
 
 	rationality = 0.1
-	cooperation = 0.0
+	cooperation = 2.0
 	p = 1.0
+
+	# Cache enforcer reasoning about an agent with no ToM.
+	# enforcer_rewards = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
+	# cache_enforcer_no_ToM(enforcer, rationality, enforcer_rewards)
+
+	# Cache agent reasoning about an enforcer reasoning about an agent with no ToM.
+	# agent_rewards = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
+	# if GRIDWORLD == True:
+	# 	enforcer_actions = np.array([(enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 0,
+	# 							 	 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 1,
+	# 							 	 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2])
+	# else:
+	# 	enforcer_actions = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
+	# p_set = np.linspace(0.0, 1.0, num=11)
+	# cooperation_set = np.array([-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 5.0])
+	# cache_agent_ToM(agent_ToM, rationality, agent_rewards, enforcer_actions, p_set, cooperation_set)
 
 	# Enforcer reasoning about an agent with no ToM.
 	# start_time = time.time()
@@ -34,23 +50,19 @@ if __name__ == "__main__":
 	# start_time = time.time()
 	# x2 = agent_ToM(rationality, agent_reward, enforcer_action, cooperation, cache=True, plot=True)
 	# print(time.time()-start_time)
-
-	# enforcer_rewards = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
-	# cache_enforcer_no_ToM(enforcer, rationality, enforcer_rewards)
 	
 	# Enforcer reasoning about an agent with ToM.
-	start_time = time.time()
-	x3 = enforcer(rationality, enforcer_reward, p=p, cooperation=cooperation, plot=True)
-	print(time.time()-start_time)
-	plt.show()
+	# start_time = time.time()
+	# x3 = enforcer(rationality, enforcer_reward, p=p, cooperation=cooperation, plot=True)
+	# print(time.time()-start_time)
+	# plt.show()
 
 	# Observer inferring the enforcer's beliefs about the agent reward and degree of ToM.
-	# enforcer_actions = np.array([[0, 0], [0, 1], [1, 0], [1, 1], [4, 0], [0, 4], [4, 4], [4, 1], [1, 4]])
-	# enforcer_actions = np.array([[0, 0], [1, 0], [4, 0]])
-	# for enforcer_action in enforcer_actions:
-	# 	predictions = observer("agent_reward_and_p", rationality, enforcer_reward=enforcer_reward, cooperation=cooperation, \
-	# 						   enforcer_action=enforcer_action)
-	# 	filename = "predictions/" + str(cooperation) + "/" + str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
-	# 	with open(path + filename, "w", newline="") as file:
-	# 		writer = csv.writer(file)
-	# 		writer.writerows(predictions)
+	enforcer_actions = np.array([[0, 0], [1, 0], [2, 0]])
+	for enforcer_action in enforcer_actions:
+		predictions = observer("agent_reward_and_p", rationality, enforcer_reward=enforcer_reward, cooperation=cooperation, \
+							   enforcer_action=enforcer_action)
+		filename = "predictions/2/" + str(cooperation) + "/" + str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
+		with open(path + filename, "w", newline="") as file:
+			writer = csv.writer(file)
+			writer.writerows(predictions)
