@@ -4,7 +4,8 @@ import csv
 import numpy as np
 
 def retrieve_enforcer_no_ToM(enforcer_rewards, enforcer_action, likelihood):
-    filename = "cache/enforcer_no_ToM.csv" 
+    path = "cache/gridworld/" if GRIDWORLD == True else "cache/standard/"
+    filename = path + "enforcer_no_ToM.csv"
     with open(filename, "r") as file:
         reader = csv.reader(file)
         action_probabilities = []
@@ -19,7 +20,8 @@ def retrieve_enforcer_no_ToM(enforcer_rewards, enforcer_action, likelihood):
     return likelihood
 
 def retrieve_agent_ToM(enforcer_reward, agent_rewards, enforcer_actions, p, cooperation, U):
-    filename = "cache/agent_ToM/" + METHOD + "/" + str(p) + "/" + str(cooperation) + ".csv"
+    path = "cache/gridworld/" if GRIDWORLD == True else "cache/standard/"
+    filename = path + "agent_ToM/" + METHOD + "/" + str(p) + "/" + str(cooperation) + ".csv"
     with open(filename, "r") as file:
         reader = csv.reader(file)
         temp = np.zeros(U.shape)

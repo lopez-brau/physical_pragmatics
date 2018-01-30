@@ -6,7 +6,7 @@ import numpy as np
 
 def agent_no_ToM(rationality, agent_reward, enforcer_action):
 	# Compute the utilities.
-	agent_cost = NATURAL_COST + enforcer_action
+	agent_cost = convert_cost(enforcer_action) if GRIDWORLD == True else NATURAL_COST + enforcer_action
 	U = agent_reward - agent_cost
 
 	# Compute the action probabilities.
@@ -52,7 +52,7 @@ def agent_ToM(rationality, agent_reward, enforcer_action, cooperation, cache=Fal
 
 	# Compute the utilities.
 	smart_agent_reward = agent_reward + cooperative_reward(enforcer_rewards, posterior, cooperation)
-	smart_agent_cost = NATURAL_COST + enforcer_action
+	smart_agent_cost = convert_cost(enforcer_action) if GRIDWORLD == True else NATURAL_COST + enforcer_action
 	U = smart_agent_reward - smart_agent_cost
 
 	# Compute the action probabilities.
@@ -70,11 +70,21 @@ def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, agent_reward
 	size = min(np.prod(space), MAX_SAMPLES)
 	if size > MAX_SAMPLES | SAMPLING == True:
 		agent_rewards = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS))
-		enforcer_actions = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS))
+		if GRIDWORLD == True:
+			enforcer_actions = np.array([(enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 0,
+								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 1,
+								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2])
+		else:
+			enforcer_actions = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS))
 	else:
 		agent_rewards = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
-		enforcer_actions = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
-	
+		if GRIDWORLD == True:
+			enforcer_actions = np.array([(enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 0,
+								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 1,
+								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2])
+		else:
+			enforcer_actions = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
+
 	# Compute the utilities. *Cached option only supports p = 1.0.
 	if cache == True:
 		U = retrieve_agent_ToM(enforcer_reward, agent_rewards, enforcer_actions, p, cooperation, U)
@@ -133,7 +143,6 @@ def observer(infer, rationality, **kwargs):
 	# Infer the enforcer's reward.
 	if infer == "enforcer_reward":
 		# Extract variables.
-		# enforcer_rewards = kwargs["enforcer_rewards"]
 		cooperation = kwargs["cooperation"]
 		p = kwargs["p"]
 		enforcer_action = kwargs["enforcer_action"]
