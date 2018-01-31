@@ -2,4 +2,4 @@
 
 #SBATCH -t 05:00:00
 
-python3 social_pragmatics.py 5 0
+python3 main.py 2 0

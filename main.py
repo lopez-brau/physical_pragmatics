@@ -31,12 +31,7 @@ if __name__ == "__main__":
 
 	# Cache agent reasoning about an enforcer reasoning about an agent with no ToM.
 	# agent_rewards = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
-	# if GRIDWORLD == True:
-	# 	enforcer_actions = np.array([(enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 0,
-	# 							 	 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 1,
-	# 							 	 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2])
-	# else:
-	# 	enforcer_actions = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
+	# enforcer_actions = np.array([[0, 0], [1, 0], [2, 0]])
 	# p_set = np.linspace(0.0, 1.0, num=11)
 	# cooperation_set = np.array([-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 5.0])
 	# cache_agent_ToM(agent_ToM, rationality, agent_rewards, enforcer_actions, p_set, cooperation_set)
@@ -60,13 +55,13 @@ if __name__ == "__main__":
 	# Observer inferring the enforcer's beliefs about the agent reward and degree of ToM.
 	start_time = time.time()
 	enforcer_actions = np.array([[0, 0], [1, 0], [2, 0]])
-	path = "predictions/2/"
+	path = "predictions/3/"
 	for enforcer_action in enforcer_actions:
 		predictions = observer("agent_reward_and_p", rationality, enforcer_reward=enforcer_reward, cooperation=cooperation, \
 							   enforcer_action=enforcer_action)
 		print(time.time()-start_time)
 		filename = path + str(cooperation) + "/" + str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
-		with open(path + filename, "w", newline="") as file:
+		with open(filename, "w", newline="") as file:
 			writer = csv.writer(file)
 			writer.writerows(predictions)
 	print(time.time()-start_time)

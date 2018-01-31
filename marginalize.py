@@ -1,17 +1,18 @@
 from utils import *
 
 import csv
+import itertools as it
 import matplotlib.pyplot as plt
 import numpy as np
 
-natural_costs = np.array([[0, 0], [0, 2], [2, 0], [2, 2], [5, 0], [0, 5], [5, 5], [5, 2], [2, 5]])
-# enforcer_actions = [(0, 0), (0, 1), (1, 0), (1, 1), (4, 0), (0, 4), (4, 4), (4, 1), (1, 4)]
-enforcer_actions = np.array([[0, 0], [1, 0], [4, 0]])
-# enforcer_actions = np.array([[0, 0]])
+natural_costs = np.array(list(it.product(np.arange(3), repeat=NUM_ACTIONS)))
+enforcer_actions = np.array([[0, 0], [1, 0], [2, 0]])
+path = "predictions/3/"
+cooperation = 2.0
 for natural_cost in natural_costs:
     for enforcer_action in enforcer_actions:
-        filename = "predictions/" + str(cooperation) + "/" + str(natural_costs) + "_" + str(enforcer_action) + ".txt"
-        with open(path + filename, "r") as file:
+        filename = path + str(cooperation) + "/" + str(natural_cost) + "_" + str(enforcer_action) + ".txt"
+        with open(filename, "r") as file:
             reader = csv.reader(file)
             data = []
             for row in reader:
@@ -23,7 +24,7 @@ for natural_cost in natural_costs:
             expected_A = np.sum(np.multiply(prob_A, np.arange(10)))
             expected_B = np.sum(np.multiply(prob_B, np.arange(10)))
             expected_p = np.sum(np.multiply(prob_p, np.arange(11)/10))
-            print("===== Enforcer Action = %s =====" % str(enforcer_action))
+            print("===== Natural Cost = %s, Enforcer Action = %s =====" % (str(natural_cost), str(enforcer_action)))
             print("E[A] = ", expected_A)
             print("E[B] = ", expected_B)
             print("E[p] = ", expected_p)
@@ -54,7 +55,7 @@ for natural_cost in natural_costs:
             axs[1].set_ylim(0.0, 1.0)
             axs[1].set_ylabel("E[P(ToM)]")
             fig.suptitle("Enforcer Action = %s" % str(enforcer_action))
-            plt.savefig("imgs/test_2/" + str(natural_cost) + "_" + str(enforcer_action) + ".png", bbox_inches="tight")
+            plt.savefig("imgs/3/2.0/" + str(natural_cost) + "_" + str(enforcer_action) + ".png", bbox_inches="tight")
             plt.close(fig)
         # break
     # break
