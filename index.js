@@ -61,7 +61,7 @@ function make_slides(f) {
 
         // Display the setup, stimulus, and prompt on the slide.
         $(".display_setup").html("Suppose the farmer takes the following action.");
-        $(".display_stimulus").html("<img style=\"height:300px;width:300px;\" src=\"../imgs/stimuli/" + 
+        $(".display_stimulus").html("<img style=\"height:300px;width:300px;\" src=\"imgs/stimuli/" + 
                                     exp.trials[j] + "\"></script>");
     
         sentence1 = "Did the farmer think %NAME% wanted the banana?"

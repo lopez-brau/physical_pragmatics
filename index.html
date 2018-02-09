@@ -4,32 +4,32 @@
     <title>Psychology Study</title>
 
     <!-- External general utilities. -->
-    <script src="shared/js/jquery-1.11.1.min.js "></script>
-    <script src="shared/full-projects/jquery-ui/jquery-ui.min.js"></script>
-    <script src="shared/js/underscore-min.js"></script>
+    <script src="experiments/shared/js/jquery-1.11.1.min.js "></script>
+    <script src="experiments/shared/full-projects/jquery-ui/jquery-ui.min.js"></script>
+    <script src="experiments/shared/js/underscore-min.js"></script>
 
     <!-- CoCoLab experiment logic. -->
-    <script src="shared/js/exp-V2.js"></script>
-    <script src="shared/js/stream-V2.js"></script>
+    <script src="experiments/shared/js/exp-V2.js"></script>
+    <script src="experiments/shared/js/stream-V2.js"></script>
 
     <!-- CoCoLab general utilities. -->
-    <script src="shared/js/mmturkey.js "></script>
-    <script src="shared/js/browserCheck.js"></script>
-    <script src="shared/js/utils.js"></script>
+    <script src="experiments/shared/js/mmturkey.js "></script>
+    <script src="experiments/shared/js/browserCheck.js"></script>
+    <script src="experiments/shared/js/utils.js"></script>
 
     <!-- CSS files. -->
-    <link href="shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-    <link href="shared/css/cocolab-style.css" rel="stylesheet" type="text/css"/>
-    <link href="css/local-style.css" rel="stylesheet" type="text/css"/>
+    <link href="experiments/shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="experiments/shared/css/cocolab-style.css" rel="stylesheet" type="text/css"/>
+    <link href="experiments/css/local-style.css" rel="stylesheet" type="text/css"/>
 
     <!-- Experiment files. -->
-    <script src="js/observer_1.js"></script>
-    <script src="js/names.js"></script>
+    <script src="index.js"></script>
+    <script src="experiments/js/names.js"></script>
 
     <!-- Experiment specific helper functions. -->
-    <script src="js/local-utils.js"></script>
+    <script src="experiments/js/local-utils.js"></script>
 
-    <script src="shared/js/uniqueturker.js"></script>
+    <script src="experiments/shared/js/uniqueturker.js"></script>
 
 </head>
 
@@ -38,7 +38,7 @@
 
     <!-- Introduction slide. -->
     <div class="slide" id="i0">
-        <img src="shared/images/yale.png" id="yale"></img>
+        <img src="experiments/shared/images/yale.png" id="yale"></img>
         <p>Yale Computation and Cognitive Development Lab</p>
         <p id="instruct-text">In this experiment, you will be presented with interactions between two agents and asked about what one of them probably thinks. The HIT should take about 10 minutes. Please pay attention, thanks!</p>
 
@@ -49,7 +49,7 @@
     <!-- Instructions slide. -->
     <div class="slide" id="instructions">
         <h3>Instructions</h3>
-        <img style="height:300px;width:auto" src="../imgs/forest.png"></img>
+        <img style="height:300px;width:auto" src="imgs/forest.png"></img>
         <p>On each trial, you will be presented with an agent, %NAME%, traveling through a forest. %NAME% encounters two types of fruit: bananas and pears. A farmer, who owns the fruit, tries to protect them from various types of agents. You will be asked to put yourself in the shoes of this gardener to reason about what they were probably thinking when setting up these protections.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
@@ -58,7 +58,7 @@
     <div class="slide" id="catch_slide">
         <h3>Instructions</h3>
         <p>For example:</p>
-        <img style="height:150px;width:auto" src="../imgs/catch_trial.png"></img>
+        <img style="height:150px;width:auto" src="imgs/catch_trial.png"></img>
         <table id="multi_slider_table0" class="slider_table"><tr><td></td><td class="left">very unlikely</td><td class="right">very likely</td></tr></table>
         <p>There are <span class="display_trials"></span> trials in total. Press "Continue" to begin.</p>
         <p class="catch_err">Please adjust both sliders before continuing.</p>
