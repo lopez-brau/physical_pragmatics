@@ -15,8 +15,8 @@ function make_slides(f) {
         name: "instructions",
         start: function() {
             $(".catch_err").hide();
-            var catch_sentence = ["The Empire State Building is tall relative to other buildings.", 
-                                  "The Empire State Building is tall relative to other pineapples."];
+            var catch_sentence = ["How likely is it that the gardener thought %NAME% wanted bananas?", 
+                                  "How likely is it that the gardener thought %NAME% wanted pears?"];
             for (var i = 0; i < exp.num_catch; i++) {
                 $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
                                                  "\">" + catch_sentence[i] + "</td><td colspan=\"2\"><div id=\"slider" + i + 
@@ -51,12 +51,12 @@ function make_slides(f) {
         $(".slider_row").remove();
 
         // Display the setup, stimulus, and prompt on the slide.
-        $(".display_setup").html("Suppose an enforcer places one block on the grid.");
+        $(".display_setup").html("Suppose the farmer takes the following action.");
         $(".display_stimulus").html("<img style=\"height:350px;width:350px;\" src=\"../imgs/stimuli/" + 
                                     exp.trials[j] + "\"></script>");
     
-        sentence1 = "To what degree did the enforcer think Matt wanted this fruit?"
-        sentence2 = "Do you think the enforcer believes that Matt is thinking about it's actions?"
+        sentence1 = "How much did the farmer think %NAME% wanted this fruit?"
+        sentence2 = "Do you think the farmer was anticipating that %NAME% would thinking about it's potential actions?"
 
         // set up the text next to each slider
         for (var i = exp.num_catch; i < exp.num_sentences+exp.num_catch; i++) {
