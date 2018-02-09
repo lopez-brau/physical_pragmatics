@@ -3,34 +3,32 @@
 <head>
     <title>Psychology Study</title>
 
-    <!-- external general utilities -->
+    <!-- External general utilities. -->
     <script src="shared/js/jquery-1.11.1.min.js "></script>
     <script src="shared/full-projects/jquery-ui/jquery-ui.min.js"></script>
     <script src="shared/js/underscore-min.js"></script>
 
-    <!-- cocolab experiment logic -->
+    <!-- CoCoLab experiment logic. -->
     <script src="shared/js/exp-V2.js"></script>
     <script src="shared/js/stream-V2.js"></script>
 
-    <!-- cocolab general utilities -->
+    <!-- CoCoLab general utilities. -->
     <script src="shared/js/mmturkey.js "></script>
     <script src="shared/js/browserCheck.js"></script>
     <script src="shared/js/utils.js"></script>
 
-    <!-- experiment specific helper functions -->
+    <!-- Experiment specific helper functions. -->
     <script src="js/local-utils.js"></script>
 
-    <!--CSS-->
+    <!-- CSS files.-->
     <link href="shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
     <link href="shared/css/cocolab-style.css" rel="stylesheet" type="text/css"/>
     <link href="css/local-style.css" rel="stylesheet" type="text/css"/>
 
-    <!-- experiment file -->
+    <!-- Experiment files. -->
     <script src="js/class-elicitation-2.js"></script>
-    <script src="js/examples-6.js"></script>
-    <!-- <script src="js/examples-3.js"></script> -->    <!--run on 1/7/2017  -->
     <script src="js/names.js"></script>
-
+    
     <script src="shared/js/uniqueturker.js"></script>
 
 </head>
@@ -39,7 +37,7 @@
   <noscript>This task requires JavaScript.</noscript>
 
   <div class="slide" id="i0" >
-    <img src="" alt="Yale CCD Lab" id="cocologo"></img>
+    <!-- <img style="height:300px;width:300px;" src="../test-1.png" alt="Yale CCD Lab" id="cocologo"></img> -->
     <p id="cocolab">Yale Computation and Cognitive Development Lab</p>
     <p id="instruct-text">
       In this experiment, you will read short vignettes and be asked to rephrase some part of them.
@@ -53,26 +51,19 @@
     <p id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the Yale University Department of Psychology. If you have questions about this research, please contact Michael Lopez-Brau at <a href="mailto://michael.lopez-brau@yale.edu">michael.lopez-brau@yale.edu</a> or Julian Jara-Ettinger, at julian.jara-ettinger@yale.edu. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
   </div>
 
+  <!-- Instruction/catch trial slide. -->
   <div class="slide" id="instructions">
     <h3>Instructions</h3>
-    <!-- In particular, we are interested in what are called <emph>relative adjectives</emph>.
-    Adjectives describe things, and relative adjectives (like the word <strong>tall</strong>) describe things <emph>relative</emph> to other things.
-    </p>
-    <p>For example:
-      A big house cat is big relative to other cats,  a different size than a big tiger.
-      What counts as big depends on what it is big relative to.
-    </p> -->
     <p>On each trial, you will be asked to rephrase something a person said. You will be given two possible rephrasings and asked to rate each of them.</p>
     <p>For example: Imagine hearing someone say, "The Empire State Building is tall."</p>
     <p>What do you think they meant?</p>
     <table id="multi_slider_table0" class="slider_table"><tr><td></td><td class="left">very unlikely</td><td class="right">very likely</td></tr></table>
-    <!-- <p>For instance, is somebody says, "This soda is warm.", what they mean is: "This soda is warm for a soda." (or, relative to sodas). If somebody says, "This coffee is cold.", it is relative to cups of coffee. A cold coffee can be warmer than a warm soda. </p> -->
     <p>There are <span class="display_trials"></span> trials in total. Press "Continue" to begin.</p>
-    <p class="errCatch">Please adjust both sliders before continuing.</p>
+    <p class="catch_err">Please adjust both sliders before continuing.</p>
     <button onclick="_s.button()">Continue</button>
   </div>
 
-  <!-- this is where all of the trial slides are embedded -->
+  <!-- Trial slides. -->
   <div class="trial_slides"></div>
 
   <div class="slide"  id="subj_info">

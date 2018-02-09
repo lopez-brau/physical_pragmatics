@@ -73,7 +73,8 @@ def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, agent_reward
 		if GRIDWORLD == True:
 			enforcer_actions = np.array([(enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 0,
 								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 1,
-								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2])
+								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2,
+								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 3])
 		else:
 			enforcer_actions = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS))
 	else:
@@ -81,7 +82,8 @@ def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, agent_reward
 		if GRIDWORLD == True:
 			enforcer_actions = np.array([(enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 0,
 								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 1,
-								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2])
+								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2,
+								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 3])
 		else:
 			enforcer_actions = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
 

@@ -1,4 +1,4 @@
-// list of character names and typical gender
+// List of character names and typical gender.
 var characters = [
 {
 	name: "Daniel",

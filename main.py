@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
 	# Cache agent reasoning about an enforcer reasoning about an agent with no ToM.
 	# agent_rewards = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
-	# enforcer_actions = np.array([[0, 0], [1, 0], [2, 0]])
+	# enforcer_actions = np.array([[0, 0], [1, 0], [2, 0], [3, 0]])
 	# p_set = np.linspace(0.0, 1.0, num=11)
 	# cooperation_set = np.array([-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 5.0])
 	# cache_agent_ToM(agent_ToM, rationality, agent_rewards, enforcer_actions, p_set, cooperation_set)
@@ -54,8 +54,8 @@ if __name__ == "__main__":
 
 	# Observer inferring the enforcer's beliefs about the agent reward and degree of ToM.
 	start_time = time.time()
-	enforcer_actions = np.array([[0, 0], [1, 0], [2, 0]])
-	path = "predictions/3/"
+	enforcer_actions = np.array([[0, 0], [1, 0], [2, 0], [3, 0]])
+	path = "predictions/data/gridworld_nc_distance_3/"
 	for enforcer_action in enforcer_actions:
 		predictions = observer("agent_reward_and_p", rationality, enforcer_reward=enforcer_reward, cooperation=cooperation, \
 							   enforcer_action=enforcer_action)
@@ -64,4 +64,3 @@ if __name__ == "__main__":
 		with open(filename, "w", newline="") as file:
 			writer = csv.writer(file)
 			writer.writerows(predictions)
-	print(time.time()-start_time)
