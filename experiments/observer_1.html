@@ -40,20 +40,25 @@
     <div class="slide" id="i0">
         <img src="shared/images/yale.png" id="yale"></img>
         <p>Yale Computation and Cognitive Development Lab</p>
-        <p id="instruct-text">In this experiment, you will read short vignettes and be asked to rephrase some part of them.The HIT should take about 5 minutes. Please pay attention, thanks!</p>
-
-        <p style="font-family:courier; font-size:16px; text-align: justify;">Please note: There will be multiple posted versions of this HIT throughout the day. Please attempt only one HIT this series. You will not be allowed to complete multiple HITs in this series.</p>
+        <p id="instruct-text">In this experiment, you will be presented with interactions between two agents and asked about what one of them probably thinks. The HIT should take about 10 minutes. Please pay attention, thanks!</p>
 
         <button id="start_button" type="button">Start Experiment</button>
         <p id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the Yale University Department of Psychology. If you have questions about this research, please contact Michael Lopez-Brau at <a href="mailto://michael.lopez-brau@yale.edu">michael.lopez-brau@yale.edu</a> or Julian Jara-Ettinger, at julian.jara-ettinger@yale.edu. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
     </div>
 
-    <!-- Instruction/catch trial slide. -->
+    <!-- Instructions slide. -->
     <div class="slide" id="instructions">
         <h3>Instructions</h3>
-        <p>On each trial, you will be presented with an agent, %NAME%, traveling through a forest. %NAME% encounters two types of fruit: bananas and pears. A farmer, who owns the fruit, tries to protect them from various types of agents. You will be asked to put yourself in the shoes of this gardener to reason about what they were probably thinking when trying to set up these protections.</p>
-        <p>For example: </p>
-        <img style="height:200px;width:auto" src="../imgs/instruction.png"></img>
+        <img style="height:300px;width:auto" src="../imgs/forest.png"></img>
+        <p>On each trial, you will be presented with an agent, %NAME%, traveling through a forest. %NAME% encounters two types of fruit: bananas and pears. A farmer, who owns the fruit, tries to protect them from various types of agents. You will be asked to put yourself in the shoes of this gardener to reason about what they were probably thinking when setting up these protections.</p>
+        <button onclick="_s.button()">Continue</button>
+    </div>
+
+    <!-- Catch trial slide. -->
+    <div class="slide" id="catch_slide">
+        <h3>Instructions</h3>
+        <p>For example:</p>
+        <img style="height:150px;width:auto" src="../imgs/catch_trial.png"></img>
         <table id="multi_slider_table0" class="slider_table"><tr><td></td><td class="left">very unlikely</td><td class="right">very likely</td></tr></table>
         <p>There are <span class="display_trials"></span> trials in total. Press "Continue" to begin.</p>
         <p class="catch_err">Please adjust both sliders before continuing.</p>
