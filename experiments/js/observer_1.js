@@ -74,11 +74,11 @@ function make_slides(f) {
     }
 
     // These two functions help set up and read info from the sliders.
-    function init_sliders(num_sentences) {
-        for (var i = exp.num_catch; i < num_sentences+exp.num_catch; i++) {
-            utils.make_slider("#slider" + i, make_slider_callback(i));
-        }
-    }
+    // function init_sliders(num_sentences) {
+    //     for (var i = exp.num_catch; i < num_sentences+exp.num_catch; i++) {
+    //         utils.make_slider("#slider" + i, make_slider_callback(i));
+    //     }
+    // }
 
     function make_slider_callback(i) {
         return function(event, ui) {
@@ -187,8 +187,8 @@ function init() {
 
   // the blocks of the experiment
   exp.structure = ["i0", "instructions"];
-  // for (var k = 1; k <= exp.trials; k++) {
-  for (var k = 1; k <= 4; k++) {
+  for (var k = 1; k <= exp.num_trials; k++) {
+  // for (var k = 1; k <= 4; k++) {
     exp.structure.push("trial" + k);
   }
   exp.structure.push("subj_info");
