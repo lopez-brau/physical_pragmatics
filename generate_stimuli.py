@@ -106,7 +106,7 @@ def generate_stimuli(natural_cost, enforcer_action):
 			if sum(enforcer_action) == 0:
 				pass
 			elif np.argmax(enforcer_action) == 0:
-				first_rock = [1.0, banana_coordinates[1]+2.0]
+				first_rock = [9.0, banana_coordinates[1]+2.0]
 				rock_coordinates = [first_rock]
 				for action in np.arange(enforcer_action[0]):
 					if action == 0:

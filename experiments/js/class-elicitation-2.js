@@ -44,17 +44,16 @@ function make_slides(f) {
         }
     });
 
-    // Set up the functionality of a slide loading in.
+    // Set up a trial slide.
     function start() {
+        // Hide any errors and sliders from the previous slide.
         $(".err").hide();
-
-        // removes the slider from the previous slide before making the slider for the current slide
         $(".slider_row").remove();
 
+        // Display the setup, stimulus, and prompt on the slide.
         $(".display_setup").html("Suppose an enforcer places one block on the grid.");
         $(".display_stimulus").html("<img style=\"height:350px;width:350px;\" src=\"../imgs/stimuli/" + 
                                     exp.trials[j] + "\"></script>");
-            // [4 3]_[1 0].png\"></script>");
     
         sentence1 = "To what degree did the enforcer think Matt wanted this fruit?"
         sentence2 = "Do you think the enforcer believes that Matt is thinking about it's actions?"
@@ -70,7 +69,7 @@ function make_slides(f) {
             utils.make_slider("#slider" + i, make_slider_callback(i));
         }
 
-        init_sliders(exp.num_sentences);
+        // init_sliders(exp.num_sentences);
         exp.sliderPost = [];
     }
 
@@ -96,6 +95,7 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "trial_num": j + 1,
+                "stimulus": exp.trials[j],
                 "target0": exp.sliderPost[2],
                 "target1": exp.sliderPost[3]
             });
@@ -188,7 +188,7 @@ function init() {
   // the blocks of the experiment
   exp.structure = ["i0", "instructions"];
   // for (var k = 1; k <= exp.trials; k++) {
-  for (var k = 1; k <= exp.num_trials; k++) {
+  for (var k = 1; k <= 4; k++) {
     exp.structure.push("trial" + k);
   }
   exp.structure.push("subj_info");
