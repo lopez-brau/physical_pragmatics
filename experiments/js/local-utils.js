@@ -45,9 +45,9 @@ function get_characters(characters) {
 // Use the appropriate pronoun for a given character.
 function get_pronoun(character) {
     if (character.gender == "male") {
-        return "his"
+        return "he"
     }
     else {
-        return "her"
+        return "she"
     }
 }
