@@ -5,12 +5,8 @@ import itertools as it
 import matplotlib.pyplot as plt
 import numpy as np
 
-# def marginalize():
-
-
-
-natural_costs = np.array(list(it.product(np.arange(3), repeat=NUM_ACTIONS)))
-enforcer_actions = np.array([[0, 0], [1, 0], [2, 0]])
+natural_costs = np.array([[2, 2], [2, 3], [3, 2], [3, 3], [2, 4], [4, 2], [3, 4], [4, 3], [4, 4]])
+enforcer_actions = np.array([[0, 0], [1, 0], [2, 0], [3, 0]])
 path = "predictions/plots/gridworld_nc_distance_3/"
 cooperation = 2.0
 for natural_cost in natural_costs:

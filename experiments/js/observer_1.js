@@ -170,65 +170,58 @@ function init() {
         }
     })();
 
+    // Set up catch trial slide information.
     exp.num_catch = 2;
     exp.catch_trials = [];
 
+    // Set up trial slide information.
     exp.trials = trials();
     exp.num_trials = exp.trials.length;
+    exp.data_trials = [];
     $(".display_trials").html(exp.num_trials);
 
     exp.num_sentences = 2
-    // sample a phrase for this particular instance
-    // exp.condition = sampleCondition();
 
-    // stores the catch trial results for this experiment
+    // Get user system specs.
+    exp.system = {
+        Browser: BrowserDetect.browser,
+        OS: BrowserDetect.OS,
+        screenH: screen.height,
+        screenUH: exp.height,
+        screenW: screen.width,
+        screenUW: exp.width
+    };
 
-
-  // get user system specs
-  exp.system = {
-      Browser: BrowserDetect.browser,
-      OS: BrowserDetect.OS,
-      screenH: screen.height,
-      screenUH: exp.height,
-      screenW: screen.width,
-      screenUW: exp.width
-  };
-
-  // the blocks of the experiment
-  exp.structure = ["i0", "instructions", "catch_slide"];
-  for (var k = 1; k <= exp.num_trials; k++) {
-  // for (var k = 1; k <= 4; k++) {
-    exp.structure.push("trial" + k);
-  }
-  exp.structure.push("subj_info");
-  exp.structure.push("thanks");
-
-  // holds the data from each trial
-  exp.data_trials = [];
-
-  // make corresponding slides
-  exp.slides = make_slides(exp);
-
-  // embed the slides
-  embed_slides(exp.num_trials);
-
-  // this does not work if there are stacks of stims (but does work for an experiment with this structure)
-  // relies on structure and slides being defined
-  exp.nQs = utils.get_exp_length();
-
-  // hide everything
-  $(".slide").hide();
-
-  // make sure Turkers have accepted HIT (or you're not in MTurk)
-  $("#start_button").click(function() {
-    if (turk.previewMode) {
-      $("#mustaccept").show();
-    } else {
-      $("#start_button").click(function() { $("#mustaccept").show(); });
-      exp.go();
+    // Stich together the blocks of the experiment.
+    exp.structure = ["i0", "instructions", "catch_slide"];
+    for (var k = 1; k <= exp.num_trials; k++) {
+        exp.structure.push("trial" + k);
     }
-  });
+    exp.structure.push("subj_info");
+    exp.structure.push("thanks");
+   
+    // Make and embed the slides.
+    exp.slides = make_slides(exp);
+    embed_slides(exp.num_trials);
 
-  // show first slide
-  exp.go();
+    // This does not work if there are stacks of stims (but does work for an experiment with this structure).
+    // Relies on structure and slides being defined.
+    exp.nQs = utils.get_exp_length();
+
+    // Hide everything.
+    $(".slide").hide();
+
+    // Make sure Turkers have accepted HIT (or you're not in MTurk)
+    $("#start_button").click(function() {
+        if (turk.previewMode) {
+            $("#mustaccept").show();
+        }
+        else {
+            $("#start_button").click(function() { $("#mustaccept").show(); });
+            exp.go();
+        }
+    });
+
+    // Show the first slide.
+    exp.go();
 }

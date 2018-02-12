@@ -2,7 +2,6 @@ import numpy as np
 import os
 
 def generate_stimuli(natural_cost, enforcer_action):
-	# Randomly sample a starting point for the agent.
 	corners = np.array([[1.0, 1.0], [9.0, 1.0], [9.0, 9.0], [1.0, 9.0]])
 	indices = np.arange(len(corners))
 	agent_index = np.random.choice(indices)
@@ -52,7 +51,6 @@ def generate_stimuli(natural_cost, enforcer_action):
 						continue
 					more_rocks = np.array([first_rock[0], first_rock[1]+(2.0*action)])
 					rock_coordinates.append(more_rocks)
-
 	elif agent_index == 1:
 		index = np.random.choice([0, 2])
 		if index == 0:
@@ -97,7 +95,6 @@ def generate_stimuli(natural_cost, enforcer_action):
 						continue
 					more_rocks = np.array([first_rock[0], first_rock[1]+(2.0*action)])
 					rock_coordinates.append(more_rocks)
-
 	elif agent_index == 2:
 		index = np.random.choice([1, 3])
 		if index == 1:
@@ -142,7 +139,6 @@ def generate_stimuli(natural_cost, enforcer_action):
 						continue
 					more_rocks = np.array([first_rock[0]-(2.0*action), first_rock[1]])
 					rock_coordinates.append(more_rocks)
-
 	else:
 		index = np.random.choice([0, 2])
 		if index == 0:
