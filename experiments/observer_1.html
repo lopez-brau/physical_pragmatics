@@ -38,9 +38,9 @@
 
     <!-- Introduction slide. -->
     <div class="slide" id="i0">
-        <img src="shared/images/yale.png" id="yale"></img>
+        <img style="height:150px;width:150px"; src="shared/images/yale.png" id="yale"></img>
         <p>Yale Computation and Cognitive Development Lab</p>
-        <p id="instruct-text">In this experiment, you will be presented with interactions between two agents and asked about what one of them probably thinks. The HIT should take about 10 minutes. Please pay attention, thanks!</p>
+        <p id="instruct-text">In this experiment, you will be presented with interactions between two agents and asked about what they think. The HIT should take about 10 minutes. Please pay attention, thanks!</p>
 
         <button id="start_button" type="button">Start Experiment</button>
         <p id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the Yale University Department of Psychology. If you have questions about this research, please contact Michael Lopez-Brau at <a href="mailto://michael.lopez-brau@yale.edu">michael.lopez-brau@yale.edu</a> or Julian Jara-Ettinger, at julian.jara-ettinger@yale.edu. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
@@ -50,7 +50,7 @@
     <div class="slide" id="instructions">
         <h3>Instructions</h3>
         <img style="height:300px;width:auto" src="../imgs/forest.png"></img>
-        <p>On each trial, you will be presented with an agent, %NAME%, traveling through a forest. %NAME% encounters two types of fruit: bananas and pears. A farmer, who owns the fruit, tries to protect them from various types of agents. You will be asked to put yourself in the shoes of this gardener to reason about what they were probably thinking when setting up these protections.</p>
+        <p><span class="display_agent"></span> is traveling through a forest in search of delicious fruit. In this forest, <span class="display_agent"></span> encounters two types of fruit: bananas and pears. A farmer, <span class="display_enforcer"></span>, owns these fruit and tries to protect them by placing rocks near them. In the past, <span class="display_enforcer"></span> has found that people can usually figure out who stacked up the rocks. On each trial, you will be asked to put yourself in the farmer's shoes.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 

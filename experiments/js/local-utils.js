@@ -24,12 +24,30 @@ function embed_slides(num_trials) {
             "<p class=\"display_stimulus\"></p>" +
             "<table id=\"multi_slider_table" + i + "\"" + "class=\"slider_table\">" +
             "<tr><td></td>" +
-            "<td class=\"left\">very unlikely</td>"+
-            "<td class=\"right\">very likely</td>" +
+            "<td class=\"left\">not at all</td>"+
+            "<td class=\"right\">very much</td>" +
             "</tr></table><p></p>" +
             "<button onclick=\"_s.button()\">Continue</button>" +
             "<p class=\"err\">Please adjust both sliders before continuing.</p>" +
             "</div>";
         $(".trial_slides").html(slides);
+    }
+}
+
+// Sample unique names for the enforcer and the agent.
+function get_characters(characters) {
+    var shuffled_characters = _.shuffle(characters)
+    var enforcer = shuffled_characters[0]
+    var agent = shuffled_characters[1]
+    return [enforcer, agent]
+}
+
+// Use the appropriate pronoun for a given character.
+function get_pronoun(character) {
+    if (character.gender == "male") {
+        return "his"
+    }
+    else {
+        return "her"
     }
 }
