@@ -24,8 +24,8 @@ function make_slides(f) {
         name: "catch_slide",
         start: function() {
             $(".catch_err").hide();
-            var catch_sentence = ["How likely is it that the gardener thought %NAME% wanted bananas?", 
-                                  "How likely is it that the gardener thought %NAME% wanted pears?"];
+            var catch_sentence = ["How likely is it that the farmer thought " + exp.agent.name + " wanted bananas?", 
+                                  "How likely is it that the farmer thought " + exp.agent.name + " wanted pears?"];
             for (var i = 0; i < exp.num_catch; i++) {
                 $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
                                                  "\">" + catch_sentence[i] + "</td><td colspan=\"2\"><div id=\"slider" + i + 
@@ -41,12 +41,10 @@ function make_slides(f) {
             }
             else {
                 exp.catch_trials.push({
-                    object: "Empire State Building",
-                    property: "is tall",
-                    sentence1: "relative to other buildings",
-                    response1: exp.sliderPost[0],
-                    sentence2: "relative to other pineapples",
-                    response2: exp.sliderPost[1]
+                    fruit0: "bananas",
+                    response0: exp.sliderPost[0],
+                    fruit1: "pears",
+                    response1: exp.sliderPost[1]
                 });
                 exp.go();
             }
@@ -64,13 +62,14 @@ function make_slides(f) {
         $(".display_stimulus").html("<img style=\"height:300px;width:300px;\" src=\"imgs/stimuli/" + 
                                     exp.trials[j] + "\"></script>");
     
-        sentence1 = "Did the farmer think %NAME% wanted the banana?"
-        sentence2 = "Was the farmer was anticipating that %NAME% would thinking about its potential actions?"
+        sentence0 = "How much does the farmer think " + exp.agent.name + " likes bananas?"
+        sentence1 = "How much does the farmer think " + exp.agent.name + " is thinking about " + get_pronoun(exp.enforcer) + 
+                    " actions to protect the fruit?"
 
         // set up the text next to each slider
         for (var i = exp.num_catch; i < exp.num_sentences+exp.num_catch; i++) {
             // display the slider for each slide
-            sentence = i == 2 ? sentence1 : sentence2
+            sentence = i == 2 ? sentence0 : sentence1
             $("#multi_slider_table" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
                                                     "\">" + sentence + "</td><td colspan=\"2\"><div id=\"slider" + i + 
                                                     "\" class=\"slider\">-------[ ]--------</div></td></tr>");
@@ -78,16 +77,8 @@ function make_slides(f) {
             utils.make_slider("#slider" + i, make_slider_callback(i));
         }
 
-        // init_sliders(exp.num_sentences);
         exp.sliderPost = [];
     }
-
-    // These two functions help set up and read info from the sliders.
-    // function init_sliders(num_sentences) {
-    //     for (var i = exp.num_catch; i < num_sentences+exp.num_catch; i++) {
-    //         utils.make_slider("#slider" + i, make_slider_callback(i));
-    //     }
-    // }
 
     function make_slider_callback(i) {
         return function(event, ui) {
@@ -105,6 +96,8 @@ function make_slides(f) {
             exp.data_trials.push({
                 "trial_num": j + 1,
                 "stimulus": exp.trials[j],
+                "enforcer_name": exp.enforcer,
+                "agent_name": exp.agent,
                 "target0": exp.sliderPost[2],
                 "target1": exp.sliderPost[3]
             });
@@ -170,65 +163,65 @@ function init() {
         }
     })();
 
+    // Set up catch trial slide information.
     exp.num_catch = 2;
     exp.catch_trials = [];
 
+    // Set up trial slide information.
     exp.trials = trials();
     exp.num_trials = exp.trials.length;
+    exp.data_trials = [];
     $(".display_trials").html(exp.num_trials);
 
+    // Sample a name for the enforcer and the agent.
+    exp.characters = get_characters(characters)
+    exp.enforcer = exp.characters[0]
+    exp.agent = exp.characters[1]
+    $(".display_enforcer").html(exp.enforcer.name)
+    $(".display_agent").html(exp.agent.name)
+
     exp.num_sentences = 2
-    // sample a phrase for this particular instance
-    // exp.condition = sampleCondition();
 
-    // stores the catch trial results for this experiment
+    // Get user system specs.
+    exp.system = {
+        Browser: BrowserDetect.browser,
+        OS: BrowserDetect.OS,
+        screenH: screen.height,
+        screenUH: exp.height,
+        screenW: screen.width,
+        screenUW: exp.width
+    };
 
-
-  // get user system specs
-  exp.system = {
-      Browser: BrowserDetect.browser,
-      OS: BrowserDetect.OS,
-      screenH: screen.height,
-      screenUH: exp.height,
-      screenW: screen.width,
-      screenUW: exp.width
-  };
-
-  // the blocks of the experiment
-  exp.structure = ["i0", "instructions", "catch_slide"];
-  for (var k = 1; k <= exp.num_trials; k++) {
-  // for (var k = 1; k <= 4; k++) {
-    exp.structure.push("trial" + k);
-  }
-  exp.structure.push("subj_info");
-  exp.structure.push("thanks");
-
-  // holds the data from each trial
-  exp.data_trials = [];
-
-  // make corresponding slides
-  exp.slides = make_slides(exp);
-
-  // embed the slides
-  embed_slides(exp.num_trials);
-
-  // this does not work if there are stacks of stims (but does work for an experiment with this structure)
-  // relies on structure and slides being defined
-  exp.nQs = utils.get_exp_length();
-
-  // hide everything
-  $(".slide").hide();
-
-  // make sure Turkers have accepted HIT (or you're not in MTurk)
-  $("#start_button").click(function() {
-    if (turk.previewMode) {
-      $("#mustaccept").show();
-    } else {
-      $("#start_button").click(function() { $("#mustaccept").show(); });
-      exp.go();
+    // Stich together the blocks of the experiment.
+    exp.structure = ["i0", "instructions", "catch_slide"];
+    for (var k = 1; k <= exp.num_trials; k++) {
+        exp.structure.push("trial" + k);
     }
-  });
+    exp.structure.push("subj_info");
+    exp.structure.push("thanks");
+   
+    // Make and embed the slides.
+    exp.slides = make_slides(exp);
+    embed_slides(exp.num_trials);
 
-  // show first slide
-  exp.go();
+    // This does not work if there are stacks of stims (but does work for an experiment with this structure).
+    // Relies on structure and slides being defined.
+    exp.nQs = utils.get_exp_length();
+
+    // Hide everything.
+    $(".slide").hide();
+
+    // Make sure Turkers have accepted HIT (or you're not in MTurk)
+    $("#start_button").click(function() {
+        if (turk.previewMode) {
+            $("#mustaccept").show();
+        }
+        else {
+            $("#start_button").click(function() { $("#mustaccept").show(); });
+            exp.go();
+        }
+    });
+
+    // Show the first slide.
+    exp.go();
 }
