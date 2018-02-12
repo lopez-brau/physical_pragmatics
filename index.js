@@ -63,8 +63,8 @@ function make_slides(f) {
                                     exp.trials[j] + "\"></script>");
     
         sentence0 = "How much does the farmer think " + exp.agent.name + " likes bananas?"
-        sentence1 = "How much does the farmer think " + exp.agent.name + " is thinking about " + get_pronoun(exp.enforcer) + 
-                    " actions to protect the fruit?"
+        sentence1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
+                    " placed the rocks?"
 
         // set up the text next to each slider
         for (var i = exp.num_catch; i < exp.num_sentences+exp.num_catch; i++) {
