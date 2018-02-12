@@ -179,6 +179,7 @@ function init() {
     exp.agent = exp.characters[1]
     $(".display_enforcer").html(exp.enforcer.name)
     $(".display_agent").html(exp.agent.name)
+    $(".display_pronoun").html(get_pronoun(exp.enforcer))
 
     exp.num_sentences = 2
 

@@ -179,6 +179,7 @@ function init() {
     exp.agent = exp.characters[1]
     $(".display_enforcer").html(exp.enforcer.name)
     $(".display_agent").html(exp.agent.name)
+    $(".display_pronoun").html(get_pronoun(exp.enforcer))
 
     exp.num_sentences = 2
 
@@ -194,7 +195,8 @@ function init() {
 
     // Stich together the blocks of the experiment.
     exp.structure = ["i0", "instructions", "catch_slide"];
-    for (var k = 1; k <= exp.num_trials; k++) {
+    // for (var k = 1; k <= exp.num_trials; k++) {
+    for (var k = 1; k <= 4; k++) {
         exp.structure.push("trial" + k);
     }
     exp.structure.push("subj_info");
