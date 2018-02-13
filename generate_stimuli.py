@@ -1,6 +1,7 @@
 import numpy as np
 import os
 
+# Generates the coordinates for all of the objects in each stimuli.
 def generate_stimuli(natural_cost, enforcer_action):
 	corners = np.array([[1.0, 1.0], [9.0, 1.0], [9.0, 9.0], [1.0, 9.0]])
 	indices = np.arange(len(corners))
@@ -186,33 +187,46 @@ def generate_stimuli(natural_cost, enforcer_action):
 
 	return agent_coordinates, banana_coordinates, pear_coordinates, rock_coordinates
 
+# Set up how the stimuli will be varied.
 natural_costs = np.array([[2, 2], [2, 3], [3, 2], [3, 3], [2, 4], [4, 2], [3, 4], [4, 3], [4, 4]])
 enforcer_actions = np.array([[0, 0], [1, 0], [2, 0], [3, 0]])
-path = "imgs/stimuli/"
+genders = ["male", "female"]
+directions = ["right", "left"]
+
+# Set up the relative path and various file extensions.
+path = "imgs/observer_1/"
 tex = ".tex"
 pdf = ".pdf"
+png = ".png"
+
+# Create the stimuli by creating a LaTeX file, converting it to a pdf file, 
+# then converting that to a png file, and then finally renaming it.
 for natural_cost in natural_costs:
 	for enforcer_action in enforcer_actions:
 		agent_coordinates, banana_coordinates, pear_coordinates, rock_coordinates = generate_stimuli(natural_cost, enforcer_action)
-		filename = str(natural_cost) + "_" + str(enforcer_action)
-		with open(path + filename + tex, "w", newline="") as file: 
-			file.write("\\documentclass{standalone}\n\n")
-			file.write("\\usepackage{tikz}\n\\usepackage{graphicx}\n\\graphicspath{ {D:/Research/social_pragmatics/imgs/} }\n\n")
-			file.write("\\begin{document}\n\\begin{tikzpicture}\n\\draw[step=2.0cm,color=black] (0.0,0.0) grid (10.0,10.0);\n")
-			file.write("\\node at (%f,%f) {\\includegraphics[scale=0.12]{agent}};\n" % (agent_coordinates[0], agent_coordinates[1]))
-			file.write("\\node at (%f,%f) {\\includegraphics[scale=0.25]{banana}};\n" % (banana_coordinates[0], banana_coordinates[1]))
-			file.write("\\node at (%f,%f) {\\includegraphics[scale=0.25]{pear}};\n" % (pear_coordinates[0], pear_coordinates[1]))
-			if sum(enforcer_action) != 0:
-				for action in np.arange(max(enforcer_action)):
-					if len(np.shape(rock_coordinates)) == 1:
-						file.write("\\node at (%f,%f) {\\includegraphics[scale=0.12]{rocks}};\n" % (rock_coordinates[0], rock_coordinates[1]))
+		for gender in genders:
+			for direction in directions:
+				agent_scaling = 0.12 if gender == "male" else 0.37
+				filename = str(natural_cost) + "_" + str(enforcer_action) + "_" + gender + "_" + direction
+				with open(path + filename + tex, "w", newline="") as file: 
+					file.write("\\documentclass{standalone}\n\n")
+					file.write("\\usepackage{tikz}\n\\usepackage{graphicx}\n\\graphicspath{ {D:/Research/social_pragmatics/imgs/} }\n\n")
+					file.write("\\begin{document}\n\\begin{tikzpicture}\n\\draw[step=2.0cm,color=black] (0.0,0.0) grid (10.0,10.0);\n")
+					if direction == "right":
+						file.write("\\node at (%f,%f) {\\includegraphics[scale=%f]{%s}};\n" % (agent_coordinates[0], agent_coordinates[1], agent_scaling, gender))
 					else:
-						file.write("\\node at (%f,%f) {\\includegraphics[scale=0.12]{rocks}};\n" % (rock_coordinates[action][0], rock_coordinates[action][1]))
-			file.write("\\end{tikzpicture}\n\\end{document}\n")
-		os.system("pdflatex " + path + "\"" + filename + tex + "\"")
-		os.system("pdftoppm " + "\"" + str(natural_cost) + "_" + str(enforcer_action) + pdf + "\"" + " " + path + \
-				  "\"" + str(natural_cost) + "_" + str(enforcer_action) + "\"" + " -png")
-		os.chdir("D:/Research/social_pragmatics/" + path)
-		os.system("rename " + "\"" + str(natural_cost) + "_" + str(enforcer_action) + \
-				  "-1.png" + "\" " + "\""+ str(natural_cost) + "_" + str(enforcer_action) + ".png" + "\"")
-		os.chdir("D:/Research/social_pragmatics/")
+						file.write("\\node at (%f,%f) {\\scalebox{-1}[1]{\\includegraphics[scale=%f]{%s}}};\n" % (agent_coordinates[0], agent_coordinates[1], agent_scaling, gender))
+					file.write("\\node at (%f,%f) {\\includegraphics[scale=0.25]{banana}};\n" % (banana_coordinates[0], banana_coordinates[1]))
+					file.write("\\node at (%f,%f) {\\includegraphics[scale=0.25]{pear}};\n" % (pear_coordinates[0], pear_coordinates[1]))
+					if sum(enforcer_action) != 0:
+						for action in np.arange(max(enforcer_action)):
+							if len(np.shape(rock_coordinates)) == 1:
+								file.write("\\node at (%f,%f) {\\includegraphics[scale=0.12]{rocks}};\n" % (rock_coordinates[0], rock_coordinates[1]))
+							else:
+								file.write("\\node at (%f,%f) {\\includegraphics[scale=0.12]{rocks}};\n" % (rock_coordinates[action][0], rock_coordinates[action][1]))
+					file.write("\\end{tikzpicture}\n\\end{document}\n")
+				os.system("pdflatex " + path + "\"" + filename + tex + "\"")
+				os.system("pdftoppm " + "\"" + filename + pdf + "\"" + " " + path + "\"" + filename + "\"" + " -png")
+				os.chdir("D:/Research/social_pragmatics/" + path)
+				os.system("rename " + "\"" + filename + "-1.png" + "\" " + "\"" + filename + png + "\"")
+				os.chdir("D:/Research/social_pragmatics/")

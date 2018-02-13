@@ -59,7 +59,7 @@ function make_slides(f) {
 
         // Display the setup, stimulus, and prompt on the slide.
         $(".display_setup").html("Suppose the farmer takes the following action.");
-        $(".display_stimulus").html("<img style=\"height:300px;width:300px;\" src=\"../imgs/stimuli/" + 
+        $(".display_stimulus").html("<img style=\"height:300px;width:300px;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></script>");
     
         sentence0 = "How much does the farmer think " + exp.agent.name + " likes bananas?"
@@ -163,16 +163,6 @@ function init() {
         }
     })();
 
-    // Set up catch trial slide information.
-    exp.num_catch = 2;
-    exp.catch_trials = [];
-
-    // Set up trial slide information.
-    exp.trials = trials();
-    exp.num_trials = exp.trials.length;
-    exp.data_trials = [];
-    $(".display_trials").html(exp.num_trials);
-
     // Sample a name for the enforcer and the agent.
     exp.characters = get_characters(characters)
     exp.enforcer = exp.characters[0]
@@ -180,6 +170,18 @@ function init() {
     $(".display_enforcer").html(exp.enforcer.name)
     $(".display_agent").html(exp.agent.name)
     $(".display_pronoun").html(get_pronoun(exp.enforcer))
+
+    // Set up catch trial slide information.
+    exp.num_catch = 2;
+    exp.catch_trials = [];
+    $(".display_catch_trial").html("<img style=\"height:150px;width:auto\" src=\"../imgs/observer_1/catch_trial_" +
+                                   exp.agent.gender + ".png\"></img>")
+
+    // Set up trial slide information.
+    exp.trials = trials(exp.agent.gender);
+    exp.num_trials = exp.trials.length;
+    exp.data_trials = [];
+    $(".display_trials").html(exp.num_trials);
 
     exp.num_sentences = 2
 
