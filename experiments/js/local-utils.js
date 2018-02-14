@@ -1,5 +1,5 @@
 // Generates the order of trial slides.
-function trials(agent_gender) {
+function trials() {
     // Set up and shuffle the potential natural costs and potential enforcer actions.
     natural_costs = _.shuffle([[2, 2], [2, 3], [3, 2], [3, 3], [2, 4], [4, 2], [3, 4], [4, 3], [4, 4]])
     enforcer_actions = _.shuffle([[0, 0], [1, 0], [2, 0], [3, 0]])
@@ -8,7 +8,7 @@ function trials(agent_gender) {
     trials = []
     for (var i = 0; i < natural_costs.length; i++) {
         for (var j = 0; j < enforcer_actions.length; j++) {
-            trials.push("[" + natural_costs[i].join(" ") + "]_[" + enforcer_actions[j].join(" ") + "]_" + agent_gender + ".png")
+            trials.push("[" + natural_costs[i].join(" ") + "]_[" + enforcer_actions[j].join(" ") + "]")
         }
     }
 
@@ -50,4 +50,14 @@ function get_pronoun(character) {
     else {
         return "she"
     }
+}
+
+// Get the array of directions that the agent will face.
+function get_directions(num_trials) {
+    var directions = []
+    for (var i = 0; i < num_trials; i++) {
+        directions.push(_.sample(["right", "left"]))
+    }
+
+    return directions
 }

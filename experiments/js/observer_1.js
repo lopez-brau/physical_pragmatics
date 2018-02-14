@@ -41,10 +41,14 @@ function make_slides(f) {
             }
             else {
                 exp.catch_trials.push({
-                    fruit0: "bananas",
-                    response0: exp.sliderPost[0],
-                    fruit1: "pears",
-                    response1: exp.sliderPost[1]
+                    "enforcer_name": exp.enforcer.name,
+                    "enforcer_gender": exp.enforcer.gender,
+                    "agent_name": exp.agent.name,
+                    "agent_gender": exp.agent.gender,
+                    "fruit0": "bananas",
+                    "response0": exp.sliderPost[0],
+                    "fruit1": "pears",
+                    "response1": exp.sliderPost[1]
                 });
                 exp.go();
             }
@@ -60,14 +64,14 @@ function make_slides(f) {
         // Display the setup, stimulus, and prompt on the slide.
         $(".display_setup").html("Suppose the farmer takes the following action.");
         $(".display_stimulus").html("<img style=\"height:300px;width:300px;\" src=\"../imgs/observer_1/" + 
-                                    exp.trials[j] + "\"></script>");
+                                    exp.trials[j] + "_" + exp.agent.gender + "_" + exp.directions[j] + ".png\"></script>");
     
         sentence0 = "How much does the farmer think " + exp.agent.name + " likes bananas?"
         sentence1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
                     " placed the rocks?"
 
         // set up the text next to each slider
-        for (var i = exp.num_catch; i < exp.num_sentences+exp.num_catch; i++) {
+        for (var i = exp.num_catch; i < (exp.num_sentences+exp.num_catch); i++) {
             // display the slider for each slide
             sentence = i == 2 ? sentence0 : sentence1
             $("#multi_slider_table" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
@@ -95,9 +99,14 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "trial_num": j + 1,
-                "stimulus": exp.trials[j],
-                "enforcer_name": exp.enforcer,
-                "agent_name": exp.agent,
+                "stimulus": exp.trials[j] + "_" + exp.agent.gender + "_" + exp.directions[j] + ".png",
+                "enforcer_name": exp.enforcer.name,
+                "enforcer_gender": exp.enforcer.gender,
+                "agent_name": exp.agent.name,
+                "agent_gender": exp.agent.gender,
+                "agent_direction": exp.directions[j],
+                "agent_position": "",
+                "banana_position": "",
                 "target0": exp.sliderPost[2],
                 "target1": exp.sliderPost[3]
             });
@@ -174,13 +183,16 @@ function init() {
     // Set up catch trial slide information.
     exp.num_catch = 2;
     exp.catch_trials = [];
+    exp.catch_trial_direction = _.sample(["right", "left"])
     $(".display_catch_trial").html("<img style=\"height:150px;width:auto\" src=\"../imgs/observer_1/catch_trial_" +
-                                   exp.agent.gender + ".png\"></img>")
+                                   exp.agent.gender + "_right.png\"></img>")
 
     // Set up trial slide information.
-    exp.trials = trials(exp.agent.gender);
+    exp.trials = trials();
     exp.num_trials = exp.trials.length;
     exp.data_trials = [];
+    exp.directions = get_directions(exp.num_trials)
+    $(".test").html(exp.directions)
     $(".display_trials").html(exp.num_trials);
 
     exp.num_sentences = 2
@@ -207,8 +219,6 @@ function init() {
     exp.slides = make_slides(exp);
     embed_slides(exp.num_trials);
 
-    // This does not work if there are stacks of stims (but does work for an experiment with this structure).
-    // Relies on structure and slides being defined.
     exp.nQs = utils.get_exp_length();
 
     // Hide everything.
