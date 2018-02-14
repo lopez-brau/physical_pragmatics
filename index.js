@@ -62,9 +62,9 @@ function make_slides(f) {
         $(".slider_row").remove();
 
         // Display the setup, stimulus, and prompt on the slide.
-        $(".display_setup").html("Suppose the farmer takes the following action.");
+        $(".display_setup").html("Suppose the farmer's actions lead to the following scenario:");
         $(".display_stimulus").html("<img style=\"height:300px;width:300px;\" src=\"imgs/observer_1/" + 
-                                    exp.trials[j] + "_" + exp.agent.gender + "_" + exp.directions[j] + ".png\"></script>");
+                                    exp.trials[j] + "_" + exp.agent.gender + "_" + exp.agent_direction + ".png\"></script>");
     
         sentence0 = "How much does the farmer think " + exp.agent.name + " likes bananas?"
         sentence1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
@@ -99,12 +99,12 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "trial_num": j + 1,
-                "stimulus": exp.trials[j] + "_" + exp.agent.gender + "_" + exp.directions[j] + ".png",
+                "stimulus": exp.trials[j] + "_" + exp.agent.gender + "_" + exp.direction + ".png",
                 "enforcer_name": exp.enforcer.name,
                 "enforcer_gender": exp.enforcer.gender,
                 "agent_name": exp.agent.name,
                 "agent_gender": exp.agent.gender,
-                "agent_direction": exp.directions[j],
+                "agent_direction": exp.direction,
                 "agent_position": "",
                 "banana_position": "",
                 "target0": exp.sliderPost[2],
@@ -176,6 +176,7 @@ function init() {
     exp.characters = get_characters(characters)
     exp.enforcer = exp.characters[0]
     exp.agent = exp.characters[1]
+    exp.agent_direction = _.sample(["right", "left"])
     $(".display_enforcer").html(exp.enforcer.name)
     $(".display_agent").html(exp.agent.name)
     $(".display_pronoun").html(get_pronoun(exp.enforcer))
@@ -184,15 +185,15 @@ function init() {
     exp.num_catch = 2;
     exp.catch_trials = [];
     exp.catch_trial_direction = _.sample(["right", "left"])
+    exp.preferred_fruit = _.sample(["bananas", "pears"])
     $(".display_catch_trial").html("<img style=\"height:150px;width:auto\" src=\"imgs/observer_1/catch_trial_" +
                                    exp.agent.gender + "_right.png\"></img>")
+    $(".display_preferred_fruit").html(exp.preferred_fruit)
 
     // Set up trial slide information.
     exp.trials = trials();
     exp.num_trials = exp.trials.length;
     exp.data_trials = [];
-    exp.directions = get_directions(exp.num_trials)
-    $(".test").html(exp.directions)
     $(".display_trials").html(exp.num_trials);
 
     exp.num_sentences = 2

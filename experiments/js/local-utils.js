@@ -51,13 +51,3 @@ function get_pronoun(character) {
         return "she"
     }
 }
-
-// Get the array of directions that the agent will face.
-function get_directions(num_trials) {
-    var directions = []
-    for (var i = 0; i < num_trials; i++) {
-        directions.push(_.sample(["right", "left"]))
-    }
-
-    return directions
-}
