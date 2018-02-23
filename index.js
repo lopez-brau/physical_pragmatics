@@ -11,8 +11,17 @@ function make_slides(f) {
     });
 
     // Set up the instruction slide.
-    slides.instructions = slide({
-        name: "instructions",
+    slides.instructions1 = slide({
+        name: "instructions1",
+        start: function() {},
+        button: function() {
+            exp.go()
+        }
+    });
+
+    // Set up the instruction slide.
+    slides.instructions2 = slide({
+        name: "instructions2",
         start: function() {},
         button: function() {
             exp.go()
@@ -63,7 +72,7 @@ function make_slides(f) {
 
         // Display the setup, stimulus, and prompt on the slide.
         $(".display_setup").html("Suppose the farmer's actions lead to the following scenario:");
-        $(".display_stimulus").html("<img style=\"height:300px;width:300px;\" src=\"imgs/observer_1/" + 
+        $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"imgs/observer_1/" + 
                                     exp.trials[j] + "_" + exp.agent.gender + "_" + exp.agent_direction + ".png\"></script>");
     
         sentence0 = "How much does the farmer think " + exp.agent.name + " likes bananas?"
@@ -179,7 +188,9 @@ function init() {
     exp.agent_direction = _.sample(["right", "left"])
     $(".display_enforcer").html(exp.enforcer.name)
     $(".display_agent").html(exp.agent.name)
-    $(".display_pronoun").html(get_pronoun(exp.enforcer))
+    $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer))
+    $(".display_enforcer_pronoun_capitalized").html(get_pronoun_capitalized(exp.enforcer))
+    $(".display_agent_pronoun").html(get_pronoun(exp.agent))
 
     // Set up catch trial slide information.
     exp.num_catch = 2;
@@ -209,7 +220,8 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "instructions", "catch_slide"];
+    // exp.structure = ["i0", "instructions1", "instructions2", "catch_slide"];
+    exp.structure = ["i0", "instructions1", "instructions2"]
     for (var k = 1; k <= exp.num_trials; k++) {
         exp.structure.push("trial" + k);
     }

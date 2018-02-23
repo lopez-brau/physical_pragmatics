@@ -51,3 +51,13 @@ function get_pronoun(character) {
         return "she"
     }
 }
+
+// Use the appropriate pronoun for a given character (capitalized).
+function get_pronoun_capitalized(character) {
+    if (character.gender == "male") {
+        return "He"
+    }
+    else {
+        return "She"
+    }
+}

@@ -5,7 +5,8 @@ import os
 def generate_stimuli(natural_cost, enforcer_action):
 	corners = np.array([[1.0, 1.0], [9.0, 1.0], [9.0, 9.0], [1.0, 9.0]])
 	indices = np.arange(len(corners))
-	agent_index = np.random.choice(indices)
+	# agent_index = np.random.choice(indices)
+	agent_index = 0
 	rock_coordinates = None
 	agent_coordinates = corners[agent_index]
 	if agent_index == 0:
@@ -211,7 +212,10 @@ for natural_cost in natural_costs:
 				with open(path + filename + tex, "w", newline="") as file: 
 					file.write("\\documentclass{standalone}\n\n")
 					file.write("\\usepackage{tikz}\n\\usepackage{graphicx}\n\\graphicspath{ {D:/Research/social_pragmatics/imgs/} }\n\n")
-					file.write("\\begin{document}\n\\begin{tikzpicture}\n\\draw[step=2.0cm,color=black] (0.0,0.0) grid (10.0,10.0);\n")
+					file.write("\\begin{document}\n\\begin{tikzpicture}\n")
+					file.write("\\node[anchor=south west,inner sep=0] at (0,0) {\\includegraphics[scale=1.0]{grass}};\n")
+					file.write("\\begin{scope}[shift={(1.9, 0.43)}]\n")
+					file.write("\\draw[step=2.0cm,color=black, fill=white] (0.0,0.0) grid (10.0,10.0) rectangle (0.0,0.0);\n")
 					if direction == "right":
 						file.write("\\node at (%f,%f) {\\includegraphics[scale=%f]{%s}};\n" % (agent_coordinates[0], agent_coordinates[1], agent_scaling, gender))
 					else:
@@ -221,10 +225,10 @@ for natural_cost in natural_costs:
 					if sum(enforcer_action) != 0:
 						for action in np.arange(max(enforcer_action)):
 							if len(np.shape(rock_coordinates)) == 1:
-								file.write("\\node at (%f,%f) {\\includegraphics[scale=0.12]{rocks}};\n" % (rock_coordinates[0], rock_coordinates[1]))
+								file.write("\\node at (%f,%f) {\\includegraphics[scale=1.2]{rock}};\n" % (rock_coordinates[0], rock_coordinates[1]))
 							else:
-								file.write("\\node at (%f,%f) {\\includegraphics[scale=0.12]{rocks}};\n" % (rock_coordinates[action][0], rock_coordinates[action][1]))
-					file.write("\\end{tikzpicture}\n\\end{document}\n")
+								file.write("\\node at (%f,%f) {\\includegraphics[scale=1.2]{rock}};\n" % (rock_coordinates[action][0], rock_coordinates[action][1]))
+					file.write("\\end{scope}\\end{tikzpicture}\n\\end{document}\n")
 				os.system("pdflatex " + path + "\"" + filename + tex + "\"")
 				os.system("pdftoppm " + "\"" + filename + pdf + "\"" + " " + path + "\"" + filename + "\"" + " -png")
 				os.chdir("D:/Research/social_pragmatics/" + path)

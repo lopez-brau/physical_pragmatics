@@ -6,8 +6,11 @@
 
 \begin{document}
 \begin{tikzpicture}
-\draw[step=2.0cm,color=black] (0.0,0.0) grid (10.0,10.0);
+\node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[scale=1.0]{grass}};
+\begin{scope}[shift={(1.9, 0.43)}]
+\draw[step=2.0cm,color=black, fill=white] (0.0,0.0) grid (10.0,10.0) rectangle (0.0,0.0);
 \node at (1.0,1.0) {\scalebox{-1}[1]{\includegraphics[scale=0.12]{male}}};
-\node at (3.0,1.0) {\includegraphics[scale=0.37]{female}};
+\node at (3.0,1.0) {\includegraphics[scale=1.2]{rock}};
+\end{scope}
 \end{tikzpicture}
 \end{document}
