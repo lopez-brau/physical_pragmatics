@@ -1,6 +1,9 @@
 import numpy as np
 import os
 
+def get_coords(index, natural_cost, enforcer_action):
+
+
 # Set up how the stimuli will be varied.
 genders = ["male", "female"]
 coords = {
@@ -48,14 +51,16 @@ for gender in genders:
 						if sum(enforcer_action) != 0:
 							for action in range(max(enforcer_action)):
 								if len(np.shape(rock_coords)) == 1:
-									file.write("\\node at (%f,%f) {\\includegraphics[scale=1.2]{rock}};\n" % \
-										(rock_coordinates[0], rock_coordinates[1]))
+									file.write("\\node at (%d,%d) {\\includegraphics[scale=1.2]{rock}};\n" % \
+										(rock_coords[0], rock_coords[1]))
 								else:
-									file.write("\\node at (%f,%f) {\\includegraphics[scale=1.2]{rock}};\n" % \
-										(rock_coordinates[action][0], rock_coordinates[action][1]))
-						file.write("\\end{scope}\\end{tikzpicture}\n\\end{document}\n")
-					os.system("pdflatex " + path + "\"" + filename + tex + "\"")
-					os.system("pdftoppm " + "\"" + filename + pdf + "\"" + " " + path + "\"" + filename + "\"" + " -png")
+									file.write("\\node at (%d,%d) {\\includegraphics[scale=1.2]{rock}};\n" % \
+										(rock_coords[action][0], rock_coords[action][1]))
+						file.write("\\end{scope}\n \
+									\\end{tikzpicture}\n \
+									\\end{document}\n")
+					os.system("pdflatex " + path + "\"" + filename + ".tex\"")
+					os.system("pdftoppm " + "\"" + filename + ".pdf\" " + path + "\"" + filename + "\"" + " -png")
 					os.chdir("D:/Research/social_pragmatics/" + path)
-					os.system("rename " + "\"" + filename + "-1.png" + "\" " + "\"" + filename + png + "\"")
+					os.system("rename " + "\"" + filename + "-1.png\" \"" + filename + ".png\"")
 					os.chdir("D:/Research/social_pragmatics/")
