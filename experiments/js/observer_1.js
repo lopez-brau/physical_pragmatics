@@ -29,40 +29,40 @@ function make_slides(f) {
     });
 
     // Setup the catch trial slide.
-    slides.catch_slide = slide({
-        name: "catch_slide",
-        start: function() {
-            $(".catch_err").hide();
-            var catch_sentence = ["How likely is it that the farmer thought " + exp.agent.name + " wanted bananas?", 
-                                  "How likely is it that the farmer thought " + exp.agent.name + " wanted pears?"];
-            for (var i = 0; i < exp.num_catch; i++) {
-                $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
-                                                 "\">" + catch_sentence[i] + "</td><td colspan=\"2\"><div id=\"slider" + i + 
-                                                 "\" class=\"slider\">-------[ ]--------</div></td></tr>");
-                utils.match_row_height("#multi_slider_table0", ".slider_target");
-                utils.make_slider("#slider" + i, make_slider_callback(i));
-            }
-            exp.sliderPost = [];
-        },
-        button: function() {
-            if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) {
-                $(".catch_err").show(); 
-            }
-            else {
-                exp.catch_trials.push({
-                    "enforcer_name": exp.enforcer.name,
-                    "enforcer_gender": exp.enforcer.gender,
-                    "agent_name": exp.agent.name,
-                    "agent_gender": exp.agent.gender,
-                    "fruit0": "bananas",
-                    "response0": exp.sliderPost[0],
-                    "fruit1": "pears",
-                    "response1": exp.sliderPost[1]
-                });
-                exp.go();
-            }
-        }
-    });
+    // slides.catch_slide = slide({
+    //     name: "catch_slide",
+    //     start: function() {
+    //         $(".catch_err").hide();
+    //         var catch_sentence = ["How likely is it that the farmer thought " + exp.agent.name + " wanted bananas?", 
+    //                               "How likely is it that the farmer thought " + exp.agent.name + " wanted pears?"];
+    //         for (var i = 0; i < exp.num_catch; i++) {
+    //             $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
+    //                                              "\">" + catch_sentence[i] + "</td><td colspan=\"2\"><div id=\"slider" + i + 
+    //                                              "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+    //             utils.match_row_height("#multi_slider_table0", ".slider_target");
+    //             utils.make_slider("#slider" + i, make_slider_callback(i));
+    //         }
+    //         exp.sliderPost = [];
+    //     },
+    //     button: function() {
+    //         if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) {
+    //             $(".catch_err").show(); 
+    //         }
+    //         else {
+    //             exp.catch_trials.push({
+    //                 "enforcer_name": exp.enforcer.name,
+    //                 "enforcer_gender": exp.enforcer.gender,
+    //                 "agent_name": exp.agent.name,
+    //                 "agent_gender": exp.agent.gender,
+    //                 "fruit0": "bananas",
+    //                 "response0": exp.sliderPost[0],
+    //                 "fruit1": "pears",
+    //                 "response1": exp.sliderPost[1]
+    //             });
+    //             exp.go();
+    //         }
+    //     }
+    // });
 
     // Set up a trial slide.
     function start() {
@@ -108,12 +108,11 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "trial_num": j + 1,
-                "stimulus": exp.trials[j] + "_" + exp.agent.gender + "_" + exp.direction + ".png",
+                "stimulus": exp.trials[j] + "_" + exp.agent.gender + "_" + exp.agent_direction + ".png",
                 "enforcer_name": exp.enforcer.name,
                 "enforcer_gender": exp.enforcer.gender,
                 "agent_name": exp.agent.name,
                 "agent_gender": exp.agent.gender,
-                "agent_direction": exp.direction,
                 "agent_position": "",
                 "banana_position": "",
                 "target0": exp.sliderPost[2],

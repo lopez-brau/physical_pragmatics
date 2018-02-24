@@ -108,12 +108,11 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "trial_num": j + 1,
-                "stimulus": exp.trials[j] + "_" + exp.agent.gender + "_" + exp.direction + ".png",
+                "stimulus": exp.trials[j] + "_" + exp.agent.gender + "_" + exp.agent_direction + ".png",
                 "enforcer_name": exp.enforcer.name,
                 "enforcer_gender": exp.enforcer.gender,
                 "agent_name": exp.agent.name,
                 "agent_gender": exp.agent.gender,
-                "agent_direction": exp.direction,
                 "agent_position": "",
                 "banana_position": "",
                 "target0": exp.sliderPost[2],
