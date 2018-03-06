@@ -43,21 +43,21 @@ function get_characters(characters) {
 }
 
 // Use the appropriate pronoun for a given character.
-function get_pronoun(character) {
+function get_pronoun(character, capitalized) {
     if (character.gender == "male") {
-        return "he"
+        return capitalized ? "He" : "he"
     }
     else {
-        return "she"
+        return capitalized ? "She" : "she"
     }
 }
 
-// Use the appropriate pronoun for a given character (capitalized).
-function get_pronoun_capitalized(character) {
+// Use the appropriate possessive pronoun for a given character.
+function get_possessive_pronoun(character, capitalized) {
     if (character.gender == "male") {
-        return "He"
+        return capitalized ? "His" : "his"
     }
     else {
-        return "She"
+        return capitalized ? "Her" : "her"
     }
 }

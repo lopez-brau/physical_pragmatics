@@ -15,7 +15,6 @@ import time
 # 	3) A sense of cooperation (or lack of)
 # Develop a "one-slider" to my project; like the coat on the chair example
 # Loss aversion is not part of our mental models; loss aversion paper was counterintuitive!
-
 if __name__ == "__main__":
 	agent_reward = np.array([9, 0])
 	enforcer_reward = np.array([0, 9])
@@ -52,15 +51,31 @@ if __name__ == "__main__":
 	# print(time.time()-start_time)
 	# plt.show()
 
-	# Observer inferring the enforcer's beliefs about the agent reward and degree of ToM.
-	start_time = time.time()
-	enforcer_actions = np.array([[0, 0], [1, 0], [2, 0], [3, 0]])
-	path = "predictions/data/gridworld_nc_distance_3/"
-	for enforcer_action in enforcer_actions:
-		predictions = observer("agent_reward_and_p", rationality, enforcer_reward=enforcer_reward, cooperation=cooperation, \
-							   enforcer_action=enforcer_action)
-		print(time.time()-start_time)
-		filename = path + str(cooperation) + "/" + str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
-		with open(filename, "w", newline="") as file:
-			writer = csv.writer(file)
-			writer.writerows(predictions)
+	# enforcer_reward = np.array([0, 9])
+	# cooperation = 2.0
+	# enforcer_actions = [[2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0], \
+	# 					[2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0], \
+	# 					[2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0]]
+	predictions = observer("agent_reward_and_p", rationality, enforcer_reward=ENFORCER_REWARD, cooperation=COOPERATION, \
+						   enforcer_action=ENFORCER_ACTION)
+
+	path = "data/model_comparisons/"
+	filename = path + str(COOPERATION) + "/" + str(NATURAL_COST) + "_" + str(ENFORCER_ACTION) + ".txt"
+	with open(filename, "w", newline="") as file:
+		writer = csv.writer(file)
+		writer.writerows(predictions)
+	print("Done!")
+
+	# Observer reasoning about the enforcer's beliefs about the agent reward and degree of ToM.
+	# start_time = time.time()
+	# enforcer_actions = np.array([[0, 0], [1, 0], [2, 0], [3, 0]])
+	# path = "predictions/data/gridworld_nc_distance_3/"
+	# for enforcer_action in enforcer_actions:
+	# 	predictions = observer("agent_reward_and_p", rationality, enforcer_reward=enforcer_reward, cooperation=cooperation, \
+	# 						   enforcer_action=enforcer_action)
+	# 	print(time.time()-start_time)
+
+		# filename = path + str(cooperation) + "/" + str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
+		# with open(filename, "w", newline="") as file:
+		# 	writer = csv.writer(file)
+		# 	writer.writerows(predictions)
