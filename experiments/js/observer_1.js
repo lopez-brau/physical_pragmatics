@@ -33,22 +33,38 @@ function make_slides(f) {
         name: "catch_trial",
         start: function() {
             $(".catch_err").hide();
-            var sentence0 = "How much does " + exp.enforcer + " think " + exp.agent.name + " likes apples?"
-            var sentence1 = "How sure is " + exp.enforcer + " that " + exp.agent.name + " will realize that " + 
-                            get_pronoun(exp.enforcer) + " placed the boulders there?"
+        
+            $(".display_setup").html("Consider:");
+            $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" +
+                                        exp.agent_coords + "/" + exp.apple_coords + "/" + "[4 2]_[3 0].png\"></script>");
 
-            for (var i = 0; i < exp.num_catch; i++) {
-                $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
-                                                 "\">" + catch_sentence[i] + "</td><td colspan=\"2\"><div id=\"slider" + i + 
-                                                 "\" class=\"slider\">-------[ ]--------</div></td></tr>");
-                utils.match_row_height("#multi_slider_table0", ".slider_target");
-                utils.make_slider("#slider" + i, make_slider_callback(i));
-            }
+            var sentences = _.shuffle(["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
+                                       "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
+                                       " placed the boulders there?"])
+
+            var sentence_0 = sentences[0]
+            var sentence_1 = sentences[1]
+
+            $(".display_options").html("<p align=\"left\">" + sentence_0 + 
+                                       "<label><input type=\"radio\" name=\"assess\" value=\"sentence_0_Yes\"/>Yes</label>" +
+                                       "<input type=\"radio\" name=\"assess\" value=\"sentence_0_No\"/>No</label></p>" + 
+                                       "<p align=\"left\">" + sentence_1 +
+                                       "<label><input type=\"radio\" name=\"assess\" value=\"sentence_1_Yes\"/>Yes</label>" +
+                                       "<input type=\"radio\" name=\"assess\" value=\"sentence_1_No\"/>No</label></p>");
+
+            // for (var i = 0; i < exp.num_catch; i++) {
+            //     $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
+            //                                      "\">" + catch_sentence[i] + "</td><td colspan=\"2\"><div id=\"slider" + i + 
+            //                                      "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+            //     utils.match_row_height("#multi_slider_table0", ".slider_target");
+            //     utils.make_slider("#slider" + i, make_slider_callback(i));
+            // }
             exp.sliderPost = [];
         },
         button: function() {
             if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) {
-                $(".catch_err").show(); 
+                // $(".catch_err").show(); 
+                exp.go();
             }
             else {
                 exp.catch_trials.push({
@@ -59,7 +75,9 @@ function make_slides(f) {
                     "fruit0": "apples",
                     "response0": exp.sliderPost[0],
                     "fruit1": "pears",
-                    "response1": exp.sliderPost[1]
+                    "response1": exp.sliderPost[1],
+                    "sentence_0": $("#sentence_0").val(),
+                    "sentence_1": $("#sentence_1").val()
                 });
                 exp.go();
             }
@@ -138,15 +156,15 @@ function make_slides(f) {
         name: "subj_info",
         submit: function(e) {
             exp.subj_data = {
-                language: $("#language").val(),
-                enjoyment: $("#enjoyment").val(),
-                asses: $('input[name="assess"]:checked').val(),
-                age: $("#age").val(),
-                gender: $("#gender").val(),
-                education: $("#education").val(),
-                problems: $("#problems").val(),
-                fairprice: $("#fairprice").val(),
-                comments: $("#comments").val()
+                "language": $("#language").val(),
+                "enjoyment": $("#enjoyment").val(),
+                "asses": $('input[name="assess"]:checked').val(),
+                "age": $("#age").val(),
+                "gender": $("#gender").val(),
+                "education": $("#education").val(),
+                "problems": $("#problems").val(),
+                "fairprice": $("#fairprice").val(),
+                "comments": $("#comments").val()
             };
             exp.go();
         }
@@ -209,8 +227,8 @@ function init() {
     exp.catch_trials = [];
     exp.catch_trial_direction = _.sample(["right", "left"])
     exp.preferred_fruit = _.sample(["bananas", "pears"])
-    $(".display_catch_trial").html("<img style=\"height:150px;width:auto\" src=\"../imgs/observer_1/catch_trial_" +
-                                   exp.agent.gender + "_right.png\"></img>")
+    // $(".display_catch_trial").html("<img style=\"height:150px;width:auto\" src=\"../imgs/observer_1/catch_trial_" +
+    //                                exp.agent.gender + "_right.png\"></img>")
     $(".display_preferred_fruit").html(exp.preferred_fruit)
 
     // Set up trial slide information.

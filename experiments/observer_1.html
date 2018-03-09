@@ -67,21 +67,23 @@
     <!-- Instructions slide. -->
     <div class="slide" id="instructions">
         <h3>Instructions</h3>
-        <img style="height:300px;width:auto" src="../imgs/observer_1/[3 3]_[2 0]_female_right.png"></img>
-        <img style="height:175;px;width:auto" src="../imgs/legend.png"></img>
-        <p>Above is an example scenario. On each trial, you will be asked to put yourself in the farmer's shoes. You will be asked how much the farmer thought <span class="display_agent"></span> wanted a particular fruit. You will also be asked how much the farmer thought <span class="display_agent"></span> would realize that <span class="display_enforcer_pronoun"></span> placed the rocks.</p>
+        <img style="height:auto;width:auto" src="../imgs/agent.png"></img>
+        
+        <p>This is <span class="display_agent"></span>, one of the hikers that regularly hikes on this path. On each trial, you will be asked to put yourself in <span class="display_enforcer"></span>'s (the farmer's) shoes. You will be asked how much <span class="display_enforcer"></span> thought <span class="display_agent"></span> wanted a particular fruit. You will also be asked how much <span class="display_enforcer"></span> thought <span class="display_agent"></span> would realize that the boulders were placed by <span class="display_enforcer"></span> instead of being there naturally.</p>
 
-        <p>Keep in mind that <span class="display_agent"></span> can only move horizontally or vertically on the grid and cannot move diagonally or to the squares that have rocks. <span class="display_agent_pronoun"></span> can move to the squares that have the banana groves or the pear groves to get the fruit.</p>
+        <p></p><p></p>
+        <img style="height:auto;width:auto" src="../imgs/objects.png"></img>
+        <p>Above are the objects that <span class="display_agent"></span> will encounter while traversing through a grid map. Keep in mind that <span class="display_agent"></span> <b>can</b> move horizontally or vertically on the grid and on the squares that have the apple or pear. <span class="display_agent"></span> <b>cannot</b> move diagonally or on the squares that have rocks.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
     <!-- Catch trial slide. -->
     <div class="slide" id="catch_trial">
-        <h3>Instructions</h3>
         <p>For example, observe <span class="display_agent"></span> below:</p>
-        <span class="display_catch_trial"></span>
-        <p align="left"><label><input type="radio" name="assess" value="No"/>No</label></p>
-        <p align="left"><label><input type="radio" name="assess" value="Yes"/>Yes</label><p>
+        <span class="display_stimulus"></span>
+        <div class="display_options"></div>
+        <!-- <p align="left"><label><input type="radio" name="assess" value="No"/>No</label></p> -->
+        <!-- <p align="left"><label><input type="radio" name="assess" value="Yes"/>Yes</label><p> -->
         <!-- <table id="multi_slider_table0" class="slider_table"><tr><td></td><td class="left">very unlikely</td><td class="right">very likely</td></tr></table> -->
         <p>There are <span class="display_trials"></span> trials in total. Press "Continue" to begin.</p>
         <p class="catch_err">Please adjust both sliders before continuing.</p>
