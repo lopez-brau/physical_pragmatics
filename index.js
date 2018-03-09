@@ -222,6 +222,7 @@ function init() {
     $(".display_agent_possessive_pronoun").html(get_possessive_pronoun(exp.agent, false))
     $(".display_agent_possessive_pronoun_capitalized").html(get_possessive_pronoun(exp.agent, true))
 
+
     // Set up catch trial slide information.
     exp.num_catch = 2;
     exp.catch_trials = [];
