@@ -36,8 +36,8 @@ def get_coords(index, apple_corner, pear_corner, natural_cost, enforcer_action):
 	# If the agent starts off on the bottom-right corner.
 	elif index == 1:
 		# Update the fruit coordinates.
-		first_fruit -= np.array([0.0, 8.0-natural_cost[0]*2.0-4.0])
-		second_fruit += np.array([8.0-natural_cost[1]*2.0-4.0, 0.0])
+		first_fruit -= np.array([0.0, 8.0-natural_cost[0]*2.0])
+		second_fruit += np.array([8.0-natural_cost[1]*2.0, 0.0])
 
 		# The enforcer either does nothing, raises the cost of the first
 		# fruit, or raises the cost of the second fruit.
@@ -122,8 +122,9 @@ if __name__ == "__main__":
 	# agent and fruit positions, creating a tex file, converting it to a pdf 
 	# file, then converting that to a png file, and then finally renaming it.
 	for index in coords:
+		if index == 0 or index == 2 or index == 3:
+			continue
 		agent_coords = coords[index]["agent"]
-		agent_direction = 1 if index == 0 or index == 3 else 0
 		grass = "grass_" + str(index)
 		fruit_corners = coords[index]["fruit"]
 		for apple_corner in fruit_corners:
@@ -145,8 +146,8 @@ if __name__ == "__main__":
 							(grass))
 						file.write("\\begin{scope}[shift={(1.9, 0.43)}]\n" + \
 								   "\\draw[step=2.0cm,color=black, fill=white] (0,0) grid (10,10) rectangle (0,0);\n")
-						file.write("\\node at (%d,%d) {\\scalebox{%d}[1]{\\includegraphics[scale=1.0]{agent}}};\n" % \
-							(agent_coords[0], agent_coords[1], agent_direction))
+						file.write("\\node at (%d,%d) {\\includegraphics[scale=1.0]{agent}};\n" % \
+							(agent_coords[0], agent_coords[1]))
 						file.write("\\node at (%d,%d) {\\includegraphics[scale=0.06]{apple}};\n" % \
 							(apple_coords[0], apple_coords[1]))
 						file.write("\\node at (%d,%d) {\\includegraphics[scale=0.7]{pear}};\n" % \

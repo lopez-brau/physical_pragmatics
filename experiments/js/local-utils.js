@@ -1,18 +1,27 @@
 // Generates the order of trial slides.
-function trials() {
-    // Set up and shuffle the potential natural costs and potential enforcer actions.
-    natural_costs = _.shuffle([[2, 2], [2, 3], [3, 2], [3, 3], [2, 4], [4, 2], [3, 4], [4, 3], [4, 4]])
-    enforcer_actions = _.shuffle([[0, 0], [1, 0], [2, 0], [3, 0]])
+function trials(apple_position) {
+    // Sample agent and apple coordinates.
+    var agent_coords = _.sample(["[1 1]", "[9 1]", "[9 9]", "[1 9]"])
+    var apple_coords = {
+        "[1 1]": ["[9 1]", "[1 9]"],
+        "[9 1]": ["[9 9]", "[1 1]"],
+        "[9 9]": ["[1 9]", "[9 1]"],
+        "[1 9]": ["[1 1]", "[9 9]"]
+    }[agent_coords][parseInt(apple_position)]
 
-    // Construct the filenames of the stimuli to use for each trial.
-    trials = []
+    // Construct a randomized list of stimuli.
+    var trials = []
+    var natural_costs = [[2, 2], [2, 3], [3, 2], [3, 3], [2, 4], [4, 2], [3, 4], [4, 3], [4, 4]]
+    var enforcer_actions = [[0, 0], [1, 0], [2, 0], [3, 0]]
     for (var i = 0; i < natural_costs.length; i++) {
         for (var j = 0; j < enforcer_actions.length; j++) {
-            trials.push("[" + natural_costs[i].join(" ") + "]_[" + enforcer_actions[j].join(" ") + "]")
+            filename = agent_coords + "/" + apple_coords + "/[" + natural_costs[i].join(" ") + "]_[" + 
+                       enforcer_actions[j].join(" ") + "].png"
+            trials.push(filename)
         }
     }
 
-    return trials
+    return _.shuffle(trials)
 }
 
 // Embeds the trial slides.

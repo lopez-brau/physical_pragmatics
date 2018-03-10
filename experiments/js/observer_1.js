@@ -33,24 +33,26 @@ function make_slides(f) {
         name: "catch_trial",
         start: function() {
             $(".catch_err").hide();
-        
-            $(".display_setup").html("Consider:");
-            $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" +
-                                        exp.agent_coords + "/" + exp.apple_coords + "/" + "[4 2]_[3 0].png\"></script>");
 
-            var sentences = _.shuffle(["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
-                                       "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
-                                       " placed the boulders there?"])
+            exp.catch_apple_position = exp.preferred_fruit == "apples" ? "[1 9]" : "[9 1]"
+            $(".display_catch_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" +
+                                              "[1 1]/" + exp.catch_apple_position + "/[4 2]_[3 0].png\"></script>");
 
-            var sentence_0 = sentences[0]
-            var sentence_1 = sentences[1]
+            // var sentences = _.shuffle(["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
+            //                            "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
+            //                            " placed the boulders there?"])
+            var sentences = ["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
+                             "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
+                             " placed the boulders there?"]
+            exp.sentence_0 = sentences[0]
+            exp.sentence_1 = sentences[1]
 
-            $(".display_options").html("<p align=\"left\">" + sentence_0 + 
-                                       "<label><input type=\"radio\" name=\"assess\" value=\"sentence_0_Yes\"/>Yes</label>" +
-                                       "<input type=\"radio\" name=\"assess\" value=\"sentence_0_No\"/>No</label></p>" + 
-                                       "<p align=\"left\">" + sentence_1 +
-                                       "<label><input type=\"radio\" name=\"assess\" value=\"sentence_1_Yes\"/>Yes</label>" +
-                                       "<input type=\"radio\" name=\"assess\" value=\"sentence_1_No\"/>No</label></p>");
+            $(".display_catch_options").html("<p align=\"left\">" + exp.sentence_0 +
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"Yes\"/>Yes</label>" +
+                                             "<input type=\"radio\" name=\"sentence_0\" value=\"No\"/>No</label></p>" + 
+                                             "<p align=\"left\">" + exp.sentence_1 +
+                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"Yes\"/>Yes</label>" +
+                                             "<input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label></p>");
 
             // for (var i = 0; i < exp.num_catch; i++) {
             //     $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
@@ -59,12 +61,15 @@ function make_slides(f) {
             //     utils.match_row_height("#multi_slider_table0", ".slider_target");
             //     utils.make_slider("#slider" + i, make_slider_callback(i));
             // }
-            exp.sliderPost = [];
+
+            // exp.sliderPost = [];
         },
         button: function() {
-            if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) {
-                // $(".catch_err").show(); 
-                exp.go();
+            exp.target_0 = $("input[name=sentence_0]:checked").val();
+            exp.target_1 = $("input[name=sentence_1]:checked").val();
+
+            if ((exp.target_0 == undefined) || (exp.target_1 == undefined)) {
+                $(".catch_err").show();
             }
             else {
                 exp.catch_trials.push({
@@ -72,12 +77,12 @@ function make_slides(f) {
                     "enforcer_gender": exp.enforcer.gender,
                     "agent_name": exp.agent.name,
                     "agent_gender": exp.agent.gender,
-                    "fruit0": "apples",
-                    "response0": exp.sliderPost[0],
-                    "fruit1": "pears",
-                    "response1": exp.sliderPost[1],
-                    "sentence_0": $("#sentence_0").val(),
-                    "sentence_1": $("#sentence_1").val()
+                    "preferred_fruit": exp.preferred_fruit,
+                    "not_preferred_fruit": exp.not_preferred_fruit,
+                    "sentence_0": exp.sentence_0,
+                    "target_0": exp.target_0,
+                    "sentence_1": exp.sentence_1,
+                    "target_1": exp.target_1
                 });
                 exp.go();
             }
@@ -86,22 +91,19 @@ function make_slides(f) {
 
     // Set up a trial slide.
     function start() {
-        // Hide any errors and sliders from the previous slide.
         $(".err").hide();
         $(".slider_row").remove();
 
-        // Display the setup, stimulus, and prompt on the slide.
-        $(".display_setup").html("Consider the following scenario:");
-        $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + exp.agent_coords + "/" +
-                                    exp.apple_coords + "/" + exp.trials[j] + ".png\"></script>");
+        $(".display_setup").html("Consider the following scenario. Remember to place yourself in the farmer's shoes.");
+        $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
+                                    exp.trials[j] + "\"></img>");
     
-        var sentence0 = "How much does the farmer think " + exp.agent.name + " likes apples?"
-        var sentence1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
+        exp.sentence_0 = "How much does the farmer think " + exp.agent.name + " likes apples?"
+        exp.sentence_1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
                         " placed the rocks?"
 
-        // Set up the text on each slider and display the sliders.
         for (var i = exp.num_catch; i < (exp.num_sentences+exp.num_catch); i++) {
-            var sentence = i == 2 ? sentence0 : sentence1
+            var sentence = i == 2 ? exp.sentence_0 : exp.sentence_1
             $("#multi_slider_table" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
                                                     "\">" + sentence + "</td><td colspan=\"2\"><div id=\"slider" + i + 
                                                     "\" class=\"slider\">-------[ ]--------</div></td></tr>");
@@ -118,7 +120,7 @@ function make_slides(f) {
         };
     }
 
-    // runs when the "Continue" button is hit on a slide
+    // Runs when the "Continue" button is hit on a slide.
     function button() {
 
         if ((exp.sliderPost[2] === undefined) || (exp.sliderPost[3] === undefined)) { 
@@ -127,23 +129,18 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "trial_num": j + 1,
-                "stimulus": exp.trials[j] + "_" + exp.agent.gender + "_" + exp.agent_direction + ".png",
-                "preferred_fruit": exp.preferred_fruit,
-                "enforcer_name": exp.enforcer.name,
-                "enforcer_gender": exp.enforcer.gender,
-                "agent_name": exp.agent.name,
-                "agent_gender": exp.agent.gender,
-                "agent_position": "",
-                "banana_position": "",
-                "target0": exp.sliderPost[2],
-                "target1": exp.sliderPost[3]
+                "filename": exp.trials[j],
+                "sentence_0": exp.sentence_0,
+                "target_0": exp.sliderPost[2],
+                "sentence_1": exp.sentence_1,
+                "target_1": exp.sliderPost[3]
             });
             j++;
             exp.go();
         }
     }
 
-    // stitches together all of the trial slides
+    // Stitches together all of the trial slides.
     for (var i = 1; i <= exp.num_trials; i++) {
         slides["trial" + i] = slide({
             name: "trial" + i,
@@ -200,17 +197,11 @@ function init() {
         }
     })();
 
-    // Sample a name for the enforcer and the agent.
+    // Sample a name for the enforcer and the agent along with appropriate
+    // pronouns.
     exp.characters = get_characters(characters)
     exp.enforcer = exp.characters[0]
     exp.agent = exp.characters[1]
-    exp.agent_coords = _.sample(["[1 1]", "[9 1]", "[9 9]", "[1 9]"])
-    exp.apple_coords = _.sample({
-        "[1 1]": ["[9 1]", "[1 9]"],
-        "[9 1]": ["[9 9]", "[1 1]"],
-        "[9 9]": ["[1 9]", "[9 1]"],
-        "[1 9]": ["[1 1]", "[9 9]"]
-    }[exp.agent_coords])
     $(".display_enforcer").html(exp.enforcer.name)
     $(".display_agent").html(exp.agent.name)
     $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer, false))
@@ -222,17 +213,20 @@ function init() {
     $(".display_agent_possessive_pronoun").html(get_possessive_pronoun(exp.agent, false))
     $(".display_agent_possessive_pronoun_capitalized").html(get_possessive_pronoun(exp.agent, true))
 
+    // Set up the fruit that the enforcer prefers the agent takes.
+    exp.fruit = _.shuffle(["apples", "pears"])
+    exp.preferred_fruit = exp.fruit[0]
+    exp.not_preferred_fruit = exp.fruit[1]
+    $(".display_preferred_fruit").html(exp.preferred_fruit)
+    $(".display_not_preferred_fruit").html(exp.not_preferred_fruit)
+
     // Set up catch trial slide information.
     exp.num_catch = 2;
     exp.catch_trials = [];
-    exp.catch_trial_direction = _.sample(["right", "left"])
-    exp.preferred_fruit = _.sample(["bananas", "pears"])
-    // $(".display_catch_trial").html("<img style=\"height:150px;width:auto\" src=\"../imgs/observer_1/catch_trial_" +
-    //                                exp.agent.gender + "_right.png\"></img>")
-    $(".display_preferred_fruit").html(exp.preferred_fruit)
 
     // Set up trial slide information.
-    exp.trials = trials();
+    exp.apple_position = exp.preferred_fruit == "apples" ? 1 : 0
+    exp.trials = trials(exp.apple_position);
     exp.num_trials = exp.trials.length;
     exp.data_trials = [];
     $(".display_trials").html(exp.num_trials);

@@ -49,29 +49,27 @@
     <!-- Background slide. -->
     <div class="slide" id="background">
         <h3>Background</h3>
-        <!-- <img style="height:200px;width:auto" src="../imgs/forest.png"></img> -->
-        <p align="left" style="text-indent:40px"><span class="display_enforcer"></span> is a farmer on the mountainous countryside of a town. Among the crops <span class="display_enforcer_pronoun"></span> tends to are apples and pears. One day, <span class="display_agent"></span> notices that hikers have established a hiking route near <span class="display_enforcer_possessive_pronoun"></span> apple and pear groves and occasionally take some fruit while passing by. <span class="display_enforcer_pronoun_capitalized"></span> doesn’t mind that hikers take some fruit but prefers that hikers take apples since pears are out-of-season.</p>
+        <p align="left" style="text-indent:40px"><span class="display_enforcer"></span> is a farmer on the mountainous countryside of a town. Among the crops <span class="display_enforcer_pronoun"></span> tends to are apples and pears. One day, <span class="display_agent"></span> notices that hikers have established a hiking route near <span class="display_enforcer_possessive_pronoun"></span> apple and pear groves and occasionally take some fruit while passing by. <span class="display_enforcer_pronoun_capitalized"></span> doesn’t mind that hikers take some fruit but prefers that hikers take <span class="display_preferred_fruit"></span> since <span class="display_not_preferred_fruit"></span> are out-of-season.</p>
 
-        <p align="left" style="text-indent:40px">Because the hikers that hike along this route are regulars, <span class="display_enforcer"></span> knows when these hikers stop by <span class="display_enforcer_possessive_pronoun"></span> groves and which fruit different hikers prefer. Depending on the hiker, <span class="display_enforcer_pronoun"></span> takes different actions to ensure that they will take apples instead of pears.</p>
+        <p align="left" style="text-indent:40px">Because the hikers that hike along this route are regulars, <span class="display_enforcer"></span> knows when these hikers stop by <span class="display_enforcer_possessive_pronoun"></span> groves and which fruit different hikers prefer. Depending on the hiker, <span class="display_enforcer_pronoun"></span> takes different actions to ensure that they will take <span class="display_preferred_fruit"></span> instead of <span class="display_not_preferred_fruit"></span>.</p>
 
-        <p align="left" style="text-indent:40px">Since <span class="display_enforcer"></span> doesn't have time to drive to town to pick up signs, <span class="display_enforcer_pronoun"></span> lines up some boulders to make sure that the hikers do not get the pears. The hikers always notice the boulders because they have to walk around them to get to the grove but not all hikers realize that <span class="display_enforcer"></span> placed these boulders. Some hikers think that the boulders were there naturally.
+        <p align="left" style="text-indent:40px">Since <span class="display_enforcer"></span> doesn't have time to drive to town to pick up signs, <span class="display_enforcer_pronoun"></span> lines up some boulders to make sure that the hikers do not get the <span class="display_not_preferred_fruit"></span>. The hikers always notice the boulders because they have to walk around them to get to the grove but not all hikers realize that <span class="display_enforcer"></span> placed these boulders. Some hikers think that the boulders were there naturally. The rough terrain near the groves also disincentivizes hikers from traveling too far.</p>
 
         <p align="left" style="text-indent:40px"><span class="display_enforcer"></span> finds it very exhausting to arrange the boulders. They're difficult to move, so <span class="display_enforcer_pronoun"></span> doesn’t always use the most boulders <span class="display_enforcer_pronoun"></span> can. <span class="display_enforcer"></span> also knows that different hikers are more or less likely to realize that <span class="display_enforcer_pronoun"></span> arranged the boulders, and <span class="display_enforcer_pronoun"></span> takes this into account when deciding what to do.</p>
-        <button onclick="_s.button()">Continue</button>
-    </div>
 
         <!-- <p><span class="display_agent"></span> is hiking through a rocky forest in search of delicious fruit. As <span class="display_agent"></span> hikes through the only path up the hill, <span class="display_agent_pronoun"></span> reaches some flat ground and encounters two types of fruit groves: bananas and pears. A farmer, <span class="display_enforcer"></span>, owns these groves and lets hikers take some fruit. <span class="display_enforcer"></span> prefers that hikers take <span class="display_preferred_fruit"></span> because the others are out-of-season.</p> -->
 
         <!-- <p>If <span class="display_enforcer"></span> thinks that a hiker prefers the other fruit, <span class="display_enforcer_pronoun"></span> will place rocks near that grove, that any hiker on this part of the hill can see, to guide them. <span class="display_enforcer"></span> has learned that people are generally helpful, but, due to the landscape, they don't always realize that <span class="display_enforcer_pronoun"></span> placed the rocks and think that they were there naturally.</p> -->
+        <button onclick="_s.button()">Continue</button>
+    </div>
 
     <!-- Instructions slide. -->
     <div class="slide" id="instructions">
         <h3>Instructions</h3>
         <img style="height:auto;width:auto" src="imgs/agent.png"></img>
-        
-        <p>This is <span class="display_agent"></span>, one of the hikers that regularly hikes on this path. On each trial, you will be asked to put yourself in <span class="display_enforcer"></span>'s (the farmer's) shoes. You will be asked how much <span class="display_enforcer"></span> thought <span class="display_agent"></span> wanted a particular fruit. You will also be asked how much <span class="display_enforcer"></span> thought <span class="display_agent"></span> would realize that the boulders were placed by <span class="display_enforcer"></span> instead of being there naturally.</p>
+        <p>This is <span class="display_agent"></span>, one of the hikers that regularly hikes on this path. On each trial, you will be asked to put yourself in <span class="display_enforcer"></span>'s (the farmer's) shoes. You will be asked how much <span class="display_enforcer"></span> thought <span class="display_agent"></span> wanted <span class="display_preferred_fruit"></span>. You will also be asked how much <span class="display_enforcer"></span> thought <span class="display_agent"></span> would realize that the boulders were placed by <span class="display_enforcer"></span> instead of being there naturally.</p>
 
-        <p></p><p></p>
+        <br>
         <img style="height:auto;width:auto" src="imgs/objects.png"></img>
         <p>Above are the objects that <span class="display_agent"></span> will encounter while traversing through a grid map. Keep in mind that <span class="display_agent"></span> <b>can</b> move horizontally or vertically on the grid and on the squares that have the apple or pear. <span class="display_agent"></span> <b>cannot</b> move diagonally or on the squares that have rocks.</p>
         <button onclick="_s.button()">Continue</button>
@@ -80,13 +78,11 @@
     <!-- Catch trial slide. -->
     <div class="slide" id="catch_trial">
         <p>For example, observe <span class="display_agent"></span> below:</p>
-        <span class="display_stimulus"></span>
-        <div class="display_options"></div>
-        <!-- <p align="left"><label><input type="radio" name="assess" value="No"/>No</label></p> -->
-        <!-- <p align="left"><label><input type="radio" name="assess" value="Yes"/>Yes</label><p> -->
+        <p class="display_catch_stimulus"></p>
+        <p class="display_catch_options"></p>
         <!-- <table id="multi_slider_table0" class="slider_table"><tr><td></td><td class="left">very unlikely</td><td class="right">very likely</td></tr></table> -->
         <p>There are <span class="display_trials"></span> trials in total. Press "Continue" to begin.</p>
-        <p class="catch_err">Please adjust both sliders before continuing.</p>
+        <p class="catch_err">Please answer both questions before continuing.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
