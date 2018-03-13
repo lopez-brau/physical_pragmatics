@@ -71,16 +71,18 @@ function make_slides(f) {
                                              "<input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label>" +
                                              "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
                                              "<p>" + exp.sentence_2 + "</p>" +
-                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"Yes\"/>Yes</label>" +
-                                             "<input type=\"radio\" name=\"sentence_2\" value=\"No\"/>No</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"Helpful\"/>Helpful</label>" +
+                                             "<input type=\"radio\" name=\"sentence_2\" value=\"Indifferent\"/>Indifferent</label>" +
                                              "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
                                              "<p>" + exp.sentence_3 + "</p>" +
                                              "<label><input type=\"radio\" name=\"sentence_3\" value=\"Yes\"/>Yes</label>" +
                                              "<input type=\"radio\" name=\"sentence_3\" value=\"No\"/>No</label>" + 
                                              "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
                                              "<p>" + exp.sentence_4 + "</p>" +
-                                             "<p><label><input type=\"radio\" name=\"sentence_4\" value=\"Yes\"/>Yes</label>" +
-                                             "<input type=\"radio\" name=\"sentence_4\" value=\"No\"/>No</label>" +
+                                             "<p><label><input type=\"radio\" name=\"sentence_4\" value=\"Weather\"/>Weather</label>" +
+                                             "<input type=\"radio\" name=\"sentence_4\" value=\"Distance\"/>Distance</label>" +
+                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Time of Day\"/>Time of Day</label>" +
+                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Boulders\"/>Boulders</label>" +
                                              "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
                                              "<br>");
         },
