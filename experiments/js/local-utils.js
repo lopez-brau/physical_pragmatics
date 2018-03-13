@@ -31,11 +31,16 @@ function embed_slides(num_trials) {
         slides = slides + "<div class=\"slide\" id=\"trial" + i + "\">" + 
             "<p class=\"display_setup\"></p>" +
             "<p class=\"display_stimulus\"></p>" +
-            "<table id=\"multi_slider_table" + i + "\"" + "class=\"slider_table\">" +
+            "<table style=\"margin-right:0px\"id=\"multi_slider_table_0" + i + "\"" + "class=\"slider_table\">" +
             "<tr><td></td>" +
-            "<td class=\"left\">not at all</td>"+
+            "<td class=\"left\">not at all</td>" +
             "<td class=\"right\">very much</td>" +
-            "</tr></table><p></p>" +
+            "</tr></table>" + 
+            "<table id=\"multi_slider_table_1" + i + "\"" + "class=\"slider_table\">" +
+            "<tr><td></td>" +
+            "<td class=\"left\">very bad</td>"+
+            "<td class=\"right\">very good</td>" +
+            "</tr></table>" +
             "<button onclick=\"_s.button()\">Continue</button>" +
             "<p class=\"err\">Please adjust both sliders before continuing.</p>" +
             "</div>";

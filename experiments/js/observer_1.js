@@ -10,14 +10,24 @@ function make_slides(f) {
         }
     });
 
-    // Set up the background slide.
-    slides.background = slide({
-        name: "background",
+    // Set up the first background slide.
+    slides.background_1 = slide({
+        name: "background_1",
         start: function() {},
         button: function() {
             exp.go()
         }
     });
+
+    // Set up the second background slide.
+    slides.background_2 = slide({
+        name: "background_2",
+        start: function() {},
+        button: function() {
+            exp.go()
+        }
+    });
+
 
     // Set up the instructions slide.
     slides.instructions = slide({
@@ -38,35 +48,22 @@ function make_slides(f) {
             $(".display_catch_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" +
                                               "[1 1]/" + exp.catch_apple_position + "/[4 2]_[3 0].png\"></script>");
 
-            // var sentences = _.shuffle(["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
-            //                            "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
-            //                            " placed the boulders there?"])
             var sentences = ["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
                              "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
                              " placed the boulders there?"]
             exp.sentence_0 = sentences[0]
             exp.sentence_1 = sentences[1]
 
-            $(".display_catch_options").html("<p align=\"left\">" + exp.sentence_0 +
+            $(".display_catch_options").html("<p align=\"right\">" + exp.sentence_0 +
                                              "<label><input type=\"radio\" name=\"sentence_0\" value=\"Yes\"/>Yes</label>" +
                                              "<input type=\"radio\" name=\"sentence_0\" value=\"No\"/>No</label></p>" + 
-                                             "<p align=\"left\">" + exp.sentence_1 +
+                                             "<p align=\"right\">" + exp.sentence_1 +
                                              "<label><input type=\"radio\" name=\"sentence_1\" value=\"Yes\"/>Yes</label>" +
                                              "<input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label></p>");
-
-            // for (var i = 0; i < exp.num_catch; i++) {
-            //     $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
-            //                                      "\">" + catch_sentence[i] + "</td><td colspan=\"2\"><div id=\"slider" + i + 
-            //                                      "\" class=\"slider\">-------[ ]--------</div></td></tr>");
-            //     utils.match_row_height("#multi_slider_table0", ".slider_target");
-            //     utils.make_slider("#slider" + i, make_slider_callback(i));
-            // }
-
-            // exp.sliderPost = [];
         },
         button: function() {
-            exp.target_0 = $("input[name=sentence_0]:checked").val();
-            exp.target_1 = $("input[name=sentence_1]:checked").val();
+            exp.target_0 = $("input[name='sentence_0']:checked").val();
+            exp.target_1 = $("input[name='sentence_1']:checked").val();
 
             if ((exp.target_0 == undefined) || (exp.target_1 == undefined)) {
                 $(".catch_err").show();
@@ -99,17 +96,31 @@ function make_slides(f) {
                                     exp.trials[j] + "\"></img>");
     
         exp.sentence_0 = "How much does the farmer think " + exp.agent.name + " likes apples?"
-        exp.sentence_1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
-                        " placed the rocks?"
+        exp.sentence_1 = "How good does the farmer think " + exp.agent.name + " is at knowing " + exp.enforcer_pronoun + 
+                         " placed the rocks?"
+        // exp.sentence_1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
+        //                 " placed the rocks?"
+        
 
-        for (var i = exp.num_catch; i < (exp.num_sentences+exp.num_catch); i++) {
-            var sentence = i == 2 ? exp.sentence_0 : exp.sentence_1
-            $("#multi_slider_table" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
-                                                    "\">" + sentence + "</td><td colspan=\"2\"><div id=\"slider" + i + 
-                                                    "\" class=\"slider\">-------[ ]--------</div></td></tr>");
-            utils.match_row_height("#multi_slider_table" + (j+1), ".slider_target");
-            utils.make_slider("#slider" + i, make_slider_callback(i));
-        }
+        $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row_0\"><td class=\"slider_target\" id=\"sentence_0" + 
+                                                "\">" + exp.sentence_0 + "</td><td colspan=\"2\"><div id=\"slider_0" + 
+                                                "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+        $("#multi_slider_table_1" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
+                                                "\">" + exp.sentence_1 + "</td><td colspan=\"2\"><div id=\"slider_1" + 
+                                                "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+        utils.match_row_height("#multi_slider_table_0" + (j+1), ".slider_target");
+        utils.match_row_height("#multi_slider_table_1" + (j+1), ".slider_target");
+        utils.make_slider("#slider_0", make_slider_callback(0));
+        utils.make_slider("#slider_1", make_slider_callback(1));
+
+        // for (var i = exp.num_catch; i < (exp.num_sentences+exp.num_catch); i++) {
+        //     var sentence = i == 2 ? exp.sentence_0 : exp.sentence_1
+        //     $("#multi_slider_table" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
+        //                                             "\">" + sentence + "</td><td colspan=\"2\"><div id=\"slider" + i + 
+        //                                             "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+        //     utils.match_row_height("#multi_slider_table" + (j+1), ".slider_target");
+        //     utils.make_slider("#slider" + i, make_slider_callback(i));
+        // }
 
         exp.sliderPost = [];
     }
@@ -123,7 +134,7 @@ function make_slides(f) {
     // Runs when the "Continue" button is hit on a slide.
     function button() {
 
-        if ((exp.sliderPost[2] === undefined) || (exp.sliderPost[3] === undefined)) { 
+        if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) { 
             $(".err").show(); 
         }
         else {
@@ -155,7 +166,7 @@ function make_slides(f) {
             exp.subj_data = {
                 "language": $("#language").val(),
                 "enjoyment": $("#enjoyment").val(),
-                "asses": $('input[name="assess"]:checked').val(),
+                "asses": $("input[name='assess']:checked").val(),
                 "age": $("#age").val(),
                 "gender": $("#gender").val(),
                 "education": $("#education").val(),
@@ -212,6 +223,7 @@ function init() {
     $(".display_agent_pronoun_capitalized").html(get_pronoun(exp.agent, true))
     $(".display_agent_possessive_pronoun").html(get_possessive_pronoun(exp.agent, false))
     $(".display_agent_possessive_pronoun_capitalized").html(get_possessive_pronoun(exp.agent, true))
+    exp.enforcer_pronoun = get_pronoun(exp.enforcer, false)
 
     // Set up the fruit that the enforcer prefers the agent takes.
     exp.fruit = _.shuffle(["apples", "pears"])
@@ -244,7 +256,7 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "background", "instructions", "catch_trial"]
+    exp.structure = ["i0", "background_1", "background_2", "instructions", "catch_trial"]
     for (var k = 1; k <= exp.num_trials; k++) {
         exp.structure.push("trial" + k);
     }
