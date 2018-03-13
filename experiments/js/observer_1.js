@@ -54,29 +54,35 @@ function make_slides(f) {
             var sentences = ["Which fruit does the farmer prefer?",
                              "Do hikers always know that the farmer placed the boulders there?",
                              "Do hikers tend to be helpful or indifferent?",
-                             "Does the farmer know which fruit a regular hiker prefers?",
-                             "What are the two features that inhibit hikers from getting to a particular fruit grove?"]
+                             "Does the farmer know which fruit regular hikers prefers?",
+                             "What are the two features that make it harder for hikers to get to a fruit grove?"]
             exp.sentence_0 = sentences[0]
             exp.sentence_1 = sentences[1]
             exp.sentence_2 = sentences[2]
             exp.sentence_3 = sentences[3]
             exp.sentence_4 = sentences[4]
 
-            $(".display_catch_options").html("<p align=\"right\">" + exp.sentence_0 +
-                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"Yes\"/>Yes</label>" +
-                                             "<input type=\"radio\" name=\"sentence_0\" value=\"No\"/>No</label></p>" + 
-                                             "<p align=\"right\">" + exp.sentence_1 +
+            $(".display_catch_options").html("<p>" + exp.sentence_0 + "</p>" +
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"Apples\"/>Apples</label>" +
+                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Pears\"/>Pears</label>" + 
+                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
+                                             "<p>" + exp.sentence_1 + "</p>" +
                                              "<label><input type=\"radio\" name=\"sentence_1\" value=\"Yes\"/>Yes</label>" +
-                                             "<input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label></p>" +
-                                             "<p align=\"right\">" + exp.sentence_2 +
+                                             "<input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label>" +
+                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
+                                             "<p>" + exp.sentence_2 + "</p>" +
                                              "<label><input type=\"radio\" name=\"sentence_2\" value=\"Yes\"/>Yes</label>" +
-                                             "<input type=\"radio\" name=\"sentence_2\" value=\"No\"/>No</label></p>" +
-                                             "<p align=\"right\">" + exp.sentence_3 +
+                                             "<input type=\"radio\" name=\"sentence_2\" value=\"No\"/>No</label>" +
+                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
+                                             "<p>" + exp.sentence_3 + "</p>" +
                                              "<label><input type=\"radio\" name=\"sentence_3\" value=\"Yes\"/>Yes</label>" +
-                                             "<input type=\"radio\" name=\"sentence_3\" value=\"No\"/>No</label></p>" + 
-                                             "<p align=\"right\">" + exp.sentence_4 +
-                                             "</p><p><label><input type=\"radio\" name=\"sentence_4\" value=\"Yes\"/>Yes</label>" +
-                                             "<input type=\"radio\" name=\"sentence_4\" value=\"No\"/>No</label></p>");
+                                             "<input type=\"radio\" name=\"sentence_3\" value=\"No\"/>No</label>" + 
+                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
+                                             "<p>" + exp.sentence_4 + "</p>" +
+                                             "<p><label><input type=\"radio\" name=\"sentence_4\" value=\"Yes\"/>Yes</label>" +
+                                             "<input type=\"radio\" name=\"sentence_4\" value=\"No\"/>No</label>" +
+                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
+                                             "<br>");
         },
         button: function() {
             exp.target_0 = $("input[name='sentence_0']:checked").val();
