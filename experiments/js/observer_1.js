@@ -44,13 +44,13 @@ function make_slides(f) {
         start: function() {
             $(".catch_err").hide();
 
-            exp.catch_apple_position = exp.preferred_fruit == "apples" ? "[1 9]" : "[9 1]"
-            $(".display_catch_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" +
-                                              "[1 1]/" + exp.catch_apple_position + "/[4 2]_[3 0].png\"></script>");
+            // exp.catch_apple_position = exp.preferred_fruit == "apples" ? "[1 9]" : "[9 1]"
+            // $(".display_catch_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" +
+            //                                   "[1 1]/" + exp.catch_apple_position + "/[4 2]_[3 0].png\"></script>");
 
-            var sentences = ["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
-                             "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
-                             " placed the boulders there?"]
+            // var sentences = ["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
+            //                  "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
+            //                  " placed the boulders there?"]
             var sentences = ["Which fruit does the farmer prefer?",
                              "Do hikers always know that the farmer placed the boulders there?",
                              "Do hikers tend to be helpful or indifferent?",
@@ -75,7 +75,7 @@ function make_slides(f) {
                                              "<label><input type=\"radio\" name=\"sentence_3\" value=\"Yes\"/>Yes</label>" +
                                              "<input type=\"radio\" name=\"sentence_3\" value=\"No\"/>No</label></p>" + 
                                              "<p align=\"right\">" + exp.sentence_4 +
-                                             "<label><input type=\"radio\" name=\"sentence_4\" value=\"Yes\"/>Yes</label>" +
+                                             "</p><p><label><input type=\"radio\" name=\"sentence_4\" value=\"Yes\"/>Yes</label>" +
                                              "<input type=\"radio\" name=\"sentence_4\" value=\"No\"/>No</label></p>");
         },
         button: function() {
@@ -111,7 +111,8 @@ function make_slides(f) {
         $(".err").hide();
         $(".slider_row").remove();
 
-        $(".display_setup").html("Consider the following scenario. Remember to place yourself in the farmer's shoes.");
+        $(".display_setup").html("Consider the following scenario. Remember to place yourself in " + exp.enforcer.name + 
+                                 " (the farmer's) shoes.");
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     
