@@ -83,8 +83,7 @@ function make_slides(f) {
                                              "<input type=\"radio\" name=\"sentence_4\" value=\"Distance\"/>Distance</label>" +
                                              "<input type=\"radio\" name=\"sentence_0\" value=\"Time of Day\"/>Time of Day</label>" +
                                              "<input type=\"radio\" name=\"sentence_0\" value=\"Boulders\"/>Boulders</label>" +
-                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
-                                             "<br>");
+                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>");
         },
         button: function() {
             exp.target_0 = $("input[name='sentence_0']:checked").val();
@@ -124,8 +123,8 @@ function make_slides(f) {
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     
-        exp.sentence_0 = "How much does the farmer think " + exp.agent.name + " likes apples?"
-        exp.sentence_1 = "How good does the farmer think " + exp.agent.name + " is at knowing " + exp.enforcer_pronoun + 
+        exp.sentence_0 = "How much does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?"
+        exp.sentence_1 = "How good does " + exp.enforcer.name + " think " + exp.agent.name + " is at knowing " + exp.enforcer.name + 
                          " placed the rocks?"
         // exp.sentence_1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
         //                 " placed the rocks?"
