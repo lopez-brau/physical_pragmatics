@@ -51,19 +51,39 @@ function make_slides(f) {
             var sentences = ["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
                              "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
                              " placed the boulders there?"]
+            var sentences = ["Which fruit does the farmer prefer?",
+                             "Do hikers always know that the farmer placed the boulders there?",
+                             "Do hikers tend to be helpful or indifferent?",
+                             "Does the farmer know which fruit a regular hiker prefers?",
+                             "What are the two features that inhibit hikers from getting to a particular fruit grove?"]
             exp.sentence_0 = sentences[0]
             exp.sentence_1 = sentences[1]
+            exp.sentence_2 = sentences[2]
+            exp.sentence_3 = sentences[3]
+            exp.sentence_4 = sentences[4]
 
             $(".display_catch_options").html("<p align=\"right\">" + exp.sentence_0 +
                                              "<label><input type=\"radio\" name=\"sentence_0\" value=\"Yes\"/>Yes</label>" +
                                              "<input type=\"radio\" name=\"sentence_0\" value=\"No\"/>No</label></p>" + 
                                              "<p align=\"right\">" + exp.sentence_1 +
                                              "<label><input type=\"radio\" name=\"sentence_1\" value=\"Yes\"/>Yes</label>" +
-                                             "<input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label></p>");
+                                             "<input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label></p>" +
+                                             "<p align=\"right\">" + exp.sentence_2 +
+                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"Yes\"/>Yes</label>" +
+                                             "<input type=\"radio\" name=\"sentence_2\" value=\"No\"/>No</label></p>" +
+                                             "<p align=\"right\">" + exp.sentence_3 +
+                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"Yes\"/>Yes</label>" +
+                                             "<input type=\"radio\" name=\"sentence_3\" value=\"No\"/>No</label></p>" + 
+                                             "<p align=\"right\">" + exp.sentence_4 +
+                                             "<label><input type=\"radio\" name=\"sentence_4\" value=\"Yes\"/>Yes</label>" +
+                                             "<input type=\"radio\" name=\"sentence_4\" value=\"No\"/>No</label></p>");
         },
         button: function() {
             exp.target_0 = $("input[name='sentence_0']:checked").val();
             exp.target_1 = $("input[name='sentence_1']:checked").val();
+            exp.target_2 = $("input[name='sentence_2']:checked").val();
+            exp.target_3 = $("input[name='sentence_3']:checked").val();
+            exp.target_4 = $("input[name='sentence_4']:checked").val();
 
             if ((exp.target_0 == undefined) || (exp.target_1 == undefined)) {
                 $(".catch_err").show();
@@ -233,7 +253,7 @@ function init() {
     $(".display_not_preferred_fruit").html(exp.not_preferred_fruit)
 
     // Set up catch trial slide information.
-    exp.num_catch = 2;
+    exp.num_catch = 5;
     exp.catch_trials = [];
 
     // Set up trial slide information.
