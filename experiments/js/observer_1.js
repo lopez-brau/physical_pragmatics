@@ -42,7 +42,8 @@ function make_slides(f) {
     slides.catch_trial = slide({
         name: "catch_trial",
         start: function() {
-            $(".catch_err").hide();
+            $(".catch_err_1").hide();
+            $(".catch_err_2").hide();
 
             // exp.catch_apple_position = exp.preferred_fruit == "apples" ? "[1 9]" : "[9 1]"
             // $(".display_catch_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" +
@@ -51,7 +52,7 @@ function make_slides(f) {
             // var sentences = ["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
             //                  "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
             //                  " placed the boulders there?"]
-            var sentences = ["Which fruit does the farmer prefer?",
+            var sentences = ["Which fruit does the farmer prefer hikers take?",
                              "Do hikers always know that the farmer placed the boulders there?",
                              "Do hikers tend to be helpful or indifferent?",
                              "Does the farmer know which fruit regular hikers prefers?",
@@ -62,38 +63,50 @@ function make_slides(f) {
             exp.sentence_3 = sentences[3]
             exp.sentence_4 = sentences[4]
 
-            $(".display_catch_options").html("<p>" + exp.sentence_0 + "</p>" +
+            $(".display_catch_options").html("<p>" + exp.sentence_0 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_0\" value=\"Apples\"/>Apples</label>" +
-                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Pears\"/>Pears</label>" + 
-                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
-                                             "<p>" + exp.sentence_1 + "</p>" +
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"Pears\"/>Pears</label>" + 
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"Not sure\"/>Not sure</label>" +
+                                             "</p><p>" + exp.sentence_1 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_1\" value=\"Yes\"/>Yes</label>" +
-                                             "<input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label>" +
-                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
-                                             "<p>" + exp.sentence_2 + "</p>" +
+                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"Not sure\"/>Not sure</label>" +
+                                             "</p><p>" + exp.sentence_2 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_2\" value=\"Helpful\"/>Helpful</label>" +
-                                             "<input type=\"radio\" name=\"sentence_2\" value=\"Indifferent\"/>Indifferent</label>" +
-                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
-                                             "<p>" + exp.sentence_3 + "</p>" +
+                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"Indifferent\"/>Indifferent</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"Not sure\"/>Not sure</label>" +
+                                             "</p><p>" + exp.sentence_3 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_3\" value=\"Yes\"/>Yes</label>" +
-                                             "<input type=\"radio\" name=\"sentence_3\" value=\"No\"/>No</label>" + 
-                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>" +
-                                             "<p>" + exp.sentence_4 + "</p>" +
-                                             "<p><label><input type=\"radio\" name=\"sentence_4\" value=\"Weather\"/>Weather</label>" +
-                                             "<input type=\"radio\" name=\"sentence_4\" value=\"Distance\"/>Distance</label>" +
-                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Time of Day\"/>Time of Day</label>" +
-                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Boulders\"/>Boulders</label>" +
-                                             "<input type=\"radio\" name=\"sentence_0\" value=\"Not Sure\"/>Not Sure</label></p>");
+                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"No\"/>No</label>" + 
+                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"Not sure\"/>Not sure</label>" +
+                                             "</p><p>" + exp.sentence_4 + "</p><p>" +
+                                             "<label><input type=\"checkbox\" name=\"sentence_4_0\" value=\"Weather\"/>Weather  </label>" +
+                                             "<label><input type=\"checkbox\" name=\"sentence_4_1\" value=\"Distance\"/>Distance from the grove  </label>" +
+                                             "<label><input type=\"checkbox\" name=\"sentence_4_2\" value=\"Time of day\"/>Time of day  </label>" +
+                                             "<label><input type=\"checkbox\" name=\"sentence_4_3\" value=\"Boulders\"/>Boulders  </label>" +
+                                             "<label><input type=\"checkbox\" name=\"sentence_4_4\" value=\"Not sure\"/>Not sure  </label></p>");
         },
         button: function() {
             exp.target_0 = $("input[name='sentence_0']:checked").val();
             exp.target_1 = $("input[name='sentence_1']:checked").val();
             exp.target_2 = $("input[name='sentence_2']:checked").val();
             exp.target_3 = $("input[name='sentence_3']:checked").val();
-            exp.target_4 = $("input[name='sentence_4']:checked").val();
+            exp.target_4_0 = ($("input[name='sentence_4_0']:checked").val() == "Weather") ? 1 : 0;
+            exp.target_4_1 = ($("input[name='sentence_4_1']:checked").val() == "Distance") ? 1 : 0;
+            exp.target_4_2 = ($("input[name='sentence_4_2']:checked").val() == "Time of day") ? 1 : 0;
+            exp.target_4_3 = ($("input[name='sentence_4_3']:checked").val() == "Boulders") ? 1 : 0;
+            exp.target_4_4 = $("input[name='sentence_4_4']:checked").val();
 
-            if ((exp.target_0 == undefined) || (exp.target_1 == undefined)) {
-                $(".catch_err").show();
+
+            if ((exp.target_0 == undefined) || (exp.target_1 == undefined) || 
+                (exp.target_2 == undefined) || (exp.target_3 == undefined) ||
+                ((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 == 0) && (exp.target_4_4 != "Not sure"))) {
+                $(".catch_err_1").show();
+            }
+            else if (((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 != 2) && (exp.target_4_4 != "Not sure")) ||
+                     ((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 != 0) && (exp.target_4_4 == "Not sure"))) {
+                $(".catch_err_1").hide();
+                $(".catch_err_2").show();
             }
             else {
                 exp.catch_trials.push({
@@ -106,7 +119,17 @@ function make_slides(f) {
                     "sentence_0": exp.sentence_0,
                     "target_0": exp.target_0,
                     "sentence_1": exp.sentence_1,
-                    "target_1": exp.target_1
+                    "target_1": exp.target_1,
+                    "sentence_2": exp.sentence_2,
+                    "target_2": exp.target_2,
+                    "sentence_3": exp.sentence_3,
+                    "target_3": exp.target_3,
+                    "sentence_4": exp.sentence_4,
+                    "target_4_0": exp.target_4_0,
+                    "target_4_1": exp.target_4_1,
+                    "target_4_2": exp.target_4_2,
+                    "target_4_3": exp.target_4_3,
+                    "target_4_4": exp.target_4_4
                 });
                 exp.go();
             }
@@ -128,9 +151,8 @@ function make_slides(f) {
                          " placed the rocks?"
         // exp.sentence_1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
         //                 " placed the rocks?"
-        
 
-        $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row_0\"><td class=\"slider_target\" id=\"sentence_0" + 
+        $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_0" + 
                                                 "\">" + exp.sentence_0 + "</td><td colspan=\"2\"><div id=\"slider_0" + 
                                                 "\" class=\"slider\">-------[ ]--------</div></td></tr>");
         $("#multi_slider_table_1" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
@@ -170,9 +192,9 @@ function make_slides(f) {
                 "trial_num": j + 1,
                 "filename": exp.trials[j],
                 "sentence_0": exp.sentence_0,
-                "target_0": exp.sliderPost[2],
+                "target_0": exp.sliderPost[0],
                 "sentence_1": exp.sentence_1,
-                "target_1": exp.sliderPost[3]
+                "target_1": exp.sliderPost[1]
             });
             j++;
             exp.go();
