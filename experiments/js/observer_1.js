@@ -45,13 +45,6 @@ function make_slides(f) {
             $(".catch_err_1").hide();
             $(".catch_err_2").hide();
 
-            // exp.catch_apple_position = exp.preferred_fruit == "apples" ? "[1 9]" : "[9 1]"
-            // $(".display_catch_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" +
-            //                                   "[1 1]/" + exp.catch_apple_position + "/[4 2]_[3 0].png\"></script>");
-
-            // var sentences = ["Does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?",
-            //                  "Will " + exp.agent.name + " realize that " + exp.enforcer.name + 
-            //                  " placed the boulders there?"]
             var sentences = ["Which fruit does the farmer prefer hikers take?",
                              "Do hikers always know that the farmer placed the boulders there?",
                              "Do hikers tend to be helpful or indifferent?",
@@ -96,7 +89,6 @@ function make_slides(f) {
             exp.target_4_2 = ($("input[name='sentence_4_2']:checked").val() == "Time of day") ? 1 : 0;
             exp.target_4_3 = ($("input[name='sentence_4_3']:checked").val() == "Boulders") ? 1 : 0;
             exp.target_4_4 = $("input[name='sentence_4_4']:checked").val();
-
 
             if ((exp.target_0 == undefined) || (exp.target_1 == undefined) || 
                 (exp.target_2 == undefined) || (exp.target_3 == undefined) ||
@@ -147,10 +139,10 @@ function make_slides(f) {
                                     exp.trials[j] + "\"></img>");
     
         exp.sentence_0 = "How much does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?"
-        exp.sentence_1 = "How good does " + exp.enforcer.name + " think " + exp.agent.name + " is at knowing " + exp.enforcer.name + 
-                         " placed the rocks?"
         // exp.sentence_1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
         //                 " placed the rocks?"
+        exp.sentence_1 = "How good does " + exp.enforcer.name + " think " + exp.agent.name + " is at knowing " + exp.enforcer.name + 
+                         " placed the rocks?"
 
         $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_0" + 
                                                 "\">" + exp.sentence_0 + "</td><td colspan=\"2\"><div id=\"slider_0" + 
@@ -163,15 +155,6 @@ function make_slides(f) {
         utils.make_slider("#slider_0", make_slider_callback(0));
         utils.make_slider("#slider_1", make_slider_callback(1));
 
-        // for (var i = exp.num_catch; i < (exp.num_sentences+exp.num_catch); i++) {
-        //     var sentence = i == 2 ? exp.sentence_0 : exp.sentence_1
-        //     $("#multi_slider_table" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + i + 
-        //                                             "\">" + sentence + "</td><td colspan=\"2\"><div id=\"slider" + i + 
-        //                                             "\" class=\"slider\">-------[ ]--------</div></td></tr>");
-        //     utils.match_row_height("#multi_slider_table" + (j+1), ".slider_target");
-        //     utils.make_slider("#slider" + i, make_slider_callback(i));
-        // }
-
         exp.sliderPost = [];
     }
 
@@ -181,7 +164,7 @@ function make_slides(f) {
         };
     }
 
-    // Runs when the "Continue" button is hit on a slide.
+    // Run when the "Continue" button is hit on a slide.
     function button() {
 
         if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) { 
