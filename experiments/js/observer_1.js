@@ -104,8 +104,8 @@ function make_slides(f) {
                 exp.catch_trials.push({
                     "enforcer_name": exp.enforcer.name,
                     "enforcer_gender": exp.enforcer.gender,
-                    "agent_name": exp.agent.name,
-                    "agent_gender": exp.agent.gender,
+                    // "agent_name": exp.agent.name,
+                    // "agent_gender": exp.agent.gender,
                     "preferred_fruit": exp.preferred_fruit,
                     "not_preferred_fruit": exp.not_preferred_fruit,
                     "sentence_0": exp.sentence_0,
@@ -138,10 +138,10 @@ function make_slides(f) {
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     
-        exp.sentence_0 = "How much does " + exp.enforcer.name + " think " + exp.agent.name + " likes apples?"
+        exp.sentence_0 = "How much does " + exp.enforcer.name + " think that this hiker likes apples?"
         // exp.sentence_1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
         //                 " placed the rocks?"
-        exp.sentence_1 = "How good does " + exp.enforcer.name + " think " + exp.agent.name + " is at knowing " + exp.enforcer.name + 
+        exp.sentence_1 = "How good does " + exp.enforcer.name + " think this hiker is at knowing " + exp.enforcer.name + 
                          " placed the rocks?"
 
         $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_0" + 
@@ -271,7 +271,7 @@ function init() {
 
     // Set up trial slide information.
     exp.apple_position = exp.preferred_fruit == "apples" ? 1 : 0
-    exp.trials = trials(exp.apple_position);
+    exp.trials = trials(exp.apple_position).slice(0, 18);
     exp.num_trials = exp.trials.length;
     exp.data_trials = [];
     $(".display_trials").html(exp.num_trials);
