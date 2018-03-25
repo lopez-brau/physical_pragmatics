@@ -4,8 +4,8 @@ import csv
 import numpy as np
 
 def retrieve_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, likelihood):
-    path = "cache/gridworld/" if GRIDWORLD == True else "cache/standard/"
-    filename = path + "enforcer_no_ToM/" + str(rationality) + ".csv"
+    path = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
+    filename = path + "enforcer_no_ToM_" + str(rationality) + "_" + str(NATURAL_COST) + ".csv"
     with open(filename, "r") as file:
         reader = csv.reader(file)
         action_probabilities = []
@@ -20,14 +20,15 @@ def retrieve_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, lik
     return likelihood
 
 def retrieve_agent(rationality, enforcer_reward, agent_rewards, enforcer_actions, p, cooperation, U):
-    path = "cache/gridworld/" if GRIDWORLD == True else "cache/standard/"    
+    path = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
     if p != 1.0:
-        filename_agent_no_ToM = path + "agent_no_ToM/" + str(rationality) + ".csv"
+        filename_agent_no_ToM = path + "agent_no_ToM_" + str(rationality) + "_" + str(NATURAL_COST) + ".csv"
         file_agent_no_ToM = open(filename_agent_no_ToM, "r")
         reader_agent_no_ToM = csv.reader(file_agent_no_ToM)
     
     if p != 0.0:
-        filename_agent_ToM = path + "agent_ToM/" + str(rationality) + "/" + METHOD + "/" + str(cooperation) + ".csv"    
+        filename_agent_ToM = path + "agent_ToM_" + str(rationality) + "_" + METHOD + "_" + str(cooperation) + "_" + \
+                             str(NATURAL_COST) + ".csv"    
         file_agent_ToM = open(filename_agent_ToM, "r")
         reader_agent_ToM = csv.reader(file_agent_ToM)
     

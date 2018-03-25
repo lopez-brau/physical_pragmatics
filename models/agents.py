@@ -58,7 +58,7 @@ def agent_ToM(rationality, agent_reward, enforcer_action, cooperation, cache=Fal
 
 	return action_probabilities
 
-def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, agent_reward=None, cache=False, plot=False):
+def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, reward_assumptions=[], cache=False, plot=False):
 	# Set up the utility space.
 	space = tuple([MAX_VALUE for action in np.arange(NUM_ACTIONS)])
 	U = np.zeros(space)
@@ -66,42 +66,29 @@ def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, agent_reward
 	# Generate possible agent rewards and enforcer actions.
 	if SAMPLING == True:
 		agent_rewards = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS))
-		if GRIDWORLD == True:
-			enforcer_actions = np.array([(enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 0,
-								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 1,
-								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2,
-								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 3])
-		else:
-			enforcer_actions = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS))
+		enforcer_actions = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS)) if GRIDWORLD == True else
+						   np.array([(enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 0,
+								 	 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 1,
+								 	 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2,
+								 	 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 3])
 	else:
-		agent_rewards = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
-		if GRIDWORLD == True:
-			enforcer_actions = np.array([(enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 0,
-								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 1,
-								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2,
-								 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 3])
+		# The enforcer has no assumptions about agent rewards.
+		if len(reward_assumptions) == 0:
+			agent_rewards = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
+		# The enforcer has one assumed agent reward.
+		elif len(reward_assumptions) == 1:
+			agent_rewards = np.array([reward_assumptions])
+		# The enforcer has multiple assumed agent rewards.
 		else:
-			enforcer_actions = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS)))
+			agent_rewards = reward_assumptions
+		enforcer_actions = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS))) if GRIDWORLD == True else
+						   np.array([(enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 0,
+							 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 1,
+							 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 2,
+							 		 (enforcer_reward == max(enforcer_reward)).astype(int)[::-1] * 3])
 
 	# Compute the utilities.
-	if agent_reward != None:
-		U_agent_no_ToM = np.zeros(space)
-		U_agent_ToM = np.zeros(space)
-		for enforcer_action in enforcer_actions:
-			# Reason about a non-ToM agent.
-			if p != 1.0:
-				agent_action_probabilities = agent_no_ToM(rationality, agent_reward, enforcer_action)
-				expected_enforcer_reward = np.dot(enforcer_reward, agent_action_probabilities)
-				U_agent_no_ToM[tuple(enforcer_action)] = expected_enforcer_reward - (COST_RATIO*sum(enforcer_action))
-
-			# Reason about a ToM agent.
-			if p != 0.0:
-				agent_action_probabilities = agent_ToM(rationality, agent_reward, enforcer_action, cooperation, cache=True)
-				expected_enforcer_reward = np.dot(enforcer_reward, agent_action_probabilities)
-				U_agent_ToM[tuple(enforcer_action)] = expected_enforcer_reward - (COST_RATIO*sum(enforcer_action))
-
-		U = ((1.0-p)*U_agent_no_ToM) + (p*U_agent_ToM)
-	elif cache == True:
+	if cache == True:
 		U = retrieve_agent(rationality, enforcer_reward, agent_rewards, enforcer_actions, p, cooperation, U)
 	else:
 		U_agent_no_ToM = np.zeros(space)
@@ -124,8 +111,8 @@ def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, agent_reward
 
 			U_agent_no_ToM = U_agent_no_ToM + temp_agent_no_ToM
 			U_agent_ToM = U_agent_ToM + temp_agent_ToM
-		U_agent_no_ToM = U_agent_no_ToM / np.prod(space)
-		U_agent_ToM = U_agent_ToM / np.prod(space)
+		U_agent_no_ToM = U_agent_no_ToM / len(agent_rewards)
+		U_agent_ToM = U_agent_ToM / len(agent_rewards)
 		U = ((1.0-p)*U_agent_no_ToM) + (p*U_agent_ToM)
 
 	# Compute the action probabilities.
@@ -230,7 +217,7 @@ def observer(infer, rationality, **kwargs):
 		# Set up the space of possible proportion parameters and the likelihood
 		# space.
 		p_set = np.linspace(0.0, 1.0, num=11)
-		space = (min(MAX_VALUE**2, MAX_SAMPLES), p_set.size)
+		space = (MAX_VALUE**2, p_set.size)
 		likelihood = np.zeros(space)
 
 		# Generate possible enforcer rewards.
