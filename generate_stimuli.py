@@ -129,7 +129,7 @@ if __name__ == "__main__":
 		fruit_corners = coords[index]["fruit"]
 		for apple_corner in fruit_corners:
 			pear_corner = [pear_corner for pear_corner in fruit_corners if pear_corner != apple_corner][0]
-			path = "imgs/observer_1/" + str(np.array(agent_coords)) + "/" + str(np.array(apple_corner)) + "/"
+			path = "../imgs/observer_1/" + str(np.array(agent_coords)) + "/" + str(np.array(apple_corner)) + "/"
 			for natural_cost in natural_costs:
 				for enforcer_action in enforcer_actions:
 					filename = str(natural_cost) + "_" + str(enforcer_action)
@@ -165,6 +165,6 @@ if __name__ == "__main__":
 								   "\\end{document}\n")
 					os.system("pdflatex " + "\"" + path + filename + ".tex\"")
 					os.system("pdftoppm -r 300 -png " + "\"" + filename + ".pdf\" " + "\"" + path + filename + "\"")
-					os.chdir("D:/Research/social_pragmatics/" + path)
+					os.chdir(path)
 					os.system("rename " + "\"" + filename + "-1.png\" \"" + filename + ".png\"")
-					os.chdir("D:/Research/social_pragmatics/")
+					os.chdir("../utils")

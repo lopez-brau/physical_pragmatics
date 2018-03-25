@@ -138,7 +138,7 @@ function make_slides(f) {
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     
-        exp.sentence_0 = "How much does " + exp.enforcer.name + " think that this hiker likes apples?"
+        exp.sentence_0 = "How much does " + exp.enforcer.name + " think that this hiker likes " + exp.not_preferred_fruit + "?"
         // exp.sentence_1 = "How sure is the farmer that " + exp.agent.name + " will realize that " + get_pronoun(exp.enforcer) + 
         //                 " placed the rocks?"
         exp.sentence_1 = "How good does " + exp.enforcer.name + " think this hiker is at knowing " + exp.enforcer.name + 
