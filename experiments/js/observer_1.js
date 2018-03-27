@@ -7,13 +7,16 @@ function make_slides(f) {
         name: "i0",
         start: function() {
             exp.startT = Date.now();
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%")
         }
     });
 
     // Set up the first background slide.
     slides.background_1 = slide({
         name: "background_1",
-        start: function() {},
+        start: function() {
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%")
+        },
         button: function() {
             exp.go()
         }
@@ -22,7 +25,9 @@ function make_slides(f) {
     // Set up the second background slide.
     slides.background_2 = slide({
         name: "background_2",
-        start: function() {},
+        start: function() {
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%")
+        },
         button: function() {
             exp.go()
         }
@@ -32,9 +37,11 @@ function make_slides(f) {
     // Set up the instructions slide.
     slides.instructions = slide({
         name: "instructions",
-        start: function() {},
+        start: function() {
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%")
+        },
         button: function() {
-            exp.go(-2)
+            exp.go()
         }
     });
 
@@ -42,11 +49,13 @@ function make_slides(f) {
     slides.catch_trial = slide({
         name: "catch_trial",
         start: function() {
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%")
             $(".catch_err_1").hide();
             $(".catch_err_2").hide();
 
             var sentences = ["Which fruit does the farmer prefer hikers take?",
-                             "Do hikers always know that the farmer placed the boulders there?",
+                             // "Do hikers always know that the farmer placed the boulders there?",
+                             "" + exp.nQs,
                              "Do hikers tend to be helpful or indifferent?",
                              "Does the farmer know which fruit regular hikers prefers?",
                              "What are the two features that make it harder for hikers to get to a fruit grove?"]
@@ -57,8 +66,8 @@ function make_slides(f) {
             exp.sentence_4 = sentences[4]
 
             $(".display_catch_options").html("<p>" + exp.sentence_0 + "</p><p>" +
-                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"Apples\"/>Apples</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"Pears\"/>Pears</label>" + 
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"apples\"/>Apples</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"pears\"/>Pears</label>" + 
                                              "<label><input type=\"radio\" name=\"sentence_0\" value=\"Not sure\"/>Not sure</label>" +
                                              "</p><p>" + exp.sentence_1 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_1\" value=\"Yes\"/>Yes</label>" +
@@ -105,7 +114,7 @@ function make_slides(f) {
                      (exp.target_3 != "Yes") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").hide();
-                exp.go(0)
+                exp.go(-3)
             }
             else {
                 exp.catch_trials.push({
@@ -137,6 +146,7 @@ function make_slides(f) {
 
     // Set up a trial slide.
     function start() {
+        $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%")
         $(".err").hide();
         $(".slider_row").remove();
 
@@ -202,6 +212,9 @@ function make_slides(f) {
 
     slides.subj_info =  slide({
         name: "subj_info",
+        start: function() {
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%")
+        },
         submit: function(e) {
             exp.subj_data = {
                 "language": $("#language").val(),
@@ -221,6 +234,7 @@ function make_slides(f) {
     slides.thanks = slide({
         name: "thanks",
         start: function() {
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%")
             exp.data = {
                 "trials": exp.data_trials,
                 "catch_trials": exp.catch_trials,
@@ -311,10 +325,13 @@ function init() {
 
     exp.nQs = utils.get_exp_length();
 
+    // Set up the progress bar.
+    $(".display_progress").html("0.00%")
+
     // Hide everything.
     $(".slide").hide();
 
-    // Make sure Turkers have accepted HIT (or you're not in MTurk)
+    // Make sure Turkers have accepted HIT (or you're not in MTurk).
     $("#start_button").click(function() {
         if (turk.previewMode) {
             $("#mustaccept").show();
