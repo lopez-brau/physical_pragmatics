@@ -34,7 +34,7 @@ function make_slides(f) {
         name: "instructions",
         start: function() {},
         button: function() {
-            exp.go()
+            exp.go(-2)
         }
     });
 
@@ -93,12 +93,19 @@ function make_slides(f) {
             if ((exp.target_0 == undefined) || (exp.target_1 == undefined) || 
                 (exp.target_2 == undefined) || (exp.target_3 == undefined) ||
                 ((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 == 0) && (exp.target_4_4 != "Not sure"))) {
+                $(".catch_err_2").hide();
                 $(".catch_err_1").show();
             }
             else if (((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 != 2) && (exp.target_4_4 != "Not sure")) ||
                      ((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 != 0) && (exp.target_4_4 == "Not sure"))) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").show();
+            }
+            else if ((exp.target_0 != exp.preferred_fruit) || (exp.target_1 != "Yes") || (exp.target_2 != "Helpful") || 
+                     (exp.target_3 != "Yes") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
+                $(".catch_err_1").hide();
+                $(".catch_err_2").hide();
+                exp.go(0)
             }
             else {
                 exp.catch_trials.push({
@@ -230,6 +237,8 @@ function make_slides(f) {
 
 function init() {
 
+    // Set up the payment amount and Unique Turker.
+    $(".display_payment").html("$1.00")
     repeatWorker = false;
     (function() {
         // How do I get my own ut_id?

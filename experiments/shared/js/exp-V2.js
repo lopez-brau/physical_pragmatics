@@ -19,16 +19,22 @@ make_exp = function() {
   f.go = function(num_slides_to_skip) {
     /* previously: we first called end of whatever slide we _were_ on 
         this was redundent with what was done in _stream */
-
+    
     /* figure out what slide to go to next */
-    this.slideIndex++;
+    if (num_slides_to_skip < 0) {
+      this.slideIndex += num_slides_to_skip
+    }
+    else {
+      this.slideIndex++;        
+    }    
+    
     if (this.slideIndex < this.structure.length) {
       /*
        * in the original, there's an option to do different versions of the
        * same slide here. i'm taking that out for the moment for readability.
        */
       var slide_name = this.structure[this.slideIndex];
-      console.log("Beginning "+ slide_name);
+      console.log(this.slideIndex + " Beginning " + slide_name);
       _s = this.slides[slide_name];
       /*$('#progress').css('visibility', 'hidden');*/
       if(_s != undefined) {
@@ -36,7 +42,7 @@ make_exp = function() {
       } else {
         utils.showSlide(slide_name);
       }
-      if (num_slides_to_skip !=0 && num_slides_to_skip != undefined){
+      if (num_slides_to_skip > 0 && num_slides_to_skip != undefined){
         this.go(num_slides_to_skip-1);
       }
     } else {
