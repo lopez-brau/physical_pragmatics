@@ -44,26 +44,37 @@ if __name__ == "__main__":
 	# print(time.time()-start_time)
 
 	
-	enforcer_actions = np.array(list(it.product(np.arange(GRIDWORLD_MAX_ACTION), repeat=NUM_ACTIONS)))
-	rationality = 0.1
-	enforcer_reward = np.array([0, 9])
-	p_set = np.linspace(0.0, 1.0, num=11)
-	cooperation = 2.0
-	for enforcer_action in enforcer_actions:
-		start_time = time.time()
-		predictions = observer("agent_reward_and_p", rationality, enforcer_reward=enforcer_reward, p_set=p_set, \
-							   cooperation=cooperation, enforcer_action=enforcer_action, cache=True)
-		print(time.time()-start_time)
+	# enforcer_actions = np.array(list(it.product(np.arange(GRIDWORLD_MAX_ACTION), repeat=NUM_ACTIONS)))
+	# rationality = 0.1
+	# enforcer_reward = np.array([0, 9])
+	# p_set = np.linspace(0.0, 1.0, num=11)
+	# cooperation = 2.0
+	# for enforcer_action in enforcer_actions:
+	# 	start_time = time.time()
+	# 	predictions = observer("agent_reward_and_p", rationality, enforcer_reward=enforcer_reward, p_set=p_set, \
+	# 						   cooperation=cooperation, enforcer_action=enforcer_action, cache=True)
+	# 	print(time.time()-start_time)
 
-		filename = "data/model/" + str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
-		with open(filename, "w", newline="") as file:
-			writer = csv.writer(file)
-			writer.writerows(predictions)
+	# 	filename = "data/model/" + str(NATURAL_COST) + "_" + str(enforcer_action) + ".txt"
+	# 	with open(filename, "w", newline="") as file:
+	# 		writer = csv.writer(file)
+	# 		writer.writerows(predictions)
 	
 	sys.exit("Done with one iteration.")
 
 	predictions = []
 	path = "data/model/"
+
+	natural_costs = [[2, 2], [2, 2], [2, 2], [2, 2], [2, 3], [2, 3], [2, 3], [2, 3], [2, 4], [2, 4], [2, 4], [2, 4], \
+	 				 [3, 2], [3, 2], [3, 2], [3, 2], [3, 3], [3, 3], [3, 3], [3, 3], [3, 4], [3, 4], [3, 4], [3, 4],  \
+	 				 [4, 2], [4, 2], [4, 2], [4, 2], [4, 3], [4, 3], [4, 3], [4, 3], [4, 4], [4, 4], [4, 4], [4, 4]]
+	enforcer_actions = [[2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0], \
+						[2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0], \
+						[2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0], [2, 0], [1, 0], [0, 0], [3, 0]]
+	
+	for natural_cost in natural_costs:
+		for enforcer_action in enforcer_actions:
+			filename = path + "/" + str(natural_cost) + "_" + str(enforcer_action) + ".txt"
 	with open("temp.txt", "r") as file:
 		reader = csv.reader(file)
 		for row in reader:

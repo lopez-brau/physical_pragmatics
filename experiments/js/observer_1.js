@@ -42,9 +42,9 @@ function make_slides(f) {
             $(".catch_err_2").hide();
 
             var sentences = ["Which fruit does the farmer prefer hikers take?",
-                             "Do hikers always know that the farmer placed the boulders there?",
-                             "Do hikers tend to be helpful or indifferent?",
-                             "Does the farmer know which fruit regular hikers prefers?",
+                             "Do distracted hikers always know that the farmer placed the boulders there?",
+                             "Do hikers try to be helpful or are they selfish?",
+                             "Does the farmer know the fruit preferences of the hikers that hike regularly every month?",
                              "What are the two features that make it harder for hikers to get to a fruit grove?"];
             exp.sentence_0 = sentences[0];
             exp.sentence_1 = sentences[1];
@@ -62,7 +62,7 @@ function make_slides(f) {
                                              "<label><input type=\"radio\" name=\"sentence_1\" value=\"Not sure\"/>Not sure</label>" +
                                              "</p><p>" + exp.sentence_2 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_2\" value=\"Helpful\"/>Helpful</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"Indifferent\"/>Indifferent</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"Selfish\"/>Selfish</label>" +
                                              "<label><input type=\"radio\" name=\"sentence_2\" value=\"Not sure\"/>Not sure</label>" +
                                              "</p><p>" + exp.sentence_3 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_3\" value=\"Yes\"/>Yes</label>" +
@@ -97,7 +97,7 @@ function make_slides(f) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").show();
             }
-            else if ((exp.target_0 != exp.preferred_fruit) || (exp.target_1 != "Yes") || (exp.target_2 != "Helpful") || 
+            else if ((exp.target_0 != exp.preferred_fruit) || (exp.target_1 != "No") || (exp.target_2 != "Helpful") || 
                      (exp.target_3 != "Yes") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").hide();
@@ -109,6 +109,8 @@ function make_slides(f) {
                     "enforcer_gender": exp.enforcer.gender,
                     "preferred_fruit": exp.preferred_fruit,
                     "not_preferred_fruit": exp.not_preferred_fruit,
+                    "agent_coords": exp.trials[j].slice(0, 5),
+                    "apple_coords": exp.trials[j].slice(6, 11),
                     "sentence_0": exp.sentence_0,
                     "target_0": exp.target_0,
                     "sentence_1": exp.sentence_1,
@@ -136,13 +138,14 @@ function make_slides(f) {
         $(".slider_row").remove();
 
         $(".display_setup").html("Consider the following scenario. Remember to place yourself in " + exp.enforcer.name + 
-                                 " (the farmer's) shoes.");
+                                 "'s (the farmer's) shoes.");
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     
-        exp.sentence_0 = "How much does " + exp.enforcer.name + " think that this hiker likes " + exp.not_preferred_fruit + "?"
-        exp.sentence_1 = "How good does " + exp.enforcer.name + " think this hiker is at knowing " + exp.enforcer.name + 
-                         " placed the rocks?"
+        exp.sentence_0 = "How much does " + exp.enforcer.name + " think that this hiker likes " + exp.preferred_fruit + "?"
+        // exp.sentence_1 = "How good does " + exp.enforcer.name + " think this hiker is at knowing " + exp.enforcer.name + 
+        //                  " placed the rocks?"
+        exp.sentence_1 = "How attentive or distracted did " + exp.enforcer.name + " expect this hiker to be?"
 
         $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_0" + 
                                                 "\">" + exp.sentence_0 + "</td><td colspan=\"2\"><div id=\"slider_0" + 
@@ -166,7 +169,7 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "trial_num": j + 1,
-                "filename": exp.trials[j],
+                "filename": exp.trials[j].slice(12),
                 "sentence_0": exp.sentence_0,
                 "target_0": exp.sliderPost[0],
                 "sentence_1": exp.sentence_1,
