@@ -25,6 +25,19 @@ function make_slides(f) {
         button: function() { exp.go(); }
     });
 
+    // Set up the third background slide.
+    slides.background_3 = slide({
+        name: "background_3",
+        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+        button: function() { exp.go(); }
+    });
+
+    // Set up the fourth background slide.
+    slides.background_4 = slide({
+        name: "background_4",
+        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+        button: function() { exp.go(); }
+    });
 
     // Set up the instructions slide.
     slides.instructions = slide({
@@ -41,10 +54,12 @@ function make_slides(f) {
             $(".catch_err_1").hide();
             $(".catch_err_2").hide();
 
-            var sentences = ["Which fruit does the farmer prefer hikers take?",
+            var sentences = ["Which fruit does " + exp.enforcer.name + " want hikers to take?",
+                             "Does " + exp.enforcer.name + " know which fruit each hiker prefers?",
+                             "What is the maximum number of boulders " + exp.enforcer.name + " can place?",
+
                              "Do distracted hikers always know that the farmer placed the boulders there?",
                              "Do hikers try to be helpful or are they selfish?",
-                             "Does the farmer know the fruit preferences of the hikers that hike regularly every month?",
                              "What are the two features that make it harder for hikers to get to a fruit grove?"];
             exp.sentence_0 = sentences[0];
             exp.sentence_1 = sentences[1];
@@ -97,7 +112,7 @@ function make_slides(f) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").show();
             }
-            else if ((exp.target_0 != exp.preferred_fruit) || (exp.target_1 != "No") || (exp.target_2 != "Helpful") || 
+            else if ((exp.target_0 != exp.preferred_fruit) || (exp.target_1 != "Yes") || (exp.target_2 != "Helpful") || 
                      (exp.target_3 != "Yes") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").hide();
@@ -268,6 +283,7 @@ function init() {
     exp.not_preferred_fruit = exp.fruit[1];
     $(".display_preferred_fruit").html(exp.preferred_fruit);
     $(".display_not_preferred_fruit").html(exp.not_preferred_fruit);
+    $(".display_not_preferred_fruit_singular").html(exp.not_preferred_fruit.slice(0, exp.not_preferred_fruit.length-1));
 
     // Set up a container for the catch trial information.
     exp.catch_trials = [];
@@ -290,7 +306,7 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "background_1", "background_2", "instructions", "catch_trial"];
+    exp.structure = ["i0", "background_1", "background_2", "background_3", "background_4", "instructions", "catch_trial"];
     for (var k = 1; k <= exp.num_trials; k++) {
         exp.structure.push("trial" + k);
     }

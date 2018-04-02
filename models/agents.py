@@ -6,7 +6,8 @@ import numpy as np
 
 def agent_no_ToM(rationality, agent_reward, enforcer_action):
 	# Compute the utilities.
-	agent_cost = convert_cost(enforcer_action) if GRIDWORLD == True else NATURAL_COST + enforcer_action
+	agent_cost = NATURAL_COST + [COST_TABLE[action] for action in enforcer_action] if GRIDWORLD == True else \
+				 NATURAL_COST + enforcer_action
 	U = agent_reward - agent_cost
 
 	# Compute the action probabilities.
@@ -14,7 +15,7 @@ def agent_no_ToM(rationality, agent_reward, enforcer_action):
 
 	return action_probabilities
 
-def agent_ToM(rationality, agent_reward, enforcer_action, cooperation, cache=False, plot=False):
+def agent_ToM(rationality, agent_reward, enforcer_action, method, cooperation, cache=False, plot=False):
 	# Set up the likelihood space.
 	space = tuple([MAX_VALUE for action in np.arange(NUM_ACTIONS)])
 	likelihood = np.zeros(space)
@@ -27,7 +28,7 @@ def agent_ToM(rationality, agent_reward, enforcer_action, cooperation, cache=Fal
 
 	# Compute the likelihood.
 	if cache == True:
-		likelihood = retrieve_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, likelihood)
+		likelihood = process_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, likelihood)
 	else:
 		for enforcer_reward in enforcer_rewards:
 			enforcer_action_probabilities = enforcer(rationality, enforcer_reward, cache=True)
@@ -49,8 +50,9 @@ def agent_ToM(rationality, agent_reward, enforcer_action, cooperation, cache=Fal
 		plt.pcolor(posterior)
 
 	# Compute the utilities.
-	smart_agent_reward = agent_reward + cooperative_reward(enforcer_rewards, posterior, cooperation)
-	smart_agent_cost = convert_cost(enforcer_action) if GRIDWORLD == True else NATURAL_COST + enforcer_action
+	smart_agent_reward = agent_reward + cooperative_reward(enforcer_rewards, posterior, method, cooperation)
+	smart_agent_cost = NATURAL_COST + [COST_TABLE[action] for action in enforcer_action] if GRIDWORLD == True else \
+					   NATURAL_COST + enforcer_action
 	U = smart_agent_reward - smart_agent_cost
 
 	# Compute the action probabilities.
@@ -58,7 +60,7 @@ def agent_ToM(rationality, agent_reward, enforcer_action, cooperation, cache=Fal
 
 	return action_probabilities
 
-def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, reward_assumptions=[], cache=False, plot=False):
+def enforcer(rationality, enforcer_reward, p=0.0, method=None, cooperation=None, reward_assumptions=[], cache=False, plot=False):
 	# Set up the utility space.
 	space = tuple([MAX_VALUE for action in np.arange(NUM_ACTIONS)]) if GRIDWORLD != True else \
 			tuple([GRIDWORLD_MAX_ACTION for action in np.arange(NUM_ACTIONS)])
@@ -66,7 +68,7 @@ def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, reward_assum
 	
 	# Generate possible agent rewards and enforcer actions, taking into account
 	# any potential assumptions the enforcer may have about agent rewards.
-	if SAMPLING == True:
+	if SAMPLING == True and GRIDWORLD == False:
 		agent_rewards = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS))
 		enforcer_actions = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS)) if GRIDWORLD != True else \
 						   np.random.choice(GRIDWORLD_MAX_ACTION, (GRIDWORLD_MAX_SAMPLES, NUM_ACTIONS))
@@ -82,7 +84,7 @@ def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, reward_assum
 
 	# Compute the utilities.
 	if cache == True:
-		U = retrieve_agent(rationality, enforcer_reward, agent_rewards, enforcer_actions, p, cooperation, U)
+		U = process_agent(rationality, enforcer_reward, agent_rewards, enforcer_actions, p, method, cooperation, U)
 	else:
 		U_agent_no_ToM = np.zeros(space)
 		U_agent_ToM = np.zeros(space)
@@ -98,10 +100,10 @@ def enforcer(rationality, enforcer_reward, p=0.0, cooperation=None, reward_assum
 
 				# Reason about a ToM agent.
 				if p != 0.0:
-					agent_action_probabilities = agent_ToM(rationality, agent_reward, enforcer_action, cooperation, cache=True)
+					agent_action_probabilities = agent_ToM(rationality, agent_reward, enforcer_action, method, cooperation, \
+														   cache=True)
 					expected_enforcer_reward = np.dot(enforcer_reward, agent_action_probabilities)
 					temp_agent_ToM[tuple(enforcer_action)] = expected_enforcer_reward - (COST_RATIO*sum(enforcer_action))
-
 			U_agent_no_ToM = U_agent_no_ToM + temp_agent_no_ToM
 			U_agent_ToM = U_agent_ToM + temp_agent_ToM
 		U_agent_no_ToM = U_agent_no_ToM / len(agent_rewards)
@@ -125,8 +127,9 @@ def observer(infer, rationality, **kwargs):
 	# Infer the enforcer's reward.
 	if infer == "enforcer_reward":
 		# Extract variables.
-		cooperation = kwargs["cooperation"]
 		p = kwargs["p"]
+		method = kwargs["method"]
+		cooperation = kwargs["cooperation"]
 		enforcer_action = kwargs["enforcer_action"]
 		plot = kwargs["plot"]
 
@@ -142,7 +145,8 @@ def observer(infer, rationality, **kwargs):
 		
 		# Compute the likelihood.
 		for enforcer_reward in enforcer_rewards:
-			enforcer_action_probabilities = enforcer(rationality, enforcer_reward, p=p, cooperation=cooperation, cache=True)
+			enforcer_action_probabilities = enforcer(rationality, enforcer_reward, p=p, method=method, cooperation=cooperation, \
+													 cache=True)
 			likelihood[tuple(enforcer_reward)] = enforcer_action_probabilities[tuple(enforcer_action)]
 
 		# Normalize the likelihood to generate the posterior.
@@ -165,7 +169,7 @@ def observer(infer, rationality, **kwargs):
 		# Extract variables.
 		enforcer_reward = kwargs["enforcer_reward"]
 		p = kwargs["p"]
-		cooperation_set = kwargs["cooperation_set"]
+		method = kwargs["method"]
 		enforcer_action = kwargs["enforcer_action"]
 		plot = kwargs["plot"]
 
@@ -177,7 +181,8 @@ def observer(infer, rationality, **kwargs):
 
 		# Compute the likelihood.
 		for c in np.arange(cooperation_set.size):
-			enforcer_action_probabilities = enforcer(rationality, enforcer_reward, p=p, cooperation=cooperation_set[c], cache=True)
+			enforcer_action_probabilities = enforcer(rationality, enforcer_reward, p=p, method=method, \
+													 cooperation=cooperation_set[c], cache=True)
 			likelihood[c] = enforcer_action_probabilities[tuple(enforcer_action)]
 
 		# Normalize the likelihood to generate the posterior.
@@ -194,6 +199,7 @@ def observer(infer, rationality, **kwargs):
 	elif infer == "p":
 		# Extract variables.
 		enforcer_reward = kwargs["enforcer_reward"]
+		method = kwargs["method"]
 		cooperation = kwargs["cooperation"]
 		enforcer_action = kwargs["enforcer_action"]
 		plot = kwargs["plot"]
@@ -206,7 +212,8 @@ def observer(infer, rationality, **kwargs):
 
 		# Compute the likelihood.
 		for p in np.arange(p_set.size):
-			enforcer_action_probabilities = enforcer(rationality, enforcer_reward, p=p_set[p], cooperation=cooperation, cache=True)
+			enforcer_action_probabilities = enforcer(rationality, enforcer_reward, p=p_set[p], method=method, \
+													 cooperation=cooperation, cache=True)
 			likelihood[p] = enforcer_action_probabilities[tuple(enforcer_action)]
 
 		# Normalize the likelihood to generate the posterior.
@@ -224,6 +231,7 @@ def observer(infer, rationality, **kwargs):
 	elif infer == "agent_reward_and_p":
 		# Extract variables.
 		enforcer_reward = kwargs["enforcer_reward"]
+		method = kwargs["method"]
 		cooperation = kwargs["cooperation"]
 		enforcer_action = kwargs["enforcer_action"]
 		
@@ -242,8 +250,8 @@ def observer(infer, rationality, **kwargs):
 		# Compute the likelihood.
 		for ar in np.arange(len(agent_rewards)):
 			for p in np.arange(p_set.size):
-				enforcer_action_probabilities = enforcer(rationality, enforcer_reward, p=p_set[p], cooperation=cooperation, \
-														 reward_assumptions=agent_rewards[ar], cache=True)
+				enforcer_action_probabilities = enforcer(rationality, enforcer_reward, p=p_set[p], method=method, \
+														 cooperation=cooperation, reward_assumptions=agent_rewards[ar], cache=True)
 				likelihood[ar][p] = enforcer_action_probabilities[tuple(enforcer_action)]
 
 		# Normalize the likelihood to generate the posterior.

@@ -3,7 +3,7 @@ from .config import *
 import csv
 import numpy as np
 
-def retrieve_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, likelihood):
+def process_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, likelihood):
     path = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
     filename = path + "enforcer_no_ToM_" + str(rationality) + "_" + str(NATURAL_COST) + ".csv"
     with open(filename, "r") as file:
@@ -19,7 +19,7 @@ def retrieve_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, lik
 
     return likelihood
 
-def retrieve_agent(rationality, enforcer_reward, agent_rewards, enforcer_actions, p, cooperation, U):
+def process_agent(rationality, enforcer_reward, agent_rewards, enforcer_actions, p, method, cooperation, U):
     path = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
     if p != 1.0:
         filename_agent_no_ToM = path + "agent_no_ToM_" + str(rationality) + "_" + str(NATURAL_COST) + ".csv"
@@ -28,7 +28,7 @@ def retrieve_agent(rationality, enforcer_reward, agent_rewards, enforcer_actions
         lines_agent_no_ToM = [row for row in reader_agent_no_ToM]
     
     if p != 0.0:
-        filename_agent_ToM = path + "agent_ToM_" + str(rationality) + "_" + METHOD + "_" + str(cooperation) + "_" + \
+        filename_agent_ToM = path + "agent_ToM_" + str(rationality) + "_" + method + "_" + str(cooperation) + "_" + \
                              str(NATURAL_COST) + ".csv"    
         file_agent_ToM = open(filename_agent_ToM, "r")
         reader_agent_ToM = csv.reader(file_agent_ToM)
@@ -53,7 +53,6 @@ def retrieve_agent(rationality, enforcer_reward, agent_rewards, enforcer_actions
                 action_probabilities = [float(num) for num in row]
                 expected_enforcer_reward = np.dot(enforcer_reward, action_probabilities)
                 temp_agent_ToM[tuple(enforcer_action)] = expected_enforcer_reward - (COST_RATIO*sum(enforcer_action))
-
         U_agent_no_ToM = U_agent_no_ToM + temp_agent_no_ToM
         U_agent_ToM = U_agent_ToM + temp_agent_ToM
     U_agent_no_ToM = U_agent_no_ToM / len(agent_rewards)
