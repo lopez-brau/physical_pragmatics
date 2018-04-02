@@ -38,8 +38,8 @@ function embed_slides(num_trials) {
             "</tr></table>" + 
             "<table id=\"multi_slider_table_1" + i + "\"" + "class=\"slider_table\">" +
             "<tr><td></td>" +
-            "<td class=\"left\">very distracted</td>" + 
-            "<td class=\"right\">very attentive</td>" +
+            "<td class=\"left\">very bad</td>" + 
+            "<td class=\"right\">very good</td>" +
             "</tr></table>" +
             "<button onclick=\"_s.button()\">Continue</button>" +
             "<p class=\"err\">Please adjust both sliders before continuing.</p>" +

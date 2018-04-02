@@ -57,8 +57,6 @@ function make_slides(f) {
             var sentences = ["Which fruit does " + exp.enforcer.name + " want hikers to take?",
                              "Does " + exp.enforcer.name + " know which fruit each hiker prefers?",
                              "What is the maximum number of boulders " + exp.enforcer.name + " can place?",
-
-                             "Do distracted hikers always know that the farmer placed the boulders there?",
                              "Do hikers try to be helpful or are they selfish?",
                              "What are the two features that make it harder for hikers to get to a fruit grove?"];
             exp.sentence_0 = sentences[0];
@@ -72,16 +70,17 @@ function make_slides(f) {
                                              "<label><input type=\"radio\" name=\"sentence_0\" value=\"pears\"/>Pears</label>" + 
                                              "<label><input type=\"radio\" name=\"sentence_0\" value=\"Not sure\"/>Not sure</label>" +
                                              "</p><p>" + exp.sentence_1 + "</p><p>" +
-                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"Yes\"/>Yes</label>" +
                                              "<label><input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"Yes\"/>Yes</label>" +
                                              "<label><input type=\"radio\" name=\"sentence_1\" value=\"Not sure\"/>Not sure</label>" +
                                              "</p><p>" + exp.sentence_2 + "</p><p>" +
-                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"Helpful\"/>Helpful</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"Selfish\"/>Selfish</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"3\"/>3</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"1\"/>1</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"2\"/>2</label>" +
                                              "<label><input type=\"radio\" name=\"sentence_2\" value=\"Not sure\"/>Not sure</label>" +
                                              "</p><p>" + exp.sentence_3 + "</p><p>" +
-                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"Yes\"/>Yes</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"No\"/>No</label>" + 
+                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"Selfish\"/>Selfish</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"Helpful\"/>Helpful</label>" + 
                                              "<label><input type=\"radio\" name=\"sentence_3\" value=\"Not sure\"/>Not sure</label>" +
                                              "</p><p>" + exp.sentence_4 + "</p><p>" +
                                              "<label><input type=\"checkbox\" name=\"sentence_4_0\" value=\"Weather\"/>Weather  </label>" +
@@ -112,8 +111,8 @@ function make_slides(f) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").show();
             }
-            else if ((exp.target_0 != exp.preferred_fruit) || (exp.target_1 != "Yes") || (exp.target_2 != "Helpful") || 
-                     (exp.target_3 != "Yes") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
+            else if ((exp.target_0 != exp.preferred_fruit) || (exp.target_1 != "Yes") || (exp.target_2 != "3") || 
+                     (exp.target_3 != "Helpful") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").hide();
                 exp.go(-3);
@@ -157,10 +156,10 @@ function make_slides(f) {
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     
-        exp.sentence_0 = "How much does " + exp.enforcer.name + " think that this hiker likes " + exp.preferred_fruit + "?"
-        // exp.sentence_1 = "How good does " + exp.enforcer.name + " think this hiker is at knowing " + exp.enforcer.name + 
-        //                  " placed the rocks?"
-        exp.sentence_1 = "How attentive or distracted did " + exp.enforcer.name + " expect this hiker to be?"
+        exp.sentence_0 = "How much did " + exp.enforcer.name + " think that this hiker likes " + exp.preferred_fruit + "?"
+        exp.sentence_1 = "How good did " + exp.enforcer.name + " expect this hiker to be at detecting that " + 
+                         exp.enforcer_pronoun + " placed the rocks?"
+        // exp.sentence_1 = "How attentive or distracted did " + exp.enforcer.name + " expect this hiker to be?"
 
         $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_0" + 
                                                 "\">" + exp.sentence_0 + "</td><td colspan=\"2\"><div id=\"slider_0" + 
@@ -251,8 +250,7 @@ function init() {
     $(".display_payment").html("$1.00");
     repeatWorker = false;
     (function() {
-        // How do I get my own ut_id?
-        var ut_id = "mht-adjectives-20170115-cce";
+        var ut_id = "malb_social_pragmatics_02-04-2018_observer_1";
         if (UTWorkerLimitReached(ut_id)) {
             $('.slide').empty();
             repeatWorker = true;
