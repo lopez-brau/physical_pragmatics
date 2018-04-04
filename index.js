@@ -181,7 +181,7 @@ function make_slides(f) {
                      (exp.target_3 != "1") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").hide();
-                exp.go(-12);
+                exp.go(-18);
             }
             else {
                 exp.catch_trials.push({
