@@ -122,7 +122,7 @@ if __name__ == "__main__":
 	# agent and fruit positions, creating a tex file, converting it to a pdf 
 	# file, then converting that to a png file, and then finally renaming it.
 	for index in coords:
-		if index == 0 or index == 2 or index == 3:
+		if index == 1:
 			continue
 		agent_coords = coords[index]["agent"]
 		grass = "grass_" + str(index)
@@ -130,7 +130,7 @@ if __name__ == "__main__":
 		for pear_corner in fruit_corners:
 			pomegranate_corner = [pomegranate_corner for pomegranate_corner in fruit_corners \
 								  if pomegranate_corner != pear_corner][0]
-			path = "../imgs/observer_1/" + str(np.array(agent_coords)) + "/" + str(np.array(pear_corner)) + "/"
+			path = str(np.array(agent_coords)) + "/" + str(np.array(pear_corner)) + "/"
 			for natural_cost in natural_costs:
 				for enforcer_action in enforcer_actions:
 					filename = str(natural_cost) + "_" + str(enforcer_action)
@@ -147,19 +147,19 @@ if __name__ == "__main__":
 							(grass))
 						file.write("\\begin{scope}[shift={(1.9, 0.43)}]\n" + \
 								   "\\draw[step=2.0cm,color=black, fill=white] (0,0) grid (10,10) rectangle (0,0);\n")
-						file.write("\\node at (%d,%d) {\\includegraphics[scale=1.0]{agent}};\n" % \
+						file.write("\\node at (%d,%d) {\\includegraphics[scale=0.3]{hiker}};\n" % \
 							(agent_coords[0], agent_coords[1]))
-						file.write("\\node at (%d,%d) {\\includegraphics[scale=0.06]{pear}};\n" % \
+						file.write("\\node at (%d,%d) {\\includegraphics[scale=0.07]{pear}};\n" % \
 							(pear_coords[0], pear_coords[1]))
-						file.write("\\node at (%d,%d) {\\includegraphics[scale=0.7]{pomegranate}};\n" % \
+						file.write("\\node at (%d,%d) {\\includegraphics[scale=0.07]{pomegranate}};\n" % \
 							(pomegranate_coords[0], pomegranate_coords[1]))
 						if sum(enforcer_action) != 0:
 							for action in range(max(enforcer_action)):
 								if len(np.shape(boulder_coords)) == 1:
-									file.write("\\node at (%d,%d) {\\includegraphics[scale=1.2]{boulder}};\n" % \
+									file.write("\\node at (%d,%d) {\\includegraphics[scale=0.85]{boulder}};\n" % \
 										(boulder_coords[0], boulder_coords[1]))
 								else:
-									file.write("\\node at (%d,%d) {\\includegraphics[scale=1.2]{boulder}};\n" % \
+									file.write("\\node at (%d,%d) {\\includegraphics[scale=0.85]{boulder}};\n" % \
 										(boulder_coords[action][0], boulder_coords[action][1]))
 						file.write("\\end{scope}\n" + \
 								   "\\end{tikzpicture}\n" + \
@@ -167,5 +167,5 @@ if __name__ == "__main__":
 					os.system("pdflatex " + "\"" + path + filename + ".tex\"")
 					os.system("pdftoppm -r 300 -png " + "\"" + filename + ".pdf\" " + "\"" + path + filename + "\"")
 					os.chdir(path)
-					os.system("rename " + "\"" + filename + "-1.png\" \"" + filename + ".png\"")
-					os.chdir("../utils")
+					os.system("rename " + "\"" + filename + "-1.png\"" + " \"" + filename + ".png\"")
+					os.chdir("../../")

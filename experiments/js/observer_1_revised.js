@@ -88,9 +88,19 @@ function make_slides(f) {
         button: function() { exp.go(); }
     });
 
-    // Set up the instructions slide.
-    slides.instructions = slide({
-        name: "instructions",
+    // Set up the instructions slides.
+    slides.instructions_1 = slide({
+        name: "instructions_1",
+        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+        button: function() { exp.go(); }
+    });
+    slides.instructions_2 = slide({
+        name: "instructions_2",
+        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+        button: function() { exp.go(); }
+    });
+    slides.instructions_3 = slide({
+        name: "instructions_3",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
@@ -103,35 +113,37 @@ function make_slides(f) {
             $(".catch_err_1").hide();
             $(".catch_err_2").hide();
 
-            var sentences = ["Which fruit does " + exp.enforcer.name + " want hikers to take?",
-                             "Does " + exp.enforcer.name + " know which fruit each hiker prefers?",
-                             "What is the maximum number of boulders " + exp.enforcer.name + " can place?",
-                             "Do hikers try to be helpful or are they selfish?",
-                             "What are the two features that make it harder for hikers to get to a fruit grove?"];
+            var sentences = ["Each square on the farm is...",
+                             "Which fruit does the farmer want hikers to take?",
+                             "When deciding to arrange the boulders, or to not arrange any, what do the farmers take into account?",
+                             "The hikers...",
+                             "What are the two features that make it harder for hikers to get to a grove?"];
             exp.sentence_0 = sentences[0];
             exp.sentence_1 = sentences[1];
             exp.sentence_2 = sentences[2];
             exp.sentence_3 = sentences[3];
             exp.sentence_4 = sentences[4];
 
-            $(".display_catch_options").html("<p>" + exp.sentence_0 + "</p><p>" +
-                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"pears\"/>Pears</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"pomegranates\"/>Pomegranates</label>" + 
-                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"Not sure\"/>Not sure</label>" +
-                                             "</p><p>" + exp.sentence_1 + "</p><p>" +
-                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"Yes\"/>Yes</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"Not sure\"/>Not sure</label>" +
-                                             "</p><p>" + exp.sentence_2 + "</p><p>" +
-                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"3\"/>3</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"1\"/>1</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"2\"/>2</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"Not sure\"/>Not sure</label>" +
-                                             "</p><p>" + exp.sentence_3 + "</p><p>" +
-                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"Selfish\"/>Selfish</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"Helpful\"/>Helpful</label>" + 
-                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"Not sure\"/>Not sure</label>" +
-                                             "</p><p>" + exp.sentence_4 + "</p><p>" +
+            $(".display_catch_options").html("<p style=\"text-align:left;\">1. " + exp.sentence_0 + "</p><p>" +
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"0\"/>10 miles long</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"1\"/>1000 feet long</label>" + 
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"2\"/>1 mile long</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"3\"/>Not sure</label>" +
+                                             "</p><p style=\"text-align:left;\">2. " + exp.sentence_1 + "</p><p>" +
+                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"pomegranates\"/>Pomegranates</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"pears\"/>Pears</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"2\"/>No preference</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_1\" value=\"3\"/>Not sure</label>" +
+                                             "</p><p style=\"text-align:left;\">3. " + exp.sentence_2 + "</p><p>" +
+                                             "<div style=\"text-align:left;text-indent:20px;margin:0;\"><span><label><input type=\"radio\" name=\"sentence_2\" value=\"0\"/>What they think the hikers like</label></span>" +
+                                             "<span style=\"margin-left:235px;\"><label><input type=\"radio\" name=\"sentence_2\" value=\"2\"/>Both</label></span></div>" +
+                                             "<div style=\"text-align:left;text-indent:20px;margin:0;\"><span><label><input type=\"radio\" name=\"sentence_2\" value=\"1\"/>If they think hikers will realize that they placed the boulders</label></span>" +
+                                             "<span><label><input type=\"radio\" name=\"sentence_2\" value=\"3\"/>Not sure</label></span></div>" +
+                                             "</p><p style=\"text-align:left;\">4. " + exp.sentence_3 + "</p><p>" +
+                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"0\"/>Never consider what the farmer wants</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"1\"/>Respect the farmers preferences</label>" + 
+                                             "<label><input type=\"radio\" name=\"sentence_3\" value=\"2\"/>Not sure</label>" +
+                                             "</p><p style=\"text-align:left;\">5. " + exp.sentence_4 + "</p><p>" +
                                              "<label><input type=\"checkbox\" name=\"sentence_4_0\" value=\"Weather\"/>Weather  </label>" +
                                              "<label><input type=\"checkbox\" name=\"sentence_4_1\" value=\"Distance\"/>Distance from the grove  </label>" +
                                              "<label><input type=\"checkbox\" name=\"sentence_4_2\" value=\"Time of day\"/>Time of day  </label>" +
@@ -149,27 +161,30 @@ function make_slides(f) {
             exp.target_4_3 = ($("input[name='sentence_4_3']:checked").val() == "Boulders") ? 1 : 0;
             exp.target_4_4 = $("input[name='sentence_4_4']:checked").val();
 
+            // Triggers if the participant fails to answer all of the questions.
             if ((exp.target_0 == undefined) || (exp.target_1 == undefined) || 
                 (exp.target_2 == undefined) || (exp.target_3 == undefined) ||
                 ((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 == 0) && (exp.target_4_4 != "Not sure"))) {
                 $(".catch_err_2").hide();
                 $(".catch_err_1").show();
             }
+
+            // Triggers if the participant fails to answer the last question with the correct format.
             else if (((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 != 2) && (exp.target_4_4 != "Not sure")) ||
                      ((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 != 0) && (exp.target_4_4 == "Not sure"))) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").show();
             }
-            else if ((exp.target_0 != exp.preferred_fruit) || (exp.target_1 != "Yes") || (exp.target_2 != "3") || 
-                     (exp.target_3 != "Helpful") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
+
+            // Triggers if the participant fails to answer all of the questions correctly.
+            else if ((exp.target_0 != "2") || (exp.target_1 != exp.preferred_fruit) || (exp.target_2 != "2") || 
+                     (exp.target_3 != "1") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").hide();
-                exp.go(-3);
+                exp.go(-12);
             }
             else {
                 exp.catch_trials.push({
-                    "enforcer_name": exp.enforcer.name,
-                    "enforcer_gender": exp.enforcer.gender,
                     "preferred_fruit": exp.preferred_fruit,
                     "not_preferred_fruit": exp.not_preferred_fruit,
                     "agent_coords": exp.trials[j].slice(0, 5),
@@ -200,15 +215,12 @@ function make_slides(f) {
         $(".err").hide();
         $(".slider_row").remove();
 
-        $(".display_setup").html("Consider the following scenario. Remember to place yourself in " + exp.enforcer.name + 
-                                 "'s (the farmer's) shoes.");
+        $(".display_setup").html("Consider the following scenario.");
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     
-        exp.sentence_0 = "How much did " + exp.enforcer.name + " think that this hiker likes " + exp.preferred_fruit + "?"
-        exp.sentence_1 = "How good did " + exp.enforcer.name + " expect this hiker to be at detecting that " + 
-                         exp.enforcer_pronoun + " placed the rocks?"
-        // exp.sentence_1 = "How attentive or distracted did " + exp.enforcer.name + " expect this hiker to be?"
+        exp.sentence_0 = "How much does this farmer think that this hiker likes " + exp.preferred_fruit + "?"
+        exp.sentence_1 = "How good did this farmer expect this hiker to be at realizing that the farmer placed the boulders?"
 
         $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_0" + 
                                                 "\">" + exp.sentence_0 + "</td><td colspan=\"2\"><div id=\"slider_0" + 
@@ -308,24 +320,7 @@ function init() {
         }
     })();
 
-    // Sample a name for the enforcer and the agent along with appropriate
-    // pronouns.
-    exp.characters = get_characters(characters);
-    exp.enforcer = exp.characters[0];
-    exp.agent = exp.characters[1];
-    $(".display_enforcer").html(exp.enforcer.name);
-    $(".display_agent").html(exp.agent.name);
-    $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer, false));
-    $(".display_enforcer_pronoun_capitalized").html(get_pronoun(exp.enforcer, true));
-    $(".display_enforcer_possessive_pronoun").html(get_possessive_pronoun(exp.enforcer, false));
-    $(".display_enforcer_possessive_pronoun_capitalized").html(get_possessive_pronoun(exp.enforcer, true));
-    $(".display_agent_pronoun").html(get_pronoun(exp.agent, false));
-    $(".display_agent_pronoun_capitalized").html(get_pronoun(exp.agent, true));
-    $(".display_agent_possessive_pronoun").html(get_possessive_pronoun(exp.agent, false));
-    $(".display_agent_possessive_pronoun_capitalized").html(get_possessive_pronoun(exp.agent, true));
-    exp.enforcer_pronoun = get_pronoun(exp.enforcer, false);
-
-    // Set up the fruit that the enforcer prefers the agent takes.
+    // Set up the fruit that the enforcer prefers the agents to take.
     exp.fruit = _.shuffle(["pears", "pomegranates"]);
     exp.preferred_fruit = exp.fruit[0];
     exp.not_preferred_fruit = exp.fruit[1];
@@ -356,7 +351,8 @@ function init() {
     // Stich together the blocks of the experiment.
     exp.structure = ["i0", "background_1", "background_2", "background_3", "background_4", "background_5", "background_6",
                      "background_7", "background_8", "background_9", "background_10", "background_11", "background_12",
-                     "background_13", "background_14", "background_15", "instructions_1", "instructions_2", "catch_trial"];
+                     "background_13", "background_14", "background_15", "instructions_1", "instructions_2", "instructions_3",
+                     "catch_trial"];
     for (var k = 1; k <= exp.num_trials; k++) {
         exp.structure.push("trial" + k);
     }
