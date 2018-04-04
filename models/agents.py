@@ -19,7 +19,7 @@ def agent_ToM(rationality, agent_reward, enforcer_action, method, cooperation, c
 	# Set up the likelihood space.
 	space = tuple([MAX_VALUE for action in np.arange(NUM_ACTIONS)])
 	likelihood = np.zeros(space)
-	
+
 	# Generate possible enforcer rewards.
 	if SAMPLING == True:
 		enforcer_rewards = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS))

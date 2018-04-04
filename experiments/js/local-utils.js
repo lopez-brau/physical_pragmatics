@@ -1,13 +1,13 @@
 // Generates the order of trial slides.
-function trials(apple_position) {
-    // Sample agent and apple coordinates.
+function trials(pear_position) {
+    // Sample agent and pear coordinates.
     var agent_coords = _.sample(["[1 1]", "[9 1]", "[9 9]", "[1 9]"])
-    var apple_coords = {
+    var pear_coords = {
         "[1 1]": ["[9 1]", "[1 9]"],
         "[9 1]": ["[9 9]", "[1 1]"],
         "[9 9]": ["[1 9]", "[9 1]"],
         "[1 9]": ["[1 1]", "[9 9]"]
-    }[agent_coords][parseInt(apple_position)]
+    }[agent_coords][parseInt(pear_position)]
 
     // Construct a randomized list of stimuli.
     var trials = []
@@ -15,7 +15,7 @@ function trials(apple_position) {
     var enforcer_actions = [[0, 0], [1, 0], [2, 0], [3, 0]]
     for (var i = 0; i < natural_costs.length; i++) {
         for (var j = 0; j < enforcer_actions.length; j++) {
-            filepath = agent_coords + "/" + apple_coords + "/[" + natural_costs[i].join(" ") + "]_[" + 
+            filepath = agent_coords + "/" + pear_coords + "/[" + natural_costs[i].join(" ") + "]_[" + 
                         enforcer_actions[j].join(" ") + "].png"
             trials.push(filepath)
         }
