@@ -117,12 +117,14 @@ function make_slides(f) {
                              "Which fruit does the farmer want hikers to take?",
                              "When deciding to arrange the boulders, or to not arrange any, what do the farmers take into account?",
                              "The hikers...",
-                             "What are the two features that make it harder for hikers to get to a grove?"];
+                             "What are the two features that make it harder for hikers to get to a grove?",
+                             "The number of boulders _____ whether or not the hiker realizes if the farmer arranged the boulders."];
             exp.sentence_0 = sentences[0];
             exp.sentence_1 = sentences[1];
             exp.sentence_2 = sentences[2];
             exp.sentence_3 = sentences[3];
             exp.sentence_4 = sentences[4];
+            exp.sentence_5 = sentences[5];
 
             $(".display_catch_options").html("<p style=\"text-align:left;\">1. " + exp.sentence_0 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_0\" value=\"0\"/>10 miles long</label>" +
@@ -148,7 +150,11 @@ function make_slides(f) {
                                              "<label><input type=\"checkbox\" name=\"sentence_4_1\" value=\"Distance\"/>Distance from the grove  </label>" +
                                              "<label><input type=\"checkbox\" name=\"sentence_4_2\" value=\"Time of day\"/>Time of day  </label>" +
                                              "<label><input type=\"checkbox\" name=\"sentence_4_3\" value=\"Boulders\"/>Boulders  </label>" +
-                                             "<label><input type=\"checkbox\" name=\"sentence_4_4\" value=\"Not sure\"/>Not sure  </label></p>");
+                                             "<label><input type=\"checkbox\" name=\"sentence_4_4\" value=\"Not sure\"/>Not sure  </label></p>" + 
+                                             "</p><p style=\"text-align:left;\">6. " + exp.sentence_5 + "</p><p>" +
+                                             "<label><input type=\"radio\" name=\"sentence_5\" value=\"0\"/>does not determine</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_5\" value=\"1\"/>determines</label>" + 
+                                             "<label><input type=\"radio\" name=\"sentence_5\" value=\"2\"/>Not sure</label></p>");
         },
         button: function() {
             exp.target_0 = $("input[name='sentence_0']:checked").val();
@@ -160,11 +166,13 @@ function make_slides(f) {
             exp.target_4_2 = ($("input[name='sentence_4_2']:checked").val() == "Time of day") ? 1 : 0;
             exp.target_4_3 = ($("input[name='sentence_4_3']:checked").val() == "Boulders") ? 1 : 0;
             exp.target_4_4 = $("input[name='sentence_4_4']:checked").val();
+            exp.target_5 = $("input[name='sentence_5']:checked").val();
 
             // Triggers if the participant fails to answer all of the questions.
             if ((exp.target_0 == undefined) || (exp.target_1 == undefined) || 
                 (exp.target_2 == undefined) || (exp.target_3 == undefined) ||
-                ((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 == 0) && (exp.target_4_4 != "Not sure"))) {
+                ((exp.target_4_0 + exp.target_4_1 + exp.target_4_2 + exp.target_4_3 == 0) && (exp.target_4_4 != "Not sure")) ||
+                (exp.target_5 == undefined)) {
                 $(".catch_err_2").hide();
                 $(".catch_err_1").show();
             }
@@ -178,7 +186,7 @@ function make_slides(f) {
 
             // Triggers if the participant fails to answer all of the questions correctly.
             else if ((exp.target_0 != "2") || (exp.target_1 != exp.preferred_fruit) || (exp.target_2 != "2") || 
-                     (exp.target_3 != "1") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
+                     (exp.target_3 != "1") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1) || (exp.target_5 != "0")) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").hide();
                 exp.go(-18);
@@ -202,7 +210,9 @@ function make_slides(f) {
                     "target_4_1": exp.target_4_1,
                     "target_4_2": exp.target_4_2,
                     "target_4_3": exp.target_4_3,
-                    "target_4_4": exp.target_4_4
+                    "target_4_4": exp.target_4_4,
+                    "sentence_5": exp.sentence_5,
+                    "target_5": exp.target_5
                 });
                 exp.go();
             }
@@ -215,12 +225,12 @@ function make_slides(f) {
         $(".err").hide();
         $(".slider_row").remove();
 
-        $(".display_setup").html("Consider the following scenario.");
+        $(".display_setup").html("Consider this new farm.");
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     
         exp.sentence_0 = "How much does this farmer think that this hiker likes " + exp.preferred_fruit + "?"
-        exp.sentence_1 = "How good did this farmer expect this hiker to be at realizing that the farmer placed the boulders?"
+        exp.sentence_1 = "Did the farmer expect the hiker to realizing that they arranged the boulders?"
 
         $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_0" + 
                                                 "\">" + exp.sentence_0 + "</td><td colspan=\"2\"><div id=\"slider_0" + 
@@ -322,8 +332,10 @@ function init() {
 
     // Set up the fruit that the enforcer prefers the agents to take.
     exp.fruit = _.shuffle(["pears", "pomegranates"]);
-    exp.preferred_fruit = exp.fruit[0];
-    exp.not_preferred_fruit = exp.fruit[1];
+    // exp.preferred_fruit = exp.fruit[0];
+    // exp.not_preferred_fruit = exp.fruit[1];
+    exp.preferred_fruit = "pears"
+    exp.not_preferred_fruit = "pomegranates"
     $(".display_preferred_fruit").html(exp.preferred_fruit);
     $(".display_not_preferred_fruit").html(exp.not_preferred_fruit);
     $(".display_not_preferred_fruit_singular").html(exp.not_preferred_fruit.slice(0, exp.not_preferred_fruit.length-1));
