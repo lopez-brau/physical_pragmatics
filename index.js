@@ -230,7 +230,7 @@ function make_slides(f) {
                                     exp.trials[j] + "\"></img>");
     
         exp.sentence_0 = "How much does this farmer think that this hiker likes " + exp.preferred_fruit + "?"
-        exp.sentence_1 = "Did the farmer expect the hiker to realizing that they arranged the boulders?"
+        exp.sentence_1 = "Did the farmer expect the hiker to realize that they arranged the boulders?"
 
         $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_0" + 
                                                 "\">" + exp.sentence_0 + "</td><td colspan=\"2\"><div id=\"slider_0" + 
