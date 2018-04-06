@@ -11,30 +11,9 @@ function make_slides(f) {
         }
     });
 
-    // Set up the first background slide.
-    slides.background_1 = slide({
-        name: "background_1",
-        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
-        button: function() { exp.go(); }
-    });
-
-    // Set up the second background slide.
-    slides.background_2 = slide({
-        name: "background_2",
-        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
-        button: function() { exp.go(); }
-    });
-
-    // Set up the third background slide.
-    slides.background_3 = slide({
-        name: "background_3",
-        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
-        button: function() { exp.go(); }
-    });
-
-    // Set up the fourth background slide.
-    slides.background_4 = slide({
-        name: "background_4",
+    // Set up the background slide.
+    slides.background = slide({
+        name: "background",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
@@ -153,7 +132,7 @@ function make_slides(f) {
 
         $(".display_setup").html("Consider the following scenario. Remember to place yourself in " + exp.enforcer.name + 
                                  "'s (the farmer's) shoes.");
-        $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
+        $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/agent_1/" + 
                                     exp.trials[j] + "\"></img>");
     
         exp.sentence_0 = "How much did " + exp.enforcer.name + " think that this hiker likes " + exp.preferred_fruit + "?"
@@ -254,7 +233,8 @@ function init() {
         if (UTWorkerLimitReached(ut_id)) {
             $('.slide').empty();
             repeatWorker = true;
-            alert("You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.");
+            alert("You have already completed the maximum number of HITs allowed by this requester. " +
+                  "Please click 'Return HIT' to avoid any impact on your approval rating.");
         }
     })();
 
@@ -262,32 +242,23 @@ function init() {
     // pronouns.
     exp.characters = get_characters(characters);
     exp.enforcer = exp.characters[0];
-    exp.agent = exp.characters[1];
     $(".display_enforcer").html(exp.enforcer.name);
-    $(".display_agent").html(exp.agent.name);
     $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer, false));
     $(".display_enforcer_pronoun_capitalized").html(get_pronoun(exp.enforcer, true));
     $(".display_enforcer_possessive_pronoun").html(get_possessive_pronoun(exp.enforcer, false));
     $(".display_enforcer_possessive_pronoun_capitalized").html(get_possessive_pronoun(exp.enforcer, true));
-    $(".display_agent_pronoun").html(get_pronoun(exp.agent, false));
-    $(".display_agent_pronoun_capitalized").html(get_pronoun(exp.agent, true));
-    $(".display_agent_possessive_pronoun").html(get_possessive_pronoun(exp.agent, false));
-    $(".display_agent_possessive_pronoun_capitalized").html(get_possessive_pronoun(exp.agent, true));
     exp.enforcer_pronoun = get_pronoun(exp.enforcer, false);
 
-    // Set up the fruit that the enforcer prefers the agent takes.
-    exp.fruit = _.shuffle(["pears", "pomegranates"]);
-    exp.preferred_fruit = exp.fruit[0];
-    exp.not_preferred_fruit = exp.fruit[1];
-    $(".display_preferred_fruit").html(exp.preferred_fruit);
-    $(".display_not_preferred_fruit").html(exp.not_preferred_fruit);
-    $(".display_not_preferred_fruit_singular").html(exp.not_preferred_fruit.slice(0, exp.not_preferred_fruit.length-1));
+    // Select whether the door is open or closed.
+    exp.door = _.sample(["closed", "open"]);
+    exp.order = _.shuffle(["lc", "nc"]);
+    exp.object = _.sample(["basketball", "chair", "plant"])
+    $(".display_object").html(exp.object)
 
     // Set up a container for the catch trial information.
     exp.catch_trials = [];
 
     // Set up trial slide information.
-    exp.pear_position = exp.preferred_fruit == "pears" ? 1 : 0;
     exp.trials = trials(exp.pear_position).slice(0, 18);
     exp.num_trials = exp.trials.length;
     exp.data_trials = [];
@@ -304,7 +275,7 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "background_1", "background_2", "background_3", "background_4", "instructions", "catch_trial"];
+    exp.structure = ["i0", "background", "instructions", "catch_trial"];
     for (var k = 1; k <= exp.num_trials; k++) {
         exp.structure.push("trial" + k);
     }
