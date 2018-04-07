@@ -226,10 +226,10 @@ function make_slides(f) {
 function init() {
 
     // Set up the payment amount and Unique Turker.
-    $(".display_payment").html("$1.00");
+    $(".display_payment").html("$0.10");
     repeatWorker = false;
     (function() {
-        var ut_id = "malb_social_pragmatics_02-04-2018_observer_1";
+        var ut_id = "malb_social_pragmatics_02-04-2018_agent_1";
         if (UTWorkerLimitReached(ut_id)) {
             $('.slide').empty();
             repeatWorker = true;
@@ -243,10 +243,12 @@ function init() {
     exp.characters = get_characters(characters);
     exp.enforcer = exp.characters[0];
     $(".display_enforcer").html(exp.enforcer.name);
-    $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer, false));
-    $(".display_enforcer_pronoun_capitalized").html(get_pronoun(exp.enforcer, true));
-    $(".display_enforcer_possessive_pronoun").html(get_possessive_pronoun(exp.enforcer, false));
-    $(".display_enforcer_possessive_pronoun_capitalized").html(get_possessive_pronoun(exp.enforcer, true));
+    $(".display_enforcer_pronoun_1").html(get_pronoun_1(exp.enforcer, false));
+    $(".display_enforcer_pronoun_1_capitalized").html(get_pronoun_1(exp.enforcer, true));
+    $(".display_enforcer_pronoun_2").html(get_pronoun_2(exp.enforcer, false));
+    $(".display_enforcer_pronoun_2_capitalized").html(get_pronoun_2(exp.enforcer, true));
+    $(".display_enforcer_possessive_pronoun_3").html(get_pronoun_3(exp.enforcer, false));
+    $(".display_enforcer_possessive_pronoun_3_capitalized").html(get_pronoun_3(exp.enforcer, true));
     exp.enforcer_pronoun = get_pronoun(exp.enforcer, false);
 
     // Select whether the door is open or closed.
@@ -259,7 +261,7 @@ function init() {
     exp.catch_trials = [];
 
     // Set up trial slide information.
-    exp.trials = trials(exp.pear_position).slice(0, 18);
+    exp.trials = trials(exp.door, exp.order, exp.object);
     exp.num_trials = exp.trials.length;
     exp.data_trials = [];
     $(".display_trials").html(exp.num_trials);
