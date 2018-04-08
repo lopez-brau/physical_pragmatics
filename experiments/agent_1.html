@@ -27,7 +27,7 @@
     <script src="js/names.js"></script>
 
     <!-- Experiment specific helper functions. -->
-    <script src="js/local-utils.js"></script>
+    <script src="js/agent_1_utils.js"></script>
 
     <script src="shared/js/uniqueturker.js"></script>
 
@@ -44,8 +44,7 @@
         </div>
         <br>
         <div id="instruct-text">
-            <span>In this experiment, you will be presented with a story and asked to help him  
-            between two agents and asked about what they think. The HIT should take about 2 minutes. Please pay attention, thanks!</span>
+            <span>In this experiment, you will be presented with a story about an agent and asked to figure out what they wanted. The HIT should take about 3 minutes. Please pay attention, thanks!</span>
         </div>
         <br>
         <div id="legal">
@@ -66,35 +65,20 @@
             <p align="left">Agreement to participate: By clicking the button below, you acknowledge that you have read the above information, and agree to participate in the study. You must be at least 18 years of age to participate; agreeing to participate confirms you are 18 years of age or older.  Click the "Start Experiment" button to confirm your agreement and continue.</p>
         </div>
         <button id="start_button" type="button">Start Experiment</button>
-
     </div>
 
     <!-- Background slide. -->
     <div class="slide" id="background">
-        <h3>Background</h3>
-        <p align="left" style="text-indent:40px"><span class="display_enforcer"></span> needs your help. <span class="display_enforcer_pronoun_capitalized"></span><span class="display_enforcer_pronoun_"></span><span class="display_object"></span>.</p>
-        <button onclick="_s.button()">Continue</button>
-    </div>
-
-    <!-- Instructions slide. -->
-    <div class="slide" id="instructions">
-        <h3>Instructions</h3>
-        <p align="left" style="text-indent:40px">On each trial, you will see a hiker at the farm's entrance, the hiker's distance to each grove, and how <span class="display_enforcer"></span> (the farmer) arranged the boulders. Below, to the left, are what hikers, fruit groves, and boulders look like. Below, to the right, is an example of what the farm might look like.</p>
-        <div>
-            <img style="vertical-align:middle;margin-right:50px;height:50px;width:auto" src="../imgs/observer_1/hiker.png"></img>
-            <img style="vertical-align:middle;margin-left:50px;height:150px;width:auto" src="../imgs/observer_1/farm.png"></img>
-        </div>
-        <p align="left" style="text-indent:40px">Your task is to figure out what <span class="display_enforcer"></span> was thinking when <span class="display_enforcer_pronoun"></span> arranged the boulders. Specifically, you will decide (1) how much <span class="display_enforcer"></span> thought the hiker preferred <span class="display_preferred_fruit"></span> and (2) how good <span class="display_enforcer"></span> expected the hiker to be at detecting that <span class="display_enforcer_pronoun"></span> placed the boulders.</p>
-        <p align="left" style="text-indent:40px">All hikers can move horizontally or vertically on the grid, but not diagonally. Hikers also cannot walk across squares that have boulders.</p>
+        <p><span class="display_enforcer"></span> left <span class="display_enforcer_pronoun_4"></span> coffee in one of two rooms down two identical hallways. <span class="display_enforcer_pronoun_1_capitalized"></span> asked you to get it for <span class="display_enforcer_pronoun_2"></span>, but <span class="display_enforcer_pronoun_1"></span> didn't tell you which hallway to take.</p>
+        <p>The doors to the hallways are identical in every way, except for an object near one of the doors that you've seen before in <span class="display_enforcer_pronoun_4"></span> office: a <span class="display_object"></span>. What could <span class="display_enforcer_pronoun_1"></span> have meant?</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
     <!-- Catch trial slide. -->
     <div class="slide" id="catch_trial">
-        <p>There are <span class="display_trials"></span> trials in total. Before you begin, please answer the following questions. You <b>must</b> answer them correctly to continue. If you fail to answer them correctly, you will be sent back to reread the story.</p>
+        <p>There is one trial in total. Before you begin, please answer the following question. You <b>must</b> answer it correctly to continue. If you fail to answer it correctly, you will be sent back to reread the story.</p>
         <p class="display_catch_options"></p>
-        <p class="catch_err_1">Please answer all of the questions before continuing.</p>
-        <p class="catch_err_2">Please select two features or "Not sure" but not both.</p>
+        <p class="catch_error_0">Please answer the question before continuing.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
