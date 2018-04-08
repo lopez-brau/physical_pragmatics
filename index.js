@@ -38,7 +38,8 @@ function make_slides(f) {
                                         "</div>" + 
                                         "</div>" + 
                                         "<div>" + 
-                                        "<p style=\"text-align:left;text-indent:160px;\">Could you walk through the door with the " + exp.object + " if you wanted to?</p>" +
+                                        "<p style=\"text-align:left;text-indent:140px;\">Could you walk through the door with the " + 
+                                        exp.object + " if you wanted to?</p>" +
                                         "<label><input type=\"radio\" name=\"target_1\" value=\"0\">Yes</label>" +
                                         "<label><input type=\"radio\" name=\"target_1\" value=\"1\">No</label>" +
                                         "<label><input type=\"radio\" name=\"target_1\" value=\"2\">Not Sure</label></p>" +
@@ -247,7 +248,7 @@ function init() {
     // exp.door = _.sample(["closed", "open"]);
     exp.door = "open";
     // exp.cost = _.sample(["low", "none"]);
-    exp.cost = "none";
+    exp.cost = "low";
     // exp.object = _.sample(["chair", "plant"])
     exp.object = "basketball";
     $(".display_object").html(exp.object);
