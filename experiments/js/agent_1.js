@@ -64,9 +64,10 @@ function make_slides(f) {
                     "enforcer_name": exp.enforcer.name,
                     "enforcer_gender": exp.enforcer.gender,
                     "sentence_0": exp.sentence_0,
-                    "target_0": exp.target_0,
-                    "sentence_1": exp.sentence_1,
-                    "target_1": exp.target_1,
+                    "target_0_0": exp.target_0_0,
+                    "target_0_1": exp.target_0_1,
+                    "target_0_2": exp.target_0_2,
+                    "target_0_3": exp.target_0_3
                 });
                 exp.go();
             }
