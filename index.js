@@ -38,7 +38,7 @@ function make_slides(f) {
                                         "</div>" + 
                                         "</div>" + 
                                         "<div>" + 
-                                        "<p style=\"text-align:left;text-indent:160px;\">Can you feasibly walk through the door with the " + exp.object + "?</p>" +
+                                        "<p style=\"text-align:left;text-indent:160px;\">Could you walk through the door with the " + exp.object + " if you wanted to?</p>" +
                                         "<label><input type=\"radio\" name=\"target_1\" value=\"0\">Yes</label>" +
                                         "<label><input type=\"radio\" name=\"target_1\" value=\"1\">No</label>" +
                                         "<label><input type=\"radio\" name=\"target_1\" value=\"2\">Not Sure</label></p>" +
