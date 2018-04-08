@@ -25,7 +25,7 @@ function make_slides(f) {
             $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
             $(".catch_error_0").hide();
 
-            var sentences = ["What is the only difference between the two doors?"];
+            var sentences = ["What is the only difference between the two exits?"];
             exp.sentence_0 = sentences[0];
 
             $(".display_catch_options").html("<p>" + exp.sentence_0 + "</p>" +
@@ -72,15 +72,33 @@ function make_slides(f) {
         $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
         $(".error").hide();
 
-        $(".display_setup").html("Which door did the other person want you to walk through?");
+        $(".display_setup").html("What do you think someone was trying to tell you about the door with the " + exp.object + "?");
+        // $(".display_stimulus").html("<br><br>" + 
+        //                             "<div align=\"center\">" +
+        //                             "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;\">" +
+        //                             "<label>" +
+        //                             "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"../imgs/agent_1/" + 
+        //                             exp.trials[j][0] + "\"></img>" + 
+        //                             "<br><br>" +
+        //                             "<p style=\"margin-right:20px;\"><input type=\"radio\" name=\"target_0\" value=\"left\"/></p>" +
+        //                             "</label>" + 
+        //                             "</div>" + 
+        //                             "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;\">" +
+        //                             "<label>" + 
+        //                             "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"../imgs/agent_1/" + 
+        //                             exp.trials[j][1] + "\"></img>" +
+        //                             "<br><br>" + 
+        //                             "<p style=\"margin-right:20px;\"><input type=\"radio\" name=\"target_0\" value=\"right\"/></p>" + 
+        //                             "</label>" +
+        //                             "</div>" + 
+        //                             "</div>");
         $(".display_stimulus").html("<br><br>" + 
                                     "<div align=\"center\">" +
                                     "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;\">" +
-                                    "<label>" +
                                     "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"imgs/agent_1/" + 
                                     exp.trials[j][0] + "\"></img>" + 
                                     "<br><br>" +
-                                    "<p style=\"margin-right:20px;\"><input type=\"radio\" name=\"target_0\" value=\"left\"/></p>" +
+                                    "<p style=\"margin-right:20px;\"></p>" +
                                     "</label>" + 
                                     "</div>" + 
                                     "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;\">" +
@@ -88,9 +106,16 @@ function make_slides(f) {
                                     "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"imgs/agent_1/" + 
                                     exp.trials[j][1] + "\"></img>" +
                                     "<br><br>" + 
-                                    "<p style=\"margin-right:20px;\"><input type=\"radio\" name=\"target_0\" value=\"right\"/></p>" + 
                                     "</label>" +
                                     "</div>" + 
+                                    "</div>" + 
+                                    "<div>" + 
+                                    "<p><label><input type=\"radio\" name=\"target_0\" value=\"0\">" +
+                                    "You <b>should</b> walk through the door with the " + exp.object + 
+                                    "</label></p>" +
+                                    "<p><label><input type=\"radio\" name=\"target_0\" value=\"1\">" +
+                                    "You <b>should not</b> walk through the door with the " + exp.object +
+                                    "</label></p>" +
                                     "</div>");
     }
 
@@ -191,7 +216,7 @@ function init() {
     exp.door = "open";
     // exp.cost = _.sample(["low", "none"]);
     exp.cost = "low";
-    // exp.object = _.sample(["chair", "plant"]);
+    // exp.object = _.sample(["chair", "plant"])
     exp.object = "plant";
     $(".display_object").html(exp.object);
 
