@@ -11,6 +11,56 @@ function make_slides(f) {
         }
     });
 
+    // More questions.
+    slides["trial2"] = slide({
+        name: "trial2",
+        start: function() {
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
+            $(".error").hide();
+
+            $(".display_setup").html("What do you think someone was trying to tell you about the door with the " + exp.object + "?");
+
+            $(".display_stimulus").html(//"<br><br>" 
+                                        "<div align=\"center\">" +
+                                        // "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;\">" +
+                                        // "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"imgs/agent_1/" + 
+                                        "<div style=\"display:inline-block;vertical-align:top;margin-left:40px\">" +
+                                        "<img style=\"height:300px;width:auto;\" src=\"imgs/agent_1/" +
+                                        exp.trials[0][0] + "\"></img>" + 
+                                        // "<br><br>" +
+                                        "</div>" + 
+                                        // "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;\">" +
+                                        // "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"imgs/agent_1/" + 
+                                        "<div style=\"display:inline-block;vertical-align:top;margin-left:60px;\">" +
+                                        "<img style=\"height:300px;width:auto;\" src=\"imgs/agent_1/" +
+                                        exp.trials[0][1] + "\"></img>" +
+                                        // "<br><br>" + 
+                                        "</div>" + 
+                                        "</div>" + 
+                                        "<div>" + 
+                                        "<p style=\"text-align:left;text-indent:160px;\">Can you feasibly walk through the door with the " + exp.object + "?</p>" +
+                                        "<label><input type=\"radio\" name=\"target_1\" value=\"0\">Yes</label>" +
+                                        "<label><input type=\"radio\" name=\"target_1\" value=\"1\">No</label>" +
+                                        "<label><input type=\"radio\" name=\"target_1\" value=\"2\">Not Sure</label></p>" +
+                                        "</div>");
+        },
+        button: function() {
+            if ($("input[name='target_1']:checked").val() == undefined) { 
+                $(".error").show(); 
+            }
+            else {
+                exp.data_trials.push({
+                    // "trial_num": j + 1,
+                    // "left_door": exp.trials[0][0],
+                    // "right_door": exp.trials[0][1],
+                    "target_1": $("input[name='target_1']:checked").val()
+                });
+                j++;
+                exp.go();
+            }
+        }
+    });
+
     // Set up the instructions slide.
     slides.instructions = slide({
         name: "instructions",
@@ -73,50 +123,31 @@ function make_slides(f) {
         $(".error").hide();
 
         $(".display_setup").html("What do you think someone was trying to tell you about the door with the " + exp.object + "?");
-        // $(".display_stimulus").html("<br><br>" + 
-        //                             "<div align=\"center\">" +
-        //                             "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;\">" +
-        //                             "<label>" +
-        //                             "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"../imgs/agent_1/" + 
-        //                             exp.trials[j][0] + "\"></img>" + 
-        //                             "<br><br>" +
-        //                             "<p style=\"margin-right:20px;\"><input type=\"radio\" name=\"target_0\" value=\"left\"/></p>" +
-        //                             "</label>" + 
-        //                             "</div>" + 
-        //                             "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;\">" +
-        //                             "<label>" + 
-        //                             "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"../imgs/agent_1/" + 
-        //                             exp.trials[j][1] + "\"></img>" +
-        //                             "<br><br>" + 
-        //                             "<p style=\"margin-right:20px;\"><input type=\"radio\" name=\"target_0\" value=\"right\"/></p>" + 
-        //                             "</label>" +
-        //                             "</div>" + 
-        //                             "</div>");
-        $(".display_stimulus").html("<br><br>" + 
+
+        $(".display_stimulus").html(//"<br><br>" 
                                     "<div align=\"center\">" +
                                     // "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;\">" +
                                     // "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"imgs/agent_1/" + 
-                                    "<div style=\"display:inline-block;vertical-align:top;margin-right:20px;\">" +
+                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:40px\">" +
                                     "<img style=\"height:300px;width:auto;\" src=\"imgs/agent_1/" +
-                                    exp.trials[j][0] + "\"></img>" + 
+                                    exp.trials[0][0] + "\"></img>" + 
                                     // "<br><br>" +
-                                    "<p style=\"margin-right:20px;\"></p>" +
                                     "</div>" + 
                                     // "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;\">" +
                                     // "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"imgs/agent_1/" + 
-                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:20px;\">" +
+                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:60px;\">" +
                                     "<img style=\"height:300px;width:auto;\" src=\"imgs/agent_1/" +
-                                    exp.trials[j][1] + "\"></img>" +
+                                    exp.trials[0][1] + "\"></img>" +
                                     // "<br><br>" + 
                                     "</div>" + 
                                     "</div>" + 
                                     "<div>" + 
-                                    "<p><label><input type=\"radio\" name=\"target_0\" value=\"0\">" +
+                                    "<p style=\"text-align:left;text-indent:130px;\"><label><input type=\"radio\" name=\"target_0\" value=\"0\">" +
                                     "You <b>should</b> walk through the door with the " + exp.object + 
                                     "</label></p>" +
-                                    "<p><label><input type=\"radio\" name=\"target_0\" value=\"1\">" +
+                                    "<p style=\"text-align:left;text-indent:130px;\"><label><input type=\"radio\" name=\"target_0\" value=\"1\">" +
                                     "You <b>should not</b> walk through the door with the " + exp.object +
-                                    "</label></p>" +
+                                    "</label></p>" + 
                                     "</div>");
     }
 
@@ -128,8 +159,8 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "trial_num": j + 1,
-                "left_door": exp.trials[j][0],
-                "right_door": exp.trials[j][1],
+                "left_door": exp.trials[0][0],
+                "right_door": exp.trials[0][1],
                 "target_0": $("input[name='target_0']:checked").val()
             });
             j++;
@@ -245,12 +276,13 @@ function init() {
     for (var k = 1; k <= exp.num_trials; k++) {
         exp.structure.push("trial" + k);
     }
+    exp.structure.push("trial2");
     exp.structure.push("subj_info");
     exp.structure.push("thanks");
    
     // Make and embed the slides.
     exp.slides = make_slides(exp);
-    embed_slides(exp.num_trials);
+    embed_slides(exp.num_trials+1);
 
     // Get the length of the experiment.
     exp.nQs = utils.get_exp_length();
