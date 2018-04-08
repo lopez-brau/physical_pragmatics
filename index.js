@@ -94,19 +94,20 @@ function make_slides(f) {
         //                             "</div>");
         $(".display_stimulus").html("<br><br>" + 
                                     "<div align=\"center\">" +
-                                    "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;\">" +
-                                    "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"imgs/agent_1/" + 
+                                    // "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;\">" +
+                                    // "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"imgs/agent_1/" + 
+                                    "<div style=\"display:inline-block;vertical-align:top;margin-right:20px;\">" +
+                                    "<img style=\"height:300px;width:auto;\" src=\"imgs/agent_1/" +
                                     exp.trials[j][0] + "\"></img>" + 
-                                    "<br><br>" +
+                                    // "<br><br>" +
                                     "<p style=\"margin-right:20px;\"></p>" +
-                                    "</label>" + 
                                     "</div>" + 
-                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;\">" +
-                                    "<label>" + 
-                                    "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"imgs/agent_1/" + 
+                                    // "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;\">" +
+                                    // "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"imgs/agent_1/" + 
+                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:20px;\">" +
+                                    "<img style=\"height:300px;width:auto;\" src=\"imgs/agent_1/" +
                                     exp.trials[j][1] + "\"></img>" +
-                                    "<br><br>" + 
-                                    "</label>" +
+                                    // "<br><br>" + 
                                     "</div>" + 
                                     "</div>" + 
                                     "<div>" + 
@@ -217,7 +218,7 @@ function init() {
     // exp.cost = _.sample(["low", "none"]);
     exp.cost = "none";
     // exp.object = _.sample(["chair", "plant"])
-    exp.object = "plant";
+    exp.object = "basketball";
     $(".display_object").html(exp.object);
 
     // Set up a container for the catch trial information.

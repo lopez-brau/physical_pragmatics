@@ -1,8 +1,8 @@
 // Generate the trial slides.
 function trials(door, cost, object) {
     // Stitch together the filenames for each door.
-    empty_door = door + ".jpg"
-    object_door = door + "_" + cost + "_" + object + ".jpg"
+    empty_door = door + ".png"
+    object_door = door + "_" + cost + "_" + object + ".png"
 
     // Push the filenames to trials.
     var trials = []
