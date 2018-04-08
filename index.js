@@ -11,13 +11,6 @@ function make_slides(f) {
         }
     });
 
-    // Set up the background slide.
-    slides.background = slide({
-        name: "background",
-        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
-        button: function() { exp.go(); }
-    });
-
     // Set up the instructions slide.
     slides.instructions = slide({
         name: "instructions",
@@ -39,7 +32,7 @@ function make_slides(f) {
                                              "<p>" +
                                              "<label><input type=\"checkbox\" name=\"sentence_0_0\" value=\"0\"/>color of the door  </label>" +
                                              "<label><input type=\"checkbox\" name=\"sentence_0_1\" value=\"1\"/>amount of lighting  </label>" +
-                                             "<label><input type=\"checkbox\" name=\"sentence_0_2\" value=\"2\"/>" + exp.object + "  </label>" +
+                                             "<label><input type=\"checkbox\" name=\"sentence_0_2\" value=\"2\"/>the " + exp.object + "  </label>" +
                                              "<label><input type=\"checkbox\" name=\"sentence_0_3\" value=\"3\"/>not sure  </label>" +
                                              "</p>");
         },
@@ -79,7 +72,7 @@ function make_slides(f) {
         $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
         $(".error").hide();
 
-        $(".display_setup").html("Which door did " + exp.enforcer.name + " want you to take?");
+        $(".display_setup").html("Which door did the other person want you to walk through?");
         $(".display_stimulus").html("<br><br>" + 
                                     "<div align=\"center\">" +
                                     "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;\">" +
@@ -195,8 +188,10 @@ function init() {
 
     // Select whether the door is open or closed.
     exp.door = _.sample(["closed", "open"]);
-    exp.cost = _.sample(["low", "none"]);
-    exp.object = _.sample(["chair", "plant"])
+    // exp.cost = _.sample(["low", "none"]);
+    exp.cost = "low";
+    // exp.object = _.sample(["chair", "plant"]);
+    exp.object = "chair";
     $(".display_object").html(exp.object);
 
     // Set up a container for the catch trial information.
@@ -219,7 +214,7 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "background", "catch_trial"];
+    exp.structure = ["i0", "instructions", "catch_trial"];
     for (var k = 1; k <= exp.num_trials; k++) {
         exp.structure.push("trial" + k);
     }
