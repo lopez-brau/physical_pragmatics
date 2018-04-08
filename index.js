@@ -217,7 +217,7 @@ function init() {
     // exp.cost = _.sample(["low", "none"]);
     exp.cost = "low";
     // exp.object = _.sample(["chair", "plant"])
-    exp.object = "plant";
+    exp.object = "chair";
     $(".display_object").html(exp.object);
 
     // Set up a container for the catch trial information.
