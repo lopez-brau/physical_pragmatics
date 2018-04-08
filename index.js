@@ -215,7 +215,7 @@ function init() {
     // exp.door = _.sample(["closed", "open"]);
     exp.door = "open";
     // exp.cost = _.sample(["low", "none"]);
-    exp.cost = "low";
+    exp.cost = "none";
     // exp.object = _.sample(["chair", "plant"])
     exp.object = "chair";
     $(".display_object").html(exp.object);
