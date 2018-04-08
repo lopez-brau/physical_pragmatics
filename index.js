@@ -187,7 +187,8 @@ function init() {
     $(".display_enforcer_pronoun_4_capitalized").html(get_pronoun_4(exp.enforcer, true));
 
     // Select whether the door is open or closed.
-    exp.door = _.sample(["closed", "open"]);
+    // exp.door = _.sample(["closed", "open"]);
+    exp.door = "open";
     // exp.cost = _.sample(["low", "none"]);
     exp.cost = "low";
     // exp.object = _.sample(["chair", "plant"]);
