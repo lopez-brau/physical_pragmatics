@@ -189,7 +189,7 @@ function init() {
     // Select whether the door is open or closed.
     exp.door = _.sample(["closed", "open"]);
     // exp.cost = _.sample(["low", "none"]);
-    exp.cost = "none";
+    exp.cost = "low";
     // exp.object = _.sample(["chair", "plant"]);
     exp.object = "plant";
     $(".display_object").html(exp.object);
