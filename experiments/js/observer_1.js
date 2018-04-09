@@ -262,23 +262,23 @@ function init() {
     // pronouns.
     exp.characters = get_characters(characters);
     exp.enforcer = exp.characters[0];
-    exp.agent = exp.characters[1];
     $(".display_enforcer").html(exp.enforcer.name);
-    $(".display_agent").html(exp.agent.name);
-    $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer, false));
-    $(".display_enforcer_pronoun_capitalized").html(get_pronoun(exp.enforcer, true));
-    $(".display_enforcer_possessive_pronoun").html(get_possessive_pronoun(exp.enforcer, false));
-    $(".display_enforcer_possessive_pronoun_capitalized").html(get_possessive_pronoun(exp.enforcer, true));
-    $(".display_agent_pronoun").html(get_pronoun(exp.agent, false));
-    $(".display_agent_pronoun_capitalized").html(get_pronoun(exp.agent, true));
-    $(".display_agent_possessive_pronoun").html(get_possessive_pronoun(exp.agent, false));
-    $(".display_agent_possessive_pronoun_capitalized").html(get_possessive_pronoun(exp.agent, true));
-    exp.enforcer_pronoun = get_pronoun(exp.enforcer, false);
+    $(".display_enforcer_pronoun_1").html(get_pronoun_1(exp.enforcer, false));
+    $(".display_enforcer_pronoun_1_capitalized").html(get_pronoun_1(exp.enforcer, true));
+    $(".display_enforcer_pronoun_2").html(get_pronoun_2(exp.enforcer, false));
+    $(".display_enforcer_pronoun_2_capitalized").html(get_pronoun_2(exp.enforcer, true));
+    $(".display_enforcer_pronoun_3").html(get_pronoun_3(exp.enforcer, false));
+    $(".display_enforcer_pronoun_3_capitalized").html(get_pronoun_3(exp.enforcer, true));
+    $(".display_enforcer_pronoun_4").html(get_pronoun_4(exp.enforcer, false));
+    $(".display_enforcer_pronoun_4_capitalized").html(get_pronoun_4(exp.enforcer, true));
+    exp.enforcer_pronoun = get_pronoun_1(exp.enforcer, false);
 
     // Set up the fruit that the enforcer prefers the agent takes.
-    exp.fruit = _.shuffle(["pears", "pomegranates"]);
-    exp.preferred_fruit = exp.fruit[0];
-    exp.not_preferred_fruit = exp.fruit[1];
+    // exp.fruit = _.shuffle(["pears", "pomegranates"]);
+    // exp.preferred_fruit = exp.fruit[0];
+    // exp.not_preferred_fruit = exp.fruit[1];
+    exp.preferred_fruit = "pears";
+    exp.not_preferred_fruit = "pomegranates";
     $(".display_preferred_fruit").html(exp.preferred_fruit);
     $(".display_not_preferred_fruit").html(exp.not_preferred_fruit);
     $(".display_not_preferred_fruit_singular").html(exp.not_preferred_fruit.slice(0, exp.not_preferred_fruit.length-1));

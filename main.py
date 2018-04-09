@@ -50,25 +50,6 @@ if __name__ == "__main__":
 	# 		writer = csv.writer(file)
 	# 		writer.writerows([E_apple, E_pear, E_ToM])
 
-	# p1 = predictions[56]
-	# print(p1)
-	# predictions = predictions.reshape(MAX_VALUE, MAX_VALUE, 11)
-	# p2 = predictions[5][6]
-	# print(p2)
-	# print(p1-p2)
-
-	# fig, axs = plt.subplots(1, 2, gridspec_kw={'width_ratios': [2, 1]}, sharey=False)
-	# fig.subplots_adjust(wspace=0.35)
-	# axs[0].bar(["A", "B"], [expected_A, expected_B])
-	# axs[0].set_ylim(0, 9)
-	# axs[0].set_ylabel("E[Reward Value]")
-	# axs[1].bar(["p"], [expected_p])
-	# axs[1].set_ylim(0.0, 1.0)
-	# axs[1].set_ylabel("E[P(ToM)]")
-	# fig.suptitle("Enforcer Action = %s" % str(enforcer_action))
-	# plt.savefig("scratch/" + str(enforcer_action) + "_" + str(NATURAL_COST) + ".png", bbox_inches="tight")
-	# plt.close(fig)
-
 
 	print(time.time()-start_time)
 	sys.exit("Done.")

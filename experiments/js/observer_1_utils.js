@@ -1,4 +1,4 @@
-// Generates the order of trial slides.
+// Generates the trial slides.
 function trials(pear_position) {
     // Sample agent and pear coordinates.
     var agent_coords = _.sample(["[1 1]", "[9 1]", "[9 9]", "[1 9]"])
@@ -39,9 +39,9 @@ function embed_slides(num_trials) {
             "</tr></table>" + 
             "<table id=\"multi_slider_table_1" + i + "\"" + "class=\"slider_table\">" +
             "<tr><td></td>" +
-            "<td class=\"left\">definitely not</td>" + 
-            "<td class=\"left\">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;not sure</td>" +
-            "<td class=\"right\">definitely yes</td>" +
+            "<td class=\"left\">very bad</td>" + 
+            "<td class=\"left\">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;not sure</td>" +
+            "<td class=\"right\">very good</td>" +
             "</tr></table>" +
             "<button onclick=\"_s.button()\">Continue</button>" +
             "<p class=\"err\">Please adjust both sliders before continuing.</p>" +
@@ -58,8 +58,8 @@ function get_characters(characters) {
     return [enforcer, agent]
 }
 
-// Use the appropriate pronoun for a given character.
-function get_pronoun(character, capitalized) {
+// Use the appropriate gender-specific pronoun for a given character.
+function get_pronoun_1(character, capitalized) {
     if (character.gender == "male") {
         return capitalized ? "He" : "he"
     }
@@ -68,8 +68,28 @@ function get_pronoun(character, capitalized) {
     }
 }
 
-// Use the appropriate possessive pronoun for a given character.
-function get_possessive_pronoun(character, capitalized) {
+// Use the appropriate gender-specific pronoun for a given character.
+function get_pronoun_2(character, capitalized) {
+    if (character.gender == "male") {
+        return capitalized ? "Him" : "him"
+    }
+    else {
+        return capitalized ? "Her" : "her"
+    }
+}
+
+// Use the appropriate gender-specific pronoun for a given character.
+function get_pronoun_3(character, capitalized) {
+    if (character.gender == "male") {
+        return capitalized ? "His" : "his"
+    }
+    else {
+        return capitalized ? "Hers" : "hers"
+    }
+}
+
+// Use the appropriate gender-specific pronoun for a given character.
+function get_pronoun_4(character, capitalized) {
     if (character.gender == "male") {
         return capitalized ? "His" : "his"
     }
