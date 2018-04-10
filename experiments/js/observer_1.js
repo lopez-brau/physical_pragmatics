@@ -67,7 +67,7 @@ function make_slides(f) {
 
             $(".display_catch_options").html("<p>" + exp.sentence_0 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_0\" value=\"pears\"/>Pears</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"pomegranates\"/>pomegranates</label>" + 
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"pomegranates\"/>Pomegranates</label>" + 
                                              "<label><input type=\"radio\" name=\"sentence_0\" value=\"Not sure\"/>Not sure</label>" +
                                              "</p><p>" + exp.sentence_1 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label>" +

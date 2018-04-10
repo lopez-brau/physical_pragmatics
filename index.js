@@ -66,8 +66,8 @@ function make_slides(f) {
             exp.sentence_4 = sentences[4];
 
             $(".display_catch_options").html("<p>" + exp.sentence_0 + "</p><p>" +
-                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"pears\"/>pears</label>" +
-                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"pomegranates\"/>pomegranates</label>" + 
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"pears\"/>Pears</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_0\" value=\"pomegranates\"/>Pomegranates</label>" + 
                                              "<label><input type=\"radio\" name=\"sentence_0\" value=\"Not sure\"/>Not sure</label>" +
                                              "</p><p>" + exp.sentence_1 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_1\" value=\"No\"/>No</label>" +
@@ -115,7 +115,7 @@ function make_slides(f) {
                      (exp.target_3 != "Helpful") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").hide();
-                exp.go(-3);
+                exp.go(-5);
             }
             else {
                 exp.catch_trials.push({
