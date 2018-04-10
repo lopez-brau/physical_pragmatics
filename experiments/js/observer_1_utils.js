@@ -34,7 +34,7 @@ function embed_slides(num_trials) {
             "<table style=\"margin-right:0px\"id=\"multi_slider_table_0" + i + "\"" + "class=\"slider_table\">" +
             "<tr><td></td>" +
             "<td class=\"left\">not at all</td>" +
-            "<td class=\"left\">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;average</td>" +
+            // "<td class=\"left\">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;average</td>" +
             "<td class=\"right\">very much</td>" +
             "</tr></table>" + 
             "<table id=\"multi_slider_table_1" + i + "\"" + "class=\"slider_table\">" +

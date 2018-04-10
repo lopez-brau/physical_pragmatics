@@ -159,7 +159,6 @@ function make_slides(f) {
         exp.sentence_0 = "How much did " + exp.enforcer.name + " think that this hiker likes " + exp.preferred_fruit + "?"
         exp.sentence_1 = "How good did " + exp.enforcer.name + " expect this hiker to be at detecting that " + 
                          exp.enforcer_pronoun + " placed the rocks?"
-        // exp.sentence_1 = "How attentive or distracted did " + exp.enforcer.name + " expect this hiker to be?"
 
         $("#multi_slider_table_0" + (j+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_0" + 
                                                 "\">" + exp.sentence_0 + "</td><td colspan=\"2\"><div id=\"slider_0" + 
