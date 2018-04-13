@@ -155,7 +155,7 @@ function make_slides(f) {
         $(".err").hide();
         $(".slider_row").remove();
 
-        $(".display_setup").html("Consider the following scenario. Remember to place yourself in " + exp.enforcer.name + 
+        $(".display_setup").html("Consider the following scenario. Try to place yourself in " + exp.enforcer.name + 
                                  "'s (the farmer's) shoes.");
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
