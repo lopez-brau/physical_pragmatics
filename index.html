@@ -69,7 +69,9 @@
     <!-- First background slide. -->
     <div class="slide" id="background_1">
         <h3>Background</h3>
-        <img style="height:150px;width:auto" src="imgs/observer_1/farmer.png"></img>
+        <div align="center">
+            <img style="height:150px;width:auto" src="imgs/observer_1/farmer.png"></img>
+        </div>
         <p align="left" style="text-indent:40px">This is <span class="display_enforcer"></span>. <span class="display_enforcer"></span> is a farmer on the mountainous countryside of a small town and has pear and pomegranate crops. Town hikers set up a hiking trail that goes through <span class="display_enforcer_pronoun_4"></span> crops and hikers occasionally take fruit when they walk by. <span class="display_enforcer"></span> doesn't mind that hikers take some fruit, but <span class="display_enforcer_pronoun_1"></span> prefers that hikers take <span class="display_preferred_fruit"></span> because <span class="display_not_preferred_fruit"></span> are out of season.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
@@ -78,44 +80,81 @@
     <div class="slide" id="background_2">
         <h3>Background</h3>
         <div align="center">
-            <img style="height:100px;width:auto" src="imgs/observer_1/pear.png"></img>
-            <img style="height:100px;width:auto" src="imgs/observer_1/pomegranate.png"></img>
+            <img style="vertical-align:top;height:150px;width:auto" src="imgs/observer_1/pear.png"></img>
+            <img style="vertical-align:top;height:150px;width:auto" src="imgs/observer_1/pomegranate.png"></img>
         </div>
-        <p align="left" style="text-indent:40px"><span class="display_enforcer"></span> has learned which hikers walk past each month and which fruits they prefer. For each hiker, <span class="display_enforcer_pronoun_1"></span> takes different actions to make sure that the hiker takes <span class="display_preferred_fruit"></span> instead of <span class="display_not_preferred_fruit"></span>. Since <span class="display_enforcer"></span> doesn't have any signs, <span class="display_enforcer_pronoun_1"></span> instead places 0, 1, 2, or 3 boulders around the <span class="display_not_preferred_fruit_singular"></span> grove that hikers need to walk around. <span class="display_enforcer"></span> knows that some hikers are more or less likely to realize that <span class="display_enforcer_pronoun_1"></span> placed the boulders. <span class="display_enforcer_pronoun_1_capitalized"></span> also finds it very exhausting to arrange the boulders, so <span class="display_enforcer_pronoun_1"></span> doesn't always use the most boulders <span class="display_enforcer_pronoun_1"></span> can.</p>
+        <p align="left" style="text-indent:40px"><span class="display_enforcer"></span> has learned which hikers walk past each month and which fruits they prefer. As a result, <span class="display_enforcer_pronoun_1"></span> takes different actions for each hiker to make sure that the hiker takes <span class="display_preferred_fruit"></span> instead of <span class="display_not_preferred_fruit"></span>. Since <span class="display_enforcer"></span> doesn't have any signs, <span class="display_enforcer_pronoun_1"></span> instead places 1, 2, or 3 boulders around the <span class="display_not_preferred_fruit_singular"></span> grove that hikers need to walk around.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
     <!-- Third background slide. -->
     <div class="slide" id="background_3">
         <h3>Background</h3>
-        <img style="height:100px;width:auto" src="imgs/observer_1/boulder.png"></img>
+        <div align="center">
+            <img style="height:150px;width:auto" src="imgs/observer_1/boulder.png"></img>
+        </div>
         <p align="left" style="text-indent:40px">All hikers always see the boulders, but some don't realize that <span class="display_enforcer"></span> placed them. The hikers that <b>don't</b> realize that <span class="display_enforcer"></span> placed the boulders decide what to do based on how far each grove is and how many boulders they'd have to walk around. In addition to how far each grove is and how many boulders they'd have to walk around, the hikers that <b>do</b> realize that <span class="display_enforcer"></span> placed the boulders also take into account what they think <span class="display_enforcer"></span> wanted and try to be helpful.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
     <!-- Fourth background slide. -->
     <div class="slide" id="background_4">
-        <h3>Background</h3>
-        <p align="left" style="text-indent:40px">Fortunately, <span class="display_enforcer"></span> can rely on hikers being tired by the time they reach the farm before deciding how many boulders to place, since tired hikers are less likely to walk to a grove that is further away. <span class="display_enforcer_pronoun_1_capitalized"></span> can also rely on hikers being helpful if they realize that <span class="display_enforcer_pronoun_1"></span> placed the boulders.</p>
+        <p>For example:</p>
+        <div align="center">
+            <div style="padding-right:40px;border-right:1px solid #000000;display:inline-block;vertical-align:top;width:40%;">
+                <div align="center">
+                    <img style="margin-bottom:10px;height:170px;width:auto;" src="imgs/observer_1/background_11_1.png"></img>
+                    <img style="height:170px;width:auto;" src="imgs/observer_1/background_11_2.png"></img>
+                </div>
+                <p style="text-align:left;">Both of these hikers <b>did realize</b> that <span class="display_enforcer"></span> placed the boulders, so they chose the pears.</p>
+            </div>
+            <div style="display:inline-block;vertical-align:top;margin-left:40px;width:40%;">
+                <div align="center">
+                    <img style="margin-bottom:10px;height:170px;width:auto;" src="imgs/observer_1/background_12_1.png"></img>
+                    <img style="height:170px;width:auto;" src="imgs/observer_1/background_12_2.png"></img>
+                </div>
+                <p style="text-align:left;">Both of these hiker <b>did not realize</b> that <span class="display_enforcer"></span> placed the boulders, so they chose the pears because walking around the boulders was too exhausting.</p>
+            </div>
+        </div>
         <button onclick="_s.button()">Continue</button>
     </div>
 
-    <!-- Instructions slide. -->
-    <div class="slide" id="instructions">
+    <!-- Fifth background slide. -->
+    <div class="slide" id="background_5">
+        <h3>Background</h3>
+        <div align="center">
+            <img style="height:150px;width:auto" src="imgs/observer_1/boulder.png"></img>
+        </div>
+        <p align="left" style="text-indent:40px"><span class="display_enforcer"></span> knows that some hikers are more or less likely to realize that <span class="display_enforcer_pronoun_1"></span> placed the boulders. <span class="display_enforcer_pronoun_1_capitalized"></span> also finds it very exhausting to arrange the boulders, so <span class="display_enforcer_pronoun_1"></span> tries to use the fewest number of boulders <span class="display_enforcer_pronoun_1"></span> can. Fortunately, <span class="display_enforcer"></span> can rely on hikers being tired by the time they reach the farm before deciding how many boulders to place, since tired hikers are less likely to walk to a grove that is further away. <span class="display_enforcer_pronoun_1_capitalized"></span> can also rely on hikers being helpful if they realize that <span class="display_enforcer_pronoun_1"></span> placed the boulders.</p>
+        <button onclick="_s.button()">Continue</button>
+    </div>
+
+    <!-- First instructions slide. -->
+    <div class="slide" id="instructions_1">
         <h3>Instructions</h3>
         <p align="left" style="text-indent:40px">On each trial, you will see a hiker at the farm's entrance, the hiker's distance to each grove, and how <span class="display_enforcer"></span> (the farmer) arranged the boulders, if <span class="display_enforcer_pronoun_1"></span> decided to arrange any at all. The farms will be slightly different in each trial; below are some examples of some of the farms you'll see:</p>
         <div>
             <img style="vertical-align:middle;margin-right:30px;height:150px;width:auto" src="imgs/observer_1/background_15_1.png"></img>
             <img style="vertical-align:middle;margin-left:30px;height:150px;width:auto" src="imgs/observer_1/background_15_2.png"></img>
         </div>
-        <p align="left" style="text-indent:40px">Your task is to figure out what <span class="display_enforcer"></span> was thinking when <span class="display_enforcer_pronoun_1"></span> arranged the boulders. Specifically, you will decide (1) how much <span class="display_enforcer"></span> thought the hiker preferred <span class="display_preferred_fruit"></span> and (2) how good <span class="display_enforcer"></span> expected the hiker to be at detecting that <span class="display_enforcer_pronoun_1"></span> placed the boulders.</p>
+        <p align="left" style="text-indent:40px">Your task is to figure out what <span class="display_enforcer"></span> was thinking when <span class="display_enforcer_pronoun_1"></span> arranged the boulders. Specifically, you will decide:</p>
+        <ol style="text-align:left;">
+            <li>How much <span class="display_enforcer"></span> thought the hiker preferred <span class="display_preferred_fruit"></span> (from "not at all" to "very much")</li>
+            <li>How good <span class="display_enforcer"></span> expected the hiker to be at detecting that <span class="display_enforcer_pronoun_1"></span> placed the boulders (from "very good at detecting" to "not very good at detecting").</li>
+        </ol>
         <p align="left" style="text-indent:40px">All hikers can move horizontally or vertically on the grid, but not diagonally. Hikers also cannot walk across squares that have boulders.</p>
+        <button onclick="_s.button()">Continue</button>
+    </div>
+
+    <!-- Second instructions slide. -->
+    <div class="slide" id="instructions_2">
+        <h3>Instructions</h3>
+        <p>There are <span class="display_trials"></span> trials in total. Before you begin, please answer the following five questions. You <b>must</b> answer them correctly to continue. If you fail to answer them correctly, you will be sent back to reread the story.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
     <!-- Catch trial slide. -->
     <div class="slide" id="catch_trial">
-        <p>There are <span class="display_trials"></span> trials in total. Before you begin, please answer the following questions. You <b>must</b> answer them correctly to continue. If you fail to answer them correctly, you will be sent back to reread the story.</p>
         <p class="display_catch_options"></p>
         <p class="catch_err_1">Please answer all of the questions before continuing.</p>
         <p class="catch_err_2">Please select two features or "Not sure" but not both.</p>
@@ -180,10 +219,6 @@
     <div class="progress">
         <span>Progress:</span>
         <span class="display_progress"></span>
-        <!-- <div class="bar-wrapper">
-            <div class="bar" width="0%">
-            </div>
-        </div> -->
     </div>
 </body>
 </html>

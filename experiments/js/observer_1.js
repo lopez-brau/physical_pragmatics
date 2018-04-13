@@ -11,37 +11,41 @@ function make_slides(f) {
         }
     });
 
-    // Set up the first background slide.
+    // Set up the background slides.
     slides.background_1 = slide({
         name: "background_1",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
-
-    // Set up the second background slide.
     slides.background_2 = slide({
         name: "background_2",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
-
-    // Set up the third background slide.
     slides.background_3 = slide({
         name: "background_3",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
-
-    // Set up the fourth background slide.
     slides.background_4 = slide({
         name: "background_4",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
+    slides.background_5 = slide({
+        name: "background_5",
+        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+        button: function() { exp.go(); }
+    });
 
-    // Set up the instructions slide.
-    slides.instructions = slide({
-        name: "instructions",
+    // Set up the instructions slides.
+    slides.instructions_1 = slide({
+        name: "instructions_1",
+        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+        button: function() { exp.go(); }
+    });
+    slides.instructions_2 = slide({
+        name: "instructions_2",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
@@ -303,7 +307,8 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "background_1", "background_2", "background_3", "background_4", "instructions", "catch_trial"];
+    exp.structure = ["i0", "background_1", "background_2", "background_3", "background_4", 
+                     "background_5", "instructions_1", "instructions_2", "catch_trial"];
     for (var k = 1; k <= exp.num_trials; k++) {
         exp.structure.push("trial" + k);
     }
