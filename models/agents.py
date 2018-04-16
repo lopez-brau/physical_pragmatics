@@ -79,8 +79,9 @@ def enforcer(rationality, enforcer_reward, p=0.0, method=None, cooperation=None,
 			agent_rewards = np.array([reward_assumptions])
 		else:
 			agent_rewards = np.array(reward_assumptions)
-		enforcer_actions = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS))) if GRIDWORLD != True else \
-						   np.array(list(it.product(np.arange(GRIDWORLD_MAX_ACTION), repeat=NUM_ACTIONS)))
+		# enforcer_actions = np.array(list(it.product(np.arange(MAX_VALUE), repeat=NUM_ACTIONS))) if GRIDWORLD != True else \
+		# 				   np.array(list(it.product(np.arange(GRIDWORLD_MAX_ACTION), repeat=NUM_ACTIONS)))
+		enforcer_actions = [[1, 0], [2, 0], [3, 0]]
 
 	# Compute the utilities.
 	if cache == True:

@@ -24,13 +24,19 @@ def get_coords(index, pear_corner, pomegranate_corner, natural_cost, enforcer_ac
 			first_boulder = [first_fruit[0]-2.0, first_fruit[1]]
 			boulder_coords = [first_boulder]
 			for action in range(1, enforcer_action[0]):
-				more_boulders = np.array([first_boulder[0], first_boulder[1]+(2.0*action)])
+				if action == 2:
+					more_boulders = np.array([first_boulder[0]+2.0, first_boulder[1]+(2.0*action)])
+				else:
+					more_boulders = np.array([first_boulder[0], first_boulder[1]+(2.0*action)])
 				boulder_coords.append(more_boulders)
 		else:
 			first_boulder = [second_fruit[0], second_fruit[1]-2.0]
 			boulder_coordinates = [first_boulder]
 			for action in range(1, enforcer_action[1]):
-				more_boulders = np.array([first_boulder[0]+(2.0*action), first_boulder[1]])
+				if action == 2:
+					more_boulders = np.array([first_boulder[0]+(2.0*action), first_boulder[1]+2.0])
+				else:
+					more_boulders = np.array([first_boulder[0]+(2.0*action), first_boulder[1]])
 				boulder_coordinates.append(more_boulders)
 
 	# If the agent starts off on the bottom-right corner.
@@ -47,13 +53,19 @@ def get_coords(index, pear_corner, pomegranate_corner, natural_cost, enforcer_ac
 			first_boulder = [first_fruit[0], first_fruit[1]-2.0]
 			boulder_coords = [first_boulder]
 			for action in range(1, enforcer_action[0]):
-				more_boulders = np.array([first_boulder[0]-(2.0*action), first_boulder[1]])
+				if action == 2:
+					more_boulders = np.array([first_boulder[0]-(2.0*action), first_boulder[1]+2.0])
+				else:
+					more_boulders = np.array([first_boulder[0]-(2.0*action), first_boulder[1]])
 				boulder_coords.append(more_boulders)
 		else:
 			first_boulder = [second_fruit[0]+2.0, second_fruit[1]]
 			boulder_coords = [first_boulder]
 			for action in range(1, enforcer_action[1]):
-				more_boulders = np.array([first_boulder[0], first_boulder[1]+(2.0*action)])
+				if action == 2:
+					more_boulders = np.array([first_boulder[0]-2.0, first_boulder[1]+(2.0*action)])
+				else:
+					more_boulders = np.array([first_boulder[0], first_boulder[1]+(2.0*action)])
 				boulder_coords.append(more_boulders)
 
 	# If the agent starts off on the top-right corner.
@@ -70,13 +82,19 @@ def get_coords(index, pear_corner, pomegranate_corner, natural_cost, enforcer_ac
 			first_boulder = [first_fruit[0]+2.0, first_fruit[1]]
 			boulder_coords = [first_boulder]
 			for action in range(1, enforcer_action[0]):
-				more_boulders = np.array([first_boulder[0], first_boulder[1]-(2.0*action)])
+				if action == 2:
+					more_boulders = np.array([first_boulder[0]-2.0, first_boulder[1]-(2.0*action)])
+				else:	
+					more_boulders = np.array([first_boulder[0], first_boulder[1]-(2.0*action)])
 				boulder_coords.append(more_boulders)
 		else:
 			first_boulder = [second_fruit[0], second_fruit[1]+2.0]
 			boulder_coords = [first_boulder]
 			for action in range(1, enforcer_action[1]):
-				more_boulders = np.array([first_boulder[0]-(2.0*action), first_boulder[1]])
+				if action == 2:
+					more_boulders = np.array([first_boulder[0]-(2.0*action), first_boulder[1]-2.0])
+				else:
+					more_boulders = np.array([first_boulder[0]-(2.0*action), first_boulder[1]])
 				boulder_coords.append(more_boulders)
 
 	# If the agent starts off on the top-left corner.
@@ -93,13 +111,19 @@ def get_coords(index, pear_corner, pomegranate_corner, natural_cost, enforcer_ac
 			first_boulder = [first_fruit[0], first_fruit[1]+2.0]
 			boulder_coords = [first_boulder]
 			for action in range(1, enforcer_action[0]):
-				more_boulders = np.array([first_boulder[0]+(2.0*action), first_boulder[1]])
+				if action == 2:
+					more_boulders = np.array([first_boulder[0]+(2.0*action), first_boulder[1]-2.0])
+				else:	
+					more_boulders = np.array([first_boulder[0]+(2.0*action), first_boulder[1]])
 				boulder_coords.append(more_boulders)
 		else:
 			first_boulder = [second_fruit[0]-2.0, second_fruit[1]]
 			boulder_coord  = [first_boulder]
 			for action in range(1, enforcer_action[1]):
-				more_boulders = np.array([first_boulder[0], first_boulder[1]-(2.0*action)])
+				if action == 2:
+					more_boulders = np.array([first_boulder[0]+2.0, first_boulder[1]-(2.0*action)])
+				else:
+					more_boulders = np.array([first_boulder[0], first_boulder[1]-(2.0*action)])
 				boulder_coords.append(more_boulders)
 
 	if pear_corner == coords[index]["fruit"][0]:
@@ -122,8 +146,6 @@ if __name__ == "__main__":
 	# agent and fruit positions, creating a tex file, converting it to a pdf 
 	# file, then converting that to a png file, and then finally renaming it.
 	for index in coords:
-		if index == 1:
-			continue
 		agent_coords = coords[index]["agent"]
 		grass = "grass_" + str(index)
 		fruit_corners = coords[index]["fruit"]

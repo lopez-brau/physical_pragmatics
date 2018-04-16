@@ -1,4 +1,5 @@
 var j = 0;
+var q = 0;
 
 function make_slides(f) {
     var slides = {};
@@ -37,6 +38,11 @@ function make_slides(f) {
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
+    slides.background_6 = slide({
+        name: "background_6",
+        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+        button: function() { exp.go(); } 
+    })
 
     // Set up the instructions slides.
     slides.instructions_1 = slide({
@@ -119,7 +125,8 @@ function make_slides(f) {
                      (exp.target_3 != "Helpful") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1)) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").hide();
-                exp.go(-7);
+                q++;
+                exp.go(-8);
             }
             else {
                 exp.catch_trials.push({
@@ -142,7 +149,8 @@ function make_slides(f) {
                     "target_4_1": exp.target_4_1,
                     "target_4_2": exp.target_4_2,
                     "target_4_3": exp.target_4_3,
-                    "target_4_4": exp.target_4_4
+                    "target_4_4": exp.target_4_4,
+                    "wrong_attempts": q
                 });
                 exp.go();
             }
@@ -210,6 +218,85 @@ function make_slides(f) {
         });
     }
 
+    slides.logic_1 = slide({
+        name: "logic_1",
+        start: function() {
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); 
+            $(".logic_err").hide();
+
+            $(".display_setup").html("This trial will be slightly different. We want to know how you're thinking " +
+                                     "about the problem when " + exp.enforcer.name + " places one boulder.");
+            $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"imgs/observer_1/" + 
+                                        "[9 1]/[1 1]/[2 4]_[1 0].png" + "\"></img>");
+            $(".display_prompt").html("<p style=\"margin:0px;\"><b>" + exp.sentence_1 + "</b></p>" + 
+                                      "Instead of answering with only the slider, please answer and briefly explain your " + 
+                                      "answer in the box below. As a reminder, the slider ranged from \"very bad at detecting\"" +
+                                      "to \"very good at detecting\".");
+            $(".display_logic_1_box").html("<textarea id=\"logic_1_box\" rows=\"3\" cols=\"50\"></textarea>");
+        },
+        button: function() {
+            exp.logic_1_response = $("#logic_1_box").val()
+            if (exp.logic_1_response == "") {
+                $(".logic_err").show()
+            }
+            else {
+                exp.go();    
+            }
+        }
+    });
+    slides.logic_2 = slide({
+        name: "logic_2",
+        start: function() { 
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); 
+            $(".logic_err").hide();
+            
+            $(".display_setup").html("This trial will be slightly different. We want to know how you're thinking " +
+                                     "about the problem when " + exp.enforcer.name + " places two boulders.");
+            $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"imgs/observer_1/" + 
+                                        "[9 1]/[1 1]/[2 4]_[2 0].png" + "\"></img>");
+            $(".display_prompt").html("<p style=\"margin:0px;\"><b>" + exp.sentence_1 + "</b></p>" + 
+                                      "Instead of answering with only the slider, please answer and briefly explain your " + 
+                                      "answer in the box below. As a reminder, the slider ranged from \"very bad at detecting\"" +
+                                      "to \"very good at detecting\".");
+            $(".display_logic_2_box").html("<textarea id=\"logic_2_box\" rows=\"3\" cols=\"50\"></textarea>");
+        },
+        button: function() {
+            exp.logic_2_response = $("#logic_2_box").val()
+            if (exp.logic_2_response == "") {
+                $(".logic_err").show()
+            }
+            else {
+                exp.go();    
+            }
+        }
+    });
+    slides.logic_3 = slide({
+        name: "logic_3",
+        start: function() { 
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); 
+            $(".logic_err").hide();
+
+            $(".display_setup").html("This trial will be slightly different. We want to know how you're thinking " +
+                                     "about the problem when " + exp.enforcer.name + " places three boulders.");
+            $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"imgs/observer_1/" + 
+                                        "[9 1]/[1 1]/[2 4]_[3 0].png" + "\"></img>");
+            $(".display_prompt").html("<p style=\"margin:0px;\"><b>" + exp.sentence_1 + "</b></p>" + 
+                                      "Instead of answering with only the slider, please answer and briefly explain your " + 
+                                      "answer in the box below. As a reminder, the slider ranged from \"very bad at detecting\"" +
+                                      "to \"very good at detecting\".");
+            $(".display_logic_3_box").html("<textarea id=\"logic_3_box\" rows=\"3\" cols=\"50\"></textarea>");
+        },
+        button: function() {
+            exp.logic_3_response = $("#logic_3_box").val()
+            if (exp.logic_3_response == "") {
+                $(".logic_err").show()
+            }
+            else {
+                exp.go();    
+            }
+        }
+    });
+
     slides.subj_info = slide({
         name: "subj_info",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
@@ -236,6 +323,9 @@ function make_slides(f) {
             exp.data = {
                 "trials": exp.data_trials,
                 "catch_trials": exp.catch_trials,
+                "logic_1": exp.logic_1_response,
+                "logic_2": exp.logic_2_response,
+                "logic_3": exp.logic_3_response,
                 "system": exp.system,
                 "subject_information": exp.subj_data,
                 "time_in_minutes": (Date.now() - exp.startT) / 60000
@@ -296,6 +386,11 @@ function init() {
     exp.data_trials = [];
     $(".display_trials").html(exp.num_trials);
 
+    // Set up a container for the logic inquiry information.
+    exp.logic_1 = [];
+    exp.logic_2 = [];
+    exp.logic_3 = [];
+
     // Get user system specs.
     exp.system = {
         Browser: BrowserDetect.browser,
@@ -307,11 +402,15 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "background_1", "background_2", "background_3", "background_4", 
-                     "background_5", "instructions_1", "instructions_2", "catch_trial"];
+    exp.structure = ["i0", "background_1", "background_2", "background_3", "background_4", "background_5", "background_6",
+                     "instructions_1", "instructions_2", "catch_trial"];
     for (var k = 1; k <= exp.num_trials; k++) {
+    // for (var k = 1; k <= 3; k++) {
         exp.structure.push("trial" + k);
     }
+    exp.structure.push("logic_1");
+    exp.structure.push("logic_2");
+    exp.structure.push("logic_3");
     exp.structure.push("subj_info");
     exp.structure.push("thanks");
    

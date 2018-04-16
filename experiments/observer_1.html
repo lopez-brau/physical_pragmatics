@@ -83,7 +83,7 @@
             <img style="vertical-align:top;height:150px;width:auto" src="../imgs/observer_1/pear.png"></img>
             <img style="vertical-align:top;height:150px;width:auto" src="../imgs/observer_1/pomegranate.png"></img>
         </div>
-        <p align="left" style="text-indent:40px"><span class="display_enforcer"></span> has learned which hikers walk past each month and which fruits they prefer. As a result, <span class="display_enforcer_pronoun_1"></span> takes different actions for each hiker to make sure that the hiker takes <span class="display_preferred_fruit"></span> instead of <span class="display_not_preferred_fruit"></span>. Since <span class="display_enforcer"></span> doesn't have any signs, <span class="display_enforcer_pronoun_1"></span> instead places 1, 2, or 3 boulders around the <span class="display_not_preferred_fruit_singular"></span> grove that hikers need to walk around.</p>
+        <p align="left" style="text-indent:40px"><span class="display_enforcer"></span> has learned which hikers walk past each month and which fruits they prefer. As a result, <span class="display_enforcer_pronoun_1"></span> takes different actions for each hiker to make sure that the hiker takes <span class="display_preferred_fruit"></span> instead of <span class="display_not_preferred_fruit"></span>. Since <span class="display_enforcer"></span> doesn't have any signs, <span class="display_enforcer_pronoun_1"></span> instead places 1, 2, or 3 boulders around the <span class="display_not_preferred_fruit_singular"></span> grove that hikers need to walk around. Hikers can still see the groves over the boulders.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
@@ -122,10 +122,18 @@
     <!-- Fifth background slide. -->
     <div class="slide" id="background_5">
         <h3>Background</h3>
+        <p align="left" style="text-indent:40px;"><span class="display_enforcer"></span> knows that some hikers are better or worse than others at detecting that <span class="display_enforcer_pronoun_1"></span> placed the boulders. <span class="display_enforcer_pronoun_1_capitalized"></span> can rely on hikers being helpful if they realize that <span class="display_enforcer_pronoun_1"></span> placed the boulders.</p>
+        <button onclick="_s.button()">Continue</button>
+    </div>
+
+    <!-- Sixth background slide. -->
+    <div class="slide" id="background_6">
+        <h3>Background</h3>
         <div align="center">
-            <img style="height:150px;width:auto" src="../imgs/observer_1/boulder.png"></img>
+            <img style="margin-right:50px;height:150px;width:auto" src="../imgs/observer_1/boulder.png"></img>
+            <img style="margin-Left:50px;height:150px;width:auto" src="../imgs/observer_1/tile.png"></img>
         </div>
-        <p align="left" style="text-indent:40px"><span class="display_enforcer"></span> knows that some hikers are more or less likely to realize that <span class="display_enforcer_pronoun_1"></span> placed the boulders. <span class="display_enforcer_pronoun_1_capitalized"></span> also finds it very exhausting to arrange the boulders, so <span class="display_enforcer_pronoun_1"></span> tries to use the fewest number of boulders <span class="display_enforcer_pronoun_1"></span> can. Fortunately, <span class="display_enforcer"></span> can rely on hikers being tired by the time they reach the farm before deciding how many boulders to place, since tired hikers are less likely to walk to a grove that is further away. <span class="display_enforcer_pronoun_1_capitalized"></span> can also rely on hikers being helpful if they realize that <span class="display_enforcer_pronoun_1"></span> placed the boulders.</p>
+        <p align="left" style="text-indent:40px;">Lastly, it's equally exhausting for <span class="display_enforcer"></span> to place a boulder as it is for a hiker to walk across one tile. As a result, <span class="display_enforcer"></span> only places the minimum number of boulders <span class="display_enforcer_pronoun_1"></span> thinks <span class="display_enforcer_pronoun_1"></span> needs to; similarly, hikers are less likely to walk to a grove that is far away.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
@@ -142,7 +150,7 @@
             <li>How much <span class="display_enforcer"></span> thought the hiker preferred <span class="display_preferred_fruit"></span> (from "not at all" to "very much")</li>
             <li>How good <span class="display_enforcer"></span> expected the hiker to be at detecting that <span class="display_enforcer_pronoun_1"></span> placed the boulders (from "very bad at detecting" to "very good at detecting").</li>
         </ol>
-        <p align="left">All hikers can move horizontally or vertically on the grid, but not diagonally. Hikers also cannot walk across squares that have boulders.</p>
+        <p align="left">All hikers can move horizontally or vertically on the grid, but not diagonally. Hikers also cannot walk across tiles that have boulders.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
@@ -163,6 +171,32 @@
 
     <!-- Trial slides. -->
     <div class="trial_slides"></div>
+
+    <!-- Logic inquiry slides. -->
+    <div class="slide" id="logic_1">
+        <p class="display_setup"></p>
+        <p class="display_stimulus"></p>
+        <p class="display_prompt"></p>
+        <p class="display_logic_1_box"></p>
+        <p class="logic_err">Please answer the question to continue.</p>
+        <button onclick="_s.button()">Continue</button>
+    </div>
+    <div class="slide" id="logic_2">
+        <p class="display_setup"></p>
+        <p class="display_stimulus"></p>
+        <p class="display_prompt"></p>
+        <p class="display_logic_2_box"></p>
+        <p class="logic_err">Please answer the question to continue.</p>
+        <button onclick="_s.button()">Continue</button>
+    </div>
+    <div class="slide" id="logic_3">
+        <p class="display_setup"></p>
+        <p class="display_stimulus"></p>
+        <p class="display_prompt"></p>
+        <p class="display_logic_3_box"></p>
+        <p class="logic_err">Please answer the question to continue.</p>
+        <button onclick="_s.button()">Continue</button>
+    </div>
 
     <!-- Subject information slides. -->
     <div class="slide"  id="subj_info">
