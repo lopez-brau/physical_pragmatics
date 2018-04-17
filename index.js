@@ -228,18 +228,23 @@ function make_slides(f) {
                                      "about the problem when " + exp.enforcer.name + " places one boulder.");
             $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"imgs/observer_1/" + 
                                         "[9 1]/[1 1]/[2 4]_[1 0].png" + "\"></img>");
-            $(".display_prompt").html("<p style=\"margin:0px;\"><b>" + exp.sentence_1 + "</b></p>" + 
-                                      "Instead of answering with only the slider, please answer and briefly explain your " + 
-                                      "answer in the box below. As a reminder, the slider ranged from \"very bad at detecting\"" +
-                                      "to \"very good at detecting\".");
+            $("#multi_slider_table_logic_1").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
+                                                "\">" + exp.sentence_1 + "</td><td colspan=\"2\"><div id=\"slider_3" + 
+                                                "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+            utils.make_slider("#slider_3", make_slider_callback(0));
+            exp.sliderPost = [];
+            $(".display_prompt").html("Please explain why you chose your response.");
             $(".display_logic_1_box").html("<textarea id=\"logic_1_box\" rows=\"3\" cols=\"50\"></textarea>");
         },
         button: function() {
-            exp.logic_1_response = $("#logic_1_box").val()
-            if (exp.logic_1_response == "") {
+            if (exp.sliderPost[0] == undefined || $("#logic_1_box").val() == "") {
                 $(".logic_err").show()
             }
             else {
+                exp.logic_1_response.push({
+                    "slider": exp.sliderPost[0],
+                    "text": $("#logic_1_box").val()
+                });
                 exp.go();    
             }
         }
@@ -254,18 +259,23 @@ function make_slides(f) {
                                      "about the problem when " + exp.enforcer.name + " places two boulders.");
             $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"imgs/observer_1/" + 
                                         "[9 1]/[1 1]/[2 4]_[2 0].png" + "\"></img>");
-            $(".display_prompt").html("<p style=\"margin:0px;\"><b>" + exp.sentence_1 + "</b></p>" + 
-                                      "Instead of answering with only the slider, please answer and briefly explain your " + 
-                                      "answer in the box below. As a reminder, the slider ranged from \"very bad at detecting\"" +
-                                      "to \"very good at detecting\".");
+            $("#multi_slider_table_logic_2").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
+                                                "\">" + exp.sentence_1 + "</td><td colspan=\"2\"><div id=\"slider_4" + 
+                                                "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+            utils.make_slider("#slider_4", make_slider_callback(0));
+            exp.sliderPost = [];
+            $(".display_prompt").html("Please explain why you chose your response.");
             $(".display_logic_2_box").html("<textarea id=\"logic_2_box\" rows=\"3\" cols=\"50\"></textarea>");
         },
         button: function() {
-            exp.logic_2_response = $("#logic_2_box").val()
-            if (exp.logic_2_response == "") {
+            if (exp.sliderPost[0] == undefined || $("#logic_2_box").val() == "") {
                 $(".logic_err").show()
             }
             else {
+                exp.logic_2_response.push({
+                    "slider": exp.sliderPost[0],
+                    "text": $("#logic_2_box").val()
+                });
                 exp.go();    
             }
         }
@@ -280,18 +290,23 @@ function make_slides(f) {
                                      "about the problem when " + exp.enforcer.name + " places three boulders.");
             $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"imgs/observer_1/" + 
                                         "[9 1]/[1 1]/[2 4]_[3 0].png" + "\"></img>");
-            $(".display_prompt").html("<p style=\"margin:0px;\"><b>" + exp.sentence_1 + "</b></p>" + 
-                                      "Instead of answering with only the slider, please answer and briefly explain your " + 
-                                      "answer in the box below. As a reminder, the slider ranged from \"very bad at detecting\"" +
-                                      "to \"very good at detecting\".");
+            $("#multi_slider_table_logic_3").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
+                                                "\">" + exp.sentence_1 + "</td><td colspan=\"2\"><div id=\"slider_5" + 
+                                                "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+            utils.make_slider("#slider_5", make_slider_callback(0));
+            exp.sliderPost = [];
+            $(".display_prompt").html("Please explain why you chose your response.");
             $(".display_logic_3_box").html("<textarea id=\"logic_3_box\" rows=\"3\" cols=\"50\"></textarea>");
         },
         button: function() {
-            exp.logic_3_response = $("#logic_3_box").val()
-            if (exp.logic_3_response == "") {
+            if (exp.sliderPost[0] == undefined || $("#logic_3_box").val() == "") {
                 $(".logic_err").show()
             }
             else {
+                exp.logic_3_response.push({
+                    "slider": exp.sliderPost[0],
+                    "text": $("#logic_3_box").val()
+                });
                 exp.go();    
             }
         }
@@ -340,7 +355,7 @@ function make_slides(f) {
 function init() {
 
     // Set up the payment amount and Unique Turker.
-    $(".display_payment").html("$1.00");
+    $(".display_payment").html("$1.50");
     repeatWorker = false;
     (function() {
         var ut_id = "malb_social_pragmatics_02-04-2018_observer_1";
@@ -387,9 +402,9 @@ function init() {
     $(".display_trials").html(exp.num_trials);
 
     // Set up a container for the logic inquiry information.
-    exp.logic_1 = [];
-    exp.logic_2 = [];
-    exp.logic_3 = [];
+    exp.logic_1_response = [];
+    exp.logic_2_response = [];
+    exp.logic_3_response = [];
 
     // Get user system specs.
     exp.system = {
@@ -405,7 +420,7 @@ function init() {
     exp.structure = ["i0", "background_1", "background_2", "background_3", "background_4", "background_5", "background_6",
                      "instructions_1", "instructions_2", "catch_trial"];
     for (var k = 1; k <= exp.num_trials; k++) {
-    // for (var k = 1; k <= 3; k++) {
+    // for (var k = 1; k <= 1; k++) {
         exp.structure.push("trial" + k);
     }
     exp.structure.push("logic_1");
