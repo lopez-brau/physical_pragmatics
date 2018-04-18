@@ -238,8 +238,8 @@ function make_slides(f) {
         $(".err").hide();
         $(".slider_row").remove();
 
-        $(".display_setup").html("Consider the following scenario. Remember, we want to know what you think about what " + 
-                                 exp.enforcer.name + " thinks, so it may help to put yourself in " + 
+        $(".display_setup").html("Consider the following scenario with a new hiker. Remember, we want to know what you think " +
+                                 "about what " + exp.enforcer.name + " thinks, so it may help to put yourself in " + 
                                  get_pronoun_4(exp.enforcer, false) + " shoes.");
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");

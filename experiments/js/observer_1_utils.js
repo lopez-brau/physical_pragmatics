@@ -40,7 +40,7 @@ function embed_slides(num_trials) {
             "<table id=\"multi_slider_table_1" + i + "\"" + "class=\"slider_table\">" +
             "<tr><td></td>" +
             "<td class=\"left\">very bad</td>" + 
-            "<td class=\"left\">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;neither good nor bad</td>" +
+            "<td class=\"left\">&emsp;&emsp;&emsp;&emsp;&emsp;neither good nor bad</td>" +
             "<td class=\"right\">very good</td>" +
             "</tr></table>" +
             "<button onclick=\"_s.button()\">Continue</button>" +
