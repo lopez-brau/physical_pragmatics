@@ -463,7 +463,7 @@ function make_slides(f) {
 function init() {
 
     // Set up the payment amount and Unique Turker.
-    $(".display_payment").html("$1.00");
+    $(".display_payment").html("$1.50");
     repeatWorker = false;
     (function() {
         var ut_id = "malb_social_pragmatics_02-04-2018_observer_1";
