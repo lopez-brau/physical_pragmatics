@@ -13,7 +13,7 @@ function trials(pear_position) {
     var trials = [];
     var natural_costs = [[2, 2], [2, 3], [3, 2], [3, 3], [2, 4], [4, 2], [3, 4], [4, 3], [4, 4]];
     // var enforcer_actions = [[0, 0], [1, 0], [2, 0], [3, 0]];
-    var enforcer_actions = [[1, 0], [2, 0], [3, 0]];
+    var enforcer_actions = [[0, 0], [1, 0], [2, 0], [3, 0]];
     for (var i = 0; i < natural_costs.length; i++) {
         for (var j = 0; j < enforcer_actions.length; j++) {
             filepath = agent_coords + "/" + pear_coords + "/[" + natural_costs[i].join(" ") + "]_[" + 
@@ -40,7 +40,7 @@ function embed_slides(num_trials) {
             "<table id=\"multi_slider_table_1" + i + "\"" + "class=\"slider_table\">" +
             "<tr><td></td>" +
             "<td class=\"left\">very bad</td>" + 
-            // "<td class=\"left\">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;not sure</td>" +
+            "<td class=\"left\">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;neither good nor bad</td>" +
             "<td class=\"right\">very good</td>" +
             "</tr></table>" +
             "<button onclick=\"_s.button()\">Continue</button>" +
