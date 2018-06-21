@@ -10,13 +10,23 @@ import sys
 import time
 
 if __name__ == "__main__":
-	rationality = 0.1
+	rationality = 1.0
 	enforcer_reward = [0, 9]
+	p = 1.0
 	method = "proportional"
 	cooperation = 2.0
 	enforcer_action = [2, 0]
-	enforcer_actions = [[1, 0], [2, 0], [3, 0]]
+	enforcer_actions = [[0, 0], [1, 0], [2, 0], [3, 0]]
 	
+	# x1 = enforcer(rationality, enforcer_reward, plot=True)
+	x2 = enforcer(rationality, enforcer_reward, p=p, method=method, cooperation=cooperation, cache=True, plot=True)
+
+	cooperation = -2.0
+	x3 = enforcer(rationality, enforcer_reward, p=p, method=method, cooperation=cooperation, cache=True, plot=True)
+	# print(np.where(x1, np.max(x1)))
+	plt.show()
+	sys.exit("Done.")
+
 	for enforcer_action in enforcer_actions:
 		start_time = time.time()
 		# Generate predictions for this parameter set.
@@ -56,7 +66,7 @@ if __name__ == "__main__":
 			writer = csv.writer(file)
 			writer.writerows([[E_pear], [E_pomegranate], [E_ToM]])
 
-	sys.exit("Done.")
+	
 
 	# rationality_set = np.array([0.1, 1.0])
 	# methods = ["confidence", "flat", "confidence"]
