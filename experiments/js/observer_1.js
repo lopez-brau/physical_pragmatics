@@ -252,7 +252,7 @@ function make_slides(f) {
         //                          get_pronoun_4(exp.enforcer, false) + " shoes.");
         $(".display_setup").html("Consider the following scenario with a <b>new</b> hiker. The bold red lines show which boulders " +
                                  exp.enforcer.name + " placed (if any at all).");
-        $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
+        $(".display_stimulus").html("<img style=\"height:280px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     
         exp.sentence_0 = "How much did " + exp.enforcer.name + " think that this hiker likes " + exp.preferred_fruit + "?"
@@ -313,8 +313,8 @@ function make_slides(f) {
 
             $(".display_setup").html("This trial will be slightly different. We want to know how you're thinking " +
                                      "about the problem when " + exp.enforcer.name + " places no boulders.");
-            $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
-                                        "[9 1]/[1 1]/[3 4]_[0 0].png" + "\"></img>");
+            $(".display_stimulus").html("<img style=\"height:280px;width:auto;\" src=\"../imgs/observer_1/" + 
+                                        "[7.5 0.5]/[0.5 0.5]/[4 6]_[0 0].png" + "\"></img>");
             $("#multi_slider_table_logic_0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
                                                     "\">" + exp.sentence_1 + "</td><td colspan=\"2\"><div id=\"slider_3" + 
                                                     "\" class=\"slider\">-------[ ]--------</div></td></tr>");
@@ -344,8 +344,8 @@ function make_slides(f) {
 
             $(".display_setup").html("This trial will be slightly different. We want to know how you're thinking " +
                                      "about the problem when " + exp.enforcer.name + " places one boulder.");
-            $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
-                                        "[9 1]/[1 1]/[3 4]_[1 0].png" + "\"></img>");
+            $(".display_stimulus").html("<img style=\"height:280px;width:auto;\" src=\"../imgs/observer_1/" + 
+                                        "[7.5 0.5]/[0.5 0.5]/[4 6]_[1 0].png" + "\"></img>");
             $("#multi_slider_table_logic_1").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
                                                     "\">" + exp.sentence_1 + "</td><td colspan=\"2\"><div id=\"slider_4" + 
                                                     "\" class=\"slider\">-------[ ]--------</div></td></tr>");
@@ -375,8 +375,8 @@ function make_slides(f) {
             
             $(".display_setup").html("This trial will be slightly different. We want to know how you're thinking " +
                                      "about the problem when " + exp.enforcer.name + " places two boulders.");
-            $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
-                                        "[9 1]/[1 1]/[3 4]_[2 0].png" + "\"></img>");
+            $(".display_stimulus").html("<img style=\"height:280px;width:auto;\" src=\"../imgs/observer_1/" + 
+                                        "[7.5 0.5]/[0.5 0.5]/[4 6]_[2 0].png" + "\"></img>");
             $("#multi_slider_table_logic_2").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
                                                     "\">" + exp.sentence_1 + "</td><td colspan=\"2\"><div id=\"slider_5" + 
                                                     "\" class=\"slider\">-------[ ]--------</div></td></tr>");
@@ -406,8 +406,8 @@ function make_slides(f) {
 
             $(".display_setup").html("This trial will be slightly different. We want to know how you're thinking " +
                                      "about the problem when " + exp.enforcer.name + " places three boulders.");
-            $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
-                                        "[9 1]/[1 1]/[3 4]_[3 0].png" + "\"></img>");
+            $(".display_stimulus").html("<img style=\"height:280px;width:auto;\" src=\"../imgs/observer_1/" + 
+                                        "[7.5 0.5]/[0.5 0.5]/[4 6]_[3 0].png" + "\"></img>");
             $("#multi_slider_table_logic_3").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
                                                     "\">" + exp.sentence_1 + "</td><td colspan=\"2\"><div id=\"slider_6" + 
                                                     "\" class=\"slider\">-------[ ]--------</div></td></tr>");
@@ -424,6 +424,37 @@ function make_slides(f) {
                 exp.logic_3_response.push({
                     "slider": exp.sliderPost[0],
                     "text": $("#logic_3_box").val()
+                });
+                exp.go();    
+            }
+        }
+    });
+    slides.logic_4 = slide({
+        name: "logic_4",
+        start: function() { 
+            $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); 
+            $(".logic_err").hide();
+
+            $(".display_setup").html("This trial will be slightly different. We want to know how you're thinking " +
+                                     "about the problem when " + exp.enforcer.name + " places four boulders.");
+            $(".display_stimulus").html("<img style=\"height:280px;width:auto;\" src=\"../imgs/observer_1/" + 
+                                        "[7.5 0.5]/[0.5 0.5]/[5 6]_[4 0].png" + "\"></img>");
+            $("#multi_slider_table_logic_3").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
+                                                    "\">" + exp.sentence_1 + "</td><td colspan=\"2\"><div id=\"slider_7" + 
+                                                    "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+            utils.make_slider("#slider_7", make_slider_callback(0));
+            exp.sliderPost = [];
+            $(".display_prompt").html("Please explain why you chose your response.");
+            $(".display_logic_4_box").html("<textarea id=\"logic_4_box\" rows=\"3\" cols=\"50\"></textarea>");
+        },
+        button: function() {
+            if (exp.sliderPost[0] == undefined || $("#logic_4_box").val() == "") {
+                $(".logic_err").show()
+            }
+            else {
+                exp.logic_4_response.push({
+                    "slider": exp.sliderPost[0],
+                    "text": $("#logic_4_box").val()
                 });
                 exp.go();    
             }
@@ -460,6 +491,7 @@ function make_slides(f) {
                 "logic_1": exp.logic_1_response,
                 "logic_2": exp.logic_2_response,
                 "logic_3": exp.logic_3_response,
+                "logic_4": exp.logic_4_response,
                 "system": exp.system,
                 "subject_information": exp.subj_data,
                 "time_in_minutes": (Date.now() - exp.startT) / 60000
@@ -524,6 +556,7 @@ function init() {
     exp.logic_1_response = [];
     exp.logic_2_response = [];
     exp.logic_3_response = [];
+    exp.logic_4_response = [];
 
     // Get user system specs.
     exp.system = {
@@ -546,6 +579,7 @@ function init() {
     exp.structure.push("logic_1");
     exp.structure.push("logic_2");
     exp.structure.push("logic_3");
+    exp.structure.push("logic_4");
     exp.structure.push("subj_info");
     exp.structure.push("thanks");
    
