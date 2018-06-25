@@ -439,7 +439,7 @@ function make_slides(f) {
                                      "about the problem when " + exp.enforcer.name + " places four boulders.");
             $(".display_stimulus").html("<img style=\"height:280px;width:auto;\" src=\"../imgs/observer_1/" + 
                                         "[7.5 0.5]/[0.5 0.5]/[5 6]_[4 0].png" + "\"></img>");
-            $("#multi_slider_table_logic_3").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
+            $("#multi_slider_table_logic_4").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_1" + 
                                                     "\">" + exp.sentence_1 + "</td><td colspan=\"2\"><div id=\"slider_7" + 
                                                     "\" class=\"slider\">-------[ ]--------</div></td></tr>");
             utils.make_slider("#slider_7", make_slider_callback(0));
