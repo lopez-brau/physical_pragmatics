@@ -14,36 +14,44 @@ function make_slides(f) {
     });
 
     // Set up the background slides.
-    slides.background_1 = slide({
-        name: "background_1",
-        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
-        button: function() { exp.go(); }
-    });
-    slides.background_2 = slide({
-        name: "background_2",
-        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
-        button: function() { exp.go(); }
-    });
-    slides.background_3 = slide({
-        name: "background_3",
-        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
-        button: function() { exp.go(); }
-    });
-    slides.background_4 = slide({
-        name: "background_4",
-        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
-        button: function() { exp.go(); }
-    });
-    slides.background_5 = slide({
-        name: "background_5",
-        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
-        button: function() { exp.go(); }
-    });
-    slides.background_6 = slide({
-        name: "background_6",
-        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
-        button: function() { exp.go(); } 
-    })
+    for (var i = 0; i <= 6; i++) {
+        slides["background_" + i] = slide({
+            name: "background_" + i,
+            start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+            button: function() { exp.go(); }
+        });
+    }
+
+    // slides.background_1 = slide({
+    //     name: "background_1",
+    //     start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+    //     button: function() { exp.go(); }
+    // });
+    // slides.background_2 = slide({
+    //     name: "background_2",
+    //     start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+    //     button: function() { exp.go(); }
+    // });
+    // slides.background_3 = slide({
+    //     name: "background_3",
+    //     start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+    //     button: function() { exp.go(); }
+    // });
+    // slides.background_4 = slide({
+    //     name: "background_4",
+    //     start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+    //     button: function() { exp.go(); }
+    // });
+    // slides.background_5 = slide({
+    //     name: "background_5",
+    //     start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+    //     button: function() { exp.go(); }
+    // });
+    // slides.background_6 = slide({
+    //     name: "background_6",
+    //     start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+    //     button: function() { exp.go(); } 
+    // })
 
     // Set up the instructions slides.
     slides.instructions_1 = slide({
@@ -238,9 +246,11 @@ function make_slides(f) {
         $(".err").hide();
         $(".slider_row").remove();
 
-        $(".display_setup").html("Consider the following scenario with a new hiker. Remember, we want to know what you think " +
-                                 "about what " + exp.enforcer.name + " thinks, so it may help to put yourself in " + 
-                                 get_pronoun_4(exp.enforcer, false) + " shoes.");
+        // $(".display_setup").html("Consider the following scenario with a <b>new</b> hiker. Remember, we want to know what you think " +
+        //                          "about what " + exp.enforcer.name + " thinks, so it may help to put yourself in " + 
+        //                          get_pronoun_4(exp.enforcer, false) + " shoes.");
+        $(".display_setup").html("Consider the following scenario with a <b>new</b> hiker. The bold red lines show which boulders " +
+                                 "the farmer placed (if any at all).");
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     
