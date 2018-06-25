@@ -92,6 +92,7 @@ function make_slides(f) {
                                              "</p><p>" + exp.sentence_2 + "</p><p>" +
                                              "<label><input type=\"radio\" name=\"sentence_2\" value=\"3\"/>3</label>" +
                                              "<label><input type=\"radio\" name=\"sentence_2\" value=\"1\"/>1</label>" +
+                                             "<label><input type=\"radio\" name=\"sentence_2\" value=\"4\"/>4</label>" +
                                              "<label><input type=\"radio\" name=\"sentence_2\" value=\"2\"/>2</label>" +
                                              "<label><input type=\"radio\" name=\"sentence_2\" value=\"Not sure\"/>Not sure</label>" +
                                              "</p><p>" + exp.sentence_3 + "</p><p>" +
@@ -134,7 +135,7 @@ function make_slides(f) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").show();
             }
-            else if ((exp.target_0 != exp.preferred_fruit) || (exp.target_1 != "Yes") || (exp.target_2 != "3") || 
+            else if ((exp.target_0 != exp.preferred_fruit) || (exp.target_1 != "Yes") || (exp.target_2 != "4") || 
                      (exp.target_3 != "Helpful") || (exp.target_4_1 != 1) || (exp.target_4_3 != 1) || (exp.target_5 != "Yes")) {
                 $(".catch_err_1").hide();
                 $(".catch_err_2").hide();
@@ -250,7 +251,7 @@ function make_slides(f) {
         //                          "about what " + exp.enforcer.name + " thinks, so it may help to put yourself in " + 
         //                          get_pronoun_4(exp.enforcer, false) + " shoes.");
         $(".display_setup").html("Consider the following scenario with a <b>new</b> hiker. The bold red lines show which boulders " +
-                                 "the farmer placed (if any at all).");
+                                 exp.enforcer.name + " placed (if any at all).");
         $(".display_stimulus").html("<img style=\"height:300px;width:auto;\" src=\"../imgs/observer_1/" + 
                                     exp.trials[j] + "\"></img>");
     

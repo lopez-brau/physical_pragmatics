@@ -143,7 +143,7 @@ if __name__ == "__main__":
 	boulders = {
 		0: [[1.5, 2.5], [7.5, 5.5], [4.5, 6.5]],
 		1: [[5.5, 1.5], [2.5, 7.5], [1.5, 4.5]],
-		2: [[5.5, 6.5], [0.5, 2.5], [3.5, 1.5]],
+		2: [[6.5, 5.5], [0.5, 2.5], [3.5, 1.5]],
 		3: [[2.5, 6.5], [5.5, 0.5], [6.5, 3.5]]
 	}
 	natural_costs = np.array(list(it.product([4, 5, 6], repeat=2)))
@@ -154,7 +154,7 @@ if __name__ == "__main__":
 	# agent and fruit positions, creating a tex file, converting it to a pdf 
 	# file, then converting that to a png file, and then finally renaming it.
 	for index in coords:
-		if index != 2:
+		if index != 3:
 			continue
 		agent_coords = coords[index]["agent"]
 		grass = "grass_" + str(index)
@@ -213,7 +213,7 @@ if __name__ == "__main__":
 										boulder_coords[0] += 1
 										boulder_coords[1] += 1
 									elif index == 3:
-										boulder_coords[1] += 2
+										boulder_coords[1] += 1
 									file.write("\\draw[step=1.0cm,color=red,fill=white,line width=0.7mm] " + \
 											   "(%d,%d) rectangle (%d,%d);\n" % \
 										(boulder_coords[0]-(step_size/2.0), boulder_coords[1]-(step_size/2.0), \
@@ -227,7 +227,7 @@ if __name__ == "__main__":
 										boulder_coords[action][0] += 1
 										boulder_coords[action][1] += 1
 									elif index == 3:
-										boulder_coords[action][1] += 2
+										boulder_coords[action][1] += 1
 									file.write("\\draw[step=1.0cm,color=red,fill=white,line width=0.7mm] " + \
 											   "(%d,%d) rectangle (%d,%d);\n" % \
 										(boulder_coords[action][0]-(step_size/2.0), boulder_coords[action][1]-(step_size/2.0), \

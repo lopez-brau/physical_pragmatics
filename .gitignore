@@ -3,8 +3,4 @@ cache/*
 data/*
 scratch
 
-imgs/observer_1/'[0.5 0.5]'
-imgs/observer_1/'[7.5 0.5]'
-imgs/observer_1/'[7.5 7.5]'
-imgs/observer_1/'[0.5 7.5]'
 imgs/observer_1/old
