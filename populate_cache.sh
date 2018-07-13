@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a NATURAL_COSTS=("2 2" "2 3" "2 4" "3 2" "3 3" "3 4" "4 2" "4 3" "4 4")
+declare -a NATURAL_COSTS=("4 4" "4 5" "4 6" "5 4" "5 5" "5 6" "6 4" "6 5" "6 6")
 
 for NATURAL_COST in "${NATURAL_COSTS[@]}"
 do

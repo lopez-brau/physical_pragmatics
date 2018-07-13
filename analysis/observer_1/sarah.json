@@ -1,0 +1,122 @@
+{
+	"trials": [{
+		"trial_num": "1",
+		"filename": "[6 4]_[0 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.79",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.25"
+	},{
+		"trial_num": "2",
+		"filename": "[6 5]_[1 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.66",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.73"
+	},{
+		"trial_num": "3",
+		"filename": "[4 5]_[4 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.53",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.14"
+	},{
+		"trial_num": "4",
+		"filename": "[6 6]_[4 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.21",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.08"
+	},{
+		"trial_num": "5",
+		"filename": "[5 6]_[4 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.1",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.13"
+	},{
+		"trial_num": "6",
+		"filename": "[5 6]_[3 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.25",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.29"
+	},{
+		"trial_num": "7",
+		"filename": "[5 4]_[3 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.12",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.27"
+	},{
+		"trial_num": "8",
+		"filename": "[4 5]_[2 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.25",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.45"
+	},{
+		"trial_num": "9",
+		"filename": "[6 5]_[4 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.14",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.09"
+	},{
+		"trial_num": "10",
+		"filename": "[5 6]_[0 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.88",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0"
+	},{
+		"trial_num": "11",
+		"filename": "[4 4]_[1 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.72",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.71"
+	},{
+		"trial_num": "12",
+		"filename": "[5 5]_[0 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.8",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.21"
+	},{
+		"trial_num": "13",
+		"filename": "[5 6]_[2 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.56",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.36"
+	},{
+		"trial_num": "14",
+		"filename": "[6 4]_[2 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.55",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.45"
+	},{
+		"trial_num": "15",
+		"filename": "[5 5]_[3 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.4",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.2"
+	},{
+		"trial_num": "16",
+		"filename": "[4 4]_[2 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.44",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.25"
+	},{
+		"trial_num": "17",
+		"filename": "[6 6]_[1 0].png",
+		"sentence_0": "How much did Cameron think that this hiker likes pears?",
+		"target_0": "0.69",
+		"sentence_1": "How good did Cameron expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": "0.86"
+	}]
+}
