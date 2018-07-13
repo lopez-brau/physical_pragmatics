@@ -1,6 +1,4 @@
 __pycache__
-cache*
-data*
+cache
+data
 scratch
-
-imgs/observer_1/old
