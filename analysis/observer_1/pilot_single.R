@@ -3,8 +3,8 @@ library(tidyverse)
 
 # Set working directory and which csv file you're getting the data from.
 setwd("D:/Research/social_pragmatics")
-#data = read.csv("data/observer_1/human/pilot_5/observer_1-trials.csv")
-data = read.csv("analysis/observer_1/amanda.json")
+data = read.csv("analysis/observer_1/amanda.csv")
+#data = read.csv("analysis/observer_1/lindsay.csv")
 
 # Initialize some storage arrays.
 filenames = c()
@@ -16,10 +16,9 @@ for (i in 1:nrow(data)) {
   # Find the correct file.
   filename = data[i,][,"filename"] %>%
     as.character() %>%
-    #substr(2, 12)
     substr(1, 11)
   filenames = c(filenames, filename)
-  filepath = paste("data/observer_1/model/0123/1.0/", filename, ".txt", sep="")
+  filepath = paste("data/observer_1/model/123/1.0/", filename, ".txt", sep="")
   model_predictions = read.csv(filepath, header=FALSE)
   
   # Store model predictions.

@@ -1,0 +1,144 @@
+{
+	"trials": [{
+		"trial_num": 1,
+		"filename": "[4 3]_[1 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.51,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.54
+	},{
+		"trial_num": 2,
+		"filename": "[4 3]_[3 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.99,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.97
+	},{
+		"trial_num": 3,
+		"filename": "[3 3]_[2 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.74,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.72
+	},{
+		"trial_num": 4,
+		"filename": "[3 3]_[1 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.38,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.59
+	},{
+		"trial_num": 5,
+		"filename": "[4 4]_[1 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.35,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.44
+	},{
+		"trial_num": 6,
+		"filename": "[3 4]_[2 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.34,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.7
+	},{
+		"trial_num": 7,
+		"filename": "[4 4]_[3 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.18,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.79
+	},{
+		"trial_num": 8,
+		"filename": "[4 3]_[2 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.29,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.72
+	},{
+		"trial_num": 9,
+		"filename": "[3 3]_[3 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.17,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.99
+	},{
+		"trial_num": 10,
+		"filename": "[4 4]_[2 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.27,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.73
+	},{
+		"trial_num": 11,
+		"filename": "[3 4]_[3 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.21,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.97
+	},{
+		"trial_num": 12,
+		"filename": "[3 4]_[1 0].png",
+		"sentence_0": "How much did Josh think that this hiker likes pears?",
+		"target_0": 0.56,
+		"sentence_1": "How good did Josh expect this hiker to be at detecting that he placed the rocks?",
+		"target_1": 0.33
+	}],
+	"catch_trials": [{
+		"enforcer_name": "Josh",
+		"enforcer_gender": "male",
+		"preferred_fruit": "pears",
+		"not_preferred_fruit": "pomegranates",
+		"agent_coords": "[9 9]",
+		"pear_coords": "[9 1]",
+		"sentence_0": "Which fruit does Josh want hikers to take?",
+		"target_0": "pears",
+		"sentence_1": "Does Josh know which fruit each hiker prefers?",
+		"target_1": "Yes",
+		"sentence_2": "What is the maximum number of boulders Josh can place?",
+		"target_2": "3",
+		"sentence_3": "Do hikers try to be helpful or are they selfish?",
+		"target_3": "Helpful",
+		"sentence_4": "What are the two features that make it harder for hikers to get to a fruit grove?",
+		"target_4_0": 0,
+		"target_4_1": 1,
+		"target_4_2": 0,
+		"target_4_3": 1,
+		"target_4_4": "[undefined]",
+		"sentence_5": "Does Josh know how good each hiker is at detecting that he placed the boulders?",
+		"target_5": "Yes",
+		"wrong_attempts": 0
+	}],
+	"logic_1": [{
+		"slider": 0.3,
+		"text": "fewer rocks placed will make the hikers less likely to realize that josh did it on purpose "
+	}],
+	"logic_2": [{
+		"slider": 0.66,
+		"text": "more rocks = more likely to realize it was on purpose "
+	}],
+	"logic_3": [{
+		"slider": 1,
+		"text": "more rocks = more likely to realize it was on purpose"
+	}],
+	"system": {
+		"Browser": "Chrome",
+		"OS": "Mac",
+		"screenH": 800,
+		"screenUH": "[undefined]",
+		"screenW": 1280,
+		"screenUW": "[undefined]"
+	},
+	"subject_information": {
+		"language": "english",
+		"enjoyment": "2",
+		"asses": "Yes",
+		"age": "22",
+		"gender": "Female",
+		"education": "3",
+		"problems": "the text box jumped around a bit the first time i was expected to answer an open ended question",
+		"fairprice": "$100",
+		"comments": ""
+	},
+	"time_in_minutes": 10.7512
+}

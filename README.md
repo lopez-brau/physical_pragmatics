@@ -7,10 +7,3 @@
 	1. Theory of Mind (ToM)
 	2. Intuitive physics (for understanding costs) 
 	3. A sense of cooperation (or lack of)
-
-## To-Do:
-
-- Perform a clean-up/reorganization
-- Finish analyzing current results
-- Participants should not be able to continue the HIT until they have completely passed the questionnaire
-- Start working on presentation; develop a "one-slider," too
