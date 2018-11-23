@@ -6,20 +6,20 @@ library(tidyverse)
 setwd("D:/Research/social_pragmatics")
 
 # Import the human data.
-data_0 = read_csv("data/actor_0/data.csv")
+data_0 = read_csv("data/actor_0/human/data.csv")
 
 # Update old formatting and remove irrelevant columns.
 data_1 = data_0 %>%
   select(-Key, -CompletionDate, -UserID)
-names(data_1)[which(names(data_1) == "CostCondition")] = "Condition"
-names(data_1)[which(names(data_1) == "DoorChoice")] = "Response"
-names(data_1)[which(names(data_1) == "HighCost")] = "Costlier"
-data_1$Response[which(data_1$Response == "ClearDoor")] = "unmodified"
-data_1$Response[which(data_1$Response == "ModifiedDoor")] = "modified"
-data_1$Costlier[which(data_1$Costlier == "BaseDoor")] = "unmodified"
-data_1$Costlier[which(data_1$Costlier == "TargetDoor")] = "modified"
-data_1$Difficulty[which(data_1$Difficulty == "Yes")] = "yes"
-data_1$Difficulty[which(data_1$Difficulty == "No")] = "no"
+names(data_1)[which(names(data_1)=="CostCondition")] = "Condition"
+names(data_1)[which(names(data_1)=="DoorChoice")] = "Response"
+names(data_1)[which(names(data_1)=="HighCost")] = "Costlier"
+data_1$Response[which(data_1$Response=="ClearDoor")] = "unmodified"
+data_1$Response[which(data_1$Response=="ModifiedDoor")] = "modified"
+data_1$Costlier[which(data_1$Costlier=="BaseDoor")] = "unmodified"
+data_1$Costlier[which(data_1$Costlier=="TargetDoor")] = "modified"
+data_1$Difficulty[which(data_1$Difficulty=="Yes")] = "yes"
+data_1$Difficulty[which(data_1$Difficulty=="No")] = "no"
 
 # Exclude participants who said the unmodified door was more difficult to walk
 # through and omit missing data.
@@ -31,8 +31,8 @@ data_2 = data_1 %>%
 # Compute the (percent) participant endorsement of each door in each condition.
 data_3 = data_2 %>% 
   do(left_join(., summarize(group_by(., Condition),
-                            Unmodified=sum(Response == "unmodified"), 
-                            Modified=sum(Response == "modified"),
+                            Unmodified=sum(Response=="unmodified"), 
+                            Modified=sum(Response=="modified"),
                             Total=n()))) %>%
   mutate(Unmodified=Unmodified/Total*100,
          Modified=Modified/Total*100)
@@ -44,8 +44,8 @@ compute_mean = function(data, indices) {
 
 compute_bootstrap = function(data, condition) {
   bool_data = data %>%
-    filter(Condition == condition) %>%
-    mutate(Response=ifelse(Response == "unmodified", 1, 0))
+    filter(Condition==condition) %>%
+    mutate(Response=ifelse(Response=="unmodified", 1, 0))
     
   simulations = boot(bool_data$Response,
                      statistic=compute_mean,
@@ -83,8 +83,8 @@ plot_0 +
 # Compute the (percent) participant endorsement of each door in each condition.
 data_4 = data_2 %>% 
   do(left_join(., summarize(group_by(., Costlier),
-                            Unmodified=sum(Response == "unmodified"), 
-                            Modified=sum(Response == "modified"),
+                            Unmodified=sum(Response=="unmodified"), 
+                            Modified=sum(Response=="modified"),
                             Total=n()))) %>%
   mutate(Unmodified=Unmodified/Total*100,
          Modified=Modified/Total*100)
@@ -92,8 +92,8 @@ data_4 = data_2 %>%
 # Compute 95% bootstrapped CIs.
 compute_bootstrap = function(data, costlier) {
   bool_data = data %>%
-    filter(Costlier == costlier) %>%
-    mutate(Response=ifelse(Response == "unmodified", 1, 0))
+    filter(Costlier==costlier) %>%
+    mutate(Response=ifelse(Response=="unmodified", 1, 0))
   print(bool_data$Response)
   simulations = boot(bool_data$Response,
                      statistic=compute_mean,

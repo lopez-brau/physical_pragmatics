@@ -48,7 +48,7 @@ def actor_ToM(rationality, actor_reward, enforcer_action, method, cooperation, c
 		plt.ylabel("Enforcer Rewards for Action 0")
 		plt.xlabel("Enforcer Rewards for Action 1")
 		plt.pcolor(posterior)
-
+	
 	# Compute the utilities.
 	actor_ToM_reward = actor_reward + cooperative_reward(enforcer_rewards, posterior, method, cooperation)
 	actor_ToM_cost = NATURAL_COST + [COST_TABLE[action] for action in enforcer_action] if GRIDWORLD == True else \

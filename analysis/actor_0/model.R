@@ -6,87 +6,79 @@ library(tidyverse)
 setwd("D:/Research/social_pragmatics")
 
 # Import the model data.
+#data_0 = read_csv("data/actor_0/model/enforcer_action_vs_actor_reward.csv")
+data_0 = read_csv("data/actor_0/model/data_0.csv")
+#
+methods = c("confidence", "flat", "proportional")
+cooperation_set = c(-10.0, -5.0, -2.0, 0.0, 2.0, 5.0, 10.0)
 
-data_0 = read_csv("analysis/actor_0/temp.csv", col_names=FALSE)
-data_1 = read_csv("analysis/actor_0/temp2.csv", col_names=FALSE)
+# Plots the model predictions for how the enforcers action changes as a
+# function of the actor's reward (as well as rationality, ToM, method of 
+# integrating others' rewards, and cooperation.
+data_1 = data_0 %>%
+  filter(Rationality=1.0, ToM %in% c(0.0, 0.3, 0.6, 0.8, 1.0), Cooperation %in% cooperation_set) %>%
+  mutate(Actor_Preference=B-A, ToM=factor(ToM))
 
-names(data_0) = c("Actor_Preference", "Enforcer_Action", "ToM")
-names(data_1) = c("Actor_Preference", "Enforcer_Action", "ToM")
-
-plot_0 = data_0 %>%
-  mutate(ToM=factor(ToM)) %>%
-  ggplot(aes(x=Actor_Preference, y=Enforcer_Action))
+plot_0 = data_1 %>%
+  ggplot(aes(x=Actor_Preference, y=Enforcer_Action, group=ToM))
 
 plot_0 +
-  geom_point(aes(shape=ToM, color=ToM), size=5) + 
+  geom_point(aes(color=ToM), size=3) +
+  geom_line(aes(color=ToM)) +
+  facet_wrap(Method~Cooperation, nrow=3) +
   theme_bw() +
-  ggtitle("Cooperation = 0.0") +
+  theme(plot.title=element_text(hjust=0.5)) +
   ylab("Enforcer Action") +
   xlab("Actor Preference (A <= B)") +
-  scale_y_discrete(limit=c(0:9)) +
-  scale_x_discrete(limit=c(0:9))
-
-plot_1 = data_1 %>%
-  mutate(ToM=factor(ToM)) %>%
-  ggplot(aes(x=Actor_Preference, y=Enforcer_Action))
-
-plot_1 +
-  geom_point(aes(shape=ToM, color=ToM), size=5) + 
-  theme_bw() +
-  ylab("Enforcer Action") +
-  xlab("Actor Preference (A <= B)") +
-  scale_y_discrete(limit=c(0:9)) +
-  scale_x_discrete(limit=c(0:9))
-
-# y-axis: Enforcer behavior 
-# x-axis: actor's preferences
-# facet_wrap(~cooperation, nrow=1)
-# Fix the enforcer reward and compute the relevant stuff
+  scale_y_discrete(limits=c(0:9)) +
+  coord_cartesian(ylim=c(0,9)) +
+  scale_x_discrete(limits=c(0:9))
 
 # Plot 2 - same but with actor ToM on x axis
-#data_1 = read_csv("temp2.csv", col_names=FALSE)
+data_2 = data_0 %>%
+  filter(Rationality==0.1, Cooperation %in% cooperation_set) %>%
+  mutate(Actor_Preference=B-A)
+  
+data_2 = data_0 %>%
+  filter(Rationality==1.0, Method=="confidence", Cooperation==10.0) %>%
+  mutate(Actor_Preference=B-A) %>%
+  filter(Actor_Preference %in% c(0, 2, 4, 6, 8))
 
-data_2 = read_csv("plot_2.csv", col_names=FALSE)
+plot_1 = data_2 %>%
+  filter(Actor_Preference>=0) %>%
+  mutate(Actor_Preference=factor(B-A)) %>%
+  ggplot(aes(x=ToM, y=Enforcer_Action, group=Actor_Preference))
 
-names(data_2) = c("a", "b", "y", "p")
-
-data_3 = data_2 %>%
-  mutate(preference_B=b-a)
-
-data_3 %>%
-  filter(preference_B %in% c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) %>%
-  ggplot(aes(x=p, y=y, group=preference_B)) + 
-    theme_bw() + 
-    geom_point(aes(color=factor(preference_B)), size=5) + 
-    geom_line() +
-    scale_x_discrete(limit=c(0:9)) +
-    scale_y_discrete(limit=c(0:9))
-
-data_3 %>%
-  filter(preference_B %in% c(0, -1, -2, -3, -4, -5, -6, -7, -8, -9)) %>%
-  ggplot(aes(x=p, y=y, group=preference_B)) + 
-    theme_bw() + 
-    geom_point(aes(color=factor(preference_B)), size=5) + 
-    geom_line() +
-    scale_x_discrete(limit=c(0:9)) +
-    scale_y_discrete(limit=c(0:9))
+plot_1 +
+  geom_point(aes(color=Actor_Preference), size=3) +
+  geom_line(aes(color=Actor_Preference)) +
+  facet_wrap(Method~Cooperation, nrow=3) +
+  theme_bw() +
+  theme(plot.title=element_text(hjust=0.5)) +
+  ylab("Enforcer Action") +
+  xlab("ToM") +
+  scale_y_discrete(limits=c(0:9)) +
+  coord_cartesian(ylim=c(0,9)) +
+  scale_x_discrete(limits=c(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0))
 
 # Plot 3.
-data_4 = read_csv("plot_3.csv", col_names=FALSE)
+#data_3 = read_csv("data/actor_0/model/actor_choice_vs_enforcer_action.csv")
+data_3 = read_csv("data/actor_0/model/data_1.csv")
 
-names(data_4) = c("x", "a", "b", "p")
+data_4 = data_3 %>%
+  filter(Rationality==1.0, Cooperation %in% cooperation_set) %>%
+  mutate(Actor_Choice=A/(A+B), ToM=factor(ToM))
+    
+plot_2 = data_4 %>%
+  ggplot(aes(x=Enforcer_Action, y=Actor_Choice, group=ToM))
 
-data_5 = data_4 %>%
-  mutate(preference=a/(a+b))
-
-plot_4 = data_5 %>%
-  ggplot(aes(x=x, y=preference, group=p))
-
-
-plot_4 +
-  theme_bw() + 
-  geom_point(aes(color=factor(p)), size=5) + 
-  geom_line(aes(color=factor(p))) +
-  scale_x_discrete(limit=c(0:9))
-
-
+plot_2 +
+  geom_point(aes(color=ToM), size=3) +
+  geom_line(aes(color=ToM)) +
+  facet_wrap(Method~Cooperation, nrow=3) +
+  theme_bw() +
+  theme(plot.title=element_text(hjust=0.5)) +
+  ylab("Actor Preference for A") +
+  xlab("Enforcer Action") +
+  scale_y_discrete(limits=c(0:1)) +
+  scale_x_discrete(limits=c(0:9))

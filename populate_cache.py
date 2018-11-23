@@ -33,9 +33,9 @@ if __name__ == "__main__":
 	cache_enforcer_no_ToM(enforcer, rationality_set, enforcer_rewards)
 	print("Cache time for enforcer_no_ToM: " + str(time.time()-start_time))
 	
-	# Set up the parameter sets for the actor_ToM model.
+	# Set up the method and cooperation sets for the actor_ToM model.
 	methods = ["confidence", "flat", "proportional"]
-	cooperation_set = np.array([-5.0, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 5.0])
+	cooperation_set = np.array([-10.0, -5.0, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 5.0, 10.0, 20.0])
 
 	# Cache the actor_ToM model.
 	if SAMPLING == True:

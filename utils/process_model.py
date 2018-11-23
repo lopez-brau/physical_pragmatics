@@ -3,14 +3,12 @@ import numpy as np
 import os
 import sys
 
-
 from .config import *
-sys.path.append(os.path.join(os.path.dirname(__file__), PATH))
 
 def process_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, likelihood):
-    path = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
-    filename = path + "enforcer_no_ToM_" + str(rationality) + "_" + str(NATURAL_COST) + ".csv"
-    with open(filename, "r") as file:
+    environment = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
+    filename = environment + "enforcer_no_ToM_" + str(rationality) + "_" + str(NATURAL_COST) + ".csv"
+    with open(PATH+filename, "r") as file:
         reader = csv.reader(file)
         action_probabilities = []
         for enforcer_reward in enforcer_rewards:
@@ -24,19 +22,19 @@ def process_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, like
     return likelihood
 
 def process_actor(rationality, enforcer_reward, actor_rewards, enforcer_actions, p, method, cooperation, U):
-    path = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
+    environment = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
     if p != 1.0:
-        filename_actor_no_ToM = path + "actor_no_ToM_" + str(rationality) + "_" + str(NATURAL_COST) + ".csv"
-        file_actor_no_ToM = open(filename_actor_no_ToM, "r")
-        reader_actor_no_ToM = csv.reader(file_actor_no_ToM)
-        lines_actor_no_ToM = [row for row in reader_actor_no_ToM]
+        filename_actor_no_ToM = environment + "actor_no_ToM_" + str(rationality) + "_" + str(NATURAL_COST) + ".csv"
+        with open(PATH+filename_actor_no_ToM, "r") as file_actor_no_ToM:
+            reader_actor_no_ToM = csv.reader(file_actor_no_ToM)
+            lines_actor_no_ToM = [row for row in reader_actor_no_ToM]
     
     if p != 0.0:
-        filename_actor_ToM = path + "actor_ToM_" + str(rationality) + "_" + method + "_" + str(cooperation) + "_" + \
+        filename_actor_ToM = environment + "actor_ToM_" + str(rationality) + "_" + method + "_" + str(cooperation) + "_" + \
                              str(NATURAL_COST) + ".csv"    
-        file_actor_ToM = open(filename_actor_ToM, "r")
-        reader_actor_ToM = csv.reader(file_actor_ToM)
-        lines_actor_ToM = [row for row in reader_actor_ToM]
+        with open(PATH+filename_actor_ToM, "r") as file_actor_ToM:
+            reader_actor_ToM = csv.reader(file_actor_ToM)
+            lines_actor_ToM = [row for row in reader_actor_ToM]
     
     U_actor_no_ToM = np.zeros(U.shape)
     U_actor_ToM = np.zeros(U.shape)
