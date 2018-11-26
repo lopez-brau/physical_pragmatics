@@ -17,7 +17,7 @@ if __name__ == "__main__":
 	# p_set = np.array([0.0, 1.0])
 	enforcer_reward = np.array([9, 0])
 
-	methods = ["confidence", "flat", "proportional"]
+	methods = ["confidence", "preference", "proportional"]
 	# method = "proportional"
 	cooperation_set = np.array([-10.0, -5.0, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 5.0, 10.0])
 	# cooperation = 1.0

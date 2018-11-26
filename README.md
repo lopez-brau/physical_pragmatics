@@ -18,7 +18,6 @@ PATH = "/path/to/repository/"
 
 ## To-do
 
-- Re-generate `data/observer/model`
-- Implement `cache_enforcer_ToM`
-- Figure out what's wrong with the "flat" method
+- Clean up `data/observer/model`.
+- Implement `cache_enforcer_ToM`.
 - ShinyApps: Set up a GUI with sliders for each of the parameters; displays how the model predictions change.

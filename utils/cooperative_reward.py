@@ -4,8 +4,8 @@ from .config import *
 
 def cooperative_reward(enforcer_rewards, reward_probabilities, method, cooperation):
     
-    # The "confidence" method computes the probabilities of each enforcer 
-    # action being the optimal one.
+    # The "confidence" method computes the probabilities of each enforcer's 
+    # reward being the preferred one.
     if method == "confidence":
         inferred_enforcer_reward = np.zeros(NUM_ACTIONS)
         for enforcer_reward in enforcer_rewards:
@@ -18,8 +18,8 @@ def cooperative_reward(enforcer_rewards, reward_probabilities, method, cooperati
                                        (reward_probabilities[tuple(enforcer_reward)]*enforcer_preference)
         return cooperation * inferred_enforcer_reward
 
-    # The "flat" method computes the expected enforcer rewards and infers that
-    # the max of those rewards is the enforcer's preference.
+    # The "preference" method computes the expected enforcer's rewards and
+    # infers that the max of those rewards is the enforcer's preference.
     elif method == "preference":
         expected_enforcer_rewards = np.zeros(NUM_ACTIONS)
         for enforcer_reward in enforcer_rewards:

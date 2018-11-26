@@ -29,11 +29,11 @@ def cache_enforcer_no_ToM(model, rationality_set, enforcer_rewards):
                 writer.writerows(action_probabilities)
                 file.write("\n")
 
-def cache_actor_ToM(model, rationality_set, actor_rewards, enforcer_actions, methods, cooperation_set):
+def cache_actor_ToM(model, rationality_set, actor_rewards, enforcer_actions, social_reward):
     environment = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
     for rationality in rationality_set:
-        for method in methods:
-            for cooperation in cooperation_set:
+        for method in social_reward.keys():
+            for cooperation in social_reward[method]:
                 filename = environment + "actor_ToM_" + str(rationality) + "_" + method + "_" + str(cooperation) + "_" + \
                            str(NATURAL_COST) + ".csv"
                 with open(PATH+filename, "w", newline="") as file:
@@ -47,10 +47,3 @@ def cache_actor_ToM(model, rationality_set, actor_rewards, enforcer_actions, met
                                                          cooperation=cooperation, cache=True)
                             data[int("".join([actor_reward_index, enforcer_action_index]))] = action_probabilities
                     writer.writerows(data)
-
-# def cache_enforcer_ToM(model, rationality_set, enforcer_rewards, p_set, methods, cooperation_set, reward_assumptions):
-#     environment = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
-#     for rationality in rationality_set:
-#         for method in methods:
-#             for cooperation in cooperation_set:
-#                 for actor_rewards in reward_assumptions:

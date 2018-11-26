@@ -33,10 +33,13 @@ if __name__ == "__main__":
 	cache_enforcer_no_ToM(enforcer, rationality_set, enforcer_rewards)
 	print("Cache time for enforcer_no_ToM: " + str(time.time()-start_time))
 	
-	# Set up the method and cooperation sets for the actor_ToM model.
-	methods = ["confidence", "flat", "proportional"]
-	cooperation_set = np.array([-10.0, -5.0, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 5.0, 10.0, 20.0])
-
+	# Set up the ways in which the actor can integrate social reward.
+	social_reward = {
+		"confidence": np.array([-25.0, -20.0, -15.0, -10.0, -5.0, 0.0, 5.0, 10.0, 15.0, 20.0, 25.0]),
+		"preference": np.array([-25.0, -20.0, -15.0, -10.0, -5.0, 0.0, 5.0, 10.0, 15.0, 20.0, 25.0]),
+		"proportional": np.array([-2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5])
+	}
+	
 	# Cache the actor_ToM model.
 	if SAMPLING == True:
 		actor_rewards = np.random.choice(MAX_VALUE, (MAX_SAMPLES, NUM_ACTIONS))
@@ -48,5 +51,5 @@ if __name__ == "__main__":
 						   np.array(list(it.product(np.arange(GRIDWORLD_MAX_VALUE), repeat=NUM_ACTIONS)))
 
 	start_time = time.time()
-	cache_actor_ToM(actor_ToM, rationality_set, actor_rewards, enforcer_actions, methods, cooperation_set)
+	cache_actor_ToM(actor_ToM, rationality_set, actor_rewards, enforcer_actions, social_reward)
 	print("Cache time for actor_ToM: " + str(time.time()-start_time))
