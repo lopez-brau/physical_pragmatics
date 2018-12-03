@@ -5,5 +5,5 @@ def softmax(U, rationality):
     U = U - np.max(U)
     exp = np.exp(U/rationality)
     action_probabilities = exp / sum(exp)
-    
+
     return action_probabilities

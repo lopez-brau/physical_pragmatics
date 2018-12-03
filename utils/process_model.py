@@ -30,8 +30,8 @@ def process_actor(rationality, enforcer_reward, actor_rewards, enforcer_actions,
             lines_actor_no_ToM = [row for row in reader_actor_no_ToM]
     
     if p != 0.0:
-        filename_actor_ToM = environment + "actor_ToM_" + str(rationality) + "_" + method + "_" + str(cooperation) + "_" + \
-                             str(NATURAL_COST) + ".csv"    
+        filename_actor_ToM = environment + "actor_ToM_" + str(rationality) + "_" + method + "_" + str(cooperation) + \
+                             "_" + str(NATURAL_COST) + ".csv"    
         with open(PATH+filename_actor_ToM, "r") as file_actor_ToM:
             reader_actor_ToM = csv.reader(file_actor_ToM)
             lines_actor_ToM = [row for row in reader_actor_ToM]
@@ -48,7 +48,8 @@ def process_actor(rationality, enforcer_reward, actor_rewards, enforcer_actions,
                 row = lines_actor_no_ToM[int("".join([actor_reward_index, enforcer_action_index]))]
                 action_probabilities = [float(num) for num in row]
                 expected_enforcer_reward = np.dot(enforcer_reward, action_probabilities)
-                temp_actor_no_ToM[tuple(enforcer_action)] = expected_enforcer_reward - (COST_RATIO*sum(enforcer_action))
+                temp_actor_no_ToM[tuple(enforcer_action)] = expected_enforcer_reward - \
+                                                            (COST_RATIO*sum(enforcer_action))
 
             if p != 0.0:
                 row = lines_actor_ToM[int("".join([actor_reward_index, enforcer_action_index]))]
@@ -62,3 +63,25 @@ def process_actor(rationality, enforcer_reward, actor_rewards, enforcer_actions,
     U = ((1.0-p)*U_actor_no_ToM) + (p*U_actor_ToM)
 
     return U
+
+def process_enforcer(rationality, enforcer_rewards, enforcer_action, likelihood, p=0.0, method=None, \
+                     cooperation=None):
+    environment = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
+    if p == 0.0:
+        filename = environment + "enforcer_no_ToM_" + str(rationality) + "_" + str(NATURAL_COST) + ".csv"
+    else:
+        filename = environment + "enforcer_ToM_" + str(rationality) + "_" + str(p) + "_" + method + "_" + \
+                   str(cooperation) + "_" + str(NATURAL_COST) + ".csv"
+    
+    with open(PATH+filename, "r") as file:
+        reader = csv.reader(file)
+        action_probabilities = []
+        for enforcer_reward in enforcer_rewards:
+            row = next(reader)
+            while row != []:
+                action_probabilities.append([float(num) for num in row])
+                row = next(reader)
+            likelihood[tuple(enforcer_reward)] = np.array(action_probabilities)[tuple(enforcer_action)]
+            action_probabilities = []
+
+    return likelihood

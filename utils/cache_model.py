@@ -34,8 +34,8 @@ def cache_actor_ToM(model, rationality_set, actor_rewards, enforcer_actions, soc
     for rationality in rationality_set:
         for method in social_reward.keys():
             for cooperation in social_reward[method]:
-                filename = environment + "actor_ToM_" + str(rationality) + "_" + method + "_" + str(cooperation) + "_" + \
-                           str(NATURAL_COST) + ".csv"
+                filename = environment + "actor_ToM_" + str(rationality) + "_" + method + "_" + str(cooperation) + \
+                           "_" + str(NATURAL_COST) + ".csv"
                 with open(PATH+filename, "w", newline="") as file:
                     writer = csv.writer(file)
                     data = [""] * (MAX_VALUE**(NUM_ACTIONS*2))
@@ -47,3 +47,19 @@ def cache_actor_ToM(model, rationality_set, actor_rewards, enforcer_actions, soc
                                                          cooperation=cooperation, cache=True)
                             data[int("".join([actor_reward_index, enforcer_action_index]))] = action_probabilities
                     writer.writerows(data)
+
+def cache_enforcer_ToM(model, rationality_set, enforcer_rewards, p_set, social_reward):
+    environment = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
+    for rationality in rationality_set:
+        for p in p_set:
+            for method in social_reward.keys():
+                for cooperation in social_reward[method]:
+                    filename = environment + "enforcer_ToM_" + str(rationality) + "_" + str(p) + "_" + method + "_" + \
+                               str(cooperation) + "_" + str(NATURAL_COST) + ".csv"
+                    with open(PATH+filename, "w", newline="") as file:
+                        for enforcer_reward in enforcer_rewards:
+                            writer = csv.writer(file)
+                            action_probabilities = model(rationality, enforcer_reward, p=p, method=method, \
+                                                         cooperation=cooperation, cache=True)
+                            writer.writerows(action_probabilities)
+                            file.write("\n")

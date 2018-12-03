@@ -6,7 +6,7 @@ library(tidyverse)
 setwd("D:/Research/social_pragmatics")
 
 # Import the human data.
-data_0 = read_csv("data/actor_0/human/data.csv")
+data_0 = read_csv("data/actor_0/data.csv")
 
 # Update old formatting and remove irrelevant columns.
 data_1 = data_0 %>%
