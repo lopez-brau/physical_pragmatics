@@ -5,22 +5,6 @@ import sys
 
 from .config import *
 
-def process_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, likelihood):
-    environment = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
-    filename = environment + "enforcer_no_ToM_" + str(rationality) + "_" + str(NATURAL_COST) + ".csv"
-    with open(PATH+filename, "r") as file:
-        reader = csv.reader(file)
-        action_probabilities = []
-        for enforcer_reward in enforcer_rewards:
-            row = next(reader)
-            while row != []:
-                action_probabilities.append([float(num) for num in row])
-                row = next(reader)
-            likelihood[tuple(enforcer_reward)] = np.array(action_probabilities)[tuple(enforcer_action)]
-            action_probabilities = []
-
-    return likelihood
-
 def process_actor(rationality, enforcer_reward, actor_rewards, enforcer_actions, p, method, cooperation, U):
     environment = "cache/gridworld_" if GRIDWORLD == True else "cache/standard_"
     if p != 1.0:

@@ -28,7 +28,7 @@ def actor_ToM(rationality, actor_reward, enforcer_action, method, cooperation, c
 
 	# Compute the likelihood.
 	if cache == True:
-		likelihood = process_enforcer_no_ToM(rationality, enforcer_rewards, enforcer_action, likelihood)
+		likelihood = process_enforcer(rationality, enforcer_rewards, enforcer_action, likelihood)
 	else:
 		for enforcer_reward in enforcer_rewards:
 			enforcer_action_probabilities = enforcer(rationality, enforcer_reward, cache=True)
@@ -126,6 +126,7 @@ def enforcer(rationality, enforcer_reward, p=0.0, method=None, cooperation=None,
 
 	return action_probabilities
 
+# Add cached versions for all of these.
 def observer(infer, rationality, **kwargs):
 	# Infer the enforcer's reward.
 	if infer == "enforcer_reward":
