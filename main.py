@@ -13,15 +13,21 @@ if __name__ == "__main__":
 
 	# Set up model parameters.
 	rationality = 1.0
-	enforcer_reward = np.array([4, 0])
+	enforcer_reward = np.array([9, 0])
 	method = "confidence"
 	cooperation = 5.0
 	actor_reward = np.array([0, 5])
 	enforcer_action = np.array([6, 4])
 
-	enforcer(rationality, enforcer_reward, p=1.0, method=method, cooperation=cooperation, cache=True, plot=True)
+	ap0 = actor_no_ToM(rationality, actor_reward, enforcer_action)
+	ap1 = actor_ToM(rationality, actor_reward, enforcer_action, method=method, cooperation=cooperation, cache=True)
 
-	sys.exit(plt.show())
+	enforcer_action = np.array([2, 0])
+	ap2 = actor_no_ToM(rationality, actor_reward, enforcer_action)
+	ap3 = actor_ToM(rationality, actor_reward, enforcer_action, method=method, cooperation=cooperation, cache=True)
+
+	
+	sys.exit(print(ap0, ap1, ap2, ap3))
 
 	# Compute model predictions for all enforcer actions.
 	for enforcer_action in enforcer_actions:
