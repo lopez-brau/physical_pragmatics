@@ -50,8 +50,8 @@ function get_noun_phrase_0(object) {
     noun_phrases = {
         "plant": "is a plant",
         "chair": "is a chair",
-        "stack of books": "is a stack of books",
-        "pile of cinderblocks": "is a pile of cinderblocks",
+        "books": "is a stack of books",
+        "cinderblocks": "is a pile of cinderblocks",
         "tape": "is some tape",
         "rulers": "are some rulers",
         "hat": "is a hat",
