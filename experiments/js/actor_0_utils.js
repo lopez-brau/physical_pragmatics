@@ -10,21 +10,17 @@ function trials(doors, condition, side, object) {
     if (side == "left") {
         if (condition == "low") {
             trials.push([low_door, unmodified_door])
-            trials.push([none_door, unmodified_door])
         }
         else if (condition == "none") {
             trials.push([none_door, unmodified_door])
-            trials.push([low_door, unmodified_door])
         } 
     }
     else if (side == "right") {
         if (condition == "low") {
             trials.push([unmodified_door, low_door])
-            trials.push([unmodified_door, none_door])
         }
         else if (condition == "none") {
             trials.push([unmodified_door, none_door])
-            trials.push([unmodified_door, low_door])
         } 
     }
 
