@@ -216,7 +216,6 @@ function init() {
 
     // Select which object is being used for the low cost and the symbol.
     exp.object = "plant";
-    $(".display_stimuli").html(exp.object);
     $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.object));
     $(".display_stimuli_phrase_1").html(get_noun_phrase_1(exp.object));
 

@@ -66,12 +66,12 @@ function get_noun_phrase_1(object) {
     noun_phrases = {
         "plant": "a plant",
         "chair": "a chair",
-        "stack of books": "a stack of books",
-        "pile of cinderblocks": "a pile of cinderblocks",
+        "books": "a stack of books",
+        "cinderblocks": "a pile of cinderblocks",
         "tape": "some tape",
         "rulers": "some rulers",
         "hat": "a hat",
-        "fishbowl": "a fishbowl tied to a string"
+        "string": "a fishbowl tied to a string"
     }
 
     return noun_phrases[object]
