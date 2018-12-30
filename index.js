@@ -75,34 +75,55 @@ function make_slides(f) {
         // Display the prompt, stimuli, and the options.
         if ((j+1) == 1) {
             $(".display_prompt").html("What do you think someone was trying to tell you about the door with the " + exp.object + "?");
-        }
+            $(".display_stimulus").html("<div align=\"center\">" +
+                                        "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;margin-bottom:-30px;\">" +
+                                        "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_0/" +
+                                        exp.trials[j][0] + "\"></img>" + 
+                                        "<br><br>" +
+                                        "<p style=\"margin-right:20px;\"></p>" +
+                                        "</label>" + 
+                                        "</div>" + 
+                                        "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;margin-bottom:-30px;\">" +
+                                        "<label>" + 
+                                        "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_0/" +
+                                        exp.trials[j][1] + "\"></img>" +
+                                        "<br><br>" + 
+                                        "</label>" +
+                                        "</div>" + 
+                                        "</div>" + 
+                                        "<div style=\"width:60%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
+                                        "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
+                                        "You <b>should</b> walk through the door with the " + exp.object + 
+                                        "</label></p>" +
+                                        "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
+                                        "You <b>should not</b> walk through the door with the " + exp.object +
+                                        "</label></p>" +
+                                        "</div>");
         else if ((j+1) == 2) {
             $(".display_prompt").html("What do you think someone was trying to tell you about the door with the picture?");
+            $(".display_stimulus").html("<div align=\"center\">" +
+                                        "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;margin-bottom:-30px;\">" +
+                                        "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_0/" +
+                                        exp.trials[j][0] + "\"></img>" + 
+                                        "<br><br>" +
+                                        "<p style=\"margin-right:20px;\"></p>" +
+                                        "</label>" + 
+                                        "</div>" + 
+                                        "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;margin-bottom:-30px;\">" +
+                                        "<label>" + 
+                                        "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_0/" +
+                                        exp.trials[j][1] + "\"></img>" +
+                                        "<br><br>" + 
+                                        "</label>" +
+                                        "</div>" + 
+                                        "</div>" + 
+                                        "<div style=\"width:60%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
+                                        "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
+                                        "You <b>should</b> walk through the door with the picture</label></p>" +
+                                        "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
+                                        "You <b>should not</b> walk through the door with the picture</label></p>" +
+                                        "</div>");
         }
-        $(".display_stimulus").html("<div align=\"center\">" +
-                                    "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;margin-bottom:-30px;\">" +
-                                    "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_0/" +
-                                    exp.trials[j][0] + "\"></img>" + 
-                                    "<br><br>" +
-                                    "<p style=\"margin-right:20px;\"></p>" +
-                                    "</label>" + 
-                                    "</div>" + 
-                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;margin-bottom:-30px;\">" +
-                                    "<label>" + 
-                                    "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_0/" +
-                                    exp.trials[j][1] + "\"></img>" +
-                                    "<br><br>" + 
-                                    "</label>" +
-                                    "</div>" + 
-                                    "</div>" + 
-                                    "<div style=\"width:60%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
-                                    "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
-                                    "You <b>should</b> walk through the door with the " + exp.object + 
-                                    "</label></p>" +
-                                    "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
-                                    "You <b>should not</b> walk through the door with the " + exp.object +
-                                    "</label></p>" +
-                                    "</div>");
     }
 
     // Run when the "Continue" button is hit on a slide.
@@ -159,7 +180,7 @@ function make_slides(f) {
                 "catch_trials": exp.catch_trials,
                 "system": exp.system,
                 "subject_information": exp.subj_data,
-                "time_in_minutes": (Date.now()-exp.startT) / 60000
+                "time_in_minutes": (Date.now() - exp.startT) / 60000
             };
             setTimeout(function() {turk.submit(exp.data);}, 1000);
         }
