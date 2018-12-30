@@ -23,11 +23,10 @@
     <link href="css/local-style.css" rel="stylesheet" type="text/css"/>
 
     <!-- Experiment files. -->
-    <script src="js/agent_1.js"></script>
-    <script src="js/names.js"></script>
+    <script src="js/symbols_0.js"></script>
 
     <!-- Experiment specific helper functions. -->
-    <script src="js/agent_1_utils.js"></script>
+    <script src="js/symbols_0_utils.js"></script>
 
     <script src="shared/js/uniqueturker.js"></script>
 
@@ -56,10 +55,10 @@
                 <p align="left">Procedures: This experiment takes around 3 minutes to complete. You will first read a story. Then, you will answer a multiple-choice question. You will receive <span class="display_payment"></span> upon completing the experiment.</p>
                 <p align="left">Risks and Benefits: Completing this task poses no more risk of harm to you than do the experiences of everyday life (e.g., from working on a computer). Although this study will not benefit you personally, it will contribute to the advancement of our understanding of human reasoning.</p>
                 <p align="left">Confidentiality: All of the responses you provide during this study will be anonymous. You will not be asked to provide any identifying information, such as your name, in any of the questionnaires. Typically, only the researchers involved in this study and those responsible for research oversight will have access to the information you provide. However, we may also share the data with other researchers so that they can check the accuracy of our conclusions; this will not impact you because the data are anonymous. The researcher will not know your name, and no identifying information will be connected to your survey answers in any way. The survey is therefore anonymous. However, your account is associated with an mTurk number that the researcher has to be able to see in order to pay you, and in some cases these numbers are associated with public profiles which could, in theory, be searched. For this reason, though the researcher will not be looking at anyone's public profiles, the fact of your participation in the research (as opposed to your actual survey responses) is technically considered "confidential" rather than truly anonymous.</p>
-                <p align="left">Voluntary Participation: Your participation in this study is voluntary. You are free to decline to participate, to end your participation at any time for any reason, or to refuse to answer any individual question. Questions: If you have any questions about this study, you may contact Michael Lopez-Brau at <a style="text-decoration:none" href="mailto:michael.lopez-brau@yale.edu">michael.lopez-brau@yale.edu</a> or Julian Jara-Ettinger at julian.jara-ettinger@yale.edu. If you would like to talk with someone other than the researchers to discuss problems or concerns, to discuss situations in the event that a member of the research team is not available, or to discuss your rights as a research participant, you may contact, and mention HSC number 2000020357:</p>
-                <p align="left" style="text-indent:180px;margin:0">Yale University Human Subjects Committee</p>
-                <p align="left" style="text-indent:180px;margin:0">Box 208010, New Haven, CT 06520-8010</p>
-                <p align="left" style="text-indent:180px;margin:0">(203) 785-4688; human.subjects@yale.edu</p>
+                <p align="left">Voluntary Participation: Your participation in this study is voluntary. You are free to decline to participate, to end your participation at any time for any reason, or to refuse to answer any individual question. Questions: If you have any questions about this study, you may contact Michael Lopez-Brau at <a style="text-decoration:none;" href="mailto:michael.lopez-brau@yale.edu">michael.lopez-brau@yale.edu</a> or Julian Jara-Ettinger at julian.jara-ettinger@yale.edu. If you would like to talk with someone other than the researchers to discuss problems or concerns, to discuss situations in the event that a member of the research team is not available, or to discuss your rights as a research participant, you may contact, and mention HSC number 2000020357:</p>
+                <p align="left" style="text-indent:180px;margin:0;">Yale University Human Subjects Committee</p>
+                <p align="left" style="text-indent:180px;margin:0;">Box 208010, New Haven, CT 06520-8010</p>
+                <p align="left" style="text-indent:180px;margin:0;">(203) 785-4688; human.subjects@yale.edu</p>
                 <p align="left">Additional information is available <a style="text-decoration:none;" href="https://your.yale.edu/research-support/human-research/research-participants/rights-research-participant">here</a>.</p>
             </div>
             <p align="left">Agreement to participate: By clicking the button below, you acknowledge that you have read the above information, and agree to participate in the study. You must be at least 18 years of age to participate; agreeing to participate confirms you are 18 years of age or older.  Click the "Start Experiment" button to confirm your agreement and continue.</p>
@@ -67,22 +66,25 @@
         <button id="start_button" type="button">Start Experiment</button>
     </div>
 
-    <!-- Instructions slide. -->
-    <div class="slide" id="instructions">
-        <p>You're leaving an office building and find two identical exits. Near one of the exits . You're not sure if someone wanted you to walk through this exit or walk through the other one instead.</p>
+    <!-- Context slide. -->
+    <div class="slide" id="context">
+        <p>You're leaving an office building and find two identical exits. Near one of the exits <span class="display_stimuli_phrase_0"></span>. You're not sure if someone wanted you to walk through this exit or walk through the other one instead.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
     <!-- Catch trial slide. -->
     <div class="slide" id="catch_trial">
-        <p>There is one trial in total. Before you begin, please answer the following question. You <b>must</b> answer it correctly to continue. If you fail to answer it correctly, you will be sent back to reread the instructions.</p>
-        <p class="display_catch_options"></p>
-        <p class="catch_error_0">Please answer the question before continuing.</p>
+        <p>There will be two trials in total. Before you begin, please answer the following question. You <b>must</b> answer it correctly to continue. If you fail to answer it correctly, you will be sent back to reread the background.</p>
+        <p class="display_catch"></p>
+        <p class="catch_error">Please answer the question before continuing.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
     <!-- Trial slides. -->
     <div class="trial_slides"></div>
+
+    <!-- Exclusion slides. -->
+    <div class="exclusion_slides"></div>
 
     <!-- Subject information slides. -->
     <div class="slide"  id="subj_info">
@@ -90,13 +92,12 @@
             <div class="subj_info_title">Additional Information</div>
                 <p class="info">Answering these questions is optional, but will help us understand your answers.</p>
                 <p>Did you read the instructions and do you think you did the HIT correctly?</p>
-                <label><input type="radio" name="assess" value="No"/>No</label>
-                <label><input type="radio" name="assess" value="Yes"/>Yes</label>
-                <label><input type="radio" name="assess" value="Confused"/>I was confused</label>
+                    <label><input type="radio" name="assess" value="No"/>No</label>
+                    <label><input type="radio" name="assess" value="Yes"/>Yes</label>
+                    <label><input type="radio" name="assess" value="Confused"/>I was confused</label>
                 <p>Were there any problems or bugs in the experiment?</p>
                 <textarea id="problems" rows="2" cols="50"></textarea>
-                <p>What do you think is a fair price for the work you did?</p>
-                <textarea id="fairprice" rows="1" cols="10"></textarea>
+                <p>What do you think is a fair price for the work you did? <input type="text" id="fairprice"/></p>
                 <p>Gender:
                     <select id="gender">
                         <label><option value=""/></label>
@@ -106,7 +107,7 @@
                     </select>
                 </p>
                 <p>Age: <input type="text" id="age"/></p>
-                <p>Level of Education:
+                <p>Education:
                     <select id="education">
                         <label><option value="-1"/></label>
                         <label><option value="0"/>Some High School</label>
@@ -139,10 +140,6 @@
     <div class="progress">
         <span>Progress:</span>
         <span class="display_progress"></span>
-        <!-- <div class="bar-wrapper">
-            <div class="bar" width="0%">
-            </div>
-        </div> -->
     </div>
 </body>
 </html>

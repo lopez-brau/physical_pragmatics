@@ -1,74 +1,84 @@
-// Generate the trial slides.
-function trials(door, cost, object) {
-    // Stitch together the filenames for each door.
-    empty_door = door + ".png"
-    object_door = door + "_" + cost + "_" + object + ".png"
+// Generate the stimuli for the trial and exclusion slides.
+function trials(doors, condition, side, object) {
+    // Stitch together the filenames for all of the doors.
+    unmodified_door = doors + ".png"
+    object_door = doors + "_low_" + object + ".png"
+    symbol_door = doors + "_symbol_" + object + ".png"
 
-    // Push the filenames to trials.
+    // Push the filenames for both trials.
     var trials = []
-    trials.push(_.shuffle([empty_door, object_door]))
+    if (side == "left") {
+        if (condition == "low") {
+            trials.push([object_door, unmodified_door])
+            trials.push([symbol_door, unmodified_door])
+        }
+        else if (condition == "symbol") {
+            trials.push([symbol_door, unmodified_door])
+            trials.push([object_door, unmodified_door])
+        } 
+    }
+    else if (side == "right") {
+        if (condition == "low") {
+            trials.push([unmodified_door, object_door])
+            trials.push([unmodified_door, symbol_door])
+        }
+        else if (condition == "symbol") {
+            trials.push([unmodified_door, symbol_door])
+            trials.push([unmodified_door, object_door])
+        } 
+    }
 
     return trials
 }
 
-// Embeds the trial slides.
+// Embeds the trial and exclusion slides.
 function embed_slides(num_trials) {
-    var slides = "";
+    var trial_slides = "";
+    var exclusion_slides = "";
     for (var i = 1; i <= num_trials; i++) {
-        slides = slides + "<div class=\"slide\" id=\"trial" + i + "\">" + 
-            "<p class=\"display_setup\"></p>" +
-            "<p class=\"display_stimulus\"></p>" +
-            "<button onclick=\"_s.button()\">Continue</button>" +
-            "<p class=\"error\">Please make a selection before continuing.</p>" +
-            "</div>";
-        $(".trial_slides").html(slides);
+        trial_slides = trial_slides + "<div class=\"slide\" id=\"trial_" + i + "\">" + 
+                       "<p class=\"display_trial\"></p>" +
+                       "<button onclick=\"_s.button()\">Continue</button>" +
+                       "<p class=\"trial_error\">Please make a selection before continuing.</p>" +
+                       "</div>";
+        exclusion_slides = exclusion_slides + "<div class=\"slide\" id=\"exclusion_" + i + "\">" + 
+                           "<p class=\"display_exclusion\"></p>" +
+                           "<button onclick=\"_s.button()\">Continue</button>" +
+                           "<p class=\"exclusion_error\">Please make a selection before continuing.</p>" +
+                           "</div>";
+        $(".trial_slides").html(trial_slides);
+        $(".exclusion_slides").html(exclusion_slides);
     }
 }
 
-// Sample unique names for the enforcer and the agent.
-function get_characters(characters) {
-    var shuffled_characters = _.shuffle(characters)
-    var enforcer = shuffled_characters[0]
-    var agent = shuffled_characters[1]
-    return [enforcer, agent]
+// Retrieve the noun phrase for a given object for the instructions slide.
+function get_noun_phrase_0(object) {
+    noun_phrases = {
+        "plant": "is a plant",
+        "chair": "is a chair",
+        "books": "is a stack of books",
+        "cinderblocks": "is a pile of cinderblocks",
+        "tape": "is some tape",
+        "rulers": "are some rulers",
+        "hat": "is a hat",
+        "fishbowl": "is a fishbowl tied to a string"
+    }
+
+    return noun_phrases[object]
 }
 
-// Use the appropriate gender-specific pronoun for a given character.
-function get_pronoun_1(character, capitalized) {
-    if (character.gender == "male") {
-        return capitalized ? "He" : "he"
+// Retrieve the noun phrase for a given object for the transition slide.
+function get_noun_phrase_1(object) {
+    noun_phrases = {
+        "plant": "a plant",
+        "chair": "a chair",
+        "books": "a stack of books",
+        "cinderblocks": "a pile of cinderblocks",
+        "tape": "some tape",
+        "rulers": "some rulers",
+        "hat": "a hat",
+        "string": "a fishbowl tied to a string"
     }
-    else {
-        return capitalized ? "She" : "she"
-    }
-}
 
-// Use the appropriate gender-specific pronoun for a given character.
-function get_pronoun_2(character, capitalized) {
-    if (character.gender == "male") {
-        return capitalized ? "Him" : "him"
-    }
-    else {
-        return capitalized ? "Her" : "her"
-    }
-}
-
-// Use the appropriate gender-specific pronoun for a given character.
-function get_pronoun_3(character, capitalized) {
-    if (character.gender == "male") {
-        return capitalized ? "His" : "his"
-    }
-    else {
-        return capitalized ? "Hers" : "hers"
-    }
-}
-
-// Use the appropriate gender-specific pronoun for a given character.
-function get_pronoun_4(character, capitalized) {
-    if (character.gender == "male") {
-        return capitalized ? "His" : "his"
-    }
-    else {
-        return capitalized ? "Her" : "her"
-    }
+    return noun_phrases[object]
 }

@@ -1,4 +1,4 @@
-// Generate the trial slides.
+// Generate the stimuli for the trial and exclusion slides.
 function trials(doors, condition, side, object) {
     // Stitch together the filenames for all of the doors.
     unmodified_door = doors + ".png"
@@ -31,17 +31,23 @@ function trials(doors, condition, side, object) {
     return trials
 }
 
-// Embeds the trial slides.
+// Embeds the trial and exclusion slides.
 function embed_slides(num_trials) {
-    var slides = "";
+    var trial_slides = "";
+    var exclusion_slides = "";
     for (var i = 1; i <= num_trials; i++) {
-        slides = slides + "<div class=\"slide\" id=\"trial_" + i + "\">" + 
-            "<p class=\"display_prompt\"></p>" +
-            "<p class=\"display_stimulus\"></p>" +
-            "<button onclick=\"_s.button()\">Continue</button>" +
-            "<p class=\"error\">Please make a selection before continuing.</p>" +
-            "</div>";
-        $(".trial_slides").html(slides);
+        trial_slides = trial_slides + "<div class=\"slide\" id=\"trial_" + i + "\">" + 
+                       "<p class=\"display_trial\"></p>" +
+                       "<button onclick=\"_s.button()\">Continue</button>" +
+                       "<p class=\"trial_error\">Please make a selection before continuing.</p>" +
+                       "</div>";
+        exclusion_slides = exclusion_slides + "<div class=\"slide\" id=\"exclusion_" + i + "\">" + 
+                           "<p class=\"display_exclusion\"></p>" +
+                           "<button onclick=\"_s.button()\">Continue</button>" +
+                           "<p class=\"exclusion_error\">Please make a selection before continuing.</p>" +
+                           "</div>";
+        $(".trial_slides").html(trial_slides);
+        $(".exclusion_slides").html(exclusion_slides);
     }
 }
 
@@ -50,10 +56,10 @@ function get_noun_phrase_0(object) {
     noun_phrases = {
         "plant": "is a plant",
         "chair": "is a chair",
-        "books": "is a stack of books",
+        "books": "are some books",
         "cinderblocks": "is a pile of cinderblocks",
         "tape": "is some tape",
-        "rulers": "are some rulers",
+        "rulers": "are some rulers taped to the door frame",
         "hat": "is a hat",
         "fishbowl": "is a fishbowl tied to a string"
     }
@@ -66,10 +72,10 @@ function get_noun_phrase_1(object) {
     noun_phrases = {
         "plant": "a plant",
         "chair": "a chair",
-        "books": "a stack of books",
+        "books": "some books",
         "cinderblocks": "a pile of cinderblocks",
         "tape": "some tape",
-        "rulers": "some rulers",
+        "rulers": "some rulers taped to the door frame",
         "hat": "a hat",
         "string": "a fishbowl tied to a string"
     }

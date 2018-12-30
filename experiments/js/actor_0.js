@@ -11,9 +11,9 @@ function make_slides(f) {
         }
     });
 
-    // Set up the instructions slide.
-    slides.instructions = slide({
-        name: "instructions",
+    // Set up the context slide.
+    slides.context = slide({
+        name: "context",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
@@ -22,106 +22,88 @@ function make_slides(f) {
     slides.catch_trial = slide({
         name: "catch_trial",
         start: function() {
+            // Display the progress bar and remove any previous error messages.
             $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
-            $(".catch_error_0").hide();
+            $(".catch_error").hide();
 
-            var sentences = ["What is the only difference between the two exits?"];
-            exp.sentence_0 = sentences[0];
-
-            $(".display_catch_options").html("<p>" + exp.sentence_0 + "</p>" +
-                                             "<p>" +
-                                             "<label><input type=\"checkbox\" name=\"sentence_0_0\" value=\"0\"/>color of the door  </label>" +
-                                             "<label><input type=\"checkbox\" name=\"sentence_0_1\" value=\"1\"/>amount of lighting  </label>" +
-                                             "<label><input type=\"checkbox\" name=\"sentence_0_2\" value=\"2\"/>the " + exp.object + "  </label>" +
-                                             "<label><input type=\"checkbox\" name=\"sentence_0_3\" value=\"3\"/>not sure  </label>" +
-                                             "</p>");
+            // Set up the catch trial prompt and display it along with the options.
+            exp.catch_prompt = "What is the only difference between the two exits?";
+            $(".display_catch").html("<p>" + exp.catch_prompt + "</p>" +
+                                     "<p>" +
+                                     "<label><input type=\"checkbox\" name=\"catch_0\" value=\"0\"/>" + 
+                                     "color of the door  </label>" +
+                                     "<label><input type=\"checkbox\" name=\"catch_1\" value=\"1\"/>" + 
+                                     "amount of lighting  </label>" +
+                                     "<label><input type=\"checkbox\" name=\"catch_2\" value=\"2\"/>" +
+                                     "the " + exp.object + "  </label>" +
+                                     "<label><input type=\"checkbox\" name=\"catch_3\" value=\"3\"/>" +
+                                     "not sure  </label>" +
+                                     "</p>");
         },
         button: function() {
-            exp.target_0_0 = ($("input[name='sentence_0_0']:checked").val() == "0") ? 1 : 0;
-            exp.target_0_1 = ($("input[name='sentence_0_1']:checked").val() == "1") ? 1 : 0;
-            exp.target_0_2 = ($("input[name='sentence_0_2']:checked").val() == "2") ? 1 : 0;
-            exp.target_0_3 = ($("input[name='sentence_0_3']:checked").val() == "3") ? 1 : 0;
+            // Record the responses.
+            exp.catch_response_0 = ($("input[name='catch_0']:checked").val() == "0") ? 1 : 0;
+            exp.catch_response_1 = ($("input[name='catch_1']:checked").val() == "1") ? 1 : 0;
+            exp.catch_response_2 = ($("input[name='catch_2']:checked").val() == "2") ? 1 : 0;
+            exp.catch_response_3 = ($("input[name='catch_3']:checked").val() == "3") ? 1 : 0;
 
-            // Triggers if the participant fails to answer all of the questions.
-            if (exp.target_0_0 + exp.target_0_1 + exp.target_0_2 + exp.target_0_3 == 0) {
-                $(".catch_error_0").show();
+            // Triggers if the participant fails to answer the question.
+            if (exp.catch_response_0 + exp.catch_response_1 + exp.catch_response_2 + exp.catch_response_3 == 0) {
+                $(".catch_error").show();
             }
 
             // Triggers if the participant fails to answer the question correctly.
-            else if ((exp.target_0_0 == 1) || (exp.target_0_1 == 1) || (exp.target_0_2 == 0) || (exp.target_0_3 == 1)) {
-                $(".catch_error_0").hide();
+            else if ((exp.catch_response_0 == 1) || (exp.catch_response_1 == 1) || (exp.catch_response_2 == 0) || 
+                     (exp.catch_response_3 == 1)) {
+                $(".catch_error").hide();
                 exp.go(-1);
             }
             else {
-                exp.catch_trials.push({
-                    "enforcer_name": exp.enforcer.name,
-                    "enforcer_gender": exp.enforcer.gender,
-                    "sentence_0": exp.sentence_0,
-                    "target_0_0": exp.target_0_0,
-                    "target_0_1": exp.target_0_1,
-                    "target_0_2": exp.target_0_2,
-                    "target_0_3": exp.target_0_3
-                });
                 exp.go();
             }
         }
     });
 
     // Set up a trial slide.
-    function start() {
+    function trial_start() {
+        // Display the progress bar and remove any previous error messages.
         $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
-        $(".error").hide();
+        $(".trial_error").hide();
 
-        $(".display_setup").html("What do you think someone was trying to tell you about the door with the " + exp.object + "?");
-        // $(".display_stimulus").html("<br><br>" + 
-        //                             "<div align=\"center\">" +
-        //                             "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;\">" +
-        //                             "<label>" +
-        //                             "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"../imgs/agent_1/" + 
-        //                             exp.trials[j][0] + "\"></img>" + 
-        //                             "<br><br>" +
-        //                             "<p style=\"margin-right:20px;\"><input type=\"radio\" name=\"target_0\" value=\"left\"/></p>" +
-        //                             "</label>" + 
-        //                             "</div>" + 
-        //                             "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;\">" +
-        //                             "<label>" + 
-        //                             "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"../imgs/agent_1/" + 
-        //                             exp.trials[j][1] + "\"></img>" +
-        //                             "<br><br>" + 
-        //                             "<p style=\"margin-right:20px;\"><input type=\"radio\" name=\"target_0\" value=\"right\"/></p>" + 
-        //                             "</label>" +
-        //                             "</div>" + 
-        //                             "</div>");
-        $(".display_stimulus").html("<br><br>" + 
-                                    "<div align=\"center\">" +
-                                    "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;\">" +
-                                    "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"../imgs/agent_1/" + 
-                                    exp.trials[j][0] + "\"></img>" + 
-                                    "<br><br>" +
-                                    "<p style=\"margin-right:20px;\"></p>" +
-                                    "</label>" + 
-                                    "</div>" + 
-                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;\">" +
-                                    "<label>" + 
-                                    "<img style=\"-webkit-transform:rotate(90deg);height:200px;width:auto;\" src=\"../imgs/agent_1/" + 
-                                    exp.trials[j][1] + "\"></img>" +
-                                    "<br><br>" + 
-                                    "</label>" +
-                                    "</div>" + 
-                                    "</div>" + 
-                                    "<div>" + 
-                                    "<p><label><input type=\"radio\" name=\"target_0\" value=\"0\">" +
-                                    "You <b>should</b> walk through the door with the " + exp.object + 
-                                    "</label></p>" +
-                                    "<p><label><input type=\"radio\" name=\"target_0\" value=\"1\">" +
-                                    "You <b>should not</b> walk through the door with the " + exp.object +
-                                    "</label></p>" +
-                                    "</div>");
+        // Display the prompt, stimuli, and the options.
+        $(".display_trial").html("What do you think someone was trying to tell you about the door with the " +
+                                 exp.object + "?" +
+                                 "<div align=\"center\">" +
+                                 "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
+                                 "margin-bottom:-30px;\">" +
+                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                 exp.trials[j][0] + "\"></img>" + 
+                                 "<br><br>" +
+                                 "<p style=\"margin-right:20px;\"></p>" +
+                                 "</label>" + 
+                                 "</div>" + 
+                                 "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
+                                 "margin-bottom:-30px;\">" +
+                                 "<label>" + 
+                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                 exp.trials[j][1] + "\"></img>" +
+                                 "<br><br>" + 
+                                 "</label>" +
+                                 "</div>" + 
+                                 "</div>" + 
+                                 "<div style=\"width:70%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
+                                 "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
+                                 "You <b>should</b> walk through the door with the " + exp.object + 
+                                 "</label></p>" +
+                                 "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
+                                 "You <b>should not</b> walk through the door with the " + exp.object +
+                                 "</label></p>" +
+                                 "</div>");
     }
 
-    // Run when the "Continue" button is hit on a slide.
-    function button() {
-        if ($("input[name='target_0']:checked").val() == undefined) { 
+    // Run when the "Continue" button is hit on a trial slide.
+    function trial_button() {
+        if ($("input[name='target']:checked").val() == undefined) { 
             $(".error").show(); 
         }
         else {
@@ -129,7 +111,7 @@ function make_slides(f) {
                 "trial_num": j + 1,
                 "left_door": exp.trials[j][0],
                 "right_door": exp.trials[j][1],
-                "target_0": $("input[name='target_0']:checked").val()
+                "target": $("input[name='target']:checked").val()
             });
             j++;
             exp.go();
@@ -138,10 +120,71 @@ function make_slides(f) {
 
     // Stitches together all of the trial slides.
     for (var i = 1; i <= exp.num_trials; i++) {
-        slides["trial" + i] = slide({
-            name: "trial" + i,
-            start: start,
-            button: button
+        slides["trial_" + i] = slide({
+            name: "trial_" + i,
+            start: trial_start,
+            button: trial_button
+        });
+    }
+
+    // Set up the first exclusion slide.
+    function exclusion_start() {
+        // Display the progress bar and remove any previous error messages.
+        $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
+        $(".exclusion_error").hide();
+
+        // Display the prompt, stimuli, and the options.
+        $(".display_exclusion").html("Which door requires more work to walk through?" + 
+                                     "<div align=\"center\">" +
+                                     "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
+                                     "margin-bottom:-30px;\">" +
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                     exp.trials[j-exp.num_trials][0] + "\"></img>" + 
+                                     "<br><br>" +
+                                     "<p style=\"margin-right:20px;\"></p>" +
+                                     "</label>" + 
+                                     "</div>" + 
+                                     "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
+                                     "margin-bottom:-30px;\">" +
+                                     "<label>" + 
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                     exp.trials[j-exp.num_trials][1] + "\"></img>" +
+                                     "<br><br>" + 
+                                     "</label>" +
+                                     "</div>" + 
+                                     "</div>" + 
+                                     "<div style=\"width:40%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
+                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"0\">" +
+                                     "The door on the left.</label></p>" +
+                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"1\">" +
+                                     "The door on the right.</label></p>" +
+                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"2\">" +
+                                     "Equally easy.</label></p>" +
+                                     "</div>");
+    }
+
+    function exclusion_button() {
+        if ($("input[name='exclusion']:checked").val() == undefined) { 
+            $(".exclusion_error").show(); 
+        }
+        else {
+            exp.data_trials.push({
+                "exclusion_num": (j-exp.num_trials) + 1,
+                "left_door": exp.trials[j-exp.num_trials][0],
+                "right_door": exp.trials[j-exp.num_trials][1],
+                "target": $("input[name='exclusion']:checked").val()
+            });
+            j++;
+            exp.go();
+        }
+    }
+
+    // Stitches together all of the exclusion slides.
+    for (var i = 1; i <= exp.num_trials; i++) {
+        slides["exclusion_" + i] = slide({
+            name: "exclusion_" + i,
+            start: exclusion_start,
+            button: exclusion_button
         });
     }
 
@@ -169,8 +212,8 @@ function make_slides(f) {
         start: function() {
             $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
             exp.data = {
+                "setup": exp.setup,
                 "trials": exp.data_trials,
-                "catch_trials": exp.catch_trials,
                 "system": exp.system,
                 "subject_information": exp.subj_data,
                 "time_in_minutes": (Date.now() - exp.startT) / 60000
@@ -188,42 +231,48 @@ function init() {
     $(".display_payment").html("$0.10");
     repeatWorker = false;
     (function() {
-        var ut_id = "malb_social_pragmatics_02-04-2018_agent_1";
+        var ut_id = "malb_social_pragmatics_12-30-2018_symbols_0";
         if (UTWorkerLimitReached(ut_id)) {
-            $('.slide').empty();
+            $(".slide").empty();
             repeatWorker = true;
             alert("You have already completed the maximum number of HITs allowed by this requester. " +
                   "Please click 'Return HIT' to avoid any impact on your approval rating.");
         }
     })();
 
-    // Sample a name for the enforcer and the agent along with appropriate
-    // pronouns.
-    exp.characters = get_characters(characters);
-    exp.enforcer = exp.characters[0];
-    $(".display_enforcer").html(exp.enforcer.name);
-    $(".display_enforcer_pronoun_1").html(get_pronoun_1(exp.enforcer, false));
-    $(".display_enforcer_pronoun_1_capitalized").html(get_pronoun_1(exp.enforcer, true));
-    $(".display_enforcer_pronoun_2").html(get_pronoun_2(exp.enforcer, false));
-    $(".display_enforcer_pronoun_2_capitalized").html(get_pronoun_2(exp.enforcer, true));
-    $(".display_enforcer_pronoun_3").html(get_pronoun_3(exp.enforcer, false));
-    $(".display_enforcer_pronoun_3_capitalized").html(get_pronoun_3(exp.enforcer, true));
-    $(".display_enforcer_pronoun_4").html(get_pronoun_4(exp.enforcer, false));
-    $(".display_enforcer_pronoun_4_capitalized").html(get_pronoun_4(exp.enforcer, true));
+    // Select whether the modified door has a low-cost object or a symbol in front of it.
+    exp.condition = "low";
 
-    // Select whether the door is open or closed.
-    // exp.door = _.sample(["closed", "open"]);
-    exp.door = "closed"
-    exp.cost = _.sample(["low", "none"]);
-    // exp.object = _.sample(["chair", "plant"])
-    exp.object = "plant"
-    $(".display_object").html(exp.object);
+    // Select which side the modified door is on.
+    exp.side = _.sample(["left", "right"]);
 
-    // Set up a container for the catch trial information.
-    exp.catch_trials = [];
+    // Select which object is being used for the low cost and the symbol.
+    exp.object = "cinderblocks";
+    $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.object));
+    $(".display_stimuli_phrase_1").html(get_noun_phrase_1(exp.object));
+
+    // Select whether the doors are open or closed.
+    exp.doors = {
+        "plant": "closed",
+        "chair": "open",
+        "books": "open",
+        "cinderblocks": "open",
+        "tape": "closed",
+        "rulers": "open",
+        "hat": "closed",
+        "fishbowl": "closed"
+    }[exp.object];
+
+    // Store the experiment variables.
+    exp.setup = {
+        "condition": exp.condition,
+        "side": exp.side,
+        "object": exp.object,
+        "doors": exp.doors
+    };
 
     // Set up trial slide information.
-    exp.trials = trials(exp.door, exp.cost, exp.object);
+    exp.trials = trials(exp.doors, exp.condition, exp.side, exp.object);
     exp.num_trials = exp.trials.length;
     exp.data_trials = [];
     $(".display_num_trials").html(exp.num_trials);
@@ -239,10 +288,8 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "instructions", "catch_trial"];
-    for (var k = 1; k <= exp.num_trials; k++) {
-        exp.structure.push("trial" + k);
-    }
+    exp.structure = ["i0", "context", "catch_trial", "trial_1", "transition_1", "trial_2", "transition_2", 
+                     "exclusion_1", "exclusion_2"];
     exp.structure.push("subj_info");
     exp.structure.push("thanks");
    

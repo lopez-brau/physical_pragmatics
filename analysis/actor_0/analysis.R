@@ -10,7 +10,7 @@ data_0 = read_csv("data/actor_0/data.csv")
 
 # Update old formatting and remove irrelevant columns.
 data_1 = data_0 %>%
-  select(-Key, -CompletionDate, -UserID)
+  select(-Key, -CompletionDate)
 names(data_1)[which(names(data_1)=="CostCondition")] = "Condition"
 names(data_1)[which(names(data_1)=="DoorChoice")] = "Response"
 names(data_1)[which(names(data_1)=="HighCost")] = "Costlier"
