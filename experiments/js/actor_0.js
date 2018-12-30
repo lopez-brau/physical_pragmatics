@@ -76,7 +76,7 @@ function make_slides(f) {
                                  "<div align=\"center\">" +
                                  "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                  "margin-bottom:-30px;\">" +
-                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/actor_0/" +
                                  exp.trials[j][0] + "\"></img>" + 
                                  "<br><br>" +
                                  "<p style=\"margin-right:20px;\"></p>" +
@@ -85,7 +85,7 @@ function make_slides(f) {
                                  "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                                  "margin-bottom:-30px;\">" +
                                  "<label>" + 
-                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/actor_0/" +
                                  exp.trials[j][1] + "\"></img>" +
                                  "<br><br>" + 
                                  "</label>" +
@@ -138,7 +138,7 @@ function make_slides(f) {
                                      "<div align=\"center\">" +
                                      "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                      "margin-bottom:-30px;\">" +
-                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/actor_0/" +
                                      exp.trials[j-exp.num_trials][0] + "\"></img>" + 
                                      "<br><br>" +
                                      "<p style=\"margin-right:20px;\"></p>" +
@@ -147,7 +147,7 @@ function make_slides(f) {
                                      "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                                      "margin-bottom:-30px;\">" +
                                      "<label>" + 
-                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/actor_0/" +
                                      exp.trials[j-exp.num_trials][1] + "\"></img>" +
                                      "<br><br>" + 
                                      "</label>" +
@@ -231,7 +231,7 @@ function init() {
     $(".display_payment").html("$0.10");
     repeatWorker = false;
     (function() {
-        var ut_id = "malb_social_pragmatics_12-30-2018_symbols_0";
+        var ut_id = "malb_social_pragmatics_12-30-2018_actor_0";
         if (UTWorkerLimitReached(ut_id)) {
             $(".slide").empty();
             repeatWorker = true;
@@ -240,13 +240,13 @@ function init() {
         }
     })();
 
-    // Select whether the modified door has a low-cost object or a symbol in front of it.
+    // Select whether the modified door has an object in front of it that incurs a low cost or no cost.
     exp.condition = "low";
 
     // Select which side the modified door is on.
     exp.side = _.sample(["left", "right"]);
 
-    // Select which object is being used for the low cost and the symbol.
+    // Select which object is being used.
     exp.object = "cinderblocks";
     $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.object));
     $(".display_stimuli_phrase_1").html(get_noun_phrase_1(exp.object));
@@ -288,8 +288,7 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "context", "catch_trial", "trial_1", "transition_1", "trial_2", "transition_2", 
-                     "exclusion_1", "exclusion_2"];
+    exp.structure = ["i0", "context", "catch_trial", "trial_1", "exclusion_1"];
     exp.structure.push("subj_info");
     exp.structure.push("thanks");
    

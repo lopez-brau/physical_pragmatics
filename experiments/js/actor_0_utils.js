@@ -2,29 +2,29 @@
 function trials(doors, condition, side, object) {
     // Stitch together the filenames for all of the doors.
     unmodified_door = doors + ".png"
-    object_door = doors + "_low_" + object + ".png"
-    symbol_door = doors + "_symbol_" + object + ".png"
+    low_door = doors + "_low_" + object + ".png"
+    none_door = doors + "_none_" + object + ".png"
 
     // Push the filenames for both trials.
     var trials = []
     if (side == "left") {
         if (condition == "low") {
-            trials.push([object_door, unmodified_door])
-            trials.push([symbol_door, unmodified_door])
+            trials.push([low_door, unmodified_door])
+            trials.push([none_door, unmodified_door])
         }
-        else if (condition == "symbol") {
-            trials.push([symbol_door, unmodified_door])
-            trials.push([object_door, unmodified_door])
+        else if (condition == "none") {
+            trials.push([none_door, unmodified_door])
+            trials.push([low_door, unmodified_door])
         } 
     }
     else if (side == "right") {
         if (condition == "low") {
-            trials.push([unmodified_door, object_door])
-            trials.push([unmodified_door, symbol_door])
+            trials.push([unmodified_door, low_door])
+            trials.push([unmodified_door, none_door])
         }
-        else if (condition == "symbol") {
-            trials.push([unmodified_door, symbol_door])
-            trials.push([unmodified_door, object_door])
+        else if (condition == "none") {
+            trials.push([unmodified_door, none_door])
+            trials.push([unmodified_door, low_door])
         } 
     }
 
