@@ -99,6 +99,7 @@ function make_slides(f) {
                                         "You <b>should not</b> walk through the door with the " + exp.object +
                                         "</label></p>" +
                                         "</div>");
+        }
         else if ((j+1) == 2) {
             $(".display_prompt").html("What do you think someone was trying to tell you about the door with the picture?");
             $(".display_stimulus").html("<div align=\"center\">" +
