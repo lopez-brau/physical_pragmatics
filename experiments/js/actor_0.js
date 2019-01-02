@@ -109,8 +109,6 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "trial_num": j + 1,
-                "left_door": exp.trials[j][0],
-                "right_door": exp.trials[j][1],
                 "target": $("input[name='target']:checked").val()
             });
             j++;
@@ -170,8 +168,6 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "exclusion_num": (j-exp.num_trials) + 1,
-                "left_door": exp.trials[j-exp.num_trials][0],
-                "right_door": exp.trials[j-exp.num_trials][1],
                 "target": $("input[name='exclusion']:checked").val()
             });
             j++;
@@ -220,8 +216,6 @@ function make_slides(f) {
         else {
             exp.data_trials.push({
                 "exclusion_num": (j-exp.num_trials) + 1,
-                "left_door": exp.trials[(j-1)-exp.num_trials][0],
-                "right_door": exp.trials[(j-1)-exp.num_trials][1],
                 "target": $("input[name='exclusion']:checked").val()
             });
             j++;
