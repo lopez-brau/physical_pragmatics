@@ -155,11 +155,11 @@ function make_slides(f) {
                                      "</div>" + 
                                      "<div style=\"width:40%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
                                      "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"0\">" +
-                                     "The door on the left.</label></p>" +
+                                     "The door on the " + exp.other_side + "</label></p>" +
                                      "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"1\">" +
-                                     "The door on the right.</label></p>" +
+                                     "The door on the " + exp.side + "</label></p>" +
                                      "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"2\">" +
-                                     "Equally easy.</label></p>" +
+                                     "Equally easy</label></p>" +
                                      "</div>");
     }
 
@@ -295,6 +295,7 @@ function init() {
 
     // Select which side the modified door is on.
     exp.side = _.sample(["left", "right"]);
+    exp.other_side = (exp.side == "left") ? "right" : "left";
 
     // Select which object is being used.
     exp.object = "plant";
