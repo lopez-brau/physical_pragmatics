@@ -37,14 +37,16 @@ function embed_slides(num_trials) {
                        "<button onclick=\"_s.button()\">Continue</button>" +
                        "<p class=\"trial_error\">Please make a selection before continuing.</p>" +
                        "</div>";
+    }
+    for (var i = 1; i <= 2; i++) {
         exclusion_slides = exclusion_slides + "<div class=\"slide\" id=\"exclusion_" + i + "\">" + 
                            "<p class=\"display_exclusion\"></p>" +
                            "<button onclick=\"_s.button()\">Continue</button>" +
                            "<p class=\"exclusion_error\">Please make a selection before continuing.</p>" +
                            "</div>";
-        $(".trial_slides").html(trial_slides);
-        $(".exclusion_slides").html(exclusion_slides);
     }
+    $(".trial_slides").html(trial_slides);
+    $(".exclusion_slides").html(exclusion_slides);
 }
 
 // Retrieve the noun phrase for a given object for the instructions slide.

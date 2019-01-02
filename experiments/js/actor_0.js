@@ -128,7 +128,7 @@ function make_slides(f) {
     }
 
     // Set up the first exclusion slide.
-    function exclusion_start() {
+    function exclusion_start_1() {
         // Display the progress bar and remove any previous error messages.
         $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
         $(".exclusion_error").hide();
@@ -163,7 +163,7 @@ function make_slides(f) {
                                      "</div>");
     }
 
-    function exclusion_button() {
+    function exclusion_button_1() {
         if ($("input[name='exclusion']:checked").val() == undefined) { 
             $(".exclusion_error").show(); 
         }
@@ -179,12 +179,62 @@ function make_slides(f) {
         }
     }
 
+    // Set up the second exclusion slide.
+    function exclusion_start_2() {
+        // Display the progress bar and remove any previous error messages.
+        $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
+        $(".exclusion_error").hide();
+
+        // Display the prompt, stimuli, and the options.
+        $(".display_exclusion").html("Do you think you would be able to walk through this door if you wanted to?" + 
+                                     "<div align=\"center\">" +
+                                     "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
+                                     "margin-bottom:-30px;\">" +
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/actor_0/" +
+                                     exp.trials[(j-1)-exp.num_trials][0] + "\"></img>" + 
+                                     "<br><br>" +
+                                     "<p style=\"margin-right:20px;\"></p>" +
+                                     "</label>" + 
+                                     "</div>" + 
+                                     "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
+                                     "margin-bottom:-30px;\">" +
+                                     "<label>" + 
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/actor_0/" +
+                                     exp.trials[(j-1)-exp.num_trials][1] + "\"></img>" +
+                                     "<br><br>" + 
+                                     "</label>" +
+                                     "</div>" + 
+                                     "</div>" + 
+                                     "<div style=\"width:20%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
+                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"0\">" +
+                                     "Yes.</label></p>" +
+                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"1\">" +
+                                     "No.</label></p>" +
+                                     "</div>");
+    }
+
+    function exclusion_button_2() {
+        if ($("input[name='exclusion']:checked").val() == undefined) { 
+            $(".exclusion_error").show(); 
+        }
+        else {
+            exp.data_trials.push({
+                "exclusion_num": (j-exp.num_trials) + 1,
+                "left_door": exp.trials[(j-1)-exp.num_trials][0],
+                "right_door": exp.trials[(j-1)-exp.num_trials][1],
+                "target": $("input[name='exclusion']:checked").val()
+            });
+            j++;
+            exp.go();
+        }
+    }
+
     // Stitches together all of the exclusion slides.
-    for (var i = 1; i <= exp.num_trials; i++) {
+    for (var i = 1; i <= 2; i++) {
         slides["exclusion_" + i] = slide({
             name: "exclusion_" + i,
-            start: exclusion_start,
-            button: exclusion_button
+            start: (i == 1) ? exclusion_start_1 : exclusion_start_2 ,
+            button: (i == 1) ? exclusion_button_1 : exclusion_button_2
         });
     }
 
@@ -228,10 +278,10 @@ function make_slides(f) {
 function init() {
 
     // Set up the payment amount and Unique Turker.
-    $(".display_payment").html("$0.10");
+    $(".display_payment").html("$0.30");
     repeatWorker = false;
     (function() {
-        var ut_id = "malb_social_pragmatics_12-30-2018_actor_0";
+        var ut_id = "malb_social_pragmatics_actor_0";
         if (UTWorkerLimitReached(ut_id)) {
             $(".slide").empty();
             repeatWorker = true;
@@ -288,7 +338,7 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "context", "catch_trial", "trial_1", "exclusion_1"];
+    exp.structure = ["i0", "context", "catch_trial", "trial_1", "exclusion_1", "exclusion_2"];
     exp.structure.push("subj_info");
     exp.structure.push("thanks");
    
