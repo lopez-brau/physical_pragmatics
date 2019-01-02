@@ -285,14 +285,14 @@ function init() {
     })();
 
     // Select whether the modified door has an object in front of it that incurs a low cost or no cost.
-    exp.condition = "low";
+    exp.condition = "none";
 
     // Select which side the modified door is on.
     exp.side = _.sample(["left", "right"]);
     exp.other_side = (exp.side == "left") ? "right" : "left";
 
     // Select which object is being used.
-    exp.object = "fishbowl";
+    exp.object = "chair";
     $(".display_stimuli_phrase").html(get_noun_phrase(exp.object));
 
     // Select whether the doors are open or closed.
