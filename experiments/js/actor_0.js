@@ -281,7 +281,7 @@ function init() {
     $(".display_payment").html("$0.30");
     repeatWorker = false;
     (function() {
-        var ut_id = "malb_social_pragmatics_actor_0";
+        var ut_id = "lopez-brau_social_pragmatics_actor";
         if (UTWorkerLimitReached(ut_id)) {
             $(".slide").empty();
             repeatWorker = true;
