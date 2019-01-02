@@ -2,8 +2,8 @@
 function trials(doors, condition, side, object) {
     // Stitch together the filenames for all of the doors.
     unmodified_door = doors + ".png"
-    low_door = doors + "_low_" + object + ".png"
-    none_door = doors + "_none_" + object + ".png"
+    low_door = doors + "_low_" + ((object == "fishbowl") ? "string" : object) + ".png"
+    none_door = doors + "_none_" + ((object == "fishbowl") ? "string" : object) + ".png"
 
     // Push the filenames for both trials.
     var trials = []
@@ -50,7 +50,7 @@ function embed_slides(num_trials) {
 }
 
 // Retrieve the noun phrase for a given object for the instructions slide.
-function get_noun_phrase_0(object) {
+function get_noun_phrase(object) {
     noun_phrases = {
         "plant": "is a plant",
         "chair": "is a chair",
@@ -60,22 +60,6 @@ function get_noun_phrase_0(object) {
         "rulers": "are some rulers taped to the door frame",
         "hat": "is a hat",
         "fishbowl": "is a fishbowl tied to a string"
-    }
-
-    return noun_phrases[object]
-}
-
-// Retrieve the noun phrase for a given object for the transition slide.
-function get_noun_phrase_1(object) {
-    noun_phrases = {
-        "plant": "a plant",
-        "chair": "a chair",
-        "books": "a stack of books",
-        "cinderblocks": "a pile of cinderblocks",
-        "tape": "some tape",
-        "rulers": "some rulers taped to the door frame",
-        "hat": "a hat",
-        "string": "a fishbowl tied to a string"
     }
 
     return noun_phrases[object]

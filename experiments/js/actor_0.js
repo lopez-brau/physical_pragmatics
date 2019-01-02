@@ -293,8 +293,7 @@ function init() {
 
     // Select which object is being used.
     exp.object = "plant";
-    $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.object));
-    $(".display_stimuli_phrase_1").html(get_noun_phrase_1(exp.object));
+    $(".display_stimuli_phrase").html(get_noun_phrase(exp.object));
 
     // Select whether the doors are open or closed.
     exp.doors = {
