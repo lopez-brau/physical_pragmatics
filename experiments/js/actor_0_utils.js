@@ -57,7 +57,7 @@ function get_noun_phrase_0(object) {
         "books": "is a stack of books",
         "cinderblocks": "is a pile of cinderblocks",
         "tape": "is some tape",
-        "rulers": "are some rulers",
+        "rulers": "are some rulers taped to the door frame",
         "hat": "is a hat",
         "fishbowl": "is a fishbowl tied to a string"
     }
@@ -73,7 +73,7 @@ function get_noun_phrase_1(object) {
         "books": "a stack of books",
         "cinderblocks": "a pile of cinderblocks",
         "tape": "some tape",
-        "rulers": "some rulers",
+        "rulers": "some rulers taped to the door frame",
         "hat": "a hat",
         "string": "a fishbowl tied to a string"
     }
