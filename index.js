@@ -36,7 +36,7 @@ function make_slides(f) {
                                      "amount of lighting  </label>" +
                                      "<label><input type=\"checkbox\" name=\"catch_2\" value=\"2\"/>" +
                                      "the " + 
-                                     ((exp.object == "fishbowl" && condition == "none") ? "string" : exp.object) +
+                                     ((exp.object == "fishbowl" && exp.condition == "none") ? "string" : exp.object) +
                                      "  </label>" +
                                      "<label><input type=\"checkbox\" name=\"catch_3\" value=\"3\"/>" +
                                      "not sure  </label>" +
@@ -74,7 +74,7 @@ function make_slides(f) {
 
         // Display the prompt, stimuli, and the options.
         $(".display_trial").html("What do you think someone was trying to tell you about the door with the " +
-                                 ((exp.object == "fishbowl" && condition == "none") ? "string" : exp.object) + "?" +
+                                 ((exp.object == "fishbowl" && exp.condition == "none") ? "string" : exp.object) + "?" +
                                  "<div align=\"center\">" +
                                  "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                  "margin-bottom:-30px;\">" +
@@ -96,11 +96,11 @@ function make_slides(f) {
                                  "<div style=\"width:70%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
                                  "You <b>should</b> walk through the door with the " +
-                                 ((exp.object == "fishbowl" && condition == "none") ? "string" : exp.object) + 
+                                 ((exp.object == "fishbowl" && exp.condition == "none") ? "string" : exp.object) + 
                                  "</label></p>" +
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
                                  "You <b>should not</b> walk through the door with the " + 
-                                 ((exp.object == "fishbowl" && condition == "none") ? "string" : exp.object) +
+                                 ((exp.object == "fishbowl" && exp.condition == "none") ? "string" : exp.object) +
                                  "</label></p>" +
                                  "</div>");
     }
