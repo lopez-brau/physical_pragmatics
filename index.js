@@ -35,7 +35,9 @@ function make_slides(f) {
                                      "<label><input type=\"checkbox\" name=\"catch_1\" value=\"1\"/>" + 
                                      "amount of lighting  </label>" +
                                      "<label><input type=\"checkbox\" name=\"catch_2\" value=\"2\"/>" +
-                                     "the " + exp.object + "  </label>" +
+                                     "the " + 
+                                     ((exp.object == "fishbowl" && condition == "none") ? "string" : exp.object) +
+                                     "  </label>" +
                                      "<label><input type=\"checkbox\" name=\"catch_3\" value=\"3\"/>" +
                                      "not sure  </label>" +
                                      "</p>");
@@ -72,7 +74,7 @@ function make_slides(f) {
 
         // Display the prompt, stimuli, and the options.
         $(".display_trial").html("What do you think someone was trying to tell you about the door with the " +
-                                 exp.object + "?" +
+                                 ((exp.object == "fishbowl" && condition == "none") ? "string" : exp.object) + "?" +
                                  "<div align=\"center\">" +
                                  "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                  "margin-bottom:-30px;\">" +
@@ -93,10 +95,12 @@ function make_slides(f) {
                                  "</div>" + 
                                  "<div style=\"width:70%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
-                                 "You <b>should</b> walk through the door with the " + exp.object + 
+                                 "You <b>should</b> walk through the door with the " +
+                                 ((exp.object == "fishbowl" && condition == "none") ? "string" : exp.object) + 
                                  "</label></p>" +
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
-                                 "You <b>should not</b> walk through the door with the " + exp.object +
+                                 "You <b>should not</b> walk through the door with the " + 
+                                 ((exp.object == "fishbowl" && condition == "none") ? "string" : exp.object) +
                                  "</label></p>" +
                                  "</div>");
     }
@@ -293,7 +297,7 @@ function init() {
 
     // Select which object is being used.
     exp.object = "fishbowl";
-    $(".display_stimuli_phrase").html(get_noun_phrase(exp.object));
+    $(".display_stimuli_phrase").html(get_noun_phrase(exp.condition, exp.object));
 
     // Select whether the doors are open or closed.
     exp.doors = {

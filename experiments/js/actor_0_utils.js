@@ -49,8 +49,8 @@ function embed_slides(num_trials) {
     $(".exclusion_slides").html(exclusion_slides);
 }
 
-// Retrieve the noun phrase for a given object for the instructions slide.
-function get_noun_phrase(object) {
+// Retrieve the noun phrase for a given object for the background slide.
+function get_noun_phrase(condition, object) {
     noun_phrases = {
         "plant": "is a plant",
         "chair": "is a chair",
@@ -59,7 +59,7 @@ function get_noun_phrase(object) {
         "tape": "is some tape",
         "rulers": "are some rulers taped to the door frame",
         "hat": "is a hat",
-        "fishbowl": "is a fishbowl tied to a string"
+        "fishbowl": ((condition == "none") ? "is a string tacked to the door frame" : "is a fishbowl tied to a string")
     }
 
     return noun_phrases[object]
