@@ -292,7 +292,7 @@ function init() {
     exp.other_side = (exp.side == "left") ? "right" : "left";
 
     // Select which object is being used.
-    exp.object = "plant";
+    exp.object = "rulers";
     $(".display_stimuli_phrase").html(get_noun_phrase(exp.object));
 
     // Select whether the doors are open or closed.
