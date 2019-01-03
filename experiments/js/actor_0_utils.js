@@ -49,7 +49,7 @@ function embed_slides(num_trials) {
     $(".exclusion_slides").html(exclusion_slides);
 }
 
-// Retrieve the noun phrase for a given object for the background slide.
+// Retrieve the noun phrase for a given object for the context slide.
 function get_noun_phrase(condition, object) {
     noun_phrases = {
         "plant": "is a plant",

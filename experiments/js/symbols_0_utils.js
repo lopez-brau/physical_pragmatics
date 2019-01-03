@@ -2,8 +2,8 @@
 function trials(doors, condition, side, object) {
     // Stitch together the filenames for all of the doors.
     unmodified_door = doors + ".png"
-    object_door = doors + "_low_" + object + ".png"
-    symbol_door = doors + "_symbol_" + object + ".png"
+    object_door = doors + "_low_" + ((object == "fishbowl") ? "string" : object) + ".png"
+    symbol_door = doors + "_symbol_" + ((object == "fishbowl") ? "string" : object) + ".png"
 
     // Push the filenames for both trials.
     var trials = []
@@ -46,12 +46,12 @@ function embed_slides(num_trials) {
                            "<button onclick=\"_s.button()\">Continue</button>" +
                            "<p class=\"exclusion_error\">Please make a selection before continuing.</p>" +
                            "</div>";
-        $(".trial_slides").html(trial_slides);
-        $(".exclusion_slides").html(exclusion_slides);
     }
+    $(".trial_slides").html(trial_slides);
+    $(".exclusion_slides").html(exclusion_slides);
 }
 
-// Retrieve the noun phrase for a given object for the instructions slide.
+// Retrieve the noun phrase for a given object for the context slide.
 function get_noun_phrase_0(object) {
     noun_phrases = {
         "plant": "is a plant",
