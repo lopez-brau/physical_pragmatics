@@ -4,31 +4,31 @@
     <title>Psychology Study</title>
 
     <!-- External general utilities. -->
-    <script src="shared/js/jquery-1.11.1.min.js "></script>
-    <script src="shared/full-projects/jquery-ui/jquery-ui.min.js"></script>
-    <script src="shared/js/underscore-min.js"></script>
+    <script src="experiments/shared/js/jquery-1.11.1.min.js "></script>
+    <script src="experiments/shared/full-projects/jquery-ui/jquery-ui.min.js"></script>
+    <script src="experiments/shared/js/underscore-min.js"></script>
 
     <!-- CoCoLab experiment logic. -->
-    <script src="shared/js/exp-V2.js"></script>
-    <script src="shared/js/stream-V2.js"></script>
+    <script src="experiments/shared/js/exp-V2.js"></script>
+    <script src="experiments/shared/js/stream-V2.js"></script>
 
     <!-- CoCoLab general utilities. -->
-    <script src="shared/js/mmturkey.js "></script>
-    <script src="shared/js/browserCheck.js"></script>
-    <script src="shared/js/utils.js"></script>
+    <script src="experiments/shared/js/mmturkey.js "></script>
+    <script src="experiments/shared/js/browserCheck.js"></script>
+    <script src="experiments/shared/js/utils.js"></script>
 
     <!-- CSS files. -->
-    <link href="shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
-    <link href="shared/css/cocolab-style.css" rel="stylesheet" type="text/css"/>
-    <link href="css/local-style.css" rel="stylesheet" type="text/css"/>
+    <link href="experiments/shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="experiments/shared/css/cocolab-style.css" rel="stylesheet" type="text/css"/>
+    <link href="experiments/css/local-style.css" rel="stylesheet" type="text/css"/>
 
     <!-- Experiment files. -->
-    <script src="js/symbols_0.js"></script>
+    <script src="index.js"></script>
 
     <!-- Experiment specific helper functions. -->
-    <script src="js/symbols_0_utils.js"></script>
+    <script src="experiments/js/symbols_0_utils.js"></script>
 
-    <script src="shared/js/uniqueturker.js"></script>
+    <script src="experiments/shared/js/uniqueturker.js"></script>
 
 </head>
 
@@ -38,7 +38,7 @@
     <!-- Introduction slide. -->
     <div class="slide" id="i0">
         <div>
-            <img id="logo" style="height:50px;width:50px;" src="shared/images/yale.jpg"></img>
+            <img id="logo" style="height:50px;width:50px;" src="experiments/shared/images/yale.jpg"></img>
             <span id="logo">Computation and Cognitive Development Lab</span>
         </div>
         <br>
@@ -82,7 +82,7 @@
 
     <!-- First transition slide. -->
     <div class="slide" id="transition_1">
-        <p>Great job! Now, instead of <span class="display_stimuli_phrase_1"></span>, the next day the same person places a <b>picture</b> of <span class="display_stimuli_phrase_1"></span> near one of the exits.</p>
+        <p>Great job! Now, instead of <b><span class="display_stimuli_phrase_1"></span></b>, the next day the same person places <b><span class="display_stimuli_phrase_2"></span></b> near one of the exits.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 

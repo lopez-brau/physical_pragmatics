@@ -258,8 +258,8 @@ function init() {
     })();
 
     // Select whether the modified door has a low-cost object or a symbol in front of it.
-    exp.condition = "symbol";
-    exp.other_condition = "low";
+    exp.condition = "object";
+    exp.other_condition = (exp.condition == "object") ? "symbol": "object";
 
     // Select which side the modified door is on.
     exp.side = _.sample(["left", "right"]);
