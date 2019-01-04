@@ -35,9 +35,7 @@ function make_slides(f) {
                                      "<label><input type=\"checkbox\" name=\"catch_1\" value=\"1\"/>" + 
                                      "amount of lighting  </label>" +
                                      "<label><input type=\"checkbox\" name=\"catch_2\" value=\"2\"/>" +
-                                     "the " + 
-                                     ((exp.condition == "symbol") ? "picture of the " + exp.object : exp.object) + 
-                                     "  </label>" +
+                                     "the " + exp.object + "  </label>" +
                                      "<label><input type=\"checkbox\" name=\"catch_3\" value=\"3\"/>" +
                                      "not sure  </label>" +
                                      "</p>");
@@ -88,8 +86,7 @@ function make_slides(f) {
 
         // Display the prompt, stimuli, and the options.
         $(".display_trial").html("What do you think someone was trying to tell you about the door with the " + 
-                                 ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.object) :
-                                             ((exp.condition == "symbol") ? exp.object : "picture")) + "?" +
+                                 ((j == 0) ? exp.object : "picture") + "?" +
                                  "<div align=\"center\">" +
                                  "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                  "margin-bottom:-30px;\">" +
@@ -111,13 +108,11 @@ function make_slides(f) {
                                  "<div style=\"width:70%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
                                  "You <b>should</b> walk through the door with the " + 
-                                 ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.object) :
-                                             ((exp.condition == "symbol") ? exp.object : "picture")) +
+                                 ((j == 0) ? exp.object : "picture") + 
                                  "</label></p>" +
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
                                  "You <b>should not</b> walk through the door with the " +
-                                 ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.object) :
-                                             ((exp.condition == "symbol") ? exp.object : "picture")) +
+                                 ((j == 0) ? exp.object : "picture") +
                                  "</label></p>" +
                                  "</div>");
     }
@@ -174,11 +169,11 @@ function make_slides(f) {
                                      "</div>" + 
                                      "<div style=\"width:40%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
                                      "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"0\">" +
-                                     "The door on the " + exp.other_side + "</label></p>" +
+                                     "The door on the left.</label></p>" +
                                      "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"1\">" +
-                                     "The door on the " + exp.side + "</label></p>" +
+                                     "The door on the right.</label></p>" +
                                      "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"2\">" +
-                                     "Equally easy</label></p>" +
+                                     "Equally easy.</label></p>" +
                                      "</div>");
     }
 
@@ -245,10 +240,10 @@ function make_slides(f) {
 function init() {
 
     // Set up the payment amount and Unique Turker.
-    $(".display_payment").html("$0.30");
+    $(".display_payment").html("$0.10");
     repeatWorker = false;
     (function() {
-        var ut_id = "lopez-brau_social_pragmatics_actor";
+        var ut_id = "malb_social_pragmatics_12-30-2018_symbols_0";
         if (UTWorkerLimitReached(ut_id)) {
             $(".slide").empty();
             repeatWorker = true;
@@ -258,18 +253,15 @@ function init() {
     })();
 
     // Select whether the modified door has a low-cost object or a symbol in front of it.
-    exp.condition = "symbol";
-    exp.other_condition = "low";
+    exp.condition = "low";
 
     // Select which side the modified door is on.
     exp.side = _.sample(["left", "right"]);
-    exp.other_side = (exp.side == "left") ? "right" : "left";
 
     // Select which object is being used for the low cost and the symbol.
-    exp.object = "chair";
-    $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.condition, exp.object));
-    $(".display_stimuli_phrase_1").html(get_noun_phrase_1(exp.condition, exp.object));
-    $(".display_stimuli_phrase_2").html(get_noun_phrase_1(exp.other_condition, exp.object));
+    exp.object = "cinderblocks";
+    $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.object));
+    $(".display_stimuli_phrase_1").html(get_noun_phrase_1(exp.object));
 
     // Select whether the doors are open or closed.
     exp.doors = {
