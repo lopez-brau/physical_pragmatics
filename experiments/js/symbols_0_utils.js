@@ -73,11 +73,11 @@ function get_noun_phrase_1(condition, object) {
         "plant": ((condition == "symbol") ? "a picture of " : "") + "a plant",
         "chair": ((condition == "symbol") ? "a picture of " : "") + "a chair",
         "books": ((condition == "symbol") ? "a picture of " : "") + "some books",
-        "cinderblocks": ((condition == "symbol") ? "a picture of" : "") + "a pile of cinderblocks",
-        "tape": ((condition == "symbol") ? "a picture of" : "") + "some tape",
-        "rulers": ((condition == "symbol") ? "a picture of" : "") + "some rulers taped to the door frame",
-        "hat": ((condition == "symbol") ? "a picture of" : "") + "a hat",
-        "string": ((condition == "symbol") ? "a picture of" : "") + "a fishbowl tied to a string"
+        "cinderblocks": ((condition == "symbol") ? "a picture of " : "") + "a pile of cinderblocks",
+        "tape": ((condition == "symbol") ? "a picture of " : "") + "some tape",
+        "rulers": ((condition == "symbol") ? "a picture of " : "") + "some rulers taped to the door frame",
+        "hat": ((condition == "symbol") ? "a picture of " : "") + "a hat",
+        "string": ((condition == "symbol") ? "a picture of " : "") + "a fishbowl tied to a string"
     }
 
     return noun_phrases[object]
