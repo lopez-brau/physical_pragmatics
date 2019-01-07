@@ -1,9 +1,15 @@
 // Generate the stimuli for the trial and exclusion slides.
-function trials(doors, condition, side, object) {
+function trials(doors, condition, side, first_object, second_object) {
     // Stitch together the filenames for all of the doors.
     unmodified_door = doors + ".png";
-    object_door = doors + "_low_" + ((object == "fishbowl") ? "string" : object) + ".png";
-    symbol_door = doors + "_symbol_" + ((object == "fishbowl") ? "string" : object) + ".png";
+    if (condition == "object") {
+        object_door = doors + "_low_" + ((first_object == "fishbowl") ? "string" : first_object) + ".png";
+        symbol_door = doors + "_symbol_" + ((second_object == "fishbowl") ? "string" : second_object) + ".png";    
+    }
+    else if (condition == "symbol") {
+        symbol_door = doors + "_symbol_" + ((first_object == "fishbowl") ? "string" : first_object) + ".png";
+        object_door = doors + "_low_" + ((second_object == "fishbowl") ? "string" : second_object) + ".png";    
+    }
 
     // Push the filenames for both trials.
     var trials = [];

@@ -5,8 +5,12 @@ library(tidyverse)
 # Set the path.
 setwd("D:/Research/social_pragmatics")
 
-# Import the human data.
-data_0 = read_csv("data/actor_0/data_0.csv")
+# Import the human data from the first experiment.
+data_0 = read_csv("data/actor_0/data_0.csv") 
+
+# Import the human data from a second set of experiments (to round out the pre-reg sample
+# size.
+data_x = 
 
 # Update old formatting and remove irrelevant columns.
 data_1 = data_0 %>%
