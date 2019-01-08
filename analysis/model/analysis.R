@@ -9,11 +9,7 @@ setwd("D:/Research/social_pragmatics")
 data_0 = read_csv("data/model/enforcer_action_vs_actor_reward.csv")
 
 # Set up the ways in which the actor can integrate social reward.
-social_reward = data.frame(
-  confidence=c(-25.0, -20.0, -15.0, -10.0, -5.0, 0.0, 5.0, 10.0, 15.0, 20.0, 25.0),
-  preference=c(-25.0, -20.0, -15.0, -10.0, -5.0, 0.0, 5.0, 10.0, 15.0, 20.0, 25.0),
-  proportional=c(-2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5)
-)
+confidence = c(-25.0, -20.0, -15.0, -10.0, -5.0, 0.0, 5.0, 10.0, 15.0, 20.0, 25.0)
 
 # Plots the model predictions for how the enforcers action changes as a
 # function of the actor's reward (as well as rationality, ToM, method of 

@@ -38,7 +38,8 @@ for (folder in list.dirs("./data/symbols_0/")) {
         na.omit() %>%
         arrange(workerid)
       
-      # Make a column of pseudo-workerids for joining the results and the setup information.
+      # Make a column of pseudo-workerids for joining the results and the setup
+      # information.
       results_3 = results_2 %>%
         mutate(pworkerid=as.integer(workerid+id))
       pworkerid = as.integer(unique(results_2$workerid)+id)
@@ -108,8 +109,23 @@ for (id in unique(results_6$pworkerid)) {
 results_8 = results_6 %>%
   filter(!(pworkerid %in% exclusions))
 
-# Compute the endorsement for the unmodified door.
-results_9 = results_8 %>% 
+# Compute a Fisher's exact test to see if the condition (i.e., trial order) has
+# an effect.
+results_9 = results_8 %>%
+  filter(trial %in% c("trial_1", "trial_2")) %>%
+  group_by(condition, trial) %>%
+  summarize(unmodified=sum(target), modified=(n()-unmodified)) %>%
+  filter((condition=="object"&trial=="trial_2")|(condition=="symbol"&trial=="trial_1")) %>%
+  ungroup() %>%
+  select(-condition, -trial)
+fisher.test(results_9)
+
+# Simulate having the full data.
+results_10 = results_9 * data.frame(c(4, 8), c(4, 8))
+fisher.test(results_10)
+
+# Compute the endorsement for the unmodified door (as percentages).
+results_11 = results_8 %>% 
   filter(trial %in% c("trial_1", "trial_2")) %>%
   group_by(condition, trial) %>%
   summarize(unmodified=sum(target)/n()) %>%
@@ -117,7 +133,7 @@ results_9 = results_8 %>%
   gather(door, endorsement, unmodified, modified)
 
 # Plot the data. * Make plots prettier and add CIs.
-results_9 %>%
+results_11 %>%
   ggplot(aes(x=trial, y=endorsement, fill=door)) + 
     geom_histogram(stat="identity") +
     theme_bw() +
