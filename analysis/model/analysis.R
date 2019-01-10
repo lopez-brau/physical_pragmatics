@@ -19,8 +19,8 @@ data_0 %>%
   filter(Rationality==0.1, Method=="confidence", Cooperation==10,
          Enforcer_Reward==9, ToM %in% c(0.0, 0.5, 1.0)) %>%
   ggplot(aes(x=Actor_Reward, y=Enforcer_Action, group=factor(ToM))) + 
-    geom_line(aes(color=factor(ToM)), position=position_dodge(0.8)) +  
-    geom_point(aes(color=factor(ToM)), size=3, position=position_dodge(0.8)) +
+    geom_line(aes(color=factor(ToM))) +  
+    geom_point(aes(color=factor(ToM)), size=3) +
     theme_classic() +
     theme(plot.title=element_text(hjust=0.5)) +
     ylab("Enforcer Action") +
@@ -84,8 +84,8 @@ data_1 %>%
     theme(plot.title=element_text(hjust=0.5),
           axis.text=element_text(size=12),
           axis.title=element_text(size=12)) +
-    ylab("Probability of actor picking  ----- \n\n") +
-    xlab("\n\n\n\n\nEnforcer Action") +
+    ylab("Probability of actor picking - - - - - - \n\n\n") +
+    xlab("\n\n\n\n\nEnforcer's action") +
     scale_y_continuous(breaks=c(0.0, 0.5, 1.0), labels=c("0.0", "0.5", "1.0")) +
     scale_x_continuous(breaks=c(0:9), labels=rep(c(""), times=10)) + 
     scale_color_manual(name="Theory of Mind", labels=c("None", "Full"), 
