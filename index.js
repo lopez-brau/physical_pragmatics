@@ -266,7 +266,7 @@ function init() {
     exp.other_side = (exp.side == "left") ? "right" : "left";
 
     // Select which object is being used for the low cost and the symbol.
-    exp.object = "chair";
+    exp.object = "plant";
     // exp.object = _.sample(["plant", "books", "cinderblocks", "tape", "rulers", "hat", "fishbowl"]);
     $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.condition, exp.object));
     $(".display_stimuli_phrase_1").html(get_noun_phrase_1(exp.condition, exp.object));

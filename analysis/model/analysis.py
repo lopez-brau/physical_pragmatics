@@ -50,7 +50,8 @@ if __name__ == "__main__":
 	enforcer_actions = np.array([[0, 0]]+[[a, 0] for a in np.arange(1, 10)]+[[0, b] for b in np.arange(1, 10)])
 	with open(PATH+"data/model/actor_action_vs_enforcer_action.csv", "w", newline="") as file:
 		writer = csv.writer(file)
-		writer.writerow(["Actor_Action", "Enforcer_Action", "Cooperation", "Method", "ToM", "Rationality"])
+		writer.writerow(["Actor_Reward", "Actor_Action_A", "Actor_Action_B", "Enforcer_Action", "Cooperation", 
+						 "Method", "ToM", "Rationality"])
 		for rationality in rationality_set:
 			for p in p_set:
 				for method in social_reward.keys():
@@ -65,5 +66,5 @@ if __name__ == "__main__":
 								else:
 									continue
 
-								writer.writerow([action_probabilities[0], action_probabilities[1], enforcer_action[1], \
-												 cooperation, method, p, rationality])
+								writer.writerow([actor_reward[1], action_probabilities[0], action_probabilities[1], \
+												 enforcer_action[1], cooperation, method, p, rationality])

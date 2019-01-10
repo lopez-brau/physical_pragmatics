@@ -54,16 +54,17 @@ data_2 = read_csv("data/model/actor_action_vs_enforcer_action.csv")
 # For the plots for the paper, we only want to set the rationality to 0.1, 
 # use the confidence method, and set the cooperation parameter to 10.  
 data_3 = data_2 %>%
-  filter(Rationality==0.1, Method=="confidence", Cooperation==10)
+  filter(Rationality==0.1, Method=="confidence", Cooperation==10, Actor_Reward==4)
 
 data_3 %>%
-  ggplot(aes(x=Enforcer_Action, y=Actor_Action, group=Method)) +
-    geom_point(size=3) +
-    geom_line() +
-    facet_wrap(~Cooperation) +
-    theme_bw() +
+  ggplot(aes(x=Enforcer_Action, y=Actor_Action_A, group=ToM)) +
+    geom_point(aes(color=factor(ToM)), size=3) +
+    geom_line(aes(color=factor(ToM))) +
+    theme_classic() +
     theme(plot.title=element_text(hjust=0.5)) +
-    ylab("Actor Preference for A") +
+    ylab("Actor Choice") +
     xlab("Enforcer Action") +
-    scale_y_continuous(breaks=c(0:1)) +
-    scale_x_continuous(breaks=c(0:9))
+    scale_y_continuous(breaks=c(0:1), labels=c("A", "B")) +
+    scale_x_continuous(breaks=c(0:9)) + 
+    scale_color_manual(name="Theory of Mind", labels=c("None", "Full"), 
+                       values=c("cyan","red"))
