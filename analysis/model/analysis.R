@@ -75,15 +75,18 @@ data_0 %>%
 data_1 = read_csv("data/model/actor_action_vs_enforcer_action.csv")
 
 data_1 %>%
-  filter(Rationality==0.1, Method=="confidence", Cooperation==10, Actor_Reward==4) %>%
+  filter(Rationality==0.1, Method=="confidence", Cooperation==10, Actor_Reward==2,
+         Enforcer_Action %in% c(0:5)) %>%
   ggplot(aes(x=Enforcer_Action, y=Actor_Action_A, group=ToM)) +
-    geom_point(aes(color=factor(ToM)), size=3) +
+    geom_point(aes(color=factor(ToM)), size=2) +
     geom_line(aes(color=factor(ToM))) +
     theme_classic() +
-    theme(plot.title=element_text(hjust=0.5)) +
-    ylab("Actor Choice") +
-    xlab("Enforcer Action") +
-    scale_y_continuous(breaks=c(0:1), labels=c("A", "B")) +
-    scale_x_continuous(breaks=c(0:9)) + 
+    theme(plot.title=element_text(hjust=0.5),
+          axis.text=element_text(size=12),
+          axis.title=element_text(size=12)) +
+    ylab("Probability of actor picking  ----- \n\n") +
+    xlab("\n\n\n\n\nEnforcer Action") +
+    scale_y_continuous(breaks=c(0.0, 0.5, 1.0), labels=c("0.0", "0.5", "1.0")) +
+    scale_x_continuous(breaks=c(0:9), labels=rep(c(""), times=10)) + 
     scale_color_manual(name="Theory of Mind", labels=c("None", "Full"), 
                        values=c("#F8766D","#00BFC4"))
