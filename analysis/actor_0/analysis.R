@@ -6,31 +6,86 @@ library(tidyverse)
 setwd("D:/Research/social_pragmatics")
 
 # Import the human data from the first experiment.
-data_0 = read_csv("data/actor_0/data_0.csv") 
-
-# Import the human data from a second set of experiments (to round out the pre-reg sample
-# size.
-data_x = 
+data_0 = read_csv("data/actor_0/data_0/data.csv")
 
 # Update old formatting and remove irrelevant columns.
 data_1 = data_0 %>%
-  select(-Key, -CompletionDate)
-names(data_1)[which(names(data_1)=="CostCondition")] = "Condition"
-names(data_1)[which(names(data_1)=="DoorChoice")] = "Response"
-names(data_1)[which(names(data_1)=="HighCost")] = "Costlier"
-data_1$Response[which(data_1$Response=="ClearDoor")] = "unmodified"
-data_1$Response[which(data_1$Response=="ModifiedDoor")] = "modified"
-data_1$Costlier[which(data_1$Costlier=="BaseDoor")] = "unmodified"
-data_1$Costlier[which(data_1$Costlier=="TargetDoor")] = "modified"
-data_1$Difficulty[which(data_1$Difficulty=="Yes")] = "yes"
-data_1$Difficulty[which(data_1$Difficulty=="No")] = "no"
+  mutate(condition=CostCondition, object=Object, side=Counterbalancing,
+         costlier=HighCost, response=DoorChoice, possible=Difficulty) %>%
+  select(UserID, condition, object, side, costlier, response, possible)
+data_1$response[which(data_1$response=="ClearDoor")] = "unmodified"
+data_1$response[which(data_1$response=="ModifiedDoor")] = "modified"
+data_1$costlier[which(data_1$costlier=="BaseDoor")] = "unmodified"
+data_1$costlier[which(data_1$costlier=="TargetDoor")] = "modified"
+data_1$possible[which(data_1$possible=="Yes")] = "yes"
+data_1$possible[which(data_1$possible=="No")] = "no"
 
 # Exclude participants who said the unmodified door was more difficult to walk
 # through and omit missing data.
 data_2 = data_1 %>% 
-  filter(Costlier != "unmodified") %>%
-  filter(Condition != "") %>%
+  filter(costlier!="unmodified") %>%
+  filter(condition!="") %>%
   na.omit() 
+
+# Add pseudo-workerids to make it easier to distinguish participants across
+# disjoint datasets.
+data_3 = data.frame(pworkerids=c(0:(nrow(data_2)-1)), data_2) %>%
+  select(-UserID)
+
+# Import the human data from a second set of experiments (to round out the 
+# pre-reg sample size). First, set up the conditions and the different objects 
+# participants can see.
+conditions = c("none", "low")
+objects = c("chair", "plant", "books", "cinderblocks", "tape", "rulers", "hat", "string")
+
+# Populate the list of experimental manipulations.
+experiment_list = c()
+for (c in conditions) {
+  for (o in objects) {
+    experiment_list = c(experiment_list, paste(c, "_", o, sep=""))
+  }
+}
+
+# Import the data.
+# results_5 = data.frame()
+id = nrow(data_3)
+for (folder in list.dirs("./data/actor_0/data_1/")) {
+  for (e in experiment_list) {
+    if (grepl(e, folder)) {
+      # Read in the results for this worker.
+      data_4 = read_csv(paste(folder, "/", e, "-trials.csv", sep=""))
+      
+      # Convert the target column into integers.
+      data_5 = data_4 %>%
+        mutate(target=as.integer(substr(target, 2, 2)))
+      
+      # Combine the trial and exclusion columns.
+      data_6 = data_5 %>%
+        gather(trial_type, num, trial_num, exclusion_num) %>%
+        mutate(trial=gsub("num", "", paste(trial_type, num, sep=""))) %>%
+        select(-trial_type, -num) %>%
+        na.omit() %>%
+        arrange(workerid)
+      
+      # Make a column of pseudo-workerids for joining the results and the setup
+      # information.
+      data_7 = data_6 %>%
+        mutate(pworkerid=as.integer(workerid+id)) %>%
+        select(-workerid)
+      id = id + length(unique(data_6$workerid))
+      
+      #
+      # data_8 = 
+      
+      # Finally, stitch everything together.
+      # results_5 = rbind(results_5, results_4)
+    }
+  }
+}
+
+data_x = read_csv("data/actor_0/data_0/")
+
+
 
 # Compute the (percent) participant endorsement of each door in each condition.
 data_3 = data_2 %>% 

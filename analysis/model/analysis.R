@@ -19,8 +19,8 @@ data_0 %>%
   filter(Rationality==0.1, Method=="confidence", Cooperation==10,
          Enforcer_Reward==5, ToM %in% c(0.0, 1.0), Actor_Reward %in% c(0:5)) %>%
   ggplot(aes(x=Actor_Reward, y=Enforcer_Action, group=factor(ToM))) + 
-    geom_line(aes(color=factor(ToM))) +  
-    geom_point(aes(color=factor(ToM)), size=2) +
+    geom_point(aes(color=factor(ToM)), size=2, alpha=0.5) +
+    geom_line(aes(color=factor(ToM)), size=2, alpha=0.5) +  
     theme_classic() +
     theme(plot.title=element_text(hjust=0.5),
           axis.text=element_text(size=12),
@@ -41,8 +41,8 @@ data_0 %>%
   filter(Rationality==0.1, Method=="confidence", Cooperation==0,
          Enforcer_Reward==5, ToM %in% c(0.0, 1.0), Actor_Reward %in% c(0:5)) %>%
   ggplot(aes(x=Actor_Reward, y=Enforcer_Action, group=factor(ToM))) + 
-    geom_line(aes(color=factor(ToM))) +
-    geom_point(aes(color=factor(ToM)), size=2) +
+    geom_point(aes(color=factor(ToM)), size=2, alpha=0.5) +
+    geom_line(aes(color=factor(ToM)), size=2, alpha=0.5) +
     theme_classic() +
     theme(plot.title=element_text(hjust=0.5),
           axis.text=element_text(size=12),
@@ -63,8 +63,8 @@ data_0 %>%
   filter(Rationality==0.1, Method=="confidence", Cooperation==10,
          Enforcer_Reward==5, Actor_Reward %in% c(0, 2, 5)) %>%
   ggplot(aes(x=ToM, y=Enforcer_Action, group=factor(Actor_Reward))) +
-    geom_line(aes(color=factor(Actor_Reward))) +
-    geom_point(aes(color=factor(Actor_Reward)), size=2) +
+    geom_point(aes(color=factor(Actor_Reward)), size=2, alpha=0.5) +
+    geom_line(aes(color=factor(Actor_Reward)), size=2, alpha=0.5) +
     theme_classic() +
     theme(plot.title=element_text(hjust=0.5),
           axis.text=element_text(size=12),
@@ -76,7 +76,7 @@ data_0 %>%
                        labels=c("0.0\nNone", "0.1", "0.2", "0.3", "0.4", "0.5",
                                 "0.6", "0.7", "0.8", "0.9", "1.0\nFull")) + 
     coord_cartesian(ylim=c(0,5)) +
-    scale_color_manual(name="Actor Preference", 
+    scale_color_manual(name="Actor preference", 
                        labels=c("Not at all", "Somewhat", "Very much"),
                        values=c("#F8766D","#00BA38", "#00BFC4"))
     
@@ -88,8 +88,8 @@ data_1 %>%
   filter(Rationality==0.1, Method=="confidence", Cooperation==10, Actor_Reward==2,
          Enforcer_Action %in% c(0:5)) %>%
   ggplot(aes(x=Enforcer_Action, y=Actor_Action_A, group=ToM)) +
-    geom_point(aes(color=factor(ToM)), size=2) +
-    geom_line(aes(color=factor(ToM))) +
+    geom_point(aes(color=factor(ToM)), size=2, alpha=0.5) +
+    geom_line(aes(color=factor(ToM)), size=2, alpha=0.5) +
     theme_classic() +
     theme(plot.title=element_text(hjust=0.5),
           axis.text=element_text(size=12),

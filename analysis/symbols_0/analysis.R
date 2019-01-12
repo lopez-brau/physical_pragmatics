@@ -6,8 +6,7 @@ setwd("D:/Research/social_pragmatics/")
 
 # Set up the conditions and the different objects participants can see.
 conditions = c("object", "symbol")
-objects = c("chair", "plant", "books", "cinderblocks", "tape", "rulers", "hat", "string",
-            "not-chair")
+objects = c("chair", "plant", "books", "cinderblocks", "tape", "rulers", "hat", "string")
 
 # Populate the list of experimental manipulations.
 experiment_list = c()
@@ -22,7 +21,7 @@ setup = c()
 results_0 = data.frame()
 results_5 = data.frame()
 id = 0
-for (folder in list.dirs("./data/symbols_0/")) {
+for (folder in list.dirs("./data/symbols_0/symbols_0/")) {
   for (e in experiment_list) {
     if (grepl(e, folder)) {
       # Read in the results for this worker.
@@ -111,18 +110,55 @@ results_8 = results_6 %>%
 
 # Compute a Fisher's exact test to see if the condition (i.e., trial order) has
 # an effect.
-results_9 = results_8 %>%
-  filter(trial %in% c("trial_1", "trial_2")) %>%
-  group_by(condition, trial) %>%
-  summarize(unmodified=sum(target), modified=(n()-unmodified)) %>%
-  filter((condition=="object"&trial=="trial_2")|(condition=="symbol"&trial=="trial_1")) %>%
-  ungroup() %>%
-  select(-condition, -trial)
-fisher.test(results_9)
+# results_9 = results_8 %>%
+#   filter(trial %in% c("trial_1", "trial_2")) %>%
+#   group_by(condition, trial) %>%
+#   summarize(unmodified=sum(target), modified=(n()-unmodified)) %>%
+#   filter((condition=="object"&trial=="trial_2")|(condition=="symbol"&trial=="trial_1")) %>%
+#   ungroup() %>%
+#   select(-condition, -trial)
+# fisher.test(results_9)
 
 # Simulate having the full data.
-results_10 = results_9 * data.frame(c(4, 8), c(4, 8))
-fisher.test(results_10)
+# results_10 = results_9 * data.frame(c(4, 8), c(4, 8))
+# fisher.test(results_10)
+
+# Compute 95% bootstrapped CIs.
+compute_mean = function(data, indices) {
+  return(mean(data[indices]))
+}
+
+compute_bootstrap = function(data, cond, tri) {
+  bool_data = data %>%
+    filter(condition==cond, trial==tri)
+
+  simulations = boot(bool_data$target,
+                     statistic=compute_mean,
+                     R=10000)
+  
+  return(boot.ci(simulations, type="perc")$perc)
+}
+
+bootstrap_ci = compute_bootstrap(results_8, "object", "trial_1")
+object_1_lower_ci = bootstrap_ci[4]
+object_1_upper_ci = bootstrap_ci[5]
+
+bootstrap_ci = compute_bootstrap(results_8, "object", "trial_2")
+object_2_lower_ci = bootstrap_ci[4]
+object_2_upper_ci = bootstrap_ci[5]
+
+bootstrap_ci = compute_bootstrap(results_8, "symbol", "trial_1")
+symbol_1_lower_ci = bootstrap_ci[4]
+symbol_1_upper_ci = bootstrap_ci[5]
+
+bootstrap_ci = compute_bootstrap(results_8, "symbol", "trial_2")
+symbol_2_lower_ci = bootstrap_ci[4]
+symbol_2_upper_ci = bootstrap_ci[5]
+
+lower_ci = c(object_1_lower_ci, object_2_lower_ci, symbol_1_lower_ci, symbol_2_lower_ci,
+             object_1_lower_ci, object_2_lower_ci, symbol_1_lower_ci, symbol_2_lower_ci)
+upper_ci = c(object_1_upper_ci, object_2_upper_ci, symbol_1_upper_ci, symbol_2_upper_ci,
+             object_1_upper_ci, object_2_upper_ci, symbol_1_upper_ci, symbol_2_upper_ci)
 
 # Compute the endorsement for the unmodified door (as percentages).
 results_11 = results_8 %>% 
@@ -130,13 +166,45 @@ results_11 = results_8 %>%
   group_by(condition, trial) %>%
   summarize(unmodified=sum(target)/n()) %>%
   mutate(modified=1-unmodified) %>%
-  gather(door, endorsement, unmodified, modified)
+  gather(door, endorsement, unmodified, modified) %>%
+  ungroup() %>%
+  mutate(lower_ci=lower_ci, upper_ci=upper_ci)
 
 # Plot the data. * Make plots prettier and add CIs.
 results_11 %>%
   ggplot(aes(x=trial, y=endorsement, fill=door)) + 
-    geom_histogram(stat="identity") +
-    theme_bw() +
-    facet_wrap(~condition) +
-    coord_cartesian(ylim=c(0.0, 1.0))
-    
+  geom_histogram(stat="identity") +
+  theme_bw() +
+  facet_wrap(~condition) +
+  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.3) +
+  coord_cartesian(ylim=c(0.0, 1.0))
+
+# Filter by object.
+p0 = results_6 %>% 
+  filter(object=="tape") %>%
+  filter(trial %in% c("trial_1", "trial_2")) %>% 
+  group_by(condition, trial) %>% 
+  summarize(unmodified=sum(target)/n()) %>% 
+  mutate(modified=1-unmodified) %>% 
+  gather(door, endorsement, unmodified, modified)
+
+p0 %>% ggplot(aes(x=trial, y=endorsement, fill=door)) + 
+  geom_histogram(stat="identity") +
+  theme_bw() +
+  facet_wrap(~condition) +
+  coord_cartesian(ylim=c(0.0, 1.0))
+
+p1 = results_8 %>% 
+  filter(object=="fishbowl") %>%
+  filter(trial %in% c("trial_1", "trial_2")) %>% 
+  group_by(condition, trial) %>% 
+  summarize(unmodified=sum(target)/n()) %>% 
+  mutate(modified=1-unmodified) %>% 
+  gather(door, endorsement, unmodified, modified)
+
+p1 %>% ggplot(aes(x=trial, y=endorsement, fill=door)) + 
+  geom_histogram(stat="identity") +
+  theme_bw() +
+  facet_wrap(~condition) +
+  coord_cartesian(ylim=c(0.0, 1.0))
+

@@ -259,7 +259,7 @@ function init() {
     })();
 
     // Select whether the modified door has a low-cost object or a symbol in front of it.
-    exp.condition = "object";
+    exp.condition = _.sample(["object", "symbol"]);
     exp.other_condition = (exp.condition == "object") ? "symbol": "object";
 
     // Select which side the modified door is on.
@@ -293,7 +293,6 @@ function init() {
     }
     
     exp.second_object = _.sample(_.filter(exp.objects, function(object){ return object != exp.first_object; }));
-    console.log(exp.first_object, exp.second_object);
     $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.condition, exp.first_object));
     $(".display_stimuli_phrase_1").html(get_noun_phrase_1(exp.condition, exp.first_object));
     $(".display_stimuli_phrase_2").html(get_noun_phrase_1(exp.other_condition, exp.second_object));
