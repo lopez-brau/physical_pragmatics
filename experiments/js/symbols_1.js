@@ -35,9 +35,10 @@ function make_slides(f) {
                                      "<label><input type=\"checkbox\" name=\"catch_1\" value=\"1\"/>" + 
                                      "amount of lighting  </label>" +
                                      "<label><input type=\"checkbox\" name=\"catch_2\" value=\"2\"/>" +
-                                     "the " + 
-                                     ((exp.condition == "symbol") ? "picture of the " + exp.first_object : 
-                                                                    exp.first_object) + 
+                                     "the " +
+                                     exp.first_object + 
+                                     // ((exp.condition == "symbol") ? exp.first_object : 
+                                     //                                exp.first_object) + 
                                      "  </label>" +
                                      "<label><input type=\"checkbox\" name=\"catch_3\" value=\"3\"/>" +
                                      "not sure  </label>" +
@@ -89,8 +90,9 @@ function make_slides(f) {
 
         // Display the prompt, stimuli, and the options.
         $(".display_trial").html("What do you think someone was trying to tell you about the door with the " + 
-                                 ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.first_object) :
-                                             ((exp.condition == "symbol") ? exp.second_object : "picture")) + "?" +
+                                 ((j == 0) ? exp.first_object : exp.second_object + " picture") + "?" + 
+                                 // ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.first_object) :
+                                 //             ((exp.condition == "symbol") ? exp.second_object : "picture")) + "?" +
                                  "<div align=\"center\">" +
                                  "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                  "margin-bottom:-30px;\">" +
@@ -112,13 +114,15 @@ function make_slides(f) {
                                  "<div style=\"width:70%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
                                  "You <b>should</b> walk through the door with the " + 
-                                 ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.first_object) :
-                                             ((exp.condition == "symbol") ? exp.second_object : "picture")) +
+                                 ((j == 0) ? exp.first_object : exp.second_object + " picture") +
+                                 // ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.first_object) :
+                                 //             ((exp.condition == "symbol") ? exp.second_object : "picture")) +
                                  "</label></p>" +
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
                                  "You <b>should not</b> walk through the door with the " +
-                                 ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.first_object) :
-                                             ((exp.condition == "symbol") ? exp.second_object : "picture")) +
+                                 ((j == 0) ? exp.first_object : exp.second_object + " picture") +
+                                 // ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.first_object) :
+                                 //             ((exp.condition == "symbol") ? exp.second_object : "picture")) +
                                  "</label></p>" +
                                  "</div>");
     }
@@ -259,8 +263,8 @@ function init() {
     })();
 
     // Select whether the modified door has a low-cost object or a symbol in front of it.
-    exp.condition = _.sample(["object", "symbol"]);
-    exp.other_condition = (exp.condition == "object") ? "symbol": "object";
+    exp.condition = _.sample(["congruent", "noncongruent"])
+    exp.other_condition = (exp.condition == "congruent") ? "noncongruent": "congruent";
 
     // Select which side the modified door is on.
     exp.side = _.sample(["left", "right"]);
@@ -281,21 +285,21 @@ function init() {
     }[exp.first_object];
 
     // Select which object is being used for the second trial.
-    exp.open_door_objects = ["chair", "books", "cinderblocks", "rulers"];
-    exp.closed_door_objects = ["plant", "tape", "hat", "fishbowl"];
-    if (exp.doors == "open") { 
-        exp.second_object = _.sample(_.filter(exp.open_door_objects, 
-                                              function(object){ return object != exp.first_object; }));
+    if (exp.condition == "noncongruent") {
+        exp.open_door_objects = ["chair", "books", "cinderblocks", "rulers"];
+        exp.closed_door_objects = ["plant", "tape", "hat", "fishbowl"];
+        if (exp.doors == "open") { 
+            exp.second_object = _.sample(_.filter(exp.open_door_objects, 
+                                                  function(object){ return object != exp.first_object; }));
+        }
+        else if(exp.doors == "closed") { 
+            exp.second_object = _.sample(_.filter(exp.closed_door_objects, 
+                                                  function(object){ return object != exp.first_object; }));
+        }
     }
-    else if(exp.doors == "closed") { 
-        exp.second_object = _.sample(_.filter(exp.closed_door_objects, 
-                                              function(object){ return object != exp.first_object; }));
-    }
-    
-    exp.second_object = _.sample(_.filter(exp.objects, function(object){ return object != exp.first_object; }));
-    $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.condition, exp.first_object));
-    $(".display_stimuli_phrase_1").html(get_noun_phrase_1(exp.condition, exp.first_object));
-    $(".display_stimuli_phrase_2").html(get_noun_phrase_1(exp.other_condition, exp.second_object));
+    $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.first_object));
+    $(".display_stimuli_phrase_1").html(get_noun_phrase_1(0, exp.first_object));
+    $(".display_stimuli_phrase_2").html(get_noun_phrase_1(1, exp.second_object));
 
     // Store the experiment variables.
     exp.setup = {
