@@ -75,10 +75,26 @@ function get_noun_phrase_1(condition, object) {
         "books": ((condition == "symbol") ? "a picture of " : "") + "some books",
         "cinderblocks": ((condition == "symbol") ? "a picture of " : "") + "a pile of cinderblocks",
         "tape": ((condition == "symbol") ? "a picture of " : "") + "some tape",
-        "rulers": ((condition == "symbol") ? "a picture of " : "") + "some rulers taped to the door frame",
+        "rulers": ((condition == "symbol") ? "a picture of some rulers with tape" : "some rulers taped to the door " +
+                                             "frame"),
         "hat": ((condition == "symbol") ? "a picture of " : "") + "a hat",
         "fishbowl": ((condition == "symbol") ? "a picture of " : "") + "a fishbowl tied to a string"
     };
 
     return noun_phrases[object];
+}
+
+// Sample unique names for the enforcer.
+function get_enforcer(characters) {
+    return _.sample(characters);
+}
+
+// Use the appropriate gender-specific pronoun for the enforcer.
+function get_pronoun(character, capitalized) {
+    if (character.gender == "male") {
+        return capitalized ? "He" : "he";
+    }
+    else {
+        return capitalized ? "She" : "she";
+    }
 }

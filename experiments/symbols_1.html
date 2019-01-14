@@ -27,6 +27,7 @@
 
     <!-- Experiment specific helper functions. -->
     <script src="js/symbols_1_utils.js"></script>
+    <script src="js/names.js"></script>
 
     <script src="shared/js/uniqueturker.js"></script>
 
@@ -66,9 +67,31 @@
         <button id="start_button" type="button">Start Experiment</button>
     </div>
 
-    <!-- Context slide. -->
-    <div class="slide" id="context">
-        <p>You're leaving an office building and find two identical exits. Near one of the exits <span class="display_stimuli_phrase_0"></span>. You're not sure if someone wanted you to walk through this exit or walk through the other one instead.</p>
+    <!-- Context slides. -->
+    <div class="slide" id="context_0">
+        <p>This is <span class="display_enforcer"></span>. You and <span class="display_enforcer"></span> work in the same office.</p>
+        <div>
+            <img style="height:100px;width:auto;" src="../stimuli/symbols_1/enforcer.png"></img>
+        </div>
+        <br>
+        <button onclick="_s.button()">Continue</button>
+    </div>
+    <div class="slide" id="context_1">
+        <p>In this office, there are two identical doors that the office workers can take to leave.</p>
+        <div>
+            <span class="display_doors"></span>
+        </div>
+        <br>
+        <button onclick="_s.button()">Continue</button>
+    </div>
+    <div class="slide" id="context_2">
+        <p>One day, on your way out, you noticed that <span class="display_enforcer"></span> placed <span class="display_stimuli_phrase_1"></span> in front of one of the doors.</p>
+        <p>You're not sure if <span class="display_enforcer_pronoun"></span> wanted you to walk through this door or walk through the other one instead.</p>
+        <div>
+            <span class="display_trial_1_doors"></span>
+            <img style="height:100px;width:auto;" src="../stimuli/symbols_1/enforcer_looking.png"></img>
+        </div>
+        <br>
         <button onclick="_s.button()">Continue</button>
     </div>
 
@@ -82,7 +105,13 @@
 
     <!-- First transition slide. -->
     <div class="slide" id="transition_1">
-        <p>Great job! Now, instead of <b><span class="display_stimuli_phrase_1"></span></b>, the next day the same person places <b><span class="display_stimuli_phrase_2"></span></b> near one of the exits.</p>
+        <p>Great job!</p>
+        <p>The next day, instead of <b><span class="display_stimuli_phrase_1"></span></b>, you noticed that <span class="display_enforcer"></span> places <b><span class="display_stimuli_phrase_2"></span></b> in front of the same door.</p>
+        <div>
+            <span class="display_trial_2_doors"></span>
+            <img style="height:100px;width:auto;" src="../stimuli/symbols_1/enforcer_looking.png"></img>
+        </div>
+        <br>
         <button onclick="_s.button()">Continue</button>
     </div>
 
@@ -91,7 +120,8 @@
 
     <!-- Second transition slide. -->
     <div class="slide" id="transition_2">
-        <p>Great job! The last two trials will ask you questions about the first two trials.</p>
+        <p>Great job!</p>
+        <p>The last two trials will ask you questions about the first two trials.</p>
         <button onclick="_s.button()">Continue</button>
     </div>
 
