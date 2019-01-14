@@ -21,7 +21,7 @@ setup = c()
 results_0 = data.frame()
 results_5 = data.frame()
 id = 0
-for (folder in list.dirs("./data/symbols_0/symbols_0/")) {
+for (folder in list.dirs("./data/symbols_0/data_0/")) {
   for (e in experiment_list) {
     if (grepl(e, folder)) {
       # Read in the results for this worker.

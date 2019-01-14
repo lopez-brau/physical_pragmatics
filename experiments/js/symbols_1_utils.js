@@ -1,19 +1,31 @@
 // Generate the stimuli for the trial and exclusion slides.
-function trials(doors, side, first_object, second_object) {
+function trials(doors, condition, side, object) {
     // Stitch together the filenames for all of the doors.
     unmodified_door = doors + ".png";
-    object_door = doors + "_low_" + ((first_object == "fishbowl") ? "string" : first_object) + ".png";
-    symbol_door = doors + "_symbol_" + ((second_object == "fishbowl") ? "string" : second_object) + ".png";    
-    
+    object_door = doors + "_low_" + ((object == "fishbowl") ? "string" : object) + ".png";
+    symbol_door = doors + "_symbol_" + ((object == "fishbowl") ? "string" : object) + ".png";
+
     // Push the filenames for both trials.
     var trials = [];
     if (side == "left") {
-        trials.push([object_door, unmodified_door]);
-        trials.push([symbol_door, unmodified_door]);
+        if (condition == "object") {
+            trials.push([object_door, unmodified_door]);
+            trials.push([symbol_door, unmodified_door]);
+        }
+        else if (condition == "symbol") {
+            trials.push([symbol_door, unmodified_door]);
+            trials.push([object_door, unmodified_door]);
+        } 
     }
     else if (side == "right") {
-        trials.push([unmodified_door, object_door]);
-        trials.push([unmodified_door, symbol_door]);
+        if (condition == "object") {
+            trials.push([unmodified_door, object_door]);
+            trials.push([unmodified_door, symbol_door]);
+        }
+        else if (condition == "symbol") {
+            trials.push([unmodified_door, symbol_door]);
+            trials.push([unmodified_door, object_door]);
+        } 
     }
 
     return trials;
@@ -40,32 +52,32 @@ function embed_slides(num_trials) {
 }
 
 // Retrieve the noun phrase for a given object for the context slide.
-function get_noun_phrase_0(object) {
+function get_noun_phrase_0(condition, object) {
     noun_phrases = {
-        "plant": "is a plant",
-        "chair": "is a chair",
-        "books": "are some books",
-        "cinderblocks": "is a pile of cinderblocks",
-        "tape": "is some tape",
-        "rulers": "are some rulers taped to the door frame",
-        "hat": "is a hat",
-        "fishbowl": "is a fishbowl tied to a string"
+        "plant": ((condition == "symbol") ? "is a picture of" : "is") + " a plant",
+        "chair": ((condition == "symbol") ? "is a picture of" : "is") + " a chair",
+        "books": ((condition == "symbol") ? "is a picture of" : "are")+ " some books",
+        "cinderblocks": ((condition == "symbol") ? "is a picture of" : "is") + " a pile of cinderblocks",
+        "tape": ((condition == "symbol") ? "is a picture of" : "is") + " some tape",
+        "rulers": ((condition == "symbol") ? "is a picture of" : "are") + " some rulers taped to the door frame",
+        "hat": ((condition == "symbol") ? "is a picture of" : "is") + " a hat",
+        "fishbowl": ((condition == "symbol") ? "is a picture of" : "is") + " a fishbowl tied to a string"
     };
 
     return noun_phrases[object];
 }
 
 // Retrieve the first noun phrase for a given object for the transition slide.
-function get_noun_phrase_1(picture, object) {
+function get_noun_phrase_1(condition, object) {
     noun_phrases = {
-        "plant": ((picture) ? "a picture of " : "") + "a plant",
-        "chair": ((picture) ? "a picture of " : "") + "a chair",
-        "books": ((picture) ? "a picture of " : "") + "some books",
-        "cinderblocks": ((picture) ? "a picture of " : "") + "a pile of cinderblocks",
-        "tape": ((picture) ? "a picture of " : "") + "some tape",
-        "rulers": ((picture) ? "a picture of " : "") + "some rulers taped to the door frame",
-        "hat": ((picture) ? "a picture of " : "") + "a hat",
-        "fishbowl": ((picture) ? "a picture of " : "") + "a fishbowl tied to a string"
+        "plant": ((condition == "symbol") ? "a picture of " : "") + "a plant",
+        "chair": ((condition == "symbol") ? "a picture of " : "") + "a chair",
+        "books": ((condition == "symbol") ? "a picture of " : "") + "some books",
+        "cinderblocks": ((condition == "symbol") ? "a picture of " : "") + "a pile of cinderblocks",
+        "tape": ((condition == "symbol") ? "a picture of " : "") + "some tape",
+        "rulers": ((condition == "symbol") ? "a picture of " : "") + "some rulers taped to the door frame",
+        "hat": ((condition == "symbol") ? "a picture of " : "") + "a hat",
+        "fishbowl": ((condition == "symbol") ? "a picture of " : "") + "a fishbowl tied to a string"
     };
 
     return noun_phrases[object];
