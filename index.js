@@ -118,7 +118,7 @@ function make_slides(f) {
                                  "<div align=\"center\">" +
                                  "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                  "margin-bottom:-30px;\">" +
-                                 "<img style=\"height:300px;width:auto;\" src=\"stimuli/congruency_1/" +
+                                 "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_2/" +
                                  exp.trials[j][0] + "\"></img>" + 
                                  "<br><br>" +
                                  "<p style=\"margin-right:20px;\"></p>" +
@@ -127,7 +127,7 @@ function make_slides(f) {
                                  "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                                  "margin-bottom:-30px;\">" +
                                  "<label>" + 
-                                 "<img style=\"height:300px;width:auto;\" src=\"stimuli/congruency_1/" +
+                                 "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_2/" +
                                  exp.trials[j][1] + "\"></img>" +
                                  "<br><br>" + 
                                  "</label>" +
@@ -182,7 +182,7 @@ function make_slides(f) {
                                      "<div align=\"center\">" +
                                      "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                      "margin-bottom:-30px;\">" +
-                                     "<img style=\"height:300px;width:auto;\" src=\"stimuli/congruency_1/" +
+                                     "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_2/" +
                                      exp.trials[j-exp.num_trials][0] + "\"></img>" + 
                                      "<br><br>" +
                                      "<p style=\"margin-right:20px;\"></p>" +
@@ -191,7 +191,7 @@ function make_slides(f) {
                                      "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                                      "margin-bottom:-30px;\">" +
                                      "<label>" + 
-                                     "<img style=\"height:300px;width:auto;\" src=\"stimuli/congruency_1/" +
+                                     "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_2/" +
                                      exp.trials[j-exp.num_trials][1] + "\"></img>" +
                                      "<br><br>" + 
                                      "</label>" +
@@ -351,7 +351,7 @@ function init() {
     $(".display_doors").html("<div align=\"center\">" +
                              "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                              "margin-bottom:-30px;\">" +
-                             "<img style=\"height:300px;width:auto;\" src=\"stimuli/congruency_1/" +
+                             "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_2/" +
                              exp.doors + ".png\"></img>" + 
                              "<br><br>" +
                              "<p style=\"margin-right:20px;\"></p>" +
@@ -360,7 +360,7 @@ function init() {
                              "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                              "margin-bottom:-30px;\">" +
                              "<label>" + 
-                             "<img style=\"height:300px;width:auto;\" src=\"stimuli/congruency_1/" +
+                             "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_2/" +
                              exp.doors + ".png\"></img>" +
                              "<br><br>" + 
                              "</label>" +
@@ -369,7 +369,7 @@ function init() {
     $(".display_trial_1_doors").html("<div align=\"center\">" +
                                    "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                    "margin-bottom:-30px;\">" +
-                                   "<img style=\"height:300px;width:auto;\" src=\"stimuli/congruency_1/" +
+                                   "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_2/" +
                                    exp.trials[0][0] + "\"></img>" + 
                                    "<br><br>" +
                                    "<p style=\"margin-right:20px;\"></p>" +
@@ -378,7 +378,7 @@ function init() {
                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                                    "margin-bottom:-30px;\">" +
                                    "<label>" + 
-                                   "<img style=\"height:300px;width:auto;\" src=\"stimuli/congruency_1/" +
+                                   "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_2/" +
                                    exp.trials[0][1] + "\"></img>" +
                                    "<br><br>" + 
                                    "</label>" +
@@ -387,7 +387,7 @@ function init() {
     $(".display_trial_2_doors").html("<div align=\"center\">" +
                                    "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                    "margin-bottom:-30px;\">" +
-                                   "<img style=\"height:300px;width:auto;\" src=\"stimuli/congruency_1/" +
+                                   "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_2/" +
                                    exp.trials[1][0] + "\"></img>" + 
                                    "<br><br>" +
                                    "<p style=\"margin-right:20px;\"></p>" +
@@ -396,7 +396,7 @@ function init() {
                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                                    "margin-bottom:-30px;\">" +
                                    "<label>" + 
-                                   "<img style=\"height:300px;width:auto;\" src=\"stimuli/congruency_1/" +
+                                   "<img style=\"height:300px;width:auto;\" src=\"stimuli/symbols_2/" +
                                    exp.trials[1][1] + "\"></img>" +
                                    "<br><br>" + 
                                    "</label>" +
