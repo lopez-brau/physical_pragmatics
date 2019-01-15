@@ -45,8 +45,8 @@ function make_slides(f) {
                                      "<label><input type=\"checkbox\" name=\"catch_1\" value=\"1\"/>" + 
                                      "amount of lighting  </label>" +
                                      "<label><input type=\"checkbox\" name=\"catch_2\" value=\"2\"/>" +
-                                     "the " + 
-                                     ((exp.condition == "symbol") ? "picture of the " + exp.object : exp.object) + 
+                                     "the " +
+                                     exp.first_object + 
                                      "  </label>" +
                                      "<label><input type=\"checkbox\" name=\"catch_3\" value=\"3\"/>" +
                                      "not sure  </label>" +
@@ -68,7 +68,7 @@ function make_slides(f) {
             else if ((exp.catch_response_0 == 1) || (exp.catch_response_1 == 1) || (exp.catch_response_2 == 0) || 
                      (exp.catch_response_3 == 1)) {
                 $(".catch_error").hide();
-                exp.go(-3);
+                exp.go(-1);
             }
             else {
                 exp.go();
@@ -98,8 +98,7 @@ function make_slides(f) {
 
         // Display the prompt, stimuli, and the options.
         $(".display_trial").html("What do you think " + exp.enforcer.name + " was trying to tell you about the door with the " + 
-                                 ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.object) :
-                                             ((exp.condition == "symbol") ? exp.object : "picture")) + "?" +
+                                 ((j == 0) ? exp.first_object : (exp.second_object + " picture")) + "?" + 
                                  "<div align=\"center\">" +
                                  "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                  "margin-bottom:-30px;\">" +
@@ -121,13 +120,11 @@ function make_slides(f) {
                                  "<div style=\"width:70%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
                                  "You <b>should</b> walk through the door with the " + 
-                                 ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.object) :
-                                             ((exp.condition == "symbol") ? exp.object : "picture")) +
+                                 ((j == 0) ? exp.first_object : (exp.second_object + " picture")) + 
                                  "</label></p>" +
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
                                  "You <b>should not</b> walk through the door with the " +
-                                 ((j == 0) ? ((exp.condition == "symbol") ? "picture" : exp.object) :
-                                             ((exp.condition == "symbol") ? exp.object : "picture")) +
+                                 ((j == 0 ) ? exp.first_object : (exp.second_object + " picture")) +
                                  "</label></p>" +
                                  "</div>");
     }
@@ -270,23 +267,19 @@ function init() {
     // Set up the enforcer's name.
     exp.enforcer = get_enforcer(characters);
     $(".display_enforcer").html(exp.enforcer.name);
-    $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer.name, 0));
+    $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer, 0));
 
-    // Select whether the modified door has a low-cost object or a symbol in front of it.
-    exp.condition = _.sample(["object", "symbol"]);
-    exp.other_condition = (exp.condition == "object") ? "symbol": "object";
+    // Select whether the trials have congruent or incongruent object-symbol pairs.
+    exp.condition = _.sample(["congruent", "incongruent"]);
+    exp.other_condition = (exp.condition == "congruent") ? "incongruent": "congruent";
 
     // Select which side the modified door is on.
     exp.side = _.sample(["left", "right"]);
     exp.other_side = (exp.side == "left") ? "right" : "left";
 
-    // Select which object is being used for the low cost and the symbol.
-    exp.object = _.sample(["chair", "plant", "books", "cinderblocks", "tape", "rulers", "hat", "fishbowl"]);
-    $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.condition, exp.object));
-    $(".display_stimuli_phrase_1").html(get_noun_phrase_1(exp.condition, exp.object));
-    $(".display_stimuli_phrase_2").html(get_noun_phrase_1(exp.other_condition, exp.object));
-
-    // Select whether the doors are open or closed.
+    // Select which object is being used for the first trial and whether the doors are open or closed.
+    exp.objects = ["chair", "plant", "books", "cinderblocks", "tape", "rulers", "hat", "fishbowl"];
+    exp.first_object = _.sample(exp.objects);
     exp.doors = {
         "plant": "closed",
         "chair": "open",
@@ -296,18 +289,39 @@ function init() {
         "rulers": "open",
         "hat": "closed",
         "fishbowl": "closed"
-    }[exp.object];
+    }[exp.first_object];
+
+    // Select which object is being used for the second trial.
+    if (exp.condition == "congruent") {
+        exp.second_object = exp.first_object;
+    }
+    else if (exp.condition == "incongruent") {
+        exp.open_door_objects = ["chair", "books", "cinderblocks", "rulers"];
+        exp.closed_door_objects = ["plant", "tape", "hat", "fishbowl"];
+        if (exp.doors == "open") { 
+            exp.second_object = _.sample(_.filter(exp.open_door_objects, 
+                                                  function(object){ return object != exp.first_object; }));
+        }
+        else if (exp.doors == "closed") { 
+            exp.second_object = _.sample(_.filter(exp.closed_door_objects, 
+                                                  function(object){ return object != exp.first_object; }));
+        }
+    }
+    $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.first_object));
+    $(".display_stimuli_phrase_1").html(get_noun_phrase_1(0, exp.first_object));
+    $(".display_stimuli_phrase_2").html(get_noun_phrase_1(1, exp.second_object));
 
     // Store the experiment variables.
     exp.setup = {
         "condition": exp.condition,
         "side": exp.side,
-        "object": exp.object,
+        "first_object": exp.first_object,
+        "second_object": exp.second_object,
         "doors": exp.doors
     };
 
     // Set up trial slide information.
-    exp.trials = trials(exp.doors, exp.condition, exp.side, exp.object);
+    exp.trials = trials(exp.doors, exp.side, exp.first_object, exp.second_object);
     exp.num_trials = exp.trials.length;
     exp.data_trials = [];
     $(".display_num_trials").html(exp.num_trials);

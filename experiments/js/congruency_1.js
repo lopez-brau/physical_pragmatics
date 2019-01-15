@@ -97,7 +97,7 @@ function make_slides(f) {
         $(".trial_error").hide();
 
         // Display the prompt, stimuli, and the options.
-        $(".display_trial").html("What do you think someone was trying to tell you about the door with the " + 
+        $(".display_trial").html("What do you think " + exp.enforcer.name + " was trying to tell you about the door with the " + 
                                  ((j == 0) ? exp.first_object : (exp.second_object + " picture")) + "?" + 
                                  "<div align=\"center\">" +
                                  "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
@@ -267,7 +267,7 @@ function init() {
     // Set up the enforcer's name.
     exp.enforcer = get_enforcer(characters);
     $(".display_enforcer").html(exp.enforcer.name);
-    $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer.name, 0));
+    $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer, 0));
 
     // Select whether the trials have congruent or incongruent object-symbol pairs.
     exp.condition = _.sample(["congruent", "incongruent"]);

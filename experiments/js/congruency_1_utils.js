@@ -63,7 +63,7 @@ function get_noun_phrase_1(picture, object) {
         "books": ((picture) ? "a picture of " : "") + "some books",
         "cinderblocks": ((picture) ? "a picture of " : "") + "a pile of cinderblocks",
         "tape": ((picture) ? "a picture of " : "") + "some tape",
-        "rulers": ((picture) ? "a picture of " : "") + "some rulers taped to the door frame",
+        "rulers": ((picture) ? "a picture of some rulers taped together" : "some rulers taped to the door frame"),
         "hat": ((picture) ? "a picture of " : "") + "a hat",
         "fishbowl": ((picture) ? "a picture of " : "") + "a fishbowl tied to a string"
     };
