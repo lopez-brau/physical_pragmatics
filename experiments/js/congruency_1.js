@@ -97,12 +97,13 @@ function make_slides(f) {
         $(".trial_error").hide();
 
         // Display the prompt, stimuli, and the options.
-        $(".display_trial").html("What do you think " + exp.enforcer.name + " was trying to tell you about the door with the " + 
-                                 ((j == 0) ? exp.first_object : (exp.second_object + " picture")) + "?" + 
+        $(".display_trial").html("What do you think " + exp.enforcer.name + " was trying to tell you about the door " + 
+                                 "with the  " + 
+                                 ((j == 0) ? exp.first_object : ("picture of the " + exp.second_object)) + "?" + 
                                  "<div align=\"center\">" +
                                  "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                  "margin-bottom:-30px;\">" +
-                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/congruency_1/" +
                                  exp.trials[j][0] + "\"></img>" + 
                                  "<br><br>" +
                                  "<p style=\"margin-right:20px;\"></p>" +
@@ -111,7 +112,7 @@ function make_slides(f) {
                                  "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                                  "margin-bottom:-30px;\">" +
                                  "<label>" + 
-                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/congruency_1/" +
                                  exp.trials[j][1] + "\"></img>" +
                                  "<br><br>" + 
                                  "</label>" +
@@ -120,11 +121,11 @@ function make_slides(f) {
                                  "<div style=\"width:70%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
                                  "You <b>should</b> walk through the door with the " + 
-                                 ((j == 0) ? exp.first_object : (exp.second_object + " picture")) + 
+                                 ((j == 0) ? exp.first_object : ("picture of the " + exp.second_object)) + 
                                  "</label></p>" +
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
                                  "You <b>should not</b> walk through the door with the " +
-                                 ((j == 0 ) ? exp.first_object : (exp.second_object + " picture")) +
+                                 ((j == 0 ) ? exp.first_object : ("picture of the " + exp.second_object)) +
                                  "</label></p>" +
                                  "</div>");
     }
@@ -164,7 +165,7 @@ function make_slides(f) {
                                      "<div align=\"center\">" +
                                      "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                      "margin-bottom:-30px;\">" +
-                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/congruency_1/" +
                                      exp.trials[j-exp.num_trials][0] + "\"></img>" + 
                                      "<br><br>" +
                                      "<p style=\"margin-right:20px;\"></p>" +
@@ -173,18 +174,21 @@ function make_slides(f) {
                                      "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                                      "margin-bottom:-30px;\">" +
                                      "<label>" + 
-                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/congruency_1/" +
                                      exp.trials[j-exp.num_trials][1] + "\"></img>" +
                                      "<br><br>" + 
                                      "</label>" +
                                      "</div>" + 
                                      "</div>" + 
                                      "<div style=\"width:40%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
-                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"0\">" +
-                                     "The door on the " + exp.other_side + "</label></p>" +
-                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"1\">" +
-                                     "The door on the " + exp.side + "</label></p>" +
-                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" value=\"2\">" +
+                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" " + 
+                                     "value=\"left\">" +
+                                     "The door on the left</label></p>" +
+                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" " + 
+                                     "value=\"right\">" +
+                                     "The door on the right</label></p>" +
+                                     "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" " + 
+                                     "value=\"equal\">" +
                                      "Equally easy</label></p>" +
                                      "</div>");
     }
@@ -267,19 +271,19 @@ function init() {
     // Set up the enforcer's name.
     exp.enforcer = get_enforcer(characters);
     $(".display_enforcer").html(exp.enforcer.name);
-    $(".display_enforcer_pronoun").html(get_pronoun(exp.enforcer, 0));
+    $(".display_enforcer_pronoun").html(get_enforcer_pronoun(exp.enforcer, 0));
 
     // Select whether the trials have congruent or incongruent object-symbol pairs.
     exp.condition = _.sample(["congruent", "incongruent"]);
-    exp.other_condition = (exp.condition == "congruent") ? "incongruent": "congruent";
 
     // Select which side the modified door is on.
-    exp.side = _.sample(["left", "right"]);
-    exp.other_side = (exp.side == "left") ? "right" : "left";
+    exp.first_side = _.sample(["left", "right"]);
+    exp.second_side = _.sample(["left", "right"]);
 
     // Select which object is being used for the first trial and whether the doors are open or closed.
     exp.objects = ["chair", "plant", "books", "cinderblocks", "tape", "rulers", "hat", "fishbowl"];
     exp.first_object = _.sample(exp.objects);
+    exp.first_object = "hat";
     exp.doors = {
         "plant": "closed",
         "chair": "open",
@@ -307,30 +311,31 @@ function init() {
                                                   function(object){ return object != exp.first_object; }));
         }
     }
-    $(".display_stimuli_phrase_0").html(get_noun_phrase_0(exp.first_object));
-    $(".display_stimuli_phrase_1").html(get_noun_phrase_1(0, exp.first_object));
-    $(".display_stimuli_phrase_2").html(get_noun_phrase_1(1, exp.second_object));
+    $(".display_object").html((exp.first_object == "rulers") ? "rulers taped together" : exp.first_object);
+    $(".display_noun_phrase_0").html(get_noun_phrase(0, exp.first_object));
+    $(".display_noun_phrase_1").html(get_noun_phrase(1, exp.second_object));
 
     // Store the experiment variables.
     exp.setup = {
         "condition": exp.condition,
-        "side": exp.side,
+        "first_side": exp.first_side,
+        "second_side": exp.second_side,
         "first_object": exp.first_object,
         "second_object": exp.second_object,
         "doors": exp.doors
     };
 
     // Set up trial slide information.
-    exp.trials = trials(exp.doors, exp.side, exp.first_object, exp.second_object);
+    exp.trials = trials(exp.doors, exp.first_side, exp.second_side, exp.first_object, exp.second_object);
     exp.num_trials = exp.trials.length;
     exp.data_trials = [];
     $(".display_num_trials").html(exp.num_trials);
-
+    console.log(exp.trials);
     // Set up the door for the context slides.
     $(".display_doors").html("<div align=\"center\">" +
                              "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                              "margin-bottom:-30px;\">" +
-                             "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                             "<img style=\"height:300px;width:auto;\" src=\"../stimuli/congruency_1/" +
                              exp.doors + ".png\"></img>" + 
                              "<br><br>" +
                              "<p style=\"margin-right:20px;\"></p>" +
@@ -339,7 +344,7 @@ function init() {
                              "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                              "margin-bottom:-30px;\">" +
                              "<label>" + 
-                             "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                             "<img style=\"height:300px;width:auto;\" src=\"../stimuli/congruency_1/" +
                              exp.doors + ".png\"></img>" +
                              "<br><br>" + 
                              "</label>" +
@@ -348,7 +353,7 @@ function init() {
     $(".display_trial_1_doors").html("<div align=\"center\">" +
                                    "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                    "margin-bottom:-30px;\">" +
-                                   "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                   "<img style=\"height:300px;width:auto;\" src=\"../stimuli/congruency_1/" +
                                    exp.trials[0][0] + "\"></img>" + 
                                    "<br><br>" +
                                    "<p style=\"margin-right:20px;\"></p>" +
@@ -357,7 +362,7 @@ function init() {
                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                                    "margin-bottom:-30px;\">" +
                                    "<label>" + 
-                                   "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                   "<img style=\"height:300px;width:auto;\" src=\"../stimuli/congruency_1/" +
                                    exp.trials[0][1] + "\"></img>" +
                                    "<br><br>" + 
                                    "</label>" +
@@ -366,7 +371,7 @@ function init() {
     $(".display_trial_2_doors").html("<div align=\"center\">" +
                                    "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                    "margin-bottom:-30px;\">" +
-                                   "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                   "<img style=\"height:300px;width:auto;\" src=\"../stimuli/congruency_1/" +
                                    exp.trials[1][0] + "\"></img>" + 
                                    "<br><br>" +
                                    "<p style=\"margin-right:20px;\"></p>" +
@@ -375,7 +380,7 @@ function init() {
                                    "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
                                    "margin-bottom:-30px;\">" +
                                    "<label>" + 
-                                   "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_0/" +
+                                   "<img style=\"height:300px;width:auto;\" src=\"../stimuli/congruency_1/" +
                                    exp.trials[1][1] + "\"></img>" +
                                    "<br><br>" + 
                                    "</label>" +
