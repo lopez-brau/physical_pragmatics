@@ -283,7 +283,6 @@ function init() {
     // Select which object is being used for the first trial and whether the doors are open or closed.
     exp.objects = ["chair", "plant", "books", "cinderblocks", "tape", "rulers", "hat", "fishbowl"];
     exp.first_object = _.sample(exp.objects);
-    exp.first_object = "hat";
     exp.doors = {
         "plant": "closed",
         "chair": "open",
