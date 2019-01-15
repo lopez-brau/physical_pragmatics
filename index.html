@@ -69,15 +69,19 @@
 
     <!-- Context slides. -->
     <div class="slide" id="context_0">
-        <p>This is <span class="display_enforcer"></span>. You and <span class="display_enforcer"></span> work in the same office.</p>
+        <div style="height:70px;">
+            <p>This is <span class="display_enforcer"></span>. You and <span class="display_enforcer"></span> work in the same office.</p>
+        </div>
         <div>
             <img style="height:100px;width:auto;" src="stimuli/congruency_1/enforcer.png"></img>
         </div>
-        <br>
+        <br><br>
         <button onclick="_s.button()">Continue</button>
     </div>
     <div class="slide" id="context_1">
-        <p>In this office, there are two identical doors that the office workers can take to leave.</p>
+        <div style="height:90px;">
+            <p>In this office, there are two identical doors that the office workers can take to leave.</p>
+        </div>
         <div>
             <span class="display_doors"></span>
         </div>
@@ -85,9 +89,20 @@
         <button onclick="_s.button()">Continue</button>
     </div>
     <div class="slide" id="context_2">
-        <p><span class="display_enforcer"></span> was looking for you to tell you something, but couldn't find you, so <span class="display_enforcer_pronoun"></span> placed <span class="display_noun_phrase_0"></span> in front of one of the doors.</p>
-        <p>At the end of the day, <span class="display_enforcer"></span> is nowhere to be found and you see the <span class="display_object"></span> on your way out.</p>
-        <p>You're not sure if <span class="display_enforcer_pronoun"></span> wanted you to walk through this door or walk through the other one instead.</p>
+        <div style="height:90px;">
+            <p><span class="display_enforcer"></span> was looking for you to tell you something, but couldn't find you, so <span class="display_enforcer_pronoun"></span> placed <span class="display_noun_phrase_0"></span> in front of one of the doors.</p>
+        </div>
+        <div>
+            <span class="display_trial_1_doors"></span>
+        </div>
+        <br>
+        <button onclick="_s.button()">Continue</button>
+    </div> 
+    <div class="slide" id="context_3">
+        <div style="height:90px;">
+            <p>At the end of the day, <span class="display_enforcer"></span> is nowhere to be found and you see the <span class="display_object"></span> on your way out.</p>
+            <p style="margin-bottom:0px">You're not sure if <span class="display_enforcer_pronoun"></span> wanted you to walk through this door or walk through the other one instead.</p>
+        </div>
         <div>
             <span class="display_trial_1_doors"></span>
         </div>
@@ -103,15 +118,33 @@
         <button onclick="_s.button()">Continue</button>
     </div>
 
-    <!-- First transition slide. -->
+    <!-- Between trial transition slides. -->
+    <div class="slide" id="transition_0">
+        <div style="height:70px;">
+            <p>That's right! <span class="display_enforcer"></span> was relieved that you understood what <span class="display_enforcer_pronoun"></span> was trying to tell you.</p>
+        </div>
+        <div>
+            <img style="height:100px;width:auto;" src="stimuli/congruency_1/enforcer.png"></img>
+        </div>
+        <br>
+        <button onclick="_s.button()">Continue</button>
+    </div>
     <div class="slide" id="transition_1">
-        <p>That's right! <span class="display_enforcer"></span> was relieved that you understood what <span class="display_enforcer_pronoun"></span> was trying to tell you.</p>
-        <p>The next day, <span class="display_enforcer"></span> was looking for you, but once again couldn't find you. This time, <span class="display_enforcer_pronoun"></span> can't find the <b><span class="display_object"></span></b>, so <span class="display_enforcer_pronoun"></span> instead draws <b><span class="display_noun_phrase_1"></span></b> and placed it in front of one of the doors.</p>
-        <p> Again, it's the end of the day, <span class="display_enforcer"></span> is nowhere to be found, and you see the picture of the <span class="display_object"></span> on your way out.</p>
+        <div style="height:90px;">
+            <p>The next day, <span class="display_enforcer"></span> was looking for you, but once again couldn't find you. This time, <span class="display_enforcer_pronoun"></span> can't find the <b><span class="display_object"></span></b>, so <span class="display_enforcer_pronoun"></span> instead draws <b><span class="display_noun_phrase_1"></span></b> and placed it in front of one of the doors.</p>
+        </div>
         <div>
             <span class="display_trial_2_doors"></span>
         </div>
-        <br>
+        <button onclick="_s.button()">Continue</button>
+    </div>
+    <div class="slide" id="transition_2">
+        <div style="height:90px;">
+            <p> Again, it's the end of the day, <span class="display_enforcer"></span> is nowhere to be found, and you see the picture of the <span class="display_object"></span> on your way out.</p>
+        </div>
+        <div>
+            <span class="display_trial_2_doors"></span>
+        </div>
         <button onclick="_s.button()">Continue</button>
     </div>
 
@@ -119,8 +152,14 @@
     <div class="trial_slides"></div>
 
     <!-- Second transition slide. -->
-    <div class="slide" id="transition_2">
-        <p>That's right! <span class="display_enforcer"></span> was relieved that you understood what <span class="display_enforcer_pronoun"></span> was trying to tell you.</p>
+    <div class="slide" id="transition_3">
+        <div style="height:70px;">
+            <p>That's right! <span class="display_enforcer"></span> was relieved once more that you understood what <span class="display_enforcer_pronoun"></span> was trying to tell you.</p>
+        </div>
+        <div>
+            <img style="height:100px;width:auto;" src="stimuli/congruency_1/enforcer.png"></img>
+        </div>
+        <br>
         <p>The last two trials will ask you questions about the first two trials.</p>
         <button onclick="_s.button()">Continue</button>
     </div>

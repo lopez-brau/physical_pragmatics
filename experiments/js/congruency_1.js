@@ -27,6 +27,11 @@ function make_slides(f) {
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
+    slides.context_3 = slide({
+        name: "context_3",
+        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+        button: function() { exp.go(); }
+    });
 
     // Set up the catch trial slide.
     slides.catch_trial = slide({
@@ -68,7 +73,7 @@ function make_slides(f) {
             else if ((exp.catch_response_0 == 1) || (exp.catch_response_1 == 1) || (exp.catch_response_2 == 0) || 
                      (exp.catch_response_3 == 1)) {
                 $(".catch_error").hide();
-                exp.go(-1);
+                exp.go(-4);
             }
             else {
                 exp.go();
@@ -76,16 +81,24 @@ function make_slides(f) {
         }
     });
 
-    // Set up the first transition slide.
+    // Set up the transition slides.
+    slides.transition_0 = slide({
+        name: "transition_0",
+        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+        button: function() { exp.go(); }
+    });
     slides.transition_1 = slide({
         name: "transition_1",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
-
-    // Set up the second transition slide.
     slides.transition_2 = slide({
         name: "transition_2",
+        start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
+        button: function() { exp.go(); }
+    });
+    slides.transition_3 = slide({
+        name: "transition_3",
         start: function() { $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%"); },
         button: function() { exp.go(); }
     });
@@ -97,9 +110,11 @@ function make_slides(f) {
         $(".trial_error").hide();
 
         // Display the prompt, stimuli, and the options.
-        $(".display_trial").html("What do you think " + exp.enforcer.name + " was trying to tell you about the door " + 
+        $(".display_trial").html("<div style=\"height:90px;\">" +
+                                 "What do you think " + exp.enforcer.name + " was trying to tell you about the door " + 
                                  "with the  " + 
                                  ((j == 0) ? exp.first_object : ("picture of the " + exp.second_object)) + "?" + 
+                                 "</div>" +
                                  "<div align=\"center\">" +
                                  "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                  "margin-bottom:-30px;\">" +
@@ -118,7 +133,7 @@ function make_slides(f) {
                                  "</label>" +
                                  "</div>" + 
                                  "</div>" + 
-                                 "<div style=\"width:70%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
+                                 "<div style\"margin-top:-40px;\">" +
                                  "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
                                  "You <b>should</b> walk through the door with the " + 
                                  ((j == 0) ? exp.first_object : ("picture of the " + exp.second_object)) + 
@@ -133,7 +148,7 @@ function make_slides(f) {
     // Run when the "Continue" button is hit on a trial slide.
     function trial_button() {
         if ($("input[name='target']:checked").val() == undefined) { 
-            $(".error").show(); 
+            $(".trial_error").show(); 
         }
         else {
             exp.data_trials.push({
@@ -161,7 +176,9 @@ function make_slides(f) {
         $(".exclusion_error").hide();
 
         // Display the prompt, stimuli, and the options.
-        $(".display_exclusion").html("Which door requires more work to walk through?" + 
+        $(".display_exclusion").html("<div style=\"height:90px;\">" +
+                                     "Which door requires more work to walk through?" + 
+                                     "</div>" +
                                      "<div align=\"center\">" +
                                      "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
                                      "margin-bottom:-30px;\">" +
@@ -180,7 +197,7 @@ function make_slides(f) {
                                      "</label>" +
                                      "</div>" + 
                                      "</div>" + 
-                                     "<div style=\"width:40%;margin-left:auto;margin-right:auto;\" align=\"center\">" + 
+                                     "<div style=\"margin-top:-40px;\">" + 
                                      "<p align=\"left\"><label><input type=\"radio\" name=\"exclusion\" " + 
                                      "value=\"left\">" +
                                      "The door on the left</label></p>" +
@@ -397,8 +414,8 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "context_0", "context_1", "context_2", "catch_trial", "trial_1", "transition_1", "trial_2", 
-                     "transition_2", "exclusion_1", "exclusion_2"];
+    exp.structure = ["i0", "context_0", "context_1", "context_2", "context_3", "catch_trial", "trial_1", "transition_0",
+                     "transition_1", "transition_2", "trial_2", "transition_3", "exclusion_1", "exclusion_2"];
     exp.structure.push("subj_info");
     exp.structure.push("thanks");
    
