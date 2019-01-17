@@ -25,9 +25,9 @@ data_1$response[which(data_1$response=="ModifiedDoor")] = "modified"
 # Exclude participants who said the unmodified door was more difficult to walk
 # through and omit missing data.
 data_2 = data_1 %>% 
-  filter(costlier!="unmodified") %>%
   filter(condition!="") %>%
-  na.omit() 
+  na.omit() %>%
+  filter(costlier!="unmodified")
 
 # Add pseudo-workerids to make it easier to distinguish participants across
 # disjoint datasets.
