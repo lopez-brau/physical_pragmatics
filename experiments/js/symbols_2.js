@@ -108,56 +108,143 @@ function make_slides(f) {
         // Display the progress bar and remove any previous error messages.
         $(".display_progress").html((exp.slideIndex/exp.nQs*100).toPrecision(3) + "%");
         $(".trial_error").hide();
+        $(".slider_row").remove();
 
         // Display the prompt, stimuli, and the options.
-        $(".display_trial").html("<div style=\"height:90px;\">" +
-                                 "What do you think " + exp.enforcer.name + " was trying to tell you about the door " + 
-                                 "with the  " + 
-                                 ((j == 0) ? exp.first_object : ("picture of the " + exp.second_object)) + "?" + 
-                                 "</div>" +
-                                 "<div align=\"center\">" +
-                                 "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
-                                 "margin-bottom:-30px;\">" +
-                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_2/" +
-                                 exp.trials[j][0] + "\"></img>" + 
-                                 "<br><br>" +
-                                 "<p style=\"margin-right:20px;\"></p>" +
-                                 "</label>" + 
-                                 "</div>" + 
-                                 "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
-                                 "margin-bottom:-30px;\">" +
-                                 "<label>" + 
-                                 "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_2/" +
-                                 exp.trials[j][1] + "\"></img>" +
-                                 "<br><br>" + 
-                                 "</label>" +
-                                 "</div>" + 
-                                 "</div>" + 
-                                 "<div style\"margin-top:-40px;\">" +
-                                 "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
-                                 "You <b>should</b> walk through the door with the " + 
-                                 ((j == 0) ? exp.first_object : ("picture of the " + exp.second_object)) + 
-                                 "</label></p>" +
-                                 "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
-                                 "You <b>should not</b> walk through the door with the " +
-                                 ((j == 0 ) ? exp.first_object : ("picture of the " + exp.second_object)) +
-                                 "</label></p>" +
-                                 "</div>");
+        if (j == 0 || j == 2) {
+            $(".display_trial").html("<div style=\"height:90px;\">" +
+                                     "What do you think " + exp.enforcer.name + " was trying to tell you about the door " + 
+                                     "with the  " + 
+                                     ((j == 0) ? exp.first_object : ("picture of the " + exp.second_object)) + "?" + 
+                                     "</div>" +
+                                     "<div align=\"center\">" +
+                                     "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
+                                     "margin-bottom:-30px;\">" +
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_2/" +
+                                     ((j == 0) ? exp.trials[0][0] : exp.trials[1][0]) + "\"></img>" + 
+                                     "<br><br>" +
+                                     "<p style=\"margin-right:20px;\"></p>" +
+                                     "</label>" + 
+                                     "</div>" + 
+                                     "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
+                                     "margin-bottom:-30px;\">" +
+                                     "<label>" + 
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_2/" +
+                                     ((j == 0) ? exp.trials[0][1] : exp.trials[1][1]) + "\"></img>" +
+                                     "<br><br>" + 
+                                     "</label>" +
+                                     "</div>" + 
+                                     "</div>" + 
+                                     "<div style\"margin-top:-40px;\">" +
+                                     "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
+                                     "You <b>should</b> walk through the door with the " + 
+                                     ((j == 0) ? exp.first_object : ("picture of the " + exp.second_object)) + 
+                                     "</label></p>" +
+                                     "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
+                                     "You <b>should not</b> walk through the door with the " +
+                                     ((j == 0 ) ? exp.first_object : ("picture of the " + exp.second_object)) +
+                                     "</label></p>" +
+                                     "</div>");
+        }
+        else if (j == 1 || j == 3) {
+            $(".display_trial").html("<div style=\"height:90px;\">" +
+                                     "How confident are you that that's what " + exp.enforcer.name + " was trying to " +
+                                     "tell you?" + 
+                                     "</div>" +
+                                     "<div align=\"center\">" +
+                                     "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
+                                     "margin-bottom:-30px;\">" +
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_2/" +
+                                     ((j == 1) ? exp.trials[0][0] : exp.trials[1][0]) + "\"></img>" + 
+                                     "<br><br>" +
+                                     "<p style=\"margin-right:20px;\"></p>" +
+                                     "</label>" + 
+                                     "</div>" + 
+                                     "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
+                                     "margin-bottom:-30px;\">" +
+                                     "<label>" + 
+                                     "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_2/" +
+                                     ((j == 1) ? exp.trials[0][1] : exp.trials[1][1]) + "\"></img>" +
+                                     "<br><br>" + 
+                                     "</label>" +
+                                     "</div>" + 
+                                     "</div>");
+
+            // Make the slider.
+            $("#multi_slider_table_" + j).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence_0" + 
+                                                 "\"></td><td colspan=\"2\"><div id=\"slider_0" + 
+                                                 "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+            utils.match_row_height("#multi_slider_table_" + j, ".slider_target");
+            utils.make_slider("#slider_0", make_slider_callback(0));
+            exp.sliderPost = [];
+        }
+        // $(".display_trial").html("<div style=\"height:90px;\">" +
+        //                          "What do you think " + exp.enforcer.name + " was trying to tell you about the door " + 
+        //                          "with the  " + 
+        //                          ((j == 0) ? exp.first_object : ("picture of the " + exp.second_object)) + "?" + 
+        //                          "</div>" +
+        //                          "<div align=\"center\">" +
+        //                          "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
+        //                          "margin-bottom:-30px;\">" +
+        //                          "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_2/" +
+        //                          exp.trials[j][0] + "\"></img>" + 
+        //                          "<br><br>" +
+        //                          "<p style=\"margin-right:20px;\"></p>" +
+        //                          "</label>" + 
+        //                          "</div>" + 
+        //                          "<div style=\"display:inline-block;vertical-align:top;margin-left:-20px;" + 
+        //                          "margin-bottom:-30px;\">" +
+        //                          "<label>" + 
+        //                          "<img style=\"height:300px;width:auto;\" src=\"../stimuli/symbols_2/" +
+        //                          exp.trials[j][1] + "\"></img>" +
+        //                          "<br><br>" + 
+        //                          "</label>" +
+        //                          "</div>" + 
+        //                          "</div>" + 
+        //                          "<div style\"margin-top:-40px;\">" +
+        //                          "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"0\">" +
+        //                          "You <b>should</b> walk through the door with the " + 
+        //                          ((j == 0) ? exp.first_object : ("picture of the " + exp.second_object)) + 
+        //                          "</label></p>" +
+        //                          "<p align=\"left\"><label><input type=\"radio\" name=\"target\" value=\"1\">" +
+        //                          "You <b>should not</b> walk through the door with the " +
+        //                          ((j == 0 ) ? exp.first_object : ("picture of the " + exp.second_object)) +
+        //                          "</label></p>" +
+        //                          "</div>");
     }
 
     // Run when the "Continue" button is hit on a trial slide.
     function trial_button() {
-        if ($("input[name='target']:checked").val() == undefined) { 
-            $(".trial_error").show(); 
+        if (j == 0 || j == 2) {
+            if ($("input[name='target']:checked").val() == undefined) { 
+                $(".trial_error").show(); 
+            }
+            else {
+                exp.data_trials.push({
+                    "trial_num": j + 1,
+                    "target": $("input[name='target']:checked").val()
+                });
+                j++;
+                exp.go();
+            }
         }
-        else {
-            exp.data_trials.push({
-                "trial_num": j + 1,
-                "target": $("input[name='target']:checked").val()
-            });
-            j++;
-            exp.go();
+        else if (j == 1 || j == 3) {
+            if (exp.sliderPost[0] === undefined) {
+                $(".trial_error").show();
+            }
+            else {
+                exp.data_trials.push({
+                    "trial_num": j + 1,
+                    "target": exp.sliderPost[0]
+                });
+                j++;
+                exp.go();
+            }
         }
+    }
+
+    function make_slider_callback(i) {
+        return function(event, ui) { exp.sliderPost[i] = ui.value; };
     }
 
     // Stitches together all of the trial slides.
@@ -168,6 +255,8 @@ function make_slides(f) {
             button: trial_button
         });
     }
+
+
 
     // Set up the first exclusion slide.
     function exclusion_start() {
@@ -225,7 +314,7 @@ function make_slides(f) {
     }
 
     // Stitches together all of the exclusion slides.
-    for (var i = 1; i <= exp.num_trials; i++) {
+    for (var i = 1; i <= 2; i++) {
         slides["exclusion_" + i] = slide({
             name: "exclusion_" + i,
             start: exclusion_start,
@@ -343,10 +432,10 @@ function init() {
 
     // Set up trial slide information.
     exp.trials = trials(exp.doors, exp.first_side, exp.second_side, exp.first_object, exp.second_object);
-    exp.num_trials = exp.trials.length;
+    exp.num_trials = exp.trials.length+2;
     exp.data_trials = [];
     $(".display_num_trials").html(exp.num_trials);
-    console.log(exp.trials);
+    
     // Set up the door for the context slides.
     $(".display_doors").html("<div align=\"center\">" +
                              "<div style=\"display:inline-block;vertical-align:top;margin-right:-20px;" + 
@@ -414,8 +503,9 @@ function init() {
     };
 
     // Stich together the blocks of the experiment.
-    exp.structure = ["i0", "context_0", "context_1", "context_2", "context_3", "catch_trial", "trial_1", "transition_0",
-                     "transition_1", "transition_2", "trial_2", "transition_3", "exclusion_1", "exclusion_2"];
+    exp.structure = ["i0", "context_0", "context_1", "context_2", "context_3", "catch_trial", "trial_1", "trial_2", 
+                     "transition_0", "transition_1", "transition_2", "trial_3", "trial_4", "transition_3", 
+                     "exclusion_1", "exclusion_2"];
     exp.structure.push("subj_info");
     exp.structure.push("thanks");
    

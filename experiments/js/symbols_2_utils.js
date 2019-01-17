@@ -34,9 +34,18 @@ function embed_slides(num_trials) {
     for (var i = 1; i <= num_trials; i++) {
         trial_slides = trial_slides + "<div class=\"slide\" id=\"trial_" + i + "\">" + 
                        "<p class=\"display_trial\"></p>" +
+                       ((i == 2 || i == 4) ? 
+                        "<table id=\"multi_slider_table_" + (i-1) + "\" " +
+                        "class=\"slider_table\">" +
+                        "<tr><td></td>" +
+                        "<td class=\"left\">not confident at all</td>" +
+                        "<td class=\"right\">very confident</td>" +
+                        "</tr></table>" : "") +
                        "<button onclick=\"_s.button()\">Continue</button>" +
                        "<p class=\"trial_error\">Please make a selection before continuing.</p>" +
                        "</div>";
+    }
+    for (var i = 1; i <= 2; i++) {
         exclusion_slides = exclusion_slides + "<div class=\"slide\" id=\"exclusion_" + i + "\">" + 
                            "<p class=\"display_exclusion\"></p>" +
                            "<button onclick=\"_s.button()\">Continue</button>" +
