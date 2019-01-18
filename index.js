@@ -383,7 +383,8 @@ function init() {
                                                   function(object){ return object != exp.first_object; }));
         }
     }
-    $(".display_object").html((exp.first_object == "rulers") ? "rulers taped together" : exp.first_object);
+    $(".display_first_object").html((exp.first_object == "rulers") ? "rulers taped together" : exp.first_object);
+    $(".display_second_object").html((exp.second_object == "rulers") ? "rulers taped together" : exp.second_object);
     $(".display_noun_phrase_0").html(get_noun_phrase(0, exp.first_object));
     $(".display_noun_phrase_1").html(get_noun_phrase(1, exp.second_object));
 
