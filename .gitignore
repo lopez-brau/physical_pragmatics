@@ -6,6 +6,7 @@ decider_3
 symbols_0
 cache/
 cluster/
+OSF/
 non-anonymized_raw_data.csv
 database_config.php
 writing/
