@@ -1,0 +1,24 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\graphicspath{{C:/Data/Research/physical_pragmatics/stimuli/observer_0/}}
+
+\begin{document}
+\begin{tikzpicture}
+\node[anchor=south west,inner sep=0] at (0,0) {\includegraphics{grass_0.png}};
+\begin{scope}[shift={(0.39, 0.39)}]
+\draw[step=1.0cm,color=black, fill=white] (0,0) grid (10,10) rectangle (0,0);
+\node at (0.5,0.5) {\includegraphics[scale=0.17]{hiker.png}};
+\node at (0.25,4.25) {\includegraphics[scale=0.0175]{pear.png}};
+\node at (0.75,4.25) {\includegraphics[scale=0.0175]{pear.png}};
+\node at (0.75,4.75) {\includegraphics[scale=0.0175]{pear.png}};
+\node at (0.25,4.75) {\includegraphics[scale=0.0175]{pear.png}};
+\node at (6.25,0.25) {\includegraphics[scale=0.0175]{pomegranate.png}};
+\node at (6.75,0.25) {\includegraphics[scale=0.0175]{pomegranate.png}};
+\node at (6.75,0.75) {\includegraphics[scale=0.0175]{pomegranate.png}};
+\node at (6.25,0.75) {\includegraphics[scale=0.0175]{pomegranate.png}};
+\node at (5.5,0.5) {\includegraphics[scale=0.45]{boulder.png}};
+\end{scope}
+\end{tikzpicture}
+\end{document}

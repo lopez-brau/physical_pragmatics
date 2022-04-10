@@ -1,0 +1,301 @@
+unique_id,first_trial,door,object,response,recording,date,community,name,gender,age,schooling,subject_num,recording_num,comments,other
+080818_Limoncito_20,no_cost,low_cost,chair,leave,NA,8/8/2018,Limoncito,X,M,22,9,20,21,3 secondary,NA
+080818_Limoncito_20,no_cost,no_cost,plant,leave,NA,8/8/2018,Limoncito,X,M,22,9,20,21,3 secondary,NA
+080818_Limoncito_21,no_cost,low_cost,plant,leave,NA,8/8/2018,Limoncito,X,F,39,4,21,22,NA,NA
+080818_Limoncito_21,no_cost,no_cost,cinderblocks,enter,NA,8/8/2018,Limoncito,X,F,39,4,21,22,NA,NA
+080818_Limoncito_22,no_cost,low_cost,chair,leave,NA,8/8/2018,Limoncito,X,F,36,4,22,23,NA,NA
+080818_Limoncito_22,no_cost,no_cost,plant,leave,NA,8/8/2018,Limoncito,X,F,36,4,22,23,NA,NA
+080818_Limoncito_23,no_cost,low_cost,chair,leave,NA,8/8/2018,Limoncito,X,M,25,3,23,25,3rd primary,NA
+080818_Limoncito_23,no_cost,no_cost,plant,leave,NA,8/8/2018,Limoncito,X,M,25,3,23,25,3rd primary,NA
+080818_Limoncito_24,no_cost,low_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,F,24,4,24,28,4th primary,NA
+080818_Limoncito_24,no_cost,no_cost,chair,enter,NA,8/8/2018,Limoncito,X,F,24,4,24,28,4th primary,NA
+080818_Limoncito_25,no_cost,low_cost,plant,leave,NA,8/8/2018,Limoncito,X,F,35,0,25,31,NA,NA
+080818_Limoncito_25,no_cost,no_cost,chair,enter,NA,8/8/2018,Limoncito,X,F,35,0,25,31,NA,NA
+080818_Limoncito_26,no_cost,low_cost,chair,leave,NA,8/8/2018,Limoncito,X,F,22,5,26,8,5 primaria,NA
+080818_Limoncito_26,no_cost,no_cost,cinderblocks,enter,NA,8/8/2018,Limoncito,X,F,22,5,26,8,5 primaria,NA
+080818_Limoncito_27,low_cost,low_cost,chair,leave,NA,8/8/2018,Limoncito,X,M,24,12,27,11,NA,NA
+080818_Limoncito_27,low_cost,no_cost,cinderblocks,enter,NA,8/8/2018,Limoncito,X,M,24,12,27,11,NA,NA
+080818_Limoncito_28,low_cost,low_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,M,22,7,28,13,1 secundaria,NA
+080818_Limoncito_28,low_cost,no_cost,plant,enter,NA,8/8/2018,Limoncito,X,M,22,7,28,13,1 secundaria,NA
+080818_Limoncito_29,low_cost,low_cost,plant,enter,NA,8/8/2018,Limoncito,X,M,18,5,31,16,5 primaria; Subject number had a question mark,NA
+080818_Limoncito_29,low_cost,no_cost,chair,enter,NA,8/8/2018,Limoncito,X,M,18,5,31,16,5 primaria; Subject number had a question mark,NA
+080818_Limoncito_30,low_cost,low_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,M,41,4,32,17,NA,NA
+080818_Limoncito_30,low_cost,no_cost,plant,enter,NA,8/8/2018,Limoncito,X,M,41,4,32,17,NA,NA
+080818_Limoncito_31,low_cost,low_cost,chair,leave,NA,8/8/2018,Limoncito,X,M,60,4,34,18,4 primaria,NA
+080818_Limoncito_31,low_cost,no_cost,cinderblocks,enter,NA,8/8/2018,Limoncito,X,M,60,4,34,18,4 primaria,NA
+080818_Limoncito_32,low_cost,low_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,F,25,3,40,22,3 primaria,NA
+080818_Limoncito_32,low_cost,no_cost,chair,enter,NA,8/8/2018,Limoncito,X,F,25,3,40,22,3 primaria,NA
+080818_Limoncito_33,low_cost,low_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,F,20,5,41,24,5 primaria,NA
+080818_Limoncito_33,low_cost,no_cost,chair,enter,NA,8/8/2018,Limoncito,X,F,20,5,41,24,5 primaria,NA
+080818_Limoncito_34,low_cost,low_cost,plant,leave,NA,8/8/2018,Limoncito,X,F,27,4,42,26,4 primaria,NA
+080818_Limoncito_34,low_cost,no_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,F,27,4,42,26,4 primaria,NA
+080818_Limoncito_35,low_cost,low_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,F,28,6,43,27,6 primaria,NA
+080818_Limoncito_35,low_cost,no_cost,chair,leave,NA,8/8/2018,Limoncito,X,F,28,6,43,27,6 primaria,NA
+080818_Limoncito_36,low_cost,low_cost,plant,leave,NA,8/8/2018,Limoncito,X,F,20,1,44,29,1 primaria,NA
+080818_Limoncito_36,low_cost,no_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,F,20,1,44,29,1 primaria,NA
+080818_Limoncito_37,low_cost,low_cost,chair,leave,NA,8/8/2018,Limoncito,X,F,30,2,45,30,2 primaria,NA
+080818_Limoncito_37,low_cost,no_cost,plant,enter,NA,8/8/2018,Limoncito,X,F,30,2,45,30,2 primaria,NA
+080818_Limoncito_38,no_cost,low_cost,chair,leave,NA,8/8/2018,Limoncito,X,F,44,2,46,7,2 primaria,NA
+080818_Limoncito_38,no_cost,no_cost,cinderblocks,enter,NA,8/8/2018,Limoncito,X,F,44,2,46,7,2 primaria,NA
+080818_Limoncito_39,low_cost,low_cost,plant,leave,NA,8/8/2018,Limoncito,X,F,59,0,47,32,NA,NA
+080818_Limoncito_39,low_cost,no_cost,cinderblocks,enter,NA,8/8/2018,Limoncito,X,F,59,0,47,32,NA,NA
+080818_Limoncito_40,no_cost,low_cost,chair,enter,NA,8/8/2018,Limoncito,X,F,50,0,48,32,Recording stoppped halfway through,NA
+080818_Limoncito_40,no_cost,no_cost,cinderblocks,enter,NA,8/8/2018,Limoncito,X,F,50,0,48,32,Recording stoppped halfway through,NA
+080818_Limoncito_41,no_cost,low_cost,cinderblocks,enter,NA,8/8/2018,Limoncito,X,M,28,4,49,3,Recorder #2,NA
+080818_Limoncito_41,no_cost,no_cost,plant,enter,NA,8/8/2018,Limoncito,X,M,28,4,49,3,Recorder #2,NA
+080818_Limoncito_42,no_cost,low_cost,chair,enter,NA,8/8/2018,Limoncito,X,F,25,6,50,4,Recorder #2; 6 primaria,NA
+080818_Limoncito_42,no_cost,no_cost,cinderblocks,enter,NA,8/8/2018,Limoncito,X,F,25,6,50,4,Recorder #2; 6 primaria,NA
+080818_Limoncito_43,no_cost,low_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,F,45,0,51,5,Recorder #2,NA
+080818_Limoncito_43,no_cost,no_cost,plant,enter,NA,8/8/2018,Limoncito,X,F,45,0,51,5,Recorder #2,NA
+080818_Limoncito_44,no_cost,low_cost,plant,leave,NA,8/8/2018,Limoncito,X,F,24,4,52,6,4 primaria,NA
+080818_Limoncito_44,no_cost,no_cost,chair,enter,NA,8/8/2018,Limoncito,X,F,24,4,52,6,4 primaria,NA
+080818_Limoncito_45,no_cost,low_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,F,19,9,54,10,3 secundaria,NA
+080818_Limoncito_45,no_cost,no_cost,plant,enter,NA,8/8/2018,Limoncito,X,F,19,9,54,10,3 secundaria,NA
+080818_Limoncito_46,low_cost,low_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,F,33,2,55,12,2 primaria,NA
+080818_Limoncito_46,low_cost,no_cost,plant,enter,NA,8/8/2018,Limoncito,X,F,33,2,55,12,2 primaria,NA
+080818_Limoncito_47,no_cost,low_cost,plant,leave,NA,8/8/2018,Limoncito,X,F,18,4,55,9,4 primaria,NA
+080818_Limoncito_47,no_cost,no_cost,chair,enter,NA,8/8/2018,Limoncito,X,F,18,4,55,9,4 primaria,NA
+080818_Limoncito_48,low_cost,low_cost,plant,leave,NA,8/8/2018,Limoncito,X,M,17,7,56,15,1 secundaria,NA
+080818_Limoncito_48,low_cost,no_cost,chair,enter,NA,8/8/2018,Limoncito,X,M,17,7,56,15,1 secundaria,NA
+080818_Limoncito_49,low_cost,low_cost,chair,leave,NA,8/8/2018,Limoncito,X,M,19,10,57/29,14,4to secundaria,NA
+080818_Limoncito_49,low_cost,no_cost,cinderblocks,leave,NA,8/8/2018,Limoncito,X,M,19,10,57/29,14,4to secundaria,NA
+081018_CampoBello_72,low_cost,low_cost,plant,leave,43,8/10/2018,Campo Bello,X,M,35,4,77,57,NA,NA
+081018_CampoBello_72,low_cost,no_cost,cinderblocks,enter,43,8/10/2018,Campo Bello,X,M,35,4,77,57,NA,NA
+081018_CampoBello_73,low_cost,low_cost,cinderblocks,leave,44,8/10/2018,Campo Bello,X,M,27,4,78,58,NA,NA
+081018_CampoBello_73,low_cost,no_cost,chair,enter,44,8/10/2018,Campo Bello,X,M,27,4,78,58,NA,NA
+081018_CampoBello_74,low_cost,low_cost,chair,leave,45,8/10/2018,Campo Bello,X,M,27,4,79,59,NA,NA
+081018_CampoBello_74,low_cost,no_cost,plant,enter,45,8/10/2018,Campo Bello,X,M,27,4,79,59,NA,NA
+081018_CampoBello_75,low_cost,low_cost,plant,leave,46,8/10/2018,Campo Bello,X,F,23,3,80,60,NA,NA
+081018_CampoBello_75,low_cost,no_cost,cinderblocks,enter,46,8/10/2018,Campo Bello,X,F,23,3,80,60,NA,NA
+081018_CampoBello_76,low_cost,low_cost,cinderblocks,leave,47,8/10/2018,Campo Bello,X,F,27,2,81,61,NA,NA
+081018_CampoBello_76,low_cost,no_cost,chair,leave,47,8/10/2018,Campo Bello,X,F,27,2,81,61,NA,NA
+081018_CampoBello_77,low_cost,low_cost,chair,leave,48,8/10/2018,Campo Bello,X,F,31,1,82,62,NA,NA
+081018_CampoBello_77,low_cost,no_cost,plant,enter,48,8/10/2018,Campo Bello,X,F,31,1,82,62,NA,NA
+081018_CampoBello_78,low_cost,low_cost,plant,leave,49,8/10/2018,Campo Bello,X,F,35,2,83,63,NA,NA
+081018_CampoBello_78,low_cost,no_cost,cinderblocks,enter,49,8/10/2018,Campo Bello,X,F,35,2,83,63,NA,NA
+081018_CampoBello_79,no_cost,low_cost,plant,leave,50,8/10/2018,Campo Bello,X,F,17,6,84,64,NA,NA
+081018_CampoBello_79,no_cost,no_cost,chair,enter,50,8/10/2018,Campo Bello,X,F,17,6,84,64,NA,NA
+081018_CampoBello_80,no_cost,low_cost,cinderblocks,leave,51,8/10/2018,Campo Bello,X,F,30,0,85,66,NA,NA
+081018_CampoBello_80,no_cost,no_cost,plant,unsure,51,8/10/2018,Campo Bello,X,F,30,0,85,66,NA,NA
+081018_CampoBello_81,no_cost,low_cost,chair,leave,52,8/10/2018,Campo Bello,X,F,22,3,86,67,NA,NA
+081018_CampoBello_81,no_cost,no_cost,cinderblocks,unsure,52,8/10/2018,Campo Bello,X,F,22,3,86,67,NA,NA
+081018_CampoBello_82,no_cost,low_cost,cinderblocks,leave,53,8/10/2018,Campo Bello,X,F,55,0,87,68,NA,NA
+081018_CampoBello_82,no_cost,no_cost,plant,enter,53,8/10/2018,Campo Bello,X,F,55,0,87,68,NA,NA
+081018_CampoBello_83,no_cost,low_cost,plant,enter,54,8/10/2018,Campo Bello,X,F,22,6,89,70,NA,NA
+081018_CampoBello_83,no_cost,no_cost,chair,unsure,54,8/10/2018,Campo Bello,X,F,22,6,89,70,NA,NA
+081018_CampoBello_84,no_cost,low_cost,chair,leave,55,8/10/2018,Campo Bello,X,F,24,4,88,69,NA,NA
+081018_CampoBello_84,no_cost,no_cost,cinderblocks,leave,55,8/10/2018,Campo Bello,X,F,24,4,88,69,NA,NA
+081018_CampoBello_85,no_cost,low_cost,cinderblocks,leave,56,8/10/2018,Campo Bello,X,F,27,0,90,71,NA,NA
+081018_CampoBello_85,no_cost,no_cost,plant,leave,56,8/10/2018,Campo Bello,X,F,27,0,90,71,NA,NA
+081018_CampoBello_86,no_cost,low_cost,plant,leave,57,8/10/2018,Campo Bello,X,F,46,0,91,72,NA,NA
+081018_CampoBello_86,no_cost,no_cost,chair,enter,57,8/10/2018,Campo Bello,X,F,46,0,91,72,NA,NA
+081018_CampoBello_87,no_cost,low_cost,chair,leave,NA,8/10/2018,Campo Bello,X,F,26,3,92,73,NA,NA
+081018_CampoBello_87,no_cost,no_cost,cinderblocks,enter,NA,8/10/2018,Campo Bello,X,F,26,3,92,73,NA,NA
+081018_CampoBello_88,no_cost,low_cost,cinderblocks,leave,76,8/10/2018,Campo Bello,X,F,20,4,93,74,NA,NA
+081018_CampoBello_88,no_cost,no_cost,plant,enter,76,8/10/2018,Campo Bello,X,F,20,4,93,74,NA,NA
+081018_CampoBello_89,low_cost,low_cost,plant,leave,77,8/10/2018,Campo Bello,X,F,19,4,94,75,NA,NA
+081018_CampoBello_89,low_cost,no_cost,chair,enter,77,8/10/2018,Campo Bello,X,F,19,4,94,75,NA,NA
+081018_CampoBello_90,no_cost,low_cost,chair,leave,78,8/10/2018,Campo Bello,X,F,32,0,95,59,NA,NA
+081018_CampoBello_90,no_cost,no_cost,cinderblocks,leave,78,8/10/2018,Campo Bello,X,F,32,0,95,59,NA,NA
+081018_CampoBello_91,low_cost,low_cost,cinderblocks,leave,79,8/10/2018,Campo Bello,X,F,50,3,96,60,NA,NA
+081018_CampoBello_91,low_cost,no_cost,plant,leave,79,8/10/2018,Campo Bello,X,F,50,3,96,60,NA,NA
+081018_CampoBello_92,no_cost,low_cost,plant,leave,80,8/10/2018,Campo Bello,X,F,25,0,97,61,NA,NA
+081018_CampoBello_92,no_cost,no_cost,chair,enter,80,8/10/2018,Campo Bello,X,F,25,0,97,61,NA,NA
+081018_CampoBello_93,low_cost,low_cost,chair,leave,81,8/10/2018,Campo Bello,X,F,15,3,98,62,NA,NA
+081018_CampoBello_93,low_cost,no_cost,cinderblocks,leave,81,8/10/2018,Campo Bello,X,F,15,3,98,62,NA,NA
+081018_CampoBello_94,no_cost,low_cost,cinderblocks,leave,82,8/10/2018,Campo Bello,X,F,17,3,99,63,NA,NA
+081018_CampoBello_94,no_cost,no_cost,plant,leave,82,8/10/2018,Campo Bello,X,F,17,3,99,63,NA,NA
+081018_CampoBello_95,low_cost,low_cost,plant,leave,83,8/10/2018,Campo Bello,X,F,26,0,100,64,NA,NA
+081018_CampoBello_95,low_cost,no_cost,chair,enter,83,8/10/2018,Campo Bello,X,F,26,0,100,64,NA,NA
+081018_CampoBello_96,low_cost,low_cost,chair,leave,84,8/10/2018,Campo Bello,X,F,24,4,101,65,NA,NA
+081018_CampoBello_96,low_cost,no_cost,cinderblocks,unsure,84,8/10/2018,Campo Bello,X,F,24,4,101,65,NA,NA
+081018_CampoBello_97,no_cost,low_cost,cinderblocks,leave,85,8/10/2018,Campo Bello,X,M,37,3,102,66,NA,NA
+081018_CampoBello_97,no_cost,no_cost,plant,enter,85,8/10/2018,Campo Bello,X,M,37,3,102,66,NA,NA
+081018_CampoBello_98,low_cost,low_cost,plant,enter,86,8/10/2018,Campo Bello,X,M,70,0,103,67,NA,NA
+081018_CampoBello_98,low_cost,no_cost,chair,enter,86,8/10/2018,Campo Bello,X,M,70,0,103,67,NA,NA
+081018_CampoBello_99,no_cost,low_cost,plant,enter,87,8/10/2018,Campo Bello,X,F,65,0,104,68,NA,NA
+081018_CampoBello_99,no_cost,no_cost,chair,unsure,87,8/10/2018,Campo Bello,X,F,65,0,104,68,NA,NA
+081018_CampoBello_100,no_cost,low_cost,cinderblocks,leave,88,8/10/2018,Campo Bello,X,F,78,12,105,69,NA,NA
+081018_CampoBello_100,no_cost,no_cost,plant,leave,88,8/10/2018,Campo Bello,X,F,78,12,105,69,NA,NA
+081018_CampoBello_101,low_cost,low_cost,chair,enter,89,8/10/2018,Campo Bello,X,F,20,8,106,70,NA,NA
+081018_CampoBello_101,low_cost,no_cost,cinderblocks,enter,89,8/10/2018,Campo Bello,X,F,20,8,106,70,NA,NA
+081118_CampoBello_102,low_cost,low_cost,plant,leave,NA,8/11/2018,Campo Bello,X,F,27,2,200,72,NA,NA
+081118_CampoBello_102,low_cost,no_cost,chair,enter,NA,8/11/2018,Campo Bello,X,F,27,2,200,72,NA,NA
+081118_CampoBello_103,no_cost,low_cost,chair,leave,NA,8/11/2018,Campo Bello,X,M,32,3,201,73,NA,NA
+081118_CampoBello_103,no_cost,no_cost,cinderblocks,leave,NA,8/11/2018,Campo Bello,X,M,32,3,201,73,NA,NA
+081118_CampoBello_104,low_cost,low_cost,cinderblocks,leave,NA,8/11/2018,Campo Bello,X,F,40,0,202,74,NA,NA
+081118_CampoBello_104,low_cost,no_cost,plant,enter,NA,8/11/2018,Campo Bello,X,F,40,0,202,74,NA,NA
+081118_CampoBello_105,no_cost,low_cost,plant,leave,NA,8/11/2018,Campo Bello,X,M,60,0,203,75,NA,NA
+081118_CampoBello_105,no_cost,no_cost,chair,leave,NA,8/11/2018,Campo Bello,X,M,60,0,203,75,NA,NA
+081118_CampoBello_106,low_cost,low_cost,chair,enter,NA,8/11/2018,Campo Bello,X,F,32,1,204,76,NA,NA
+081118_CampoBello_106,low_cost,no_cost,cinderblocks,unsure,NA,8/11/2018,Campo Bello,X,F,32,1,204,76,NA,NA
+081118_CampoBello_107,no_cost,low_cost,cinderblocks,leave,NA,8/11/2018,Campo Bello,X,M,33,4,205,77,NA,NA
+081118_CampoBello_107,no_cost,no_cost,plant,leave,NA,8/11/2018,Campo Bello,X,M,33,4,205,77,NA,NA
+081118_CampoBello_108,low_cost,low_cost,plant,leave,NA,8/11/2018,Campo Bello,X,M,43,4,206,78,NA,NA
+081118_CampoBello_108,low_cost,no_cost,chair,enter,NA,8/11/2018,Campo Bello,X,M,43,4,206,78,NA,NA
+081118_CampoBello_109,no_cost,low_cost,chair,leave,NA,8/11/2018,Campo Bello,X,F,38,3,207,79,NA,NA
+081118_CampoBello_109,no_cost,no_cost,cinderblocks,enter,NA,8/11/2018,Campo Bello,X,F,38,3,207,79,NA,NA
+081118_CampoBello_110,low_cost,low_cost,cinderblocks,leave,NA,8/11/2018,Campo Bello,X,M,40,2,208,80,NA,NA
+081118_CampoBello_110,low_cost,no_cost,plant,enter,NA,8/11/2018,Campo Bello,X,M,40,2,208,80,NA,NA
+081118_CampoBello_111,no_cost,low_cost,plant,leave,NA,8/11/2018,Campo Bello,X,F,68,0,209,81,NA,NA
+081118_CampoBello_111,no_cost,no_cost,chair,enter,NA,8/11/2018,Campo Bello,X,F,68,0,209,81,NA,NA
+081118_CampoBello_112,low_cost,low_cost,chair,enter,NA,8/11/2018,Campo Bello,X,M,22,2,210,82,NA,NA
+081118_CampoBello_112,low_cost,no_cost,cinderblocks,unsure,NA,8/11/2018,Campo Bello,X,M,22,2,210,82,NA,NA
+081118_CampoBello_113,no_cost,low_cost,cinderblocks,enter,NA,8/11/2018,Campo Bello,X,F,18,4,211,83,NA,NA
+081118_CampoBello_113,no_cost,no_cost,plant,enter,NA,8/11/2018,Campo Bello,X,F,18,4,211,83,NA,NA
+081118_CampoBello_114,low_cost,low_cost,plant,enter,NA,8/11/2018,Campo Bello,X,M,32,3,212,84,NA,NA
+081118_CampoBello_114,low_cost,no_cost,chair,enter,NA,8/11/2018,Campo Bello,X,M,32,3,212,84,NA,NA
+081118_CampoBello_115,no_cost,low_cost,chair,leave,NA,8/11/2018,Campo Bello,X,F,14,8,213,85,NA,NA
+081118_CampoBello_115,no_cost,no_cost,cinderblocks,leave,NA,8/11/2018,Campo Bello,X,F,14,8,213,85,NA,NA
+081118_CampoBello_116,low_cost,low_cost,cinderblocks,leave,101,8/11/2018,Campo Bello,X,M,23,6,214,86,NA,NA
+081118_CampoBello_116,low_cost,no_cost,plant,leave,101,8/11/2018,Campo Bello,X,M,23,6,214,86,NA,NA
+081118_CampoBello_117,no_cost,low_cost,plant,leave,102,8/11/2018,Campo Bello,X,F,40,1,215,87,NA,NA
+081118_CampoBello_117,no_cost,no_cost,chair,enter,102,8/11/2018,Campo Bello,X,F,40,1,215,87,NA,NA
+081118_CampoBello_118,low_cost,low_cost,chair,leave,103,8/11/2018,Campo Bello,X,M,19,11,216,88,NA,NA
+081118_CampoBello_118,low_cost,no_cost,cinderblocks,enter,103,8/11/2018,Campo Bello,X,M,19,11,216,88,NA,NA
+081118_CampoBello_119,no_cost,low_cost,cinderblocks,leave,104,8/11/2018,Campo Bello,X,F,60,0,217,89,NA,NA
+081118_CampoBello_119,no_cost,no_cost,plant,enter,104,8/11/2018,Campo Bello,X,F,60,0,217,89,NA,NA
+081118_CampoBello_120,low_cost,low_cost,plant,leave,105,8/11/2018,Campo Bello,X,M,24,6,218,90,Recording device died during sampling task,NA
+081118_CampoBello_120,low_cost,no_cost,chair,leave,105,8/11/2018,Campo Bello,X,M,24,6,218,90,Recording device died during sampling task,NA
+081118_CampoBello_122,no_cost,low_cost,chair,leave,106,8/11/2018,Campo Bello,X,M,24,3,220,92,NA,NA
+081118_CampoBello_122,no_cost,no_cost,cinderblocks,leave,106,8/11/2018,Campo Bello,X,M,24,3,220,92,NA,NA
+081118_CampoBello_123,low_cost,low_cost,cinderblocks,leave,107,8/11/2018,Campo Bello,X,F,25,6,221,93,NA,NA
+081118_CampoBello_123,low_cost,no_cost,plant,enter,107,8/11/2018,Campo Bello,X,F,25,6,221,93,NA,NA
+081118_CampoBello_124,no_cost,low_cost,plant,leave,108,8/11/2018,Campo Bello,X,M,17,11,222,94,NA,NA
+081118_CampoBello_124,no_cost,no_cost,chair,leave,108,8/11/2018,Campo Bello,X,M,17,11,222,94,NA,NA
+081118_CampoBello_125,low_cost,low_cost,chair,leave,109,8/11/2018,Campo Bello,X,F,17,11,223,95,NA,NA
+081118_CampoBello_125,low_cost,no_cost,cinderblocks,enter,109,8/11/2018,Campo Bello,X,F,17,11,223,95,NA,NA
+081118_CampoBello_126,no_cost,low_cost,cinderblocks,leave,110,8/11/2018,Campo Bello,X,M,15,8,224,96,NA,NA
+081118_CampoBello_126,no_cost,no_cost,plant,enter,110,8/11/2018,Campo Bello,X,M,15,8,224,96,NA,NA
+081118_CampoBello_127,low_cost,low_cost,plant,leave,111,8/11/2018,Campo Bello,X,F,15,8,225,97,NA,NA
+081118_CampoBello_127,low_cost,no_cost,chair,enter,111,8/11/2018,Campo Bello,X,F,15,8,225,97,NA,NA
+081118_CampoBello_128,no_cost,low_cost,chair,leave,112,8/11/2018,Campo Bello,X,M,70,1,226,98,NA,NA
+081118_CampoBello_128,no_cost,no_cost,cinderblocks,enter,112,8/11/2018,Campo Bello,X,M,70,1,226,98,NA,NA
+081118_CampoBello_129,low_cost,low_cost,cinderblocks,leave,113,8/11/2018,Campo Bello,X,F,27,0,227,99,NA,NA
+081118_CampoBello_129,low_cost,no_cost,plant,leave,113,8/11/2018,Campo Bello,X,F,27,0,227,99,NA,NA
+081118_CampoBello_130,no_cost,low_cost,plant,enter,114,8/11/2018,Campo Bello,X,M,19,3,228,100,NA,NA
+081118_CampoBello_130,no_cost,no_cost,chair,enter,114,8/11/2018,Campo Bello,X,M,19,3,228,100,NA,NA
+081118_CampoBello_131,low_cost,low_cost,chair,enter,115,8/11/2018,Campo Bello,X,F,23,4,229,101,NA,NA
+081118_CampoBello_131,low_cost,no_cost,cinderblocks,unsure,115,8/11/2018,Campo Bello,X,F,23,4,229,101,NA,NA
+081118_CampoBello_132,no_cost,low_cost,cinderblocks,leave,116,8/11/2018,Campo Bello,X,M,16,10,230,102,NA,NA
+081118_CampoBello_132,no_cost,no_cost,plant,leave,116,8/11/2018,Campo Bello,X,M,16,10,230,102,NA,NA
+081118_CampoBello_133,low_cost,low_cost,plant,leave,117,8/11/2018,Campo Bello,X,F,18,3,231,103,NA,NA
+081118_CampoBello_133,low_cost,no_cost,chair,enter,117,8/11/2018,Campo Bello,X,F,18,3,231,103,NA,NA
+081118_CampoBello_134,no_cost,low_cost,plant,leave,118,8/11/2018,Campo Bello,X,M,45,0,232,104,NA,NA
+081118_CampoBello_134,no_cost,no_cost,cinderblocks,unsure,118,8/11/2018,Campo Bello,X,M,45,0,232,104,NA,NA
+081118_CampoBello_135,low_cost,low_cost,cinderblocks,leave,119,8/11/2018,Campo Bello,X,F,34,3,233,105,NA,NA
+081118_CampoBello_135,low_cost,no_cost,plant,enter,119,8/11/2018,Campo Bello,X,F,34,3,233,105,NA,NA
+081118_CampoBello_136,no_cost,low_cost,plant,leave,120,8/11/2018,Campo Bello,X,M,49,1,234,106,NA,NA
+081118_CampoBello_136,no_cost,no_cost,chair,unsure,120,8/11/2018,Campo Bello,X,M,49,1,234,106,NA,NA
+081118_CampoBello_137,low_cost,low_cost,chair,leave,121,8/11/2018,Campo Bello,X,F,18,8,236,107,NA,NA
+081118_CampoBello_137,low_cost,no_cost,cinderblocks,enter,121,8/11/2018,Campo Bello,X,F,18,8,236,107,NA,NA
+081118_CampoBello_138,no_cost,low_cost,plant,enter,122,8/11/2018,Campo Bello,X,M,30,4,237,108,NA,NA
+081118_CampoBello_138,no_cost,no_cost,cinderblocks,unsure,122,8/11/2018,Campo Bello,X,M,30,4,237,108,NA,NA
+081118_CampoBello_139,low_cost,low_cost,chair,leave,123,8/11/2018,Campo Bello,X,F,39,2,238,109,NA,NA
+081118_CampoBello_139,low_cost,no_cost,plant,enter,123,8/11/2018,Campo Bello,X,F,39,2,238,109,NA,NA
+081118_CampoBello_140,no_cost,low_cost,cinderblocks,enter,124,8/11/2018,Campo Bello,X,M,45,12,239,110,NA,NA
+081118_CampoBello_140,no_cost,no_cost,chair,leave,124,8/11/2018,Campo Bello,X,M,45,12,239,110,NA,NA
+081418_SanAntonio_141,low_cost,low_cost,plant,leave,NA,8/14/2018,San Antonio,X,M,41,12,103,137,NA,NA
+081418_SanAntonio_141,low_cost,no_cost,cinderblocks,leave,NA,8/14/2018,San Antonio,X,M,41,12,103,137,NA,NA
+081418_SanAntonio_142,low_cost,low_cost,chair,leave,NA,8/14/2018,San Antonio,X,M,48,3,104,138,NA,NA
+081418_SanAntonio_142,low_cost,no_cost,plant,leave,NA,8/14/2018,San Antonio,X,M,48,3,104,138,NA,NA
+081418_SanAntonio_143,no_cost,low_cost,cinderblocks,leave,NA,8/14/2018,San Antonio,X,M,35,0,105,139,NA,NA
+081418_SanAntonio_143,no_cost,no_cost,chair,leave,NA,8/14/2018,San Antonio,X,M,35,0,105,139,NA,NA
+081418_SanAntonio_144,no_cost,low_cost,plant,enter,125,8/14/2018,San Antonio,X,M,37,12,106,140,NA,NA
+081418_SanAntonio_144,no_cost,no_cost,cinderblocks,unsure,125,8/14/2018,San Antonio,X,M,37,12,106,140,NA,NA
+081418_SanAntonio_145,low_cost,low_cost,chair,leave,126,8/14/2018,San Antonio,X,M,36,12,107,141,NA,NA
+081418_SanAntonio_145,low_cost,no_cost,plant,enter,126,8/14/2018,San Antonio,X,M,36,12,107,141,NA,NA
+081418_SanAntonio_146,no_cost,low_cost,cinderblocks,leave,127,8/14/2018,San Antonio,X,M,71,0,108,142,The 108 on subject sheet looks like 109,NA
+081418_SanAntonio_146,no_cost,no_cost,chair,enter,127,8/14/2018,San Antonio,X,M,71,0,108,142,The 108 on subject sheet looks like 109,NA
+081418_SanAntonio_147,low_cost,low_cost,plant,leave,128,8/14/2018,San Antonio,X,M,49,12,110,143,NA,NA
+081418_SanAntonio_147,low_cost,no_cost,cinderblocks,leave,128,8/14/2018,San Antonio,X,M,49,12,110,143,NA,NA
+081418_SanAntonio_148,no_cost,low_cost,chair,leave,129,8/14/2018,San Antonio,X,M,63,1,111,144,NA,NA
+081418_SanAntonio_148,no_cost,no_cost,plant,enter,129,8/14/2018,San Antonio,X,M,63,1,111,144,NA,NA
+081418_SanAntonio_149,low_cost,low_cost,cinderblocks,leave,130,8/14/2018,San Antonio,X,M,30,12,112,145,NA,NA
+081418_SanAntonio_149,low_cost,no_cost,chair,leave,130,8/14/2018,San Antonio,X,M,30,12,112,145,NA,NA
+081418_SanAntonio_150,no_cost,low_cost,plant,enter,NA,8/14/2018,San Antonio,X,M,18,10,113,146,NA,NA
+081418_SanAntonio_150,no_cost,no_cost,cinderblocks,unsure,NA,8/14/2018,San Antonio,X,M,18,10,113,146,NA,NA
+081418_SanAntonio_151,low_cost,low_cost,chair,enter,131,8/14/2018,San Antonio,X,F,27,1,114,147,NA,NA
+081418_SanAntonio_151,low_cost,no_cost,plant,enter,131,8/14/2018,San Antonio,X,F,27,1,114,147,NA,NA
+081418_SanAntonio_152,no_cost,low_cost,cinderblocks,leave,132,8/14/2018,San Antonio,X,M,34,2,115,148,NA,NA
+081418_SanAntonio_152,no_cost,no_cost,chair,enter,132,8/14/2018,San Antonio,X,M,34,2,115,148,NA,NA
+081418_SanAntonio_153,low_cost,low_cost,plant,leave,133,8/14/2018,San Antonio,X,F,25,0,116,149,NA,NA
+081418_SanAntonio_153,low_cost,no_cost,cinderblocks,enter,133,8/14/2018,San Antonio,X,F,25,0,116,149,NA,NA
+081418_SanAntonio_154,no_cost,low_cost,chair,leave,134,8/14/2018,San Antonio,X,M,52,12,117,150,NA,NA
+081418_SanAntonio_154,no_cost,no_cost,plant,enter,134,8/14/2018,San Antonio,X,M,52,12,117,150,NA,NA
+081418_SanAntonio_155,low_cost,low_cost,cinderblocks,leave,135,8/14/2018,San Antonio,X,F,18,3,118,151,NA,NA
+081418_SanAntonio_155,low_cost,no_cost,chair,enter,135,8/14/2018,San Antonio,X,F,18,3,118,151,NA,NA
+081418_SanAntonio_156,no_cost,low_cost,plant,leave,136,8/14/2018,San Antonio,X,M,26,12,119,152,NA,NA
+081418_SanAntonio_156,no_cost,no_cost,cinderblocks,enter,136,8/14/2018,San Antonio,X,M,26,12,119,152,NA,NA
+081418_SanAntonio_157,low_cost,low_cost,chair,leave,137,8/14/2018,San Antonio,X,F,51,2,120,154,NA,NA
+081418_SanAntonio_157,low_cost,no_cost,plant,enter,137,8/14/2018,San Antonio,X,F,51,2,120,154,NA,NA
+081418_SanAntonio_158,no_cost,low_cost,cinderblocks,enter,138,8/14/2018,San Antonio,X,F,16,4,121,155,NA,NA
+081418_SanAntonio_158,no_cost,no_cost,chair,enter,138,8/14/2018,San Antonio,X,F,16,4,121,155,NA,NA
+081418_SanAntonio_159,low_cost,low_cost,plant,leave,139,8/14/2018,San Antonio,X,M,30,4,122,156,NA,NA
+081418_SanAntonio_159,low_cost,no_cost,cinderblocks,enter,139,8/14/2018,San Antonio,X,M,30,4,122,156,NA,NA
+081418_SanAntonio_160,no_cost,low_cost,chair,leave,140,8/14/2018,San Antonio,X,F,37,8,123,157,NA,NA
+081418_SanAntonio_160,no_cost,no_cost,plant,enter,140,8/14/2018,San Antonio,X,F,37,8,123,157,NA,NA
+081418_SanAntonio_161,low_cost,low_cost,cinderblocks,leave,141,8/14/2018,San Antonio,X,F,39,2,124,158,NA,NA
+081418_SanAntonio_161,low_cost,no_cost,chair,unsure,141,8/14/2018,San Antonio,X,F,39,2,124,158,NA,NA
+081418_SanAntonio_162,no_cost,low_cost,plant,leave,142,8/14/2018,San Antonio,X,F,53,12,125,159,NA,NA
+081418_SanAntonio_162,no_cost,no_cost,cinderblocks,leave,142,8/14/2018,San Antonio,X,F,53,12,125,159,NA,NA
+081418_SanAntonio_163,low_cost,low_cost,chair,enter,NA,8/14/2018,San Antonio,X,F,32,1,126,160,NA,NA
+081418_SanAntonio_163,low_cost,no_cost,plant,unsure,NA,8/14/2018,San Antonio,X,F,32,1,126,160,NA,NA
+081418_SanAntonio_164,no_cost,low_cost,cinderblocks,leave,143,8/14/2018,San Antonio,X,F,70,0,127,161,NA,NA
+081418_SanAntonio_164,no_cost,no_cost,chair,enter,143,8/14/2018,San Antonio,X,F,70,0,127,161,NA,NA
+081418_SanAntonio_165,low_cost,low_cost,plant,leave,144,8/14/2018,San Antonio,X,F,70,0,128,162,NA,NA
+081418_SanAntonio_165,low_cost,no_cost,cinderblocks,enter,144,8/14/2018,San Antonio,X,F,70,0,128,162,NA,NA
+081418_SanAntonio_166,no_cost,low_cost,chair,leave,145,8/14/2018,San Antonio,X,F,60,0,129,163,NA,NA
+081418_SanAntonio_166,no_cost,no_cost,plant,enter,145,8/14/2018,San Antonio,X,F,60,0,129,163,NA,NA
+081418_SanAntonio_167,low_cost,low_cost,cinderblocks,enter,146,8/14/2018,San Antonio,X,F,16,5,130,164,NA,NA
+081418_SanAntonio_167,low_cost,no_cost,chair,leave,146,8/14/2018,San Antonio,X,F,16,5,130,164,NA,NA
+081418_SanAntonio_168,low_cost,low_cost,plant,leave,147,8/14/2018,San Antonio,X,F,40,0,131,165,NA,NA
+081418_SanAntonio_168,low_cost,no_cost,cinderblocks,enter,147,8/14/2018,San Antonio,X,F,40,0,131,165,NA,NA
+081418_SanAntonio_169,no_cost,low_cost,chair,leave,148,8/14/2018,San Antonio,X,F,18,3,132,166,NA,NA
+081418_SanAntonio_169,no_cost,no_cost,plant,enter,148,8/14/2018,San Antonio,X,F,18,3,132,166,NA,NA
+081418_SanAntonio_170,low_cost,low_cost,cinderblocks,enter,149,8/14/2018,San Antonio,X,F,25,0,133,167,NA,NA
+081418_SanAntonio_170,low_cost,no_cost,chair,enter,149,8/14/2018,San Antonio,X,F,25,0,133,167,NA,NA
+081418_SanAntonio_171,no_cost,low_cost,plant,enter,150,8/14/2018,San Antonio,X,F,25,12,134,168,NA,NA
+081418_SanAntonio_171,no_cost,no_cost,cinderblocks,enter,150,8/14/2018,San Antonio,X,F,25,12,134,168,NA,NA
+081418_SanAntonio_172,low_cost,low_cost,chair,leave,151,8/14/2018,San Antonio,X,F,23,3,135,169,NA,NA
+081418_SanAntonio_172,low_cost,no_cost,plant,enter,151,8/14/2018,San Antonio,X,F,23,3,135,169,NA,NA
+081418_SanAntonio_173,no_cost,low_cost,cinderblocks,leave,152,8/14/2018,San Antonio,X,F,28,12,136,170,NA,NA
+081418_SanAntonio_173,no_cost,no_cost,chair,leave,152,8/14/2018,San Antonio,X,F,28,12,136,170,NA,NA
+081418_SanAntonio_174,low_cost,low_cost,plant,enter,153,8/14/2018,San Antonio,X,M,49,12,137,171,NA,NA
+081418_SanAntonio_174,low_cost,no_cost,cinderblocks,leave,153,8/14/2018,San Antonio,X,M,49,12,137,171,NA,NA
+081418_SanAntonio_175,no_cost,low_cost,chair,leave,154,8/14/2018,San Antonio,X,F,23,4,138,172,NA,NA
+081418_SanAntonio_175,no_cost,no_cost,plant,enter,154,8/14/2018,San Antonio,X,F,23,4,138,172,NA,NA
+081418_SanAntonio_176,low_cost,low_cost,cinderblocks,leave,155,8/14/2018,San Antonio,X,F,24,5,139,173,NA,NA
+081418_SanAntonio_176,low_cost,no_cost,chair,enter,155,8/14/2018,San Antonio,X,F,24,5,139,173,NA,NA
+082218_Uvasichi_429,low_cost,low_cost,chair,leave,366,8/22/2018,Uvasichi,X,M,48,3,1,386,NA,NA
+082218_Uvasichi_429,low_cost,no_cost,plant,enter,366,8/22/2018,Uvasichi,X,M,48,3,1,386,NA,NA
+082218_Uvasichi_431,low_cost,low_cost,chair,enter,368,8/22/2018,Uvasichi,X,M,57,12,3,388,NA,NA
+082218_Uvasichi_431,low_cost,no_cost,plant,leave,368,8/22/2018,Uvasichi,X,M,57,12,3,388,NA,NA
+082218_Uvasichi_432,low_cost,low_cost,chair,leave,369,8/22/2018,Uvasichi,X,F,50,0,4,389,NA,NA
+082218_Uvasichi_432,low_cost,no_cost,plant,enter,369,8/22/2018,Uvasichi,X,F,50,0,4,389,NA,NA
+082218_Uvasichi_433,low_cost,low_cost,cinderblocks,leave,370,8/22/2018,Uvasichi,X,F,44,1,5,390,NA,NA
+082218_Uvasichi_433,low_cost,no_cost,chair,unsure,370,8/22/2018,Uvasichi,X,F,44,1,5,390,NA,NA
+082218_Uvasichi_434,low_cost,low_cost,cinderblocks,leave,371,8/22/2018,Uvasichi,X,F,25,3,6,391,NA,NA
+082218_Uvasichi_434,low_cost,no_cost,chair,enter,371,8/22/2018,Uvasichi,X,F,25,3,6,391,NA,NA
+082218_Uvasichi_435,low_cost,low_cost,cinderblocks,leave,372,8/22/2018,Uvasichi,X,F,16,0,7,392,NA,NA
+082218_Uvasichi_435,low_cost,no_cost,plant,enter,372,8/22/2018,Uvasichi,X,F,16,0,7,392,NA,NA
+082218_Uvasichi_436,low_cost,low_cost,cinderblocks,leave,373,8/22/2018,Uvasichi,X,F,29,2,8,393,NA,NA
+082218_Uvasichi_436,low_cost,no_cost,plant,enter,373,8/22/2018,Uvasichi,X,F,29,2,8,393,NA,NA
+082218_Uvasichi_437,low_cost,low_cost,plant,enter,374,8/22/2018,Uvasichi,X,F,21,3,9,394,NA,NA
+082218_Uvasichi_437,low_cost,no_cost,chair,leave,374,8/22/2018,Uvasichi,X,F,21,3,9,394,NA,NA
+082218_Uvasichi_438,no_cost,low_cost,cinderblocks,leave,375,8/22/2018,Uvasichi,X,F,30,3,10,395,NA,NA
+082218_Uvasichi_438,no_cost,no_cost,chair,enter,375,8/22/2018,Uvasichi,X,F,30,3,10,395,NA,NA
+082218_Uvasichi_439,no_cost,low_cost,cinderblocks,leave,376,8/22/2018,Uvasichi,X,F,29,2,11,396,NA,NA
+082218_Uvasichi_439,no_cost,no_cost,chair,enter,376,8/22/2018,Uvasichi,X,F,29,2,11,396,NA,NA
+082218_Uvasichi_440,no_cost,low_cost,plant,leave,377,8/22/2018,Uvasichi,X,F,52,0,12,397,NA,NA
+082218_Uvasichi_440,no_cost,no_cost,chair,leave,377,8/22/2018,Uvasichi,X,F,52,0,12,397,NA,NA
+082218_Uvasichi_441,no_cost,low_cost,chair,leave,378,8/22/2018,Uvasichi,X,M,19,2,13,398,NA,NA
+082218_Uvasichi_441,no_cost,no_cost,cinderblocks,enter,378,8/22/2018,Uvasichi,X,M,19,2,13,398,NA,NA
+082218_Uvasichi_444,no_cost,low_cost,chair,leave,381,8/22/2018,Uvasichi,X,M,62,0,16,401,NA,NA
+082218_Uvasichi_444,no_cost,no_cost,cinderblocks,leave,381,8/22/2018,Uvasichi,X,M,62,0,16,401,NA,NA
+082218_Uvasichi_445,no_cost,low_cost,plant,enter,382,8/22/2018,Uvasichi,X,F,17,4,17,402,NA,NA
+082218_Uvasichi_445,no_cost,no_cost,cinderblocks,unsure,382,8/22/2018,Uvasichi,X,F,17,4,17,402,NA,NA
+082218_Uvasichi_446,no_cost,low_cost,plant,enter,383,8/22/2018,Uvasichi,X,F,15,8,18,403,NA,NA
+082218_Uvasichi_446,no_cost,no_cost,cinderblocks,leave,383,8/22/2018,Uvasichi,X,F,15,8,18,403,NA,NA
+082218_Uvasichi_447,no_cost,low_cost,chair,leave,384,8/22/2018,Uvasichi,X,F,21,2,19,404,NA,NA
+082218_Uvasichi_447,no_cost,no_cost,plant,enter,384,8/22/2018,Uvasichi,X,F,21,2,19,404,NA,NA

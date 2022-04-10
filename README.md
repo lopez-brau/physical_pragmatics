@@ -1,23 +1,13 @@
-# Social Pragmatics
+# Physical pragmatics: The communicative meaning of objects
 
-## Research Question: How do people communicate their intentions by assigning meaning to objects in the world?
+Project repository for the manuscript, "Physical pragmatics: The communicative meaning of objects".
 
-- Read Baker et al. 2009 for background
-- We want to show that in order to do this assignment, we need:
-	1. Theory of Mind (ToM)
-	2. Intuitive physics (for understanding costs) 
-	3. A sense of cooperation (or lack of)
-- Grice (1957)
+## Experiment Directory
 
-`populate_cache.sh`: run this with `bash populate_cache.sh` in a bash terminal to populate the `cache` folder with data from the various agent models.
-
-Make sure to update PATH in `utils/config.py` to
-```
-PATH = "/path/to/repository/"
-```
-
-## To-do
-
-- Clean up `data/observer/model`.
-- Implement `cache_enforcer_ToM`.
-- ShinyApps: Set up a GUI with sliders for each of the parameters; displays how the model predictions change.
+- `decider_0`: Experiment 2a
+- `decider_1`: Experiment 1
+- `decider_2`: Experiment 2c
+- `observer_0`: Experiment 4
+- `observer_1`: Experiment 4 (replication)
+- `symbols_1`: Experiment 3
+- `tsimane_0`: Experiment 2b

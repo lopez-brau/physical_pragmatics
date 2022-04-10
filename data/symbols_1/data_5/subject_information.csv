@@ -1,0 +1,4 @@
+workerid,language,enjoyment,gender,age,problems,comments,asses,fairprice,education,first_object,second_object
+0,"""english""","""1""","""Male""","""29""","""""","""""","""Yes""","""""","""1""",hat,string
+0,"""english""","""2""","""Female""","""28""","""""","""""","""Yes""",""".30""","""4""",hat,hat
+0,"""English""","""2""","""Female""","""64""","""no""","""""","""Yes""",""".30""","""2""",tape,hat

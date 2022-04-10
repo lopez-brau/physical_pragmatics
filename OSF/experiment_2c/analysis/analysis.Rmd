@@ -1,0 +1,110 @@
+---
+title: "Physical Pragmatics (Experiment 2c)"
+output:
+  pdf_document: default
+  html_document:
+    code_folding: hide
+    df_print: paged
+---
+  
+```{r setup, echo=FALSE}
+# Set the working directory.
+knitr::opts_knit$set(root.dir=normalizePath(".."))
+
+# Turn off compile messages and warnings.
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+
+# Set the seed value.
+seed = 0
+
+# Set up the path to each partition of the participant data.
+data_path = "data"
+```
+
+```{r libraries, echo=FALSE}
+# Import R libraries.
+library(boot)
+library(jsonlite)
+library(lme4)
+library(tidyverse)
+```
+
+# Preprocessing
+
+```{r preprocessing}
+# Read in the participant data.
+data_0 = read_csv(file.path(data_path, "raw_data.csv"), quote="~")
+
+# Convert the JSON string into JSON.
+data_1 = lapply(data_0$data, fromJSON)
+
+# Extract the trial information for each participant and stack them.
+data_3 = tibble()
+for (p in 1:length(data_1)) {
+  # Trim the map and add the participant ID back in.
+  data_2 = data_1[p][[1]]$trials %>%
+    as.data.frame() %>%
+    separate(stimuli, into=c("door", "cost", "object"), sep="_") %>%
+    mutate(object=gsub(".png", "", object),
+           target=as.numeric(target),
+           unique_id=data_1[p][[1]]$id,
+           age=as.numeric(data_1[p][[1]]$subject_information$age))
+  
+  # Stack the trial information for the current participant.
+  data_3 = rbind(data_3, data_2)
+}
+
+# Write the preprocessed data.
+write_csv(data_3, file.path(data_path, "data.csv"))
+```
+
+# "Unusualness" as a predictor of communicative meaning
+
+Now, we analyze the predictive power of participant "unusualness" judgments ($N$=`r length(filter(data_3, trial_num==1)$age)`, $M$=`r round(mean(filter(data_3, trial_num==1)$age, na.rm=TRUE), 2)` years, $SD$=`r round(sd(filter(data_3, trial_num==1)$age, na.rm=TRUE), 2)` years) on the participant judgments from Experiment 2a. This time, we'll also include the cost condition as a predictor. If both predictors are significant, we will run a second analysis to determine whether or not the cost condition can explain the unexplained variance from participant "unusualness" judgments.
+
+```{r main_analysis}
+# Read in the preprocessed participant data.
+data_3 = read_csv(file.path(data_path, "data.csv"))
+
+# Compute the mean participant judgments.
+data_4 = data_3 %>%
+  select(cost, object, target) %>%
+  group_by(cost, object) %>%
+  summarize(unusualness=mean(target))
+
+# Read in the preprocessed data for the first partition.
+data_5 = read_csv("../experiment_2a/data/data_0/data.csv") %>%
+  rbind(read_csv("../experiment_2a/data/data_1/data.csv"))
+
+# Exclude participants who said the unmodified door was more difficult to walk
+# through and chop off the extra participant in the low-cost condition.
+data_6 = data_5 %>%
+  filter(costlier!="unmodified", participant!=161)
+
+# Filter the columns of interest and append the unusualness judgments.
+data_7 = data_6 %>%
+  rename(cost=condition) %>%
+  select(response, cost, object) %>%
+  full_join(data_4)
+
+# Compute a logistic regression predicting `decider_0` participant judgments as
+# a function of participant "unusualness" judgments and the cost condition.
+model_0 = glm(response~unusualness+cost, data=data_7, family="binomial")
+summary(model_0)
+```
+
+Both predictors are significant, so we will run a series of regressions to test whether or not the cost condition can explain any of the unexplained variance left by "unusualness".
+
+```{r decider_0_secondary_analysis}
+# Compute a logistic regression predicting `decider_0` participant judgments as
+# a function of participant "unusualness" judgments.
+model_1 = glm(response~unusualness, data=data_7, family="binomial")
+
+# Extract the residuals (i.e., unexplained variance) from the previous model.
+data_7$residuals = resid(model_1)
+
+# Compute a linear regression predicting the residuals as a function of the
+# cost condition.
+model_2 = glm(residuals~cost, data=data_7, family="gaussian")
+summary(model_2)
+```

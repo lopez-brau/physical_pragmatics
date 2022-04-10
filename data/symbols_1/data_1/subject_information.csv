@@ -1,0 +1,41 @@
+workerid,language,enjoyment,gender,age,problems,comments,asses,fairprice,education,first_object,second_object
+0,"""English""","""1""","""Male""","""32""","""no""","""thanks""","""No""",""".40""","""3""",books,chair
+1,"""english""","""2""","""Female""","""36""","""no""","""no""","""Yes""",""".30""","""3""",books,chair
+2,"""english""","""1""","""Female""","""60""","""no""","""""","""No""","""$0.5""","""3""",books,chair
+0,"""english""","""2""","""Male""","""21""","""No""","""""","""Yes""",""".3""","""2""",books,cinderblocks
+1,"""english""","""1""","""Male""","""28""","""no""","""""","""Yes""","""25""","""1""",books,cinderblocks
+2,"""English""","""2""","""Male""","""49""","""""","""""","""Yes""","""50 cents""","""4""",books,cinderblocks
+3,"""english""","""2""","""Female""","""38""","""no""","""""","""No""","""low""","""3""",books,cinderblocks
+0,"""English""","""1""","""Female""","""42""","""""","""""","""Yes""","""0.50""","""2""",books,rulers
+1,"""english""","""1""","""Female""","""51""","""no""","""""","""Yes""","""no""","""3""",books,rulers
+2,"""english""","""2""","""Female""","""29""","""no""","""""","""Yes""",""".30""","""3""",books,rulers
+0,"""english""","""2""","""Female""","""34""","""no""","""""","""Yes""","""yes""","""2""",chair,books
+1,"""English""","""2""","""Female""","""39""","""""","""Simple HIT.""","""Yes""","""Yes""","""3""",chair,books
+2,"""english""","""2""","""Male""","""38""","""""","""""","""Yes""","""yes""","""3""",chair,books
+3,"""english""","""2""","""Male""","""29""","""""","""""","""Yes""",""".30""","""2""",chair,books
+0,"""English""","""1""","""Female""","""29""","""No""","""""","""Yes""",""".30""","""3""",chair,cinderblocks
+1,"""English""","""2""","""Male""","""33""","""no""","""""","""Yes""",""".30""","""1""",chair,cinderblocks
+2,"""English""","""2""","""Male""","""25""","""No.""","""Quick and simple, but made me think a little bit. Definitely better than a lot of other HITs that can be found on MTurk. Thank you.""","""Yes""","""$.40""","""2""",chair,cinderblocks
+0,"""english""","""2""","""Male""","""24""","""There was no problems at all. ""","""No comments at all. ""","""Yes""","""1""","""1""",chair,rulers
+1,"""Russian, English""","""2""","""Female""","""27""","""No""","""""","""Yes""",""".20-.30""","""3""",chair,rulers
+2,"""English""","""2""","""Male""","""35""","""No problems or bugs. ""","""I enjoyed the hit, wish it payed more and there were more available. ""","""Yes""",""".50""","""3""",chair,rulers
+0,"""english""","""2""","""Female""","""38""","""no""","""""","""Yes""",""".50""","""2""",cinderblocks,books
+1,"""English""","""2""","""Female""","""40""","""no - everything worked""","""n/a""","""Yes""","""0.30""","""4""",cinderblocks,books
+2,"""english""","""2""","""Female""","""44""","""no""","""none""","""Yes""",""".30""","""2""",cinderblocks,books
+0,"""English""","""2""","""Female""","""54""","""no""","""""","""Yes""","""yes""","""3""",cinderblocks,chair
+1,"""english""","""1""","""Male""","""29""","""no""","""""","""Yes""","""$0.75""","""3""",cinderblocks,chair
+2,"""english""","""1""","""Female""","""51""","""""","""""","""Yes""",""".30""","""4""",cinderblocks,chair
+0,"""english""","""2""","""Female""","""36""","""no""","""""","""Yes""","""yes""","""2""",cinderblocks,rulers
+1,"""English""","""2""","""Male""","""44""","""Nope.""","""Nope.""","""Yes""",""".33""","""1""",cinderblocks,rulers
+2,"""English""","""1""","""Male""","""40""","""None""","""Thank you!""","""Yes""","""0.50""","""4""",cinderblocks,rulers
+3,"""English""","""2""","""Female""","""37""","""No""","""""","""Yes""","""0.50""","""2""",cinderblocks,rulers
+0,"""""","""-1""","""""","""""","""""","""""","""Yes""","""""","""-1""",rulers,books
+1,"""English""","""2""","""Male""","""59""","""No""","""Engaging and enjoyable. ""","""Yes""","""Yes""","""3""",rulers,books
+2,"""United States""","""2""","""Male""","""32""","""no""","""""","""Yes""","""1.00""","""3""",rulers,books
+0,"""English""","""2""","""Male""","""28""","""none""","""none""","""Yes""",""".30""","""2""",rulers,chair
+1,"""english""","""2""","""Male""","""42""","""no""","""""","""Yes""",""".50""","""3""",rulers,chair
+2,"""English""","""2""","""Female""","""20""","""The only minor problem was that the graphic of the doors partially covered the above text, but I highlighted that area and copy/pasted the text to read all of it. ""","""""","""Yes""","""$.30""","""2""",rulers,chair
+3,"""English""","""2""","""Female""","""30""","""None""","""Very fun and thought provoking! Thank you!""","""Yes""","""Yes""","""3""",rulers,chair
+0,"""English""","""2""","""Female""","""40""","""no""","""""","""No""","""0.50""","""2""",rulers,cinderblocks
+1,"""""","""-1""","""""","""""","""""","""""",NA,"""""","""-1""",rulers,cinderblocks
+2,"""English""","""2""","""Male""","""34""","""None at all. ""","""Interesting.""","""Yes""",""".50""","""-1""",rulers,cinderblocks

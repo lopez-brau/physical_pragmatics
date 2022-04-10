@@ -1,4 +1,11 @@
+*.docx
+*.pptx
 __pycache__
-cache
-data
-writing
+pilot_*
+decider_3
+symbols_0
+cache/
+cluster/
+non-anonymized_raw_data.csv
+database_config.php
+writing/

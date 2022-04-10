@@ -1,0 +1,7 @@
+workerid,exclusion_num,trial_num,target,first_object,second_object
+0,NA,1,"""0""",hat,string
+0,NA,2,0.67,hat,string
+0,NA,3,"""0""",hat,string
+0,NA,4,0.52,hat,string
+0,1,NA,"""right""",hat,string
+0,2,NA,"""left""",hat,string

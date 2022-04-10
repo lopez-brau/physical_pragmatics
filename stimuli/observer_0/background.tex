@@ -2,31 +2,25 @@
 \usepackage{tikz}
 \usepackage{graphicx}
 
-\graphicspath{{D:/Research/social_pragmatics/imgs/observer_0/}}
+\graphicspath{{C:/Data/Research/physical_pragmatics/stimuli/observer_0/}}
 
 \begin{document}
 \begin{tikzpicture}
-\node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=12.99cm, keepaspectratio]{grass_1.png}};
-\begin{scope}[shift={(2.5,0.5)}]
-\draw[step=1.0cm,color=black,fill=white] (0,0) grid (8,8) rectangle (0,0);
-\draw[step=1.0cm,color=red,fill=white,line width=0.7mm] (0,4) rectangle (1,5);
-\draw[step=1.0cm,color=red,fill=white,line width=0.7mm] (1,4) rectangle (2,5);
-\draw[step=1.0cm,color=red,fill=white,line width=0.7mm] (2,3) rectangle (3,4);
-\draw[step=1.0cm,color=red,fill=white,line width=0.7mm] (3,3) rectangle (4,4);
-\node at (5.5,7.5) {\includegraphics[scale=0.17]{hiker.png}};
-\node at (6.5,6.5) {\includegraphics[scale=0.035]{pear.png}};
-\node at (6.5,7.5) {\includegraphics[scale=0.035]{pear.png}};
-\node at (7.5,6.5) {\includegraphics[scale=0.035]{pear.png}};
-\node at (7.5,7.5) {\includegraphics[scale=0.035]{pear.png}};
-%\node at (3.5,0.5) {\includegraphics[scale=0.035]{pomegranate.png}};
-%\node at (3.5,1.5) {\includegraphics[scale=0.035]{pomegranate.png}};
-%\node at (4.5,0.5) {\includegraphics[scale=0.035]{pomegranate.png}};
-%\node at (4.5,1.5) {\includegraphics[scale=0.035]{pomegranate.png}};
-\node at (3,3) {\includegraphics[scale=0.92]{boulder_1.png}};
-%\node at (1.5,4.5) {\includegraphics[scale=0.19]{boulder_2.png}};
-%\node at (2.5,7.5) {\includegraphics[scale=0.19]{boulder_2.png}};
-%\node at (3.5,3.5) {\includegraphics[scale=0.19]{boulder_2.png}};
-%\draw[line width=1.5pt,gray,dashed] (0,7.5) -- (4.5,7.5) -- (4.5,6);
+\node[anchor=south west,inner sep=0] at (0,0) {\includegraphics{grass_0}};
+\begin{scope}[shift={(0.39, 0.39)}]
+\draw[step=1.0cm,color=black, fill=white] (0,0) grid (10,10) rectangle (0,0);
+\node at (0.5,0.5) {\includegraphics[scale=0.17]{hiker.png}};
+\node at (0.25,9.25) {\includegraphics[scale=0.0175]{pear.png}};
+\node at (0.75,9.25) {\includegraphics[scale=0.0175]{pear.png}};
+\node at (0.75,9.75) {\includegraphics[scale=0.0175]{pear.png}};
+\node at (0.25,9.75) {\includegraphics[scale=0.0175]{pear.png}};
+\node at (9.25,0.25) {\includegraphics[scale=0.0175]{pomegranate.png}};
+\node at (9.75,0.25) {\includegraphics[scale=0.0175]{pomegranate.png}};
+\node at (9.75,0.75) {\includegraphics[scale=0.0175]{pomegranate.png}};
+\node at (9.25,0.75) {\includegraphics[scale=0.0175]{pomegranate.png}};
+\node at (8.5,0.5) {\includegraphics[scale=0.45]{boulder.png}};
+\node at (8.5,1.5) {\includegraphics[scale=0.45]{boulder.png}};
+\node at (8.5,2.5) {\includegraphics[scale=0.45]{boulder.png}};
 \end{scope}
 \end{tikzpicture}
 \end{document}

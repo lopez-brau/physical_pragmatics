@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\graphicspath{{D:/Research/social_pragmatics/imgs/observer_0/}}
+
+\begin{document}
+\begin{tikzpicture}
+\node[anchor=south west,inner sep=0] at (0,0) {\includegraphics{grass_1.png}};
+\begin{scope}[shift={(2.0, 0.4)}]
+\draw[step=2.0cm,color=black, fill=white] (0,0) grid (10,10) rectangle (0,0);
+\node at (9,1) {\includegraphics[scale=0.34]{hiker.png}};
+\node at (0.5,0.5) {\includegraphics[scale=0.035]{pear.png}};
+\node at (1.5,0.5) {\includegraphics[scale=0.035]{pear.png}};
+\node at (1.5,1.5) {\includegraphics[scale=0.035]{pear.png}};
+\node at (0.5,1.5) {\includegraphics[scale=0.035]{pear.png}};
+\node at (8.5,8.5) {\includegraphics[scale=0.035]{pomegranate.png}};
+\node at (9.5,8.5) {\includegraphics[scale=0.035]{pomegranate.png}};
+\node at (9.5,9.5) {\includegraphics[scale=0.035]{pomegranate.png}};
+\node at (8.5,9.5) {\includegraphics[scale=0.035]{pomegranate.png}};
+\node at (7,7) {\includegraphics[scale=0.92]{boulder.png}};
+\node at (9,7) {\includegraphics[scale=0.92]{boulder.png}};
+\end{scope}
+\end{tikzpicture}
+\end{document}
