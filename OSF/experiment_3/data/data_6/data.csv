@@ -1,7 +1,0 @@
-participant,first_object,second_object,age,target,trial,condition,first_side,second_side,doors
-202,hat,string,22,0,trial_1,incongruent,right,left,closed
-202,hat,string,22,0.67,trial_2,incongruent,right,left,closed
-202,hat,string,22,0,trial_3,incongruent,right,left,closed
-202,hat,string,22,0.52,trial_4,incongruent,right,left,closed
-202,hat,string,22,right,exclusion_1,incongruent,right,left,closed
-202,hat,string,22,left,exclusion_2,incongruent,right,left,closed
