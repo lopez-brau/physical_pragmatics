@@ -211,6 +211,15 @@ plot_0
 ```
 
 ```{r compute_statistics_a_priori_labels}
+# Use a Fisher's exact test to compute probability that participants would
+# avoid the modified door by chance.
+data_13 = data_10 %>%
+  mutate(response=ifelse(response==0, "modified", "unmodified")) %>%
+  group_by(condition, response) %>%
+  summarize(total=n())
+fisher.test(rbind(filter(data_13, response=="unmodified")$total,
+                  filter(data_13, response=="modified")$total))
+
 # Compute a mixed-effects logistic regression with objects as random
 # intercepts.
 mem_0 = glmer(response~condition+(1|object), data=data_11, family="binomial")
@@ -218,17 +227,12 @@ summary(mem_0)
 
 # Compute a binomial test for each condition.
 # NOTE: Computing a two-sided binomial test for "conservativeness".
-data_13 = filter(data_11, condition=="none")
-binom.test(x=sum(data_13$response), n=length(data_13$response), p=0.5,
-           alternative="two.sided")
-data_14 = filter(data_11, condition=="low")
+data_14 = filter(data_11, condition=="none")
 binom.test(x=sum(data_14$response), n=length(data_14$response), p=0.5,
            alternative="two.sided")
-
-fisher.test(matrix(c(71,80-71,48,80-48),ncol=2))
-# p-value = 4.876e-05
-# 71/80
-# 48/80
+data_15 = filter(data_11, condition=="low")
+binom.test(x=sum(data_15$response), n=length(data_15$response), p=0.5,
+           alternative="two.sided")
 
 # Compute the bootstrapped 95% CIs for the participant endorsement of whether 
 # it would be possible to walk through the modified door for each condition.
@@ -256,7 +260,7 @@ Now, we'll compute the participant endorsement ($N$=`r nrow(data_10)`, $M$=`r ro
 
 ```{r compute_endorsement_participant_labels, fig.align="center"}
 # Compute the (percent) participant endorsement of each door in each condition.
-data_15 = data_10 %>%
+data_16 = data_10 %>%
   do(left_join(., summarize(group_by(., costlier),
                             unmodified=sum(response==1), 
                             modified=sum(response==0),
@@ -268,20 +272,20 @@ data_15 = data_10 %>%
 # unmodified door with participant labels of costliness.
 set.seed(seed)
 ci = data.frame()
-bootstrap_data = compute_bootstrap(filter(data_15,
+bootstrap_data = compute_bootstrap(filter(data_16,
                                           costlier=="equal")$response)
 ci = rbind(ci, data.frame(lower_ci=bootstrap_data[4]*100,
                           upper_ci=bootstrap_data[5]*100,
                           condition="equal"))
 
-bootstrap_data = compute_bootstrap(filter(data_15,
+bootstrap_data = compute_bootstrap(filter(data_16,
                                           costlier=="modified")$response)
 ci = rbind(ci, data.frame(lower_ci=bootstrap_data[4]*100,
                           upper_ci=bootstrap_data[5]*100,
                           condition="modified"))
 
 # Compute the percentage participant endorsement for each door per condition.
-data_16 = data_15 %>%
+data_17 = data_16 %>%
   gather(response, endorsement, unmodified, modified) %>%
   group_by(costlier, endorsement, response) %>%
   summarize(total=n()) %>%
@@ -291,7 +295,7 @@ data_16 = data_15 %>%
   left_join(ci)
 
 # Plot the data (using participant labels of door difficulty).
-plot_1 = data_16 %>%
+plot_1 = data_17 %>%
   ggplot(aes(x=condition, y=endorsement, fill=response)) +
   geom_histogram(stat="identity") +
   geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.2) +
@@ -311,16 +315,16 @@ plot_1
 ```{r compute_statistics_participant_labels}
 # Compute a mixed-effects logistic regression with objects as random
 # intercepts.
-mem_1 = glmer(response~costlier+(1|object), data=data_15, family="binomial")
+mem_1 = glmer(response~costlier+(1|object), data=data_16, family="binomial")
 summary(mem_1)
 
 # Compute a binomial test for each condition.
 # NOTE: Computing a two-sided binomial test for "conservativeness".
-data_17 = filter(data_15, costlier=="equal")
-binom.test(x=sum(data_17$response), n=length(data_17$response), p=0.5,
-           alternative="two.sided")
-data_18 = filter(data_15, costlier=="modified")
+data_18 = filter(data_16, costlier=="equal")
 binom.test(x=sum(data_18$response), n=length(data_18$response), p=0.5,
+           alternative="two.sided")
+data_19 = filter(data_16, costlier=="modified")
+binom.test(x=sum(data_19$response), n=length(data_19$response), p=0.5,
            alternative="two.sided")
 ```
 
@@ -331,13 +335,13 @@ Next, we'll compute the participant endorsement ($N$=`r nrow(data_10)`, $M$=`r r
 ```{r compute_endorsement_per_object_a_priori_labels, fig.align="center"}
 # For additional analysis, compute the endorsement across objects in the first 
 # trial.
-data_19 = data_11 %>% 
+data_20 = data_11 %>% 
   group_by(condition, object) %>% 
   summarize(unmodified=sum(response)/n()*100, modified=100-unmodified) %>%
   gather(door, endorsement, unmodified, modified)
 
 # Plot the data per object (using participant labels of door difficulty).
-plot_2 = data_19 %>%
+plot_2 = data_20 %>%
   ggplot(aes(x=object, y=endorsement, fill=door)) +
   geom_histogram(stat="identity") +
   geom_hline(yintercept=50, linetype="dashed", color="black") +
@@ -360,13 +364,13 @@ Lastly, we'll compute the participant endorsement ($N$=`r nrow(data_10)`, $M$=`r
 ```{r compute_endorsement_per_object_participant_labels, fig.align="center"}
 # For additional analysis, compute the endorsement across objects in the first 
 # trial.
-data_20 = data_15 %>%
+data_21 = data_16 %>%
   group_by(costlier, object) %>%
   summarize(unmodified=sum(response)/n()*100, modified=100-unmodified) %>%
   gather(door, endorsement, unmodified, modified)
 
 # Plot the data per object (using participant labels of door difficulty).
-plot_3 = data_20 %>%
+plot_3 = data_21 %>%
   ggplot(aes(x=object, y=endorsement, fill=door)) +
   geom_histogram(stat="identity") +
   geom_hline(yintercept=50, linetype="dashed", color="black") +
