@@ -375,3 +375,39 @@ data_17 = data_5 %>%
   select(-total)
 data_17
 ```
+
+```{r object_trial_average_confidence}
+# Set up the bootstrap functions.
+compute_mean = function(data, indices) {
+  return(mean(data[indices]))
+}
+
+compute_bootstrap = function(data) {
+  simulations = boot(data=data$target,
+                     statistic=compute_mean,
+                     R=10000)
+  
+  return(boot.ci(simulations, type="perc")$perc)
+}
+
+# Filter the confidence ratings for the object trial in both conditions.
+data_18 = data_5 %>%
+  filter(trial=="trial_2") %>%
+  mutate(target=as.numeric(target))
+
+# Compute the bootstrapped 95% CIs for the average participant confidence in 
+# the object trial across both conditions.
+set.seed(seed)
+bootstrap_data = compute_bootstrap(data_18)
+confidence_lower_ci = bootstrap_data[4] * 100
+confidence_upper_ci = bootstrap_data[5] * 100
+
+# Print the average participant confidence and 95% CIs in the object trial 
+# across both conditions.
+confidence = mean(data_18$target) * 100
+print(paste("Average Confidence CI (lower):", round(confidence_lower_ci, 2),
+            sep=" "))
+print(paste("Average Confidence CI (upper):", round(confidence_upper_ci, 2),
+            sep=" "))
+print(paste("Average Confidence:", confidence, sep=" "))
+```

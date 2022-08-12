@@ -1,0 +1,117 @@
+---
+title: "Physical Pragmatics (enforcer_0)"
+output:
+  pdf_document: default
+  html_document:
+    code_folding: hide
+    df_print: paged
+---
+
+```{r setup, echo=FALSE}
+# Set the working directory.
+knitr::opts_knit$set(root.dir=normalizePath("../.."))
+
+# Turn off compile messages and warnings.
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+
+# Set the seed value.
+seed = 0
+
+# Set a custom color palette for plotting.
+color_palette = c("#999999", "#E69F00", "#56B4E9", "#009E73",
+                  "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# Set up the path to the participant data.
+human_path = "data/enforcer_0/human/pilot_2"
+
+# Set up the path to the model data.
+model_path = "data/model"
+```
+
+```{r libraries, echo=FALSE}
+# Import R libraries.
+library(boot)
+library(jsonlite)
+library(tidyverse)
+```
+
+# Preprocessing
+
+```{r preprocessing}
+# Read in the participant data.
+human_0 = read_csv(file.path(human_path, "raw_data.csv"), quote="~")
+
+# Convert the JSON string into JSON.
+human_1 = lapply(human_0$data, fromJSON)
+
+# Extract the trial information for each participant and stack them.
+human_3 = tibble()
+for (p in 1:length(human_1)) {
+  # Trim the map and add the participant ID back in.
+  human_2 = human_1[p][[1]]$trials %>%
+    as.data.frame() %>%
+    mutate(target=as.numeric(target),
+           unique_id=human_1[p][[1]]$id,
+           age=as.numeric(human_1[p][[1]]$subject_information$age))
+  
+  # Stack the trial information for the current participant.
+  human_3 = rbind(human_3, human_2)
+}
+
+# Write the preprocessed data.
+#write_csv(data_3, file.path(data_path, "data.csv"))
+```
+
+```{r}
+# Define the bootstrap function for the bootstrap statistic.
+compute_mean = function(data, indices) {
+  return(mean(data[indices]))
+}
+
+# Define the bootstrap function to simulate the data.
+compute_bootstrap = function(data) {
+  # Run the simulations.
+  simulations = boot(data=data,
+                     statistic=compute_mean,
+                     R=10000)
+
+  return(boot.ci(simulations, type="bca")$bca)
+}
+
+human_4 = human_3 %>%
+  mutate(blocked_preference=ifelse(renovation_side==employee_preference, 3,
+                                   ifelse(employee_preference=="none", 0, -3))) %>%
+  group_by(agent_condition, blocked_preference) %>%
+  summarize(mean_target=mean(target))
+
+human_5 = human_3 %>%
+  mutate(blocked_preference=ifelse(renovation_side==employee_preference, 3,
+                                   ifelse(employee_preference=="none", 0, -3)))
+
+blocked_preferences = c(-3, 0, 3)
+agent_conditions = c("non-agentive", "agentive")
+ci = tibble()
+for (b in blocked_preferences) {
+  for (a in agent_conditions) {
+    bootstrap = compute_bootstrap(filter(human_5, blocked_preference==b, agent_condition==a)$target)
+    ci = ci %>%
+      rbind(data.frame(
+        blocked_preference=b,
+        agent_condition=a,
+        lower=bootstrap[4],
+        upper=bootstrap[5]
+      ))
+  }
+}
+```
+
+```{r}
+human_4 %>%
+  left_join(ci) %>%
+  ggplot(aes(x=blocked_preference, y=mean_target, group=agent_condition, color=agent_condition)) +
+  geom_point() +
+  geom_line() +
+  geom_errorbar(aes(ymin=lower, ymax=upper), width=0.2) +
+  scale_x_discrete(name="Employee preference for the renovation door", limits=c(-3:3)) +
+  scale_y_discrete(name="Mean number of objects", limits=c(0:4))
+```
