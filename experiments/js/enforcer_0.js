@@ -40,7 +40,7 @@ function make_slides(f) {
         "What is the most amount of rocks you can place?",
         "Is it harder for this employee to cross through a door with 2 rocks than it is for them to cross through a door with 1 rock?",
         // "How much does it cost you to place a rock?",
-        "Will this employee realize that the rocks were intentionally placed by someone else and think about them?"
+        "Will this employee realize that the rocks were placed by someone else on purpose, and think about them?"
       ];
 
       $(".survey_questions").html(
@@ -289,7 +289,7 @@ function init() {
       "<p>Your job, as a construction worker, is to <b>make sure this " +
       "employee doesn't walk through the door on the " + exp.renovation_side +
       "</b> while you're working inside.</p>" +
-      "<br>" +
+      "<br><br>" +
       "<div align=\"center\">" +
       "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/renovation_door.png\">" +
       "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
@@ -298,45 +298,61 @@ function init() {
     $(".background_4").html(
       "<p>Normally, you'd use construction tape or signs to try to keep " +
       "them out, but you don't have either. Instead, you have 4 large " +
-      "rocks that you can place in front of the door. You and this " +
-      "employee are never in the same room at the same time, so they only " +
-      "see the rocks you leave behind, if any.</p>" +
+      "rocks that you can place in front of the door. Because you and this " +
+      "employee are never in the same room at the same time, you also " +
+      "can't talk to them, so they only see the rocks you leave behind, if " +
+      "any.</p>" +
+      "<div align=\"center\">" +
+      "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door_construction_worker.png\">" +
+      "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door.png\">" +
+      "</div>"
+    );
+    $(".background_5").html(
+      "<p>The more rocks that you put in front of a door, the harder that " +
+      "it will be for the employee to walk through it. But moving the " +
+      "rocks is equally hard for you, so in this experiment, your job will " +
+      "be to figure out the <b>minimum</b> number of rocks needed to keep " +
+      "this employee away from renovation site door, <b>using anywhere " +
+      "between 0 and 4 rocks</b>.</p>" +
       "<div align=\"center\">" +
       "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door_construction_worker.png\">" +
       "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door.png\">" +
       "</div>"
     );
     if (exp.agent_condition == "agentive") {
-      $(".background_5").html(
+      $(".background_6").html(
         "<p>When this employee sees any number of rocks in front of a " +
         "door, they will know that someone must have put them there on " +
         "purpose, and think about why someone would do that.</p>" +
-        "<br>" +
+        "<br><br>" +
         "<div align=\"center\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door_employee.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door_employee.png\">" +
+        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/employee_agentive_reasoning.png\">" +
         "</div>"
       );
-      $(".background_6").html(
-        "<p>This employee is very cooperative and will avoid going into the " +
-        "renovation site. They just don't know where it is and could " +
-        "accidentally walk into it.</p>" +
-        "<br>" +
+      $(".background_7").html(
+        "<p>This employee is very cooperative and wants to avoid going " +
+        "into the renovation site. They just don't know where it is and " +
+        "could accidentally walk into it.</p>" +
+        "<br><br>" +
         "<div align=\"center\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door_employee.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door_employee.png\">" +
+        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/employee_agentive_reasoning.png\">" +
         "</div>"
       );
     } else {
-      $(".background_5").html(
+      $(".background_6").html(
         "<p>When this employee sees any amount of rocks in front of a " +
         "door, they will not realize that someone put them there on " +
         "purpose, and will think they must have ended up there by " +
         "accident.</p>" +
-        "<br>" +
+        "<br><br>" +
         "<div align=\"center\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door_employee.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door_employee.png\">" +
+        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/employee_non-agentive_reasoning.png\">" +
         "</div>"
       );
     }
@@ -345,7 +361,7 @@ function init() {
       "<p>Your job, as a construction worker, is to <b>make sure this " +
       "employee doesn't walk through the door on the " + exp.renovation_side +
       "</b> while you're working inside.</p>" +
-      "<br>" +
+      "<br><br>" +
       "<div align=\"center\">" +
       "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
       "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/renovation_door.png\">" +
@@ -354,45 +370,61 @@ function init() {
     $(".background_4").html(
       "<p>Normally, you'd use construction tape or signs to try to keep " +
       "them out, but you don't have either. Instead, you have 4 large " +
-      "rocks that you can place in front of the door. You and this " +
-      "employee are never in the same room at the same time, so they only " +
-      "see the rocks you leave behind, if any.</p>" +
+      "rocks that you can place in front of the door. Because you and this " +
+      "employee are never in the same room at the same time, you also " +
+      "can't talk to them, so they only see the rocks you leave behind, if " +
+      "any.</p>" +
+      "<div align=\"center\">" +
+      "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door_construction_worker.png\">" +
+      "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
+      "</div>"
+    );
+    $(".background_5").html(
+      "<p>The more rocks that you put in front of a door, the harder that " +
+      "it will be for the employee to walk through it. But moving the " +
+      "rocks is equally hard for you, so in this experiment, your job will " +
+      "be to figure out the <b>minimum</b> number of rocks needed to keep " +
+      "this employee away from renovation site door, <b>using anywhere " +
+      "between 0 and 4 rocks</b>.</p>" +
       "<div align=\"center\">" +
       "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door_construction_worker.png\">" +
       "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
       "</div>"
     );
     if (exp.agent_condition == "agentive") {
-      $(".background_5").html(
+      $(".background_6").html(
         "<p>When this employee sees any number of rocks in front of a " +
         "door, they will know that someone must have put them there on " +
         "purpose, and think about why someone would do that.</p>" +
-        "<br>" +
+        "<br><br>" +
         "<div align=\"center\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door.png\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door_employee.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door_employee.png\">" +
+        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/employee_agentive_reasoning.png\">" +
         "</div>"
       );
-      $(".background_6").html(
-        "<p>This employee is very cooperative and will avoid going into the " +
-        "renovation site. They just don't know where it is and could " +
-        "accidentally walk into it.</p>" +
-        "<br>" +
+      $(".background_7").html(
+        "<p>This employee is very cooperative and wants to avoid going " +
+        "into the renovation site. They just don't know where it is and " +
+        "could accidentally walk into it.</p>" +
+        "<br><br>" +
         "<div align=\"center\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door.png\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door_employee.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door_employee.png\">" +
+        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/employee_agentive_reasoning.png\">" +
         "</div>"
       );
     } else {
-      $(".background_5").html(
+      $(".background_6").html(
         "<p>When this employee sees any amount of rocks in front of a " +
         "door, they will not realize that someone put them there on " +
         "purpose, and will think they must have ended up there by " +
         "accident.</p>" +
-        "<br>" +
+        "<br><br>" +
         "<div align=\"center\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door.png\">" +
-        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door_employee.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/opaque_door.png\">" +
+        // "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/closed_door_employee.png\">" +
+        "<img style=\"height:280px;width:220px;\" src=\"../stimuli/enforcer_0/employee_non-agentive_reasoning.png\">" +
         "</div>"
       );
     }

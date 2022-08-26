@@ -148,7 +148,7 @@ if (isset($_SESSION["pid"])) {
   <div class="slide" id="background_2">
     <h3>Background</h3>
     <p>There are two doors that an employee can take to get through the building. One of these doors leads to the renovation site.</p>
-    <br>
+    <br><br>
     <div align="center">
       <img style="height:280px;width:220px;" src="../stimuli/enforcer_0/closed_door.png"><img style="height:280px;width:220px;" src="../stimuli/enforcer_0/closed_door_employee.png">
     </div>
@@ -176,7 +176,7 @@ if (isset($_SESSION["pid"])) {
   </div>
   <div class="slide" id="background_7">
     <h3>Background</h3>
-    <p>The more rocks that you put in front of a door, the harder that it will be for the employee to walk through it. But moving the rocks is equally hard for you, so in this experiment, your job will be to figure out the <b>minimum</b> number of rocks needed to keep this employee away from renovation site door, <b>using anywhere between 0 and 4 rocks</b>.</p>
+    <div class="background_7"></div>
     <button onclick="_s.button()">Continue</button>
   </div>
 
@@ -193,7 +193,8 @@ if (isset($_SESSION["pid"])) {
     <h3>Background</h3>
     <!-- <p>Lastly, different employees have different preferences for walking through a particular door. However, all employees can always use either door to navigate through the building.</p> -->
     <!-- <p>You will complete this task 3 different times. Each time, we will tell you whether the employee prefers using one of the doors or not.</p> -->
-    <p><b>One last thing</b>: We are going to ask you about 3 employees, so you will complete this task 3 different times. The employees are all identical <b>except</b> that they each have a different preference for walking through a particular door. For each employee, we will tell you what their preference is, but remember that everything else about them is the same.</p>
+    <p><b>One last thing</b>: We are going to ask you about 3 employees, so you will complete this task 3 different times.</p>
+    <p>The employees are all identical <b>except</b> that they each have a different preference for walking through a particular door when there's no renovations going on. For each employee, we will tell you what their preference is, but remember that everything else about them is the same.</p>
     <p>When deciding how many rocks to place, keep in mind that any rocks you place for one employee will <b>not</b> be seen by the other employees, so only plan for one employee at a time.</p>
     <!-- <p>On each trial, you will receive 1 chance at a bonus, for a maximum of 3 bonuses.</p> -->
     <p>For the quiz, answer as if there was still just one employee. Press "Continue" to begin the quiz.</p>
