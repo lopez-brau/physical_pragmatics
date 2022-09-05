@@ -362,20 +362,6 @@ data_16 = data_5 %>%
 wilcox.test(data_15$target, data_16$target)
 ```
 
-```{r trial_agreement}
-# Compute the agreement between participant responses across trials in each
-# condition.
-data_17 = data_5 %>%
-  filter(trial %in% c("trial_1", "trial_3")) %>%
-  mutate(target=as.numeric(target)) %>%
-  spread(trial, target) %>%
-  group_by(condition) %>%
-  summarize(agreement=sum(trial_1==trial_3)/n(), total=n()) %>%
-  ungroup() %>%
-  select(-total)
-data_17
-```
-
 ```{r object_trial_average_confidence}
 # Set up the bootstrap functions.
 compute_mean = function(data, indices) {
@@ -391,23 +377,37 @@ compute_bootstrap = function(data) {
 }
 
 # Filter the confidence ratings for the object trial in both conditions.
-data_18 = data_5 %>%
+data_17 = data_5 %>%
   filter(trial=="trial_2") %>%
   mutate(target=as.numeric(target))
 
 # Compute the bootstrapped 95% CIs for the average participant confidence in 
 # the object trial across both conditions.
 set.seed(seed)
-bootstrap_data = compute_bootstrap(data_18)
+bootstrap_data = compute_bootstrap(data_17)
 confidence_lower_ci = bootstrap_data[4] * 100
 confidence_upper_ci = bootstrap_data[5] * 100
 
 # Print the average participant confidence and 95% CIs in the object trial 
 # across both conditions.
-confidence = mean(data_18$target) * 100
+confidence = mean(data_17$target) * 100
 print(paste("Average Confidence CI (lower):", round(confidence_lower_ci, 2),
             sep=" "))
 print(paste("Average Confidence CI (upper):", round(confidence_upper_ci, 2),
             sep=" "))
 print(paste("Average Confidence:", confidence, sep=" "))
+```
+
+```{r trial_agreement}
+# Compute the agreement between participant responses across trials in each
+# condition.
+data_18 = data_5 %>%
+  filter(trial %in% c("trial_1", "trial_3")) %>%
+  mutate(target=as.numeric(target)) %>%
+  spread(trial, target) %>%
+  group_by(condition) %>%
+  summarize(agreement=sum(trial_1==trial_3)/n(), total=n()) %>%
+  ungroup() %>%
+  select(-total)
+data_18
 ```
