@@ -195,7 +195,7 @@ data_12 = data_11 %>%
 plot_0 = data_12 %>%
   ggplot(aes(x=condition, y=endorsement, fill=response)) +
   geom_histogram(stat="identity") +
-  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.3) +
+  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.2) +
   geom_hline(yintercept=50, linetype="dashed", color="black") +
   theme_classic() +
   theme(aspect.ratio=1.0,
@@ -262,7 +262,7 @@ Now, we'll compute the participant endorsement ($N$=`r nrow(data_10)`, $M$=`r ro
 # Compute the (percent) participant endorsement of each door in each condition.
 data_16 = data_10 %>%
   do(left_join(., summarize(group_by(., costlier),
-                            unmodified=sum(response==1), 
+                            unmodified=sum(response==1),
                             modified=sum(response==0),
                             total=n()))) %>%
   mutate(unmodified=unmodified/total*100,
