@@ -1,0 +1,144 @@
+---
+title: "Physical Pragmatics (decider_3)"
+output:
+  pdf_document: default
+  html_document:
+    code_folding: hide
+    df_print: paged
+---
+  
+```{r setup, echo=FALSE}
+# Set the working directory.
+knitr::opts_knit$set(root.dir=normalizePath("../.."))
+
+# Turn off compile messages and warnings.
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+
+# Set the seed value.
+seed = 0
+
+# Set up the path to each partition of the participant data.
+data_path = "data/decider_3/data_0"
+```
+
+```{r libraries, echo=FALSE}
+# Import R libraries.
+library(boot)
+library(jsonlite)
+library(tidyverse)
+```
+
+# Preprocessing
+
+```{r preprocessing}
+# Read in the participant data.
+data_0 = read_csv(file.path(data_path, "raw_data.csv"), quote="~")
+
+# Convert the JSON string into JSON.
+data_1 = lapply(data_0$data, fromJSON)
+
+# Extract the trial information for each participant and stack them.
+data_3 = tibble()
+for (p in 1:length(data_1)) {
+  # Trim the map and add the participant ID back in.
+  data_2 = data_1[p][[1]]$trials %>%
+    as.data.frame() %>%
+    gather(type, num, trial_num, exclusion_num) %>%
+    na.omit() %>%
+    mutate(type=gsub("num", "", type)) %>%
+    mutate(target=as.numeric(target), trial=paste(type, num, sep=""),
+           object=data_1[p][[1]]$setup$object,
+           condition=data_1[p][[1]]$setup$condition,
+           unique_id=data_1[p][[1]]$id,
+           age=as.numeric(data_1[p][[1]]$subject_information$age)) %>%
+    select(-type, -num)
+  
+  # Stack the trial information for the current participant.
+  data_3 = rbind(data_3, data_2)
+}
+
+# Exclude participants that said they couldn't walk through one of the doors.
+data_5 = tibble()
+exclusions = tibble()
+for (participant in unique(data_3$unique_id)) {
+  data_4 = data_3 %>%
+    filter(unique_id==participant)
+
+  if (filter(data_4, trial=="exclusion_1")[,"target"]==1) {
+    data_5 = rbind(data_5, data_4)
+  }
+  else if (filter(data_4, trial=="exclusion_1")[,"target"]==0) {
+    exclusions = rbind(exclusions, data_4)
+  }
+}
+
+# Write the preprocessed data.
+write_csv(data_5, file.path(data_path, "data.csv"))
+```
+
+# "Unusualness" as a predictor of communicative association
+
+First, we analyze the predictive power of participant "unusualness" judgments ($N$=`r length(filter(data_3, trial_num==1)$age)`, $M$=`r round(mean(filter(data_3, trial_num==1)$age, na.rm=TRUE), 2)` years, $SD$=`r round(sd(filter(data_3, trial_num==1)$age, na.rm=TRUE), 2)` years) on the participant judgments from `decider_1`.
+
+```{r decider_1_main_analysis}
+# Filter the trial of interest.
+data_6 = data_5 %>%
+  filter(trial=="trial_1")
+
+# Set up the bootstrap functions.
+compute_mean = function(data, indices) {
+  return(mean(data[indices]))
+}
+
+compute_bootstrap = function(data) {
+  simulations = boot(data=data$target,
+                     statistic=compute_mean,
+                     R=10000)
+  
+  return(boot.ci(simulations, type="perc")$perc)
+}
+
+# # Set the seed and compute the 95% bootstrapped CI.
+# set.seed(seed)
+# ci = data.frame()
+# bootstrap_data = compute_bootstrap(filter(data_6, condition=="none"))
+# ci = rbind(ci, data.frame(lower_ci=bootstrap_data[4]*100,
+#                           upper_ci=bootstrap_data[5]*100,
+#                           condition="none"))
+# 
+# bootstrap_data = compute_bootstrap(filter(data_6, condition=="low"))
+# ci = rbind(ci, data.frame(lower_ci=bootstrap_data[4]*100,
+#                           upper_ci=bootstrap_data[5]*100,
+#                           condition="low"))
+
+# Convert individual judgments to aggregate percentages.
+data_7 = data_6 %>%
+  group_by(condition) %>%
+  summarize(percentage=sum(target)/n()*100)
+
+# Plot the data (using our labels of door difficulty).
+plot_0 = data_7 %>%
+  ggplot(aes(x=condition, y=percentage)) + 
+  geom_bar(stat="identity", width=0.5) +
+  # geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.15) +
+  geom_hline(yintercept=50, linetype="dashed", color="black") +
+  theme_classic() +
+  theme(aspect.ratio=1.0,
+        legend.title=element_text(hjust=0.5)) +
+  ylab("Endorsement (%)") +
+  scale_x_discrete(name="Condition",
+                      limits=c("none", "low"),
+                      labels=c("No-Cost", "Low-Cost"))
+plot_0
+```
+
+```{r compute_statistics_a_priori_labels}
+# Compute a binomial test with the alternative hypothesis that the participant 
+# endorsement of the low-cost door is above chance.
+# NOTE: Computing a two-sided binomial test for "conservativeness".
+temp = data_6 %>%
+  rbind(data_6)
+t.test(x=filter(temp, condition=="none")$target, y=filter(temp, condition=="low")$target, alternative="two.sided")
+t.test(x=sum(data_7$target), n=length(data_7$target), p=0.5,
+       alternative="two.sided")
+```

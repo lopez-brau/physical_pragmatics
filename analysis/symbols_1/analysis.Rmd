@@ -98,7 +98,7 @@ for (partition_path in list.files(data_path, pattern="data",
     filter(trial=="exclusion_1", target==first_side) %>%
     select(participant) %>%
     left_join(data_3)
-
+  break
   # Write the current partition of the preprocessed data.
   write_csv(data_4, file.path(partition_path, "data.csv"))
 

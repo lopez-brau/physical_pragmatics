@@ -40,7 +40,8 @@ function make_slides(f) {
         "What is the most amount of rocks you can place?",
         "Is it harder for this employee to cross through a door with 2 rocks than it is for them to cross through a door with 1 rock?",
         // "How much does it cost you to place a rock?",
-        "Will this employee realize that the rocks were placed by someone else on purpose, and think about them?"
+        "Will this employee realize that the rocks were placed by someone else on purpose, and think about them?",
+        "Is this employee cooperative?"
       ];
 
       $(".survey_questions").html(
@@ -80,6 +81,11 @@ function make_slides(f) {
         "<p style=\"margin-top:5px;\">" +
         "<label><input type=\"radio\" name=\"sentence_4\" value=\"0\"/>Yes</label>" +
         "<label><input type=\"radio\" name=\"sentence_4\" value=\"1\"/>No</label>" +
+        "</p>" +
+        "<p style=\"margin-bottom:0px;\">" + exp.sentence[5] + "</p>" +
+        "<p style=\"margin-top:5px;\">" +
+        "<label><input type=\"radio\" name=\"sentence_5\" value=\"0\"/>Yes</label>" +
+        "<label><input type=\"radio\" name=\"sentence_5\" value=\"1\"/>No</label>" +
         "</p>"
       );
     },
@@ -89,18 +95,18 @@ function make_slides(f) {
       exp.target_2 = $("input[name='sentence_2']:checked").val();
       exp.target_3 = $("input[name='sentence_3']:checked").val();
       exp.target_4 = $("input[name='sentence_4']:checked").val();
-      // exp.target_5 = $("input[name='sentence_5']:checked").val();
+      exp.target_5 = $("input[name='sentence_5']:checked").val();
 
       // If a participant fails to answer every question.
-      // if ((exp.target_0 == undefined) || (exp.target_1 == undefined) ||
-      //     (exp.target_2 == undefined) || (exp.target_3 == undefined) ||
-      //     (exp.target_5 == undefined)) {
-      //   $(".survey_error").show();
-      // }
       if ((exp.target_0 == undefined) || (exp.target_1 == undefined) ||
-          (exp.target_2 == undefined) || (exp.target_3 == undefined)) {
+          (exp.target_2 == undefined) || (exp.target_3 == undefined) ||
+          (exp.target_4 == undefined) || (exp.target_5 == undefined)) {
         $(".survey_error").show();
       }
+      // if ((exp.target_0 == undefined) || (exp.target_1 == undefined) ||
+      //     (exp.target_2 == undefined) || (exp.target_3 == undefined)) {
+      //   $(".survey_error").show();
+      // }
 
       // If a participant fails to answer all questions properly.
       else if ((exp.target_0 != (exp.renovation_side == "left" ? "0" : "1")) ||
@@ -108,7 +114,8 @@ function make_slides(f) {
                (exp.target_2 != "3") ||
                (exp.target_3 != "0") ||
                // (exp.target_4 != "0") ||
-               (exp.target_4 != (exp.agent_condition == "agentive" ? "0" : "1"))) {
+               (exp.target_4 != (exp.agent_condition == "agentive" ? "0" : "1")) ||
+               (exp.target_5 != (exp.agent_condition == "agentive" ? "0" : "1"))) {
         // Stitch the participant responses together and send them as URL
         // parameters.
         exp.survey_results = [
@@ -117,7 +124,7 @@ function make_slides(f) {
           exp.target_2,
           exp.target_3,
           exp.target_4,
-          // exp.target_5
+          exp.target_5
         ];
         window.location.replace("https://compdevlab.yale.edu/studies/lopez-brau/" +
           "physical_pragmatics/experiments/enforcer_0/fail.php" +
@@ -136,8 +143,8 @@ function make_slides(f) {
           "target_3": exp.target_3,
           "sentence_4": exp.sentence[4],
           "target_4": exp.target_4,
-          // "sentence_5": exp.sentence[5],
-          // "target_5": exp.target_5,
+          "sentence_5": exp.sentence[5],
+          "target_5": exp.target_5,
           "quiz_attempts": quiz_attempts
         });
         exp.go();
@@ -163,7 +170,7 @@ function make_slides(f) {
     // Make the multiple-choice question.
     $(".display_options").html(
       // "<p style=\"margin-bottom:0px;\">How many rocks will you decide to place?</p>" +
-      "<p style=\"margin-bottom:0px;\">What do you think is the <b>minimum</b> number of rocks you need to place to keep this employee away?</p>" +
+      "<p style=\"margin-bottom:0px;\">What do you think is the <b>minimum</b> number of rocks you need to place?</p>" +
       "<div style=\"margin-top:5px;\">" +
       "<label style=\"display:inline-block;\">" +
       "<img style=\"height:160px;width:auto;display:block;\" src=\"../stimuli/enforcer_0/closed_door.png\">" +
@@ -190,13 +197,17 @@ function make_slides(f) {
       "<p style=\"margin:5px 0px 10px 0px;\">4</p>" +
       "<input type=\"radio\" name=\"sentence_" + (j+5) + "\" value=\"4\" style=\"margin:0 auto;\"/>" +
       "</label>" +
-      "</div>"
+      "</div>" +
+      // "<form action=\"/action_page.php\">"
+      // <p><label for="w3review">Review of W3Schools:</label></p>
+      "<textarea id=\"reasoning\" rows=\"4\" cols=\"50\"></textarea>"
+      // </form>
     );
   }
 
   // Run when the "Continue" button is hit on a slide.
   function button() {
-    exp.target = $("input[name='sentence_" + (j+5) + "']:checked").val();
+    exp.target = $("input[name='sentence_" + (j+6) + "']:checked").val();
     if (exp.target === undefined) {
       $(".trial_error").show();
     } else {

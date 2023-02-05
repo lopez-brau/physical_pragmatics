@@ -2,7 +2,7 @@
 *.pptx
 __pycache__
 pilot_*
-decider_3
+decider_4
 symbols_0
 cache/
 cluster/

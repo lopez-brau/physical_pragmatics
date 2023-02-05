@@ -22,7 +22,7 @@ color_palette = c("#999999", "#E69F00", "#56B4E9", "#009E73",
                   "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
 # Set up the path to the participant data.
-human_path = "data/enforcer_0/human/pilot_2"
+human_path = "data/enforcer_0/human/pilot_4"
 
 # Set up the path to the model data.
 model_path = "data/model"
@@ -114,4 +114,12 @@ human_4 %>%
   geom_errorbar(aes(ymin=lower, ymax=upper), width=0.2) +
   scale_x_discrete(name="Employee preference for the renovation door", limits=c(-3:3)) +
   scale_y_discrete(name="Mean number of objects", limits=c(0:4))
+```
+
+```{r}
+human_5 %>%
+  filter(blocked_preference==0) %>%
+  ggplot(aes(x=target)) +
+  geom_histogram() +
+  facet_wrap(~agent_condition)
 ```
