@@ -301,7 +301,8 @@ plot_1 = data_17 %>%
   geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.2) +
   geom_hline(yintercept=50, linetype="dashed", color="black") +
   theme_classic() +
-  theme(legend.title=element_text(hjust=0.5)) +
+  theme(aspect.ratio=1.0,
+        legend.title=element_text(hjust=0.5)) +
   scale_x_discrete(name="Participant-Judged Condition",
                    limits=c("equal", "modified"),
                    labels=c("No-Cost", "Low-Cost")) +
@@ -386,4 +387,65 @@ plot_3 = data_21 %>%
                       limits=c("modified", "unmodified"),
                       labels=c("Modified", "Unmodified"))
 plot_3
+```
+
+## Analyze Excluded Participants
+
+Because our exclusion question was potentially ambiguous, here we analyze the data from excluded participants to see if their judgments align with our main results.
+
+```{r compute_endorsement_excluded_participants, fig.align="center"}
+# Extract the participants who said the unmodified door was more difficult to
+# walk through.
+data_22 = data_8 %>% 
+  filter(costlier=="unmodified")
+
+# Compute the bootstrapped 95% CIs for participant endorsement of the 
+# unmodified door for both conditions.
+set.seed(seed)
+ci = data.frame()
+bootstrap_data = compute_bootstrap(filter(data_22, condition=="none")$response)
+ci = rbind(ci, data.frame(lower_ci=bootstrap_data[4]*100,
+                          upper_ci=bootstrap_data[5]*100,
+                          condition="none"))
+
+bootstrap_data = compute_bootstrap(filter(data_22, condition=="low")$response)
+ci = rbind(ci, data.frame(lower_ci=bootstrap_data[4]*100,
+                          upper_ci=bootstrap_data[5]*100,
+                          condition="low"))
+
+# Compute the percentage participant endorsement for each door per condition.
+data_23 = data_22 %>%
+  group_by(condition) %>%
+  summarize(unmodified=sum(response)/n()*100, modified=100-unmodified) %>%
+  gather(response, endorsement, unmodified, modified) %>%
+  left_join(ci)
+
+# Plot the data (using our labels of door difficulty).
+plot_4 = data_23 %>%
+  ggplot(aes(x=condition, y=endorsement, fill=response)) +
+  geom_histogram(stat="identity") +
+  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.2) +
+  geom_hline(yintercept=50, linetype="dashed", color="black") +
+  theme_classic() +
+  theme(aspect.ratio=1.0,
+        legend.title=element_text(hjust=0.5)) +
+  scale_x_discrete(name="Condition",
+                   limits=c("none", "low"),
+                   labels=c("No-Cost", "Low-Cost")) +
+  ylab("Endorsement (%)") +
+  scale_fill_discrete(name="Response",
+                      limits=c("modified", "unmodified"),
+                      labels=c("Modified", "Unmodified"))
+plot_4
+```
+
+```{r compute_statistics_excluded_participants}
+# Compute a binomial test for each condition.
+# NOTE: Computing a two-sided binomial test for "conservativeness".
+data_24 = filter(data_22, condition=="none")
+binom.test(x=sum(data_24$response), n=length(data_24$response), p=0.5,
+           alternative="two.sided")
+data_25 = filter(data_22, condition=="low")
+binom.test(x=sum(data_25$response), n=length(data_25$response), p=0.5,
+           alternative="two.sided")
 ```
