@@ -221,48 +221,35 @@ binom.test(x=sum(data_9$target), n=length(data_9$target), p=0.5,
 
 ## Analyze Excluded Participants
 
-Because our exclusion question was potentially ambiguous, here we analyze the data from excluded participants to see if their judgments align with our main results.
+### _a priori_ Labels
 
-```{r compute_endorsement_excluded_participants, fig.align="center"}
+Here we analyze the data from excluded participants, using _a priori_ labels of door difficulty, to see if their judgments align with our main results.
+
+```{r compute_endorsement_a_priori_labels_excluded_participants, fig.align="center"}
 # Filter the trial of interest.
 data_11 = exclusions %>%
   filter(trial=="trial_1")
 
-# Set the seed and compute the 95% bootstrapped CI.
-set.seed(seed)
-bootstrap_data = compute_bootstrap(data_11)
-lower_ci = bootstrap_data[4] * 100
-upper_ci = bootstrap_data[5] * 100
-
-# Convert individual judgments to aggregate percentages.
+# Sum individual judgments by door type.
 data_12 = data_11 %>%
   group_by(target) %>%
-  summarize(percentage=n()/nrow(data_11)*100) %>%
+  summarize(count=n()) %>%
   mutate(target=as.character(target))
 
 # Plot the data (using our labels of door difficulty).
 plot_2 = data_12 %>%
-  ggplot(aes(x="", y=percentage, fill=target)) +
-  geom_histogram(stat="identity", width=0.5) +
-  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.1) +
-  geom_hline(yintercept=50, linetype="dashed", color="black") +
+  ggplot(aes(x="", y=count, fill=target)) +
+  geom_histogram(stat="identity", width=0.5, position="dodge") +
   theme_classic() +
   theme(aspect.ratio=1.0,
         axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
         legend.title=element_text(hjust=0.5)) +
-  ylab("Endorsement (%)") +
+  scale_y_discrete(name="Endorsement (Count)",
+                   limits=c(0, 2, 4, 6, 8, 10)) +
   scale_fill_discrete(name="Door",
                       limits=c("0", "1"),
                       labels=c("No-Cost", "Low-Cost"))
 plot_2
-```
-
-```{r compute_statistics_excluded_participants}
-# Compute a binomial test on the alternative hypothesis that the participant 
-# endorsement for the low-cost door is above chance.
-# NOTE: Computing a two-sided binomial test for "conservativeness".
-binom.test(x=sum(data_11$target), n=length(data_11$target), p=0.5,
-           alternative="two.sided")
 ```

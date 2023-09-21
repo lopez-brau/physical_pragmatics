@@ -33,6 +33,7 @@ library(tidyverse)
 ```{r preprocessing}
 # Preprocess and merge each partition of the participant data.
 data_5 = tibble()
+exclusions = tibble()
 num_participants = 0
 for (partition_path in list.files(data_path, pattern="data",
                                   full.names=TRUE)) {
@@ -94,11 +95,16 @@ for (partition_path in list.files(data_path, pattern="data",
 
   # Exclude participants that did not say the modified door is harder to walk
   # through on the low-cost trial.
+  exclusions = data_3 %>%
+    filter(trial=="exclusion_1", target!=first_side) %>%
+    select(participant) %>%
+    left_join(data_3) %>%
+    rbind(exclusions)
   data_4 = data_3 %>%
     filter(trial=="exclusion_1", target==first_side) %>%
     select(participant) %>%
     left_join(data_3)
-  break
+
   # Write the current partition of the preprocessed data.
   write_csv(data_4, file.path(partition_path, "data.csv"))
 
@@ -166,7 +172,7 @@ data_7 = data_6 %>%
 plot_0 = data_7 %>%
   ggplot(aes(x=trial, y=endorsement, fill=door)) + 
   geom_bar(stat="identity", width=0.5) +
-  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.15) +
+  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.1) +
   geom_hline(yintercept=50, linetype="dashed", color="black") +
   theme_classic() +
   theme(aspect.ratio=1.0,
@@ -229,7 +235,7 @@ data_10 = data_8 %>%
 plot_1 = data_10 %>%
   ggplot(aes(x=condition, y=endorsement, fill=door)) + 
   geom_histogram(stat="identity") +
-  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.3) +
+  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.2) +
   geom_hline(yintercept=50, linetype="dashed", color="black") +
   theme_classic() +
   theme(aspect.ratio=1.0,
@@ -300,13 +306,13 @@ data_14 = data_5 %>%
 plot_2 = data_14 %>%
   ggplot(aes(x=condition, y=confidence, fill=trial)) +
   geom_bar(stat="identity") +
+  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.2) +
   theme_classic() +
   theme(aspect.ratio=1.0,
         legend.position="none") +
   facet_wrap(~factor(trial,
                      levels=c("trial_2", "trial_4"),
                      labels=c("Object", "Symbol"))) +
-  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.2) +
   ylim(c(0, 100)) +
   scale_x_discrete(name="Condition",
                    limits=c("congruent", "incongruent"), 
@@ -318,13 +324,9 @@ plot_2
 ```{r confidence_analysis}
 # Set up the bootstrap functions.
 compute_difference = function(data, indices) {
-  congruent_data = data[indices,] %>%
-    filter(condition=="congruent", trial=="trial_4") %>%
-    mutate(target=as.numeric(target))
-  incongruent_data = data[indices,] %>%
-    filter(condition=="incongruent", trial=="trial_4") %>%
-    mutate(target=as.numeric(target))
-  return(mean(congruent_data$target)-mean(incongruent_data$target))
+  congruent_data = mean(data[indices,]$congruent)
+  incongruent_data = mean(data[indices,]$incongruent)
+  return(congruent_data-incongruent_data)
 }
 
 compute_bootstrap = function(data) {
@@ -335,10 +337,23 @@ compute_bootstrap = function(data) {
   return(boot.ci(simulations, type="perc")$perc)
 }
 
+# Extract the individual participant confidence judgments per condition.
+data_15 = data_5 %>%
+  filter(condition=="congruent", trial=="trial_4") %>%
+  select(target) %>%
+  mutate(target=as.numeric(target)) %>%
+  rename(congruent=target)
+data_16 = data_5 %>%
+  filter(condition=="incongruent", trial=="trial_4") %>%
+  select(target) %>%
+  mutate(target=as.numeric(target)) %>%
+  rename(incongruent=target)
+data_17 = bind_cols(data_15, data_16)
+
 # Compute the boostrapped 95% CI for the difference between the mean
 # participant confidence judgments in the symbol trial.
 set.seed(seed)
-bootstrap_data = compute_bootstrap(data_5)
+bootstrap_data = compute_bootstrap(data_17)
 difference_lower_ci = bootstrap_data[4] * 100
 difference_upper_ci = bootstrap_data[5] * 100
 
@@ -353,13 +368,13 @@ print(paste("Difference:", difference, sep=" "))
 
 # Compute a U test between participant confidence in the symbol trial of both 
 # conditions.
-data_15 = data_5 %>%
+data_18 = data_5 %>%
   filter(condition=="congruent", trial=="trial_4") %>%
   mutate(target=as.numeric(target))
-data_16 = data_5 %>%
+data_19 = data_5 %>%
   filter(condition=="incongruent", trial=="trial_4") %>%
   mutate(target=as.numeric(target))
-wilcox.test(data_15$target, data_16$target)
+wilcox.test(data_18$target, data_19$target)
 ```
 
 ```{r object_trial_average_confidence}
@@ -377,20 +392,20 @@ compute_bootstrap = function(data) {
 }
 
 # Filter the confidence ratings for the object trial in both conditions.
-data_17 = data_5 %>%
+data_20 = data_5 %>%
   filter(trial=="trial_2") %>%
   mutate(target=as.numeric(target))
 
 # Compute the bootstrapped 95% CIs for the average participant confidence in 
 # the object trial across both conditions.
 set.seed(seed)
-bootstrap_data = compute_bootstrap(data_17)
+bootstrap_data = compute_bootstrap(data_20)
 confidence_lower_ci = bootstrap_data[4] * 100
 confidence_upper_ci = bootstrap_data[5] * 100
 
 # Print the average participant confidence and 95% CIs in the object trial 
 # across both conditions.
-confidence = mean(data_17$target) * 100
+confidence = mean(data_20$target) * 100
 print(paste("Average Confidence CI (lower):", round(confidence_lower_ci, 2),
             sep=" "))
 print(paste("Average Confidence CI (upper):", round(confidence_upper_ci, 2),
@@ -401,13 +416,90 @@ print(paste("Average Confidence:", confidence, sep=" "))
 ```{r trial_agreement}
 # Compute the agreement between participant responses across trials in each
 # condition.
-data_18 = data_5 %>%
+data_21 = data_5 %>%
   filter(trial %in% c("trial_1", "trial_3")) %>%
   mutate(target=as.numeric(target)) %>%
   spread(trial, target) %>%
   group_by(condition) %>%
-  summarize(agreement=sum(trial_1==trial_3)/n(), total=n()) %>%
-  ungroup() %>%
-  select(-total)
-data_18
+  summarize(agreement=sum(trial_1==trial_3), total=n(),
+            percentage=agreement/total) %>%
+  ungroup()
+data_21
+```
+
+## Analyze Excluded Participants
+
+Here we analyze the data from excluded participants to see if their judgments align with our main results.
+
+```{r low-cost_trial_plot_excluded_participants, fig.align="center"}
+# Filter the data from the low-cost trial.
+data_22 = exclusions %>%
+  filter(trial=="trial_1") %>%
+  mutate(target=as.numeric(target))
+
+# Sum individual judgments by door type.
+data_23 = data_22 %>%
+  mutate(target=ifelse(target==0, "modified", "unmodified")) %>%
+  group_by(target) %>%
+  summarize(count=n())
+
+# Plot the participant endorsement for the unmodified door in the low-cost
+# trial, which is a replication of `decider_0`.
+plot_3 = data_23 %>%
+  ggplot(aes(x="", y=count, fill=target)) +
+  geom_bar(stat="identity", width=0.5, position="dodge") +
+  theme_classic() +
+  theme(aspect.ratio=1.0,
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        legend.title=element_text(hjust=0.5)) +
+  ylab("Endorsement (Count)") +
+  scale_fill_discrete(name="Response",
+                      limits=c("modified", "unmodified"),
+                      labels=c("Modified", "Unmodified"))
+plot_3
+```
+
+```{r symbol_trial_plot_excluded_participants, fig.align="center"}
+# Filter the data from the symbol trial.
+data_24 = exclusions %>%
+  filter(trial=="trial_3") %>%
+  mutate(target=as.numeric(target))
+
+# Sum individual judgments by condition and door type.
+data_25 = data_24 %>%
+  mutate(target=ifelse(target==0, "modified", "unmodified")) %>%
+  group_by(condition, target) %>%
+  summarize(total=n())
+
+# Plot the participant endorsement for the unmodified door in the symbol trial.
+plot_4 = data_25 %>%
+  ggplot(aes(x=condition, y=total, fill=target)) + 
+  geom_bar(stat="identity", width=0.5, position="dodge") +
+  theme_classic() +
+  theme(aspect.ratio=1.0,
+        legend.title=element_text(hjust=0.5)) +
+  scale_x_discrete(name="Condition",
+                   limits=c("congruent", "incongruent"), 
+                   labels=c("Congruent", "Incongruent")) +
+  ylab("Endorsement (Count)") +
+  scale_fill_discrete(name="Response",
+                      limits=c("modified", "unmodified"),
+                      labels=c("Modified", "Unmodified"))
+plot_4
+```
+
+```{r trial_agreement_excluded_participants}
+# Compute the agreement between participant responses across trials in each
+# condition.
+data_26 = exclusions %>%
+  filter(trial %in% c("trial_1", "trial_3")) %>%
+  mutate(target=as.numeric(target)) %>%
+  spread(trial, target) %>%
+  group_by(condition) %>%
+  summarize(agreement=sum(trial_1==trial_3), total=n(),
+            percentage=agreement/total) %>%
+  ungroup()
+data_26
 ```

@@ -31,7 +31,6 @@ model_path = "data/observer_0/model"
 ```{r libraries, echo=FALSE}
 # Import R libraries.
 library(boot)
-library(lawstat)
 library(lme4)
 library(lmerTest)
 library(tidyverse)
@@ -645,7 +644,7 @@ cor_diff_1_ci = data.frame(
 
 When compared against the "decider cost lesion" model, our model has a correlation difference of $\Delta r$=`r round(cor_diff_0, 2)` (95% CI: `r round(cor_diff_0_ci$lower, 2)`-`r round(cor_diff_0_ci$upper, 2)`). When compared against the "enforcer cost lesion" model, our model as a correlation difference of $\Delta r$=`r round(cor_diff_1, 2)` (95% CI: `r round(cor_diff_1_ci$lower, 2)`-`r round(cor_diff_1_ci$upper, 2)`).
 
-# Additional Analyses
+# Comparing Reward Inferences
 
 Here we conduct an additional analyses comparing the difference in mean participant reward inferences ($N$=`r nrow(age)`, $M$=`r round(mean(age$age, na.rm=TRUE), 2)` years, $SD$=`r round(sd(age$age, na.rm=TRUE), 2)` years) across conditions.
 
@@ -683,11 +682,40 @@ plot_5 = data_15 %>%
 plot_5
 ```
 
-Now, we quantify the observed results in the previous plot by computing a linear mixed-effects regression (predicting individual participant judgments as a function of enforcer action and condition).
+We first quantify the mean participant reward differences across conditions by computing a _t_-test over each boulder count.
+
+```{r reward_differences}
+# Filter the reward inferences across in the mentalistic condition, averaged
+# over the natural cost and enforcer action.
+data_16 = data_3 %>%
+  filter(type=="mentalistic_desires")
+
+# Filter the reward inferences across in the non-mentalistic condition,
+# averaged over the natural cost and enforcer action.
+data_17 = data_3 %>%
+  filter(type=="non-mentalistic_desires")
+
+# Compute a t-test across conditions for one boulder.
+t.test(filter(data_16, enforcer_action=="[1 0]")$participants,
+       filter(data_17, enforcer_action=="[1 0]")$participants,
+       alternative="two.sided")
+
+# Compute a t-test across conditions for two boulders.
+t.test(filter(data_16, enforcer_action=="[2 0]")$participants,
+       filter(data_17, enforcer_action=="[2 0]")$participants,
+       alternative="two.sided")
+
+# Compute a t-test across conditions for three boulders.
+t.test(filter(data_16, enforcer_action=="[3 0]")$participants,
+       filter(data_17, enforcer_action=="[3 0]")$participants,
+       alternative="two.sided")
+```
+
+Next, we quantify the observed reward differences by computing a linear mixed-effects regression (predicting individual participant judgments as a function of enforcer action and condition).
 
 ```{r reward_comparison_regression}
 # Filter and preprocess the relevant individual participant judgments.
-data_16 = human_4 %>%
+data_18 = human_4 %>%
   select(-cooperation) %>%
   rename(mentalistic_desires=reward_0, nonmentalistic_desires=reward_1) %>%
   gather(condition, reward, mentalistic_desires, nonmentalistic_desires) %>%
@@ -698,7 +726,7 @@ data_16 = human_4 %>%
 # Compute a linear mixed-effects regression predicting individual participant
 # judgments as a function of enforcer action and condition.
 model_3 = lmer(formula=reward ~ enforcer_action*condition + 
-               (1+condition|workerid), data=data_16)
+               (1+condition|workerid), data=data_18)
 summary(model_3)
 
 # Print the coefficients separately for readability.
@@ -711,7 +739,7 @@ Finally, we compute two linear regressions (each predicting mean participant jud
 # Compute a linear regression predicting mean participant judgments as a
 # function of enforcer action and the natural costs for the mentalistic 
 # condition.
-data_17 = data_3 %>%
+data_19 = data_3 %>%
   filter(type=="mentalistic_desires") %>%
   mutate(enforcer_action=as.numeric(substr(enforcer_action, 2, 2))) %>%
   separate(natural_cost, into=c("natural_cost_0", "natural_cost_1"),
@@ -719,7 +747,7 @@ data_17 = data_3 %>%
   mutate(natural_cost_0=as.numeric(gsub("[", "", natural_cost_0, fixed=TRUE)),
          natural_cost_1=as.numeric(gsub("]", "", natural_cost_1, fixed=TRUE)))
 model_4 = glm(participants~enforcer_action+natural_cost_0+natural_cost_1,
-              family="gaussian", data=data_17)
+              family="gaussian", data=data_19)
 summary(model_4)
 
 # Print the coefficients separately for readability.
@@ -728,7 +756,7 @@ summary(model_4)$coefficients
 # Compute a linear regression predicting mean participant judgments as a
 # function of enforcer action and the natural costs for the non-mentalistic
 # condition.
-data_18 = data_3 %>%
+data_20 = data_3 %>%
   filter(type=="non-mentalistic_desires") %>%
   mutate(enforcer_action=as.numeric(substr(enforcer_action, 2, 2))) %>%
   separate(natural_cost, into=c("natural_cost_0", "natural_cost_1"),
@@ -736,7 +764,7 @@ data_18 = data_3 %>%
   mutate(natural_cost_0=as.numeric(gsub("[", "", natural_cost_0, fixed=TRUE)),
          natural_cost_1=as.numeric(gsub("]", "", natural_cost_1, fixed=TRUE)))
 model_5 = glm(participants~enforcer_action+natural_cost_0+natural_cost_1,
-              family="gaussian", data=data_18)
+              family="gaussian", data=data_20)
 summary(model_5)
 
 # Print the coefficients separately for readability.

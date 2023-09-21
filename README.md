@@ -1,8 +1,17 @@
-# Physical pragmatics: The communicative meaning of objects
+# Communicative meaning of objects
 
-Project repository for the manuscript, "Physical pragmatics: The communicative meaning of objects".
+Project repository for the paper, "People can use the placement of objects to infer communicative goals" ([link](https://doi.org/10.1016/j.cognition.2023.105524)).
 
-## Experiment Directory
+## Repository structure
+
+- 
+
+
+
+
+
+
+
 
 - `decider_0`: Experiment 2a
 - `decider_1`: Experiment 1

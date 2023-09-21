@@ -117,7 +117,7 @@ data_3 = data_2 %>%
 plot_0 = data_3 %>%
   ggplot(aes(x=door, y=percentage, fill=response)) +
   geom_histogram(stat="identity") +
-  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.3) +
+  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.2) +
   geom_hline(yintercept=50, linetype="dashed", color="black") +
   facet_wrap(~factor(first_trial,
                      levels=c("no_cost", "low_cost"),
@@ -176,7 +176,7 @@ data_4 = data_2 %>%
 plot_1 = data_4 %>%
   ggplot(aes(x=door, y=percentage, fill=response)) +
   geom_histogram(stat="identity") +
-  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.3) +
+  geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.2) +
   geom_hline(yintercept=50, linetype="dashed", color="black") +
   theme_classic() +
   theme(aspect.ratio=1.0,
@@ -205,4 +205,39 @@ data_6 = data_2 %>%
   mutate(response=ifelse(response=="leave", 1, 0))
 binom.test(x=sum(data_6$response), n=length(data_6$response), p=0.5,
            alternative="two.sided")
+```
+
+## Analyze Excluded Participants
+
+Here we analyze the data from excluded participants to see if their judgments align with our main results.
+
+```{r compute_endorsement_a_priori_labels_excluded_participants, fig.align="center"}
+# Extract the excluded participants and remove the trial where they responded
+# with 'unsure'.
+data_7 = data_1 %>%
+  filter(participant %in% exclusions) %>%
+  select(participant, age, first_trial, door, object, response) %>%
+  filter(response!="unsure")
+
+# Sum individual judgments by door type and response.
+data_8 = data_7 %>%
+  group_by(door, response) %>%
+  summarize(count=n())
+
+# Plot the data (using our labels of door difficulty).
+plot_2 = data_8 %>%
+  ggplot(aes(x=door, y=count, fill=response)) +
+  geom_histogram(stat="identity", width=0.5, position="dodge") +
+  theme_classic() +
+  theme(aspect.ratio=1.0,
+        legend.title=element_text(hjust=0.5)) +
+  scale_x_discrete(name="Door",
+                   limits=c("low_cost"),
+                   labels=c("Low-Cost")) +
+  scale_y_discrete(name="Endorsement (Count)",
+                   limits=c(0, 2, 4, 6, 8, 10)) +
+  scale_fill_discrete(name="Response",
+                      limits=c("enter", "leave"),
+                      labels=c("Enter", "Leave"))
+plot_2
 ```

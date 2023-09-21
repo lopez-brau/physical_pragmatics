@@ -146,16 +146,36 @@ plot_0
 ```
 
 ```{r compute_statistics_a_priori_labels}
+# Use a Fisher's exact test to compute probability that participants would
+# avoid the modified door by chance.
+data_9 = data_7 %>%
+  mutate(target=ifelse(target==0, "modified", "unmodified")) %>%
+  group_by(condition, target) %>%
+  summarize(total=n()) %>%
+  rbind(data.frame(condition="low", target="modified", total=0)) %>%
+  arrange(condition, target)
+fisher.test(rbind(filter(data_9, target=="unmodified")$total,
+                  filter(data_9, target=="modified")$total))
+
+# Compute a binomial test with the alternative hypothesis that the participant 
+# endorsement of the unmodified door is above chance.
+# NOTE: Computing a two-sided binomial test for "conservativeness".
+data_10 = filter(data_7, condition=="none")
+binom.test(x=sum(data_10$target), n=length(data_10$target), p=0.5,
+           alternative="two.sided")
+data_11 = filter(data_7, condition=="low")
+binom.test(x=sum(data_11$target), n=length(data_11$target), p=0.5,
+           alternative="two.sided")
+
 # Compute a t-test with the alternative hypothesis that the participant 
 # endorsement of the unmodified door is above chance.
-data_9 = filter(data_7, condition=="none")
-t.test(x=data_9$target, n=length(data_9$target), mu=0.5, alternative="greater")
+t.test(x=data_10$target, n=length(data_10$target), mu=0.5,
+       alternative="greater")
 
 # Compute a t-test with the alternative hypothesis that the participant
 # endorsement of the unmodified door in the low-cost condition is higher than
 # in the no-cost condition.
-data_10 = filter(data_7, condition=="low")
-t.test(x=data_10$target, y=data_9$target, alternative="greater")
+t.test(x=data_11$target, y=data_10$target, alternative="greater")
 ```
 
 ## Participant Labels
@@ -164,7 +184,7 @@ Now, we'll analyze the participant endorsement ($N$=`r length(filter(data_5, tri
 
 ```{r compute_endorsement_participant_labels, fig.align="center"}
 # Filter the trial of interest.
-data_11 = data_6 %>%
+data_12 = data_6 %>%
   spread(trial, target) %>%
   mutate(condition=ifelse(exclusion_1==1, "low", "none")) %>%
   select(-exclusion_1, -exclusion_2) %>%
@@ -173,12 +193,12 @@ data_11 = data_6 %>%
 # Set the seed and compute the 95% bootstrapped CIs.
 set.seed(seed)
 ci = data.frame()
-bootstrap_data = compute_bootstrap(filter(data_11, condition=="none"))
+bootstrap_data = compute_bootstrap(filter(data_12, condition=="none"))
 ci = rbind(ci, data.frame(lower_ci=bootstrap_data[4]*100,
                           upper_ci=bootstrap_data[5]*100,
                           condition="none"))
 
-bootstrap_data = compute_bootstrap(filter(data_11, condition=="low"))
+bootstrap_data = compute_bootstrap(filter(data_12, condition=="low"))
 ci = rbind(ci, data.frame(lower_ci=ifelse(!is.null(bootstrap_data),
                                           bootstrap_data[4]*100, 100),
                           upper_ci=ifelse(!is.null(bootstrap_data),
@@ -186,14 +206,14 @@ ci = rbind(ci, data.frame(lower_ci=ifelse(!is.null(bootstrap_data),
                           condition="low"))
 
 # Convert individual judgments to aggregate percentages.
-data_12 = data_11 %>%
+data_13 = data_12 %>%
   group_by(condition) %>%
   summarize(unmodified=sum(target)/n()*100, modified=100-unmodified) %>%
   gather(response, endorsement, unmodified, modified) %>%
   left_join(ci)
 
 # Plot the data (using participant labels of door difficulty).
-plot_1 = data_12 %>%
+plot_1 = data_13 %>%
   ggplot(aes(x=condition, y=endorsement, fill=response)) + 
   geom_bar(stat="identity") +
   geom_errorbar(aes(ymin=lower_ci, ymax=upper_ci), width=0.2) +
@@ -212,15 +232,69 @@ plot_1
 ```
 
 ```{r compute_statistics_participant_labels}
+# Use a Fisher's exact test to compute probability that participants would
+# avoid the modified door by chance.
+data_14 = data_12 %>%
+  mutate(target=ifelse(target==0, "modified", "unmodified")) %>%
+  group_by(condition, target) %>%
+  summarize(total=n()) %>%
+  rbind(data.frame(condition="low", target="modified", total=0)) %>%
+  arrange(condition, target)
+fisher.test(rbind(filter(data_14, target=="unmodified")$total,
+                  filter(data_14, target=="modified")$total))
+
+# Compute a binomial test with the alternative hypothesis that the participant 
+# endorsement of the unmodified door is above chance.
+# NOTE: Computing a two-sided binomial test for "conservativeness".
+data_15 = filter(data_12, condition=="none")
+binom.test(x=sum(data_15$target), n=length(data_15$target), p=0.5,
+           alternative="two.sided")
+data_16 = filter(data_12, condition=="low")
+binom.test(x=sum(data_16$target), n=length(data_16$target), p=0.5,
+           alternative="two.sided")
+
 # Compute a t-test with the alternative hypothesis that the participant 
 # endorsement of the unmodified door is above chance.
-data_13 = filter(data_11, condition=="none")
-t.test(x=data_13$target, n=length(data_13$target), mu=0.5,
+t.test(x=data_15$target, n=length(data_15$target), mu=0.5,
        alternative="greater")
 
 # Compute a t-test with the alternative hypothesis that the participant
 # endorsement of the unmodified door in the low-cost condition is higher than
 # in the no-cost condition.
-data_14 = filter(data_11, condition=="low")
-t.test(x=data_14$target, y=data_13$target, alternative="greater")
+t.test(x=data_16$target, y=data_15$target, alternative="greater")
+```
+
+## Analyze Excluded Participants
+
+### _a priori_ Labels
+
+Here we analyze the data from excluded participants, using _a priori_ labels of door difficulty, to see if their judgments align with our main results.
+
+```{r compute_endorsement_a_priori_labels_excluded_participants, fig.align="center"}
+# Extract the participants who said the unmodified door was more difficult to
+# walk through.
+data_17 = exclusions %>%
+  filter(trial=="trial_1")
+
+# Sum individual judgments by condition and door type.
+data_18 = data_17 %>%
+  mutate(target=ifelse(target==0, "modified", "unmodified")) %>%
+  group_by(condition, target) %>%
+  summarize(count=n())
+
+# Plot the data (using our labels of door difficulty).
+plot_2 = data_18 %>%
+  ggplot(aes(x=condition, y=count, fill=target)) +
+  geom_histogram(stat="identity", position="dodge") +
+  theme_classic() +
+  theme(aspect.ratio=1.0,
+        legend.title=element_text(hjust=0.5)) +
+  scale_x_discrete(name="Condition",
+                   limits=c("none", "low"),
+                   labels=c("No-Cost", "Low-Cost")) +
+  ylab("Endorsement (Count)") +
+  scale_fill_discrete(name="Response",
+                      limits=c("modified", "unmodified"),
+                      labels=c("Modified", "Unmodified"))
+plot_2
 ```
