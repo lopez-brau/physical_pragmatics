@@ -31,14 +31,14 @@ To run the analysis code, you will need R 4.1.2 (or higher) and R Markdown 2.11 
 
 ## Generating and evaluating data
 
-`cluster` contains a text file for each level of the recursive model, each with the list of terminal commands for caching the model predictions for that agent. The text files should be run in the following order:
+`cluster` contains a text file for each level of the recursive model, each with the list of terminal commands for caching the model predictions for that agent inside of `cache`. The text files should be run in the following order:
 
 1. `decider_no_ToM.txt`
 2. `enforcer_no_ToM.txt`
 3. `decider_ToM.txt`
 4. `enforcer_ToM.txt`
 
-Within each text file, these commands can be run independently and in parallel. Once you have the cached model predictions, you can run the commands within the following text files to quickly generate predictions for some _k_-level agent (using the cached model predictions for the _(k-1)_-level agents).
+Within each text file, these commands can be run independently and in parallel. Once you have the cached model predictions for all agents, you can run the commands within the following text files to quickly generate model predictions for some _k_-level agent (using the cached model predictions for the _(k-1)_-level agents).
 
 - `evaluate_decider.txt`
 - `evaluate_enforcer.txt`
